@@ -1,0 +1,1 @@
+# ssmcloud-resources

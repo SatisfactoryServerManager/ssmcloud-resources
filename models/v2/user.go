@@ -20,7 +20,7 @@ type UserSchema struct {
 	LinkedAccounts   []AccountSchema `json:"linkedAccounts" bson:"-"`
 
 	ActiveAccountId primitive.ObjectID `json:"-" bson:"activeAccount" mson:"collection=accounts"`
-	ActiveAccount   []AccountSchema    `json:"activeAccount" bson:"-"`
+	ActiveAccount   AccountSchema    `json:"activeAccount" bson:"-"`
 
 	LastActive time.Time `json:"lastActive" bson:"lastActive"`
 	CreatedAt  time.Time `json:"createdAt" bson:"createdAt"`

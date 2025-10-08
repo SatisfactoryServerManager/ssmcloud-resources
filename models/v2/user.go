@@ -16,8 +16,8 @@ type UserSchema struct {
 
 	APIKeys []UserAPIKey `json:"apiKeys" bson:"apiKeys"`
 
-	LinkedAccountsIds primitive.A     `json:"-" bson:"linkedAccounts" mson:"collection=accounts"`
-	LinkedAccounts    []AccountSchema `json:"linkedAccounts" bson:"-"`
+	LinkedAccountIds primitive.A     `json:"-" bson:"linkedAccounts" mson:"collection=accounts"`
+	LinkedAccounts   []AccountSchema `json:"linkedAccounts" bson:"-"`
 
 	LastActive time.Time `json:"lastActive" bson:"lastActive"`
 	CreatedAt  time.Time `json:"createdAt" bson:"createdAt"`

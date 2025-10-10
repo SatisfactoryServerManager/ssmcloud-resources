@@ -10,7 +10,7 @@ type UserSchema struct {
 	ID         primitive.ObjectID `json:"_id" bson:"_id"`
 	ExternalID string             `json:"eid" bson:"eid"`
 	Email      string             `json:"email" bson:"email"`
-	Password   string             `json:"-" bson:"password"`
+	Username   string             `json:"username" bson:"username"`
 
 	ProfileImageURL string `json:"profileImageUrl" bson:"profileImageUrl"`
 
@@ -20,7 +20,7 @@ type UserSchema struct {
 	LinkedAccounts   []AccountSchema `json:"linkedAccounts" bson:"-"`
 
 	ActiveAccountId primitive.ObjectID `json:"-" bson:"activeAccount" mson:"collection=accounts"`
-	ActiveAccount   AccountSchema    `json:"activeAccount" bson:"-"`
+	ActiveAccount   AccountSchema      `json:"activeAccount" bson:"-"`
 
 	LastActive time.Time `json:"lastActive" bson:"lastActive"`
 	CreatedAt  time.Time `json:"createdAt" bson:"createdAt"`

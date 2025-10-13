@@ -1,9 +1,11 @@
 package v2
 
 import (
+	"strings"
 	"time"
 
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/models"
+	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -161,4 +163,54 @@ type AgentStat struct {
 	CPU       float64            `json:"cpu" bson:"cpu"`
 	MEM       float32            `json:"mem" bson:"mem"`
 	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+}
+
+func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSchema {
+
+	if apiKey == "" {
+		apiKey = "API-AGT-" + strings.ToUpper(utils.RandStringBytes(24))
+	}
+
+	newAgent := AgentSchema{
+		ID:        primitive.NewObjectID(),
+		AgentName: agentName,
+		APIKey:    apiKey,
+		Tasks:     make([]AgentTask, 0),
+		LogIds:    make(primitive.A, 0),
+		StatIds:   make(primitive.A, 0),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	newAgent.Config.Port = port
+	newAgent.Config.Memory = memory
+
+	newAgent.Config.BackupKeepAmount = 24
+	newAgent.Config.BackupInterval = 1.0
+
+	newAgent.ServerConfig.MaxPlayers = 4
+	newAgent.ServerConfig.WorkerThreads = 20
+	newAgent.ServerConfig.Branch = "public"
+	newAgent.ServerConfig.UpdateOnStart = true
+	newAgent.ServerConfig.AutoSaveInterval = 300
+	newAgent.ServerConfig.AutoSaveOnDisconnect = true
+
+	newAgent.MapData.Players = make([]AgentMapDataPlayer, 0)
+	newAgent.MapData.Buildings = make([]AgentMapDataBuilding, 0)
+
+	newAgent.Saves = make([]AgentSave, 0)
+	newAgent.Backups = make([]AgentBackup, 0)
+	newAgent.Tasks = make([]AgentTask, 0)
+
+	newAgent.ModConfig.SelectedMods = make([]AgentModConfigSelectedMod, 0)
+
+	return newAgent
+}
+
+func NewAgentTask(action string, data interface{}) AgentTask {
+	return AgentTask{
+		ID:     primitive.NewObjectID(),
+		Action: action,
+		Data:   data,
+	}
 }

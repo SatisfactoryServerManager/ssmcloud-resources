@@ -4,14 +4,18 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type BaseWorkflowData struct {
+	AccountId primitive.ObjectID `json:"accountid" bson:"accountId"`
+}
+
 type CreateAgentWorkflowData struct {
-	AccountId  primitive.ObjectID `json:"accountid" bson:"accountId"`
-	AgentName  string             `json:"servername" bson:"serverName"`
-	Port       int                `json:"serverPort" bson:"serverPort"`
-	Memory     int64              `json:"serverMemory" bson:"serverMemory"`
-	AdminPass  string             `json:"serverAdminPass" bson:"serverAdminPass"`
-	ClientPass string             `json:"serverClientPass" bson:"serverClientPass"`
-	APIKey     string             `json:"serverAPIKey" bson:"serverApiKey"`
+	BaseWorkflowData
+	AgentName  string `json:"servername" bson:"serverName"`
+	Port       int    `json:"serverPort" bson:"serverPort"`
+	Memory     int64  `json:"serverMemory" bson:"serverMemory"`
+	AdminPass  string `json:"serverAdminPass" bson:"serverAdminPass"`
+	ClientPass string `json:"serverClientPass" bson:"serverClientPass"`
+	APIKey     string `json:"serverAPIKey" bson:"serverApiKey"`
 }
 
 type ClaimServer_PostData struct {
@@ -34,141 +38,8 @@ type WorkflowAction struct {
 	RetryCount   int    `json:"retryCount" bson:"retryCount"`
 }
 
-// func (obj *WorkflowSchema) ValidateStatus() {
-// 	completed := true
-// 	failed := false
 
-// 	for actionIdx := range obj.Actions {
-// 		action := &obj.Actions[actionIdx]
-// 		if action.Status == "" {
-// 			completed = false
-// 			break
-// 		} else if action.Status == "failed" {
-// 			failed = true
-// 			break
-// 		}
-// 	}
 
-// 	if completed {
-// 		obj.Status = "completed"
-// 		return
-// 	}
-
-// 	if failed {
-// 		obj.Status = "failed"
-// 		return
-// 	}
-// }
-
-// func (obj *WorkflowSchema) ProcessCurrentAction() {
-
-// 	currentActionIndex := 0
-
-// 	for idx := range obj.Actions {
-// 		action := &obj.Actions[idx]
-
-// 		if action.Status == "" {
-// 			currentActionIndex = idx
-// 			break
-// 		}
-// 	}
-// 	workflowData := CreateAgentWorkflowData{}
-// 	bodyBytes, _ := json.Marshal(obj.Data)
-// 	json.Unmarshal(bodyBytes, &workflowData)
-
-// 	//
-
-// 	action := &obj.Actions[currentActionIndex]
-// 	var theAccount AccountSchema
-
-// 	if err := mongoose.FindOne(bson.M{"_id": workflowData.AccountId}, &theAccount); err != nil {
-// 		fmt.Printf("error finding account from workflow with error %s\n", err.Error())
-// 		return
-// 	}
-
-// 	if err := theAccount.PopulateAgentSchema(); err != nil {
-// 		fmt.Printf("error failed to populate AgentSchema from workflow with error %s\n", err.Error())
-// 		return
-// 	}
-
-// 	if action.Type == "create-agent" {
-// 		if err := action.CreateAgent(workflowData, &theAccount); err != nil {
-// 			action.Status = "failed"
-// 			action.ErrorMessage = err.Error()
-// 		} else {
-// 			action.Status = "completed"
-// 		}
-// 	} else if action.Type == "wait-for-online" {
-// 		online, err := action.WaitForOnline(workflowData)
-
-// 		if online {
-// 			action.Status = "completed"
-// 		} else {
-// 			if err != nil {
-// 				action.Status = "failed"
-// 				action.ErrorMessage = err.Error()
-// 			}
-// 		}
-// 	} else if action.Type == "install-server" {
-// 		if err := action.InstallSFServer(workflowData); err != nil {
-// 			action.Status = "failed"
-// 			action.ErrorMessage = err.Error()
-// 		} else {
-// 			action.Status = "completed"
-// 		}
-
-// 	} else if action.Type == "wait-for-installed" {
-// 		installed, err := action.WaitForInstalled(workflowData)
-
-// 		if installed {
-// 			action.Status = "completed"
-// 		} else {
-// 			if err != nil {
-// 				action.Status = "failed"
-// 				action.ErrorMessage = err.Error()
-// 			}
-// 		}
-// 	} else if action.Type == "start-server" {
-// 		if err := action.StartSFServer(workflowData); err != nil {
-// 			action.Status = "failed"
-// 			action.ErrorMessage = err.Error()
-// 		} else {
-// 			action.Status = "completed"
-// 		}
-
-// 	} else if action.Type == "wait-for-running" {
-// 		running, err := action.WaitForRunning(workflowData)
-
-// 		if running {
-// 			action.Status = "completed"
-// 		} else {
-// 			if err != nil {
-// 				action.Status = "failed"
-// 				action.ErrorMessage = err.Error()
-// 			}
-// 		}
-// 	} else if action.Type == "claim-server" {
-// 		if err := action.ClaimServer(workflowData); err != nil {
-// 			action.Status = "failed"
-// 			action.ErrorMessage = err.Error()
-// 		} else {
-// 			action.Status = "completed"
-// 		}
-// 	} else {
-// 		fmt.Printf("unknown workflow action %s\n", action.Type)
-// 	}
-
-// 	obj.ValidateStatus()
-
-// 	dbUpdate := bson.M{
-// 		"status":  obj.Status,
-// 		"actions": obj.Actions,
-// 	}
-
-// 	if err := mongoose.UpdateModelData(*obj, dbUpdate); err != nil {
-// 		fmt.Println(err.Error())
-// 	}
-// }
 
 // func (obj *WorkflowAction) CreateAgent(workflowData CreateAgentWorkflowData, theAccount *AccountSchema) error {
 // 	newAgent := NewAgent(workflowData.AgentName, workflowData.Port, workflowData.Memory, workflowData.APIKey)

@@ -4,6 +4,24 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+const (
+	WorkflowType_CreateAgent = "create-agent"
+)
+
+const (
+	WorkflowActionType_CreateAgent      = "create-agent"
+	WorkflowActionType_WaitForOnline    = "wait-for-online"
+	WorkflowActionType_InstallServer    = "install-server"
+	WorkflowActionType_WaitForInstalled = "wait-for-installed"
+	WorkflowActionType_StartServer      = "start-server"
+	WorkflowActionType_WaitForRunning   = "wait-for-running"
+	WorkflowActionType_ClaimServer      = "claim-server"
+)
+
+type IWorkflowAction interface{
+    Execute() error
+}
+
 type BaseWorkflowData struct {
 	AccountId primitive.ObjectID `json:"accountid" bson:"accountId"`
 }
@@ -38,96 +56,6 @@ type WorkflowAction struct {
 	RetryCount   int    `json:"retryCount" bson:"retryCount"`
 }
 
-
-
-
-// func (obj *WorkflowAction) CreateAgent(workflowData CreateAgentWorkflowData, theAccount *AccountSchema) error {
-// 	newAgent := NewAgent(workflowData.AgentName, workflowData.Port, workflowData.Memory, workflowData.APIKey)
-
-// 	if _, err := mongoose.InsertOne(&newAgent); err != nil {
-// 		return fmt.Errorf("error inserting new agent with error: %s", err.Error())
-// 	}
-
-// 	theAccount.AgentIds = append(theAccount.AgentIds, newAgent.ID)
-
-// 	dbUpdate := bson.M{
-// 		"agents":    theAccount.AgentIds,
-// 		"updatedAt": time.Now(),
-// 	}
-
-// 	if err := mongoose.UpdateModelData(*theAccount, dbUpdate); err != nil {
-// 		return fmt.Errorf("error updating account AgentSchema with error: %s", err.Error())
-// 	}
-
-// 	theAccount.AddAudit("CREATE_AGENT", fmt.Sprintf("New agent created (%s)", workflowData.AgentName))
-// 	return nil
-// }
-
-// func (obj *WorkflowAction) WaitForOnline(workflowData CreateAgentWorkflowData) (bool, error) {
-// 	var theAgent AgentSchema
-
-// 	if err := mongoose.FindOne(bson.M{"apiKey": workflowData.APIKey}, &theAgent); err != nil {
-// 		return false, err
-// 	}
-
-// 	fmt.Printf("waiting for agent: %s to be online \n", theAgent.AgentName)
-
-// 	if !theAgent.Status.Online {
-// 		obj.RetryCount += 1
-// 		if obj.RetryCount > 120 {
-// 			return false, fmt.Errorf("timeout waiting for agent to start")
-// 		}
-
-// 		return false, nil
-// 	}
-
-// 	return true, nil
-// }
-
-// func (obj *WorkflowAction) InstallSFServer(workflowData CreateAgentWorkflowData) error {
-
-// 	var theAgent AgentSchema
-
-// 	if err := mongoose.FindOne(bson.M{"apiKey": workflowData.APIKey}, &theAgent); err != nil {
-// 		return err
-// 	}
-
-// 	newTask := NewAgentTask("installsfserver", nil)
-
-// 	theAgent.Tasks = append(theAgent.Tasks, newTask)
-
-// 	dbUpdate := bson.M{
-// 		"tasks":     theAgent.Tasks,
-// 		"updatedAt": time.Now(),
-// 	}
-
-// 	if err := mongoose.UpdateModelData(&theAgent, dbUpdate); err != nil {
-// 		return err
-// 	}
-
-// 	return nil
-// }
-
-// func (obj *WorkflowAction) WaitForInstalled(workflowData CreateAgentWorkflowData) (bool, error) {
-// 	var theAgent AgentSchema
-
-// 	if err := mongoose.FindOne(bson.M{"apiKey": workflowData.APIKey}, &theAgent); err != nil {
-// 		return false, err
-// 	}
-
-// 	fmt.Printf("waiting for agent: %s to install sf server \n", theAgent.AgentName)
-
-// 	if !theAgent.Status.Installed {
-// 		obj.RetryCount += 1
-// 		if obj.RetryCount > 120 {
-// 			return false, fmt.Errorf("timeout waiting for agent to install sf server")
-// 		}
-
-// 		return false, nil
-// 	}
-
-// 	return true, nil
-// }
 
 // func (obj *WorkflowAction) StartSFServer(workflowData CreateAgentWorkflowData) error {
 

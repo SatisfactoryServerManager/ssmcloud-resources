@@ -18,8 +18,8 @@ const (
 	WorkflowActionType_ClaimServer      = "claim-server"
 )
 
-type IWorkflowAction interface{
-    Execute() error
+type IWorkflowAction interface {
+	Execute(action *WorkflowAction, workflowData interface{}, account *AccountSchema) error
 }
 
 type BaseWorkflowData struct {
@@ -55,7 +55,6 @@ type WorkflowAction struct {
 	ErrorMessage string `json:"error" bson:"error"`
 	RetryCount   int    `json:"retryCount" bson:"retryCount"`
 }
-
 
 // func (obj *WorkflowAction) StartSFServer(workflowData CreateAgentWorkflowData) error {
 

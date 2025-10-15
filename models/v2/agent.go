@@ -25,10 +25,10 @@ type AgentSchema struct {
 
 	Tasks []AgentTask `json:"tasks" bson:"tasks"`
 
-	LogIds  primitive.A `json:"-" bson:"logs" mson:"collection=agentlogs"`
-	Logs    []AgentLogs `json:"logs" bson:"-"`
-	StatIds primitive.A `json:"-" bson:"stats" mson:"collection=agentstats"`
-	Stats   []AgentStat `json:"stats" bson:"-"`
+	LogIds  primitive.A       `json:"-" bson:"logs" mson:"collection=agentlogs"`
+	Logs    []AgentLogSchema  `json:"logs" bson:"-"`
+	StatIds primitive.A       `json:"-" bson:"stats" mson:"collection=agentstats"`
+	Stats   []AgentStatSchema `json:"stats" bson:"-"`
 
 	ModConfig AgentModConfig `json:"modConfig" bson:"modConfig"`
 
@@ -147,7 +147,7 @@ type AgentTask struct {
 	Retries   int                `json:"retries" bson:"retries"`
 }
 
-type AgentLogs struct {
+type AgentLogSchema struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id"`
 	FileName  string             `json:"fileName" bson:"fileName"`
 	Type      string             `json:"type" bson:"type"`
@@ -157,7 +157,7 @@ type AgentLogs struct {
 	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
 }
 
-type AgentStat struct {
+type AgentStatSchema struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id"`
 	Running   bool               `json:"running" bson:"running"`
 	CPU       float64            `json:"cpu" bson:"cpu"`

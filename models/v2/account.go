@@ -3,12 +3,14 @@ package v2
 import (
 	"time"
 
+	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type AccountSchema struct {
 	ID          primitive.ObjectID `json:"_id" bson:"_id"`
 	AccountName string             `json:"accountName" bson:"accountName"`
+	JoinCode    string             `json:"joinCode" bson:"joinCode"`
 
 	AgentIds       primitive.A                `json:"-" bson:"agents" mson:"collection=agents"`
 	Agents         []AgentSchema              `json:"agents" bson:"-"`
@@ -65,4 +67,17 @@ type AccountIntegrationEvent struct {
 	Failed       bool                 `json:"failed" bson:"failed"`
 	CreatedAt    time.Time            `json:"createdAt" bson:"createdAt"`
 	UpdatedAt    time.Time            `json:"updatedAt" bson:"updatedAt"`
+}
+
+func NewAccount(accountName string) *AccountSchema {
+	return &AccountSchema{
+		ID:             primitive.NewObjectID(),
+		AccountName:    accountName,
+		JoinCode:       utils.RandStringBytes(16),
+		AgentIds:       make(primitive.A, 0),
+		AuditIds:       make(primitive.A, 0),
+		IntegrationIds: make(primitive.A, 0),
+		CreatedAt:      time.Now(),
+		UpdatedAt:      time.Now(),
+	}
 }

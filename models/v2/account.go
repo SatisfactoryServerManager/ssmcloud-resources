@@ -14,7 +14,7 @@ type AccountSchema struct {
 
 	AgentIds       primitive.A                `json:"-" bson:"agents" mson:"collection=agents"`
 	Agents         []AgentSchema              `json:"agents" bson:"-"`
-	AuditIds       primitive.A                `json:"-" bson:"audit" mson:"collection=accountaudit"`
+	AuditIds       primitive.A                `json:"-" bson:"audit" mson:"collection=accountaudits"`
 	Audits         []AccountAuditSchema       `json:"audit" bson:"-"`
 	IntegrationIds primitive.A                `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
 	Integrations   []AccountIntegrationSchema `json:"integrations" bson:"-"`

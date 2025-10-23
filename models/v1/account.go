@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/SatisfactoryServerManager/ssmcloud-resources/models"
 	"github.com/mrhid6/go-mongoose/mongoose"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -311,10 +312,10 @@ func (obj *Accounts) CreateIntegrationEvent(eventType IntegrationEventType, data
 		if containsEventType {
 
 			switch v := data.(type) {
-			case EventDataAgentOnline:
+			case models.EventDataAgentOnline:
 				v.EventData.IntegrationId = integration.ID
 				data = v
-			case EventDataAgentOffline:
+			case models.EventDataAgentOffline:
 				v.EventData.IntegrationId = integration.ID
 				data = v
 			}
@@ -437,10 +438,10 @@ func (obj *AccountIntegrations) AddEvent(eventType IntegrationEventType, data in
 	}
 
 	switch v := data.(type) {
-	case EventDataAgentOnline:
+	case models.EventDataAgentOnline:
 		v.EventData.EventId = newEvent.ID
 		data = v
-	case EventDataAgentOffline:
+	case models.EventDataAgentOffline:
 		v.EventData.EventId = newEvent.ID
 		data = v
 	}

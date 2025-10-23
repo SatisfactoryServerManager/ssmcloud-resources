@@ -124,12 +124,12 @@ type AgentBackup struct {
 // Mod Data
 
 type AgentModConfig struct {
-	SelectedMods []AgentModConfigSelectedMod `json:"selectedMods" bson:"selectedMods"`
+	SelectedMods []AgentModConfigSelectedModSchema `json:"selectedMods" bson:"selectedMods"`
 }
 
-type AgentModConfigSelectedMod struct {
+type AgentModConfigSelectedModSchema struct {
 	ModId            primitive.ObjectID `json:"-" bson:"mod" mson:"collection=mods"`
-	Mod              models.Mods        `json:"mod" bson:"-"`
+	Mod              models.ModSchema   `json:"mod" bson:"-"`
 	DesiredVersion   string             `json:"desiredVersion" bson:"desiredVersion"`
 	InstalledVersion string             `json:"installedVersion" bson:"installedVersion"`
 	Installed        bool               `json:"installed" bson:"installed"`
@@ -202,7 +202,7 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 	newAgent.Backups = make([]AgentBackup, 0)
 	newAgent.Tasks = make([]AgentTask, 0)
 
-	newAgent.ModConfig.SelectedMods = make([]AgentModConfigSelectedMod, 0)
+	newAgent.ModConfig.SelectedMods = make([]AgentModConfigSelectedModSchema, 0)
 
 	return newAgent
 }

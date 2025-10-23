@@ -133,7 +133,7 @@ type AgentModConfig struct {
 
 type AgentModConfigSelectedMod struct {
 	Mod              primitive.ObjectID `json:"-" bson:"mod" mson:"collection=mods"`
-	ModObject        models.Mods        `json:"mod" bson:"-"`
+	ModObject        models.ModSchema   `json:"mod" bson:"-"`
 	DesiredVersion   string             `json:"desiredVersion" bson:"desiredVersion"`
 	InstalledVersion string             `json:"installedVersion" bson:"installedVersion"`
 	Installed        bool               `json:"installed" bson:"installed"`

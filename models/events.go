@@ -1,4 +1,4 @@
-package v1
+package models
 
 import (
 	"time"
@@ -13,8 +13,8 @@ type EventData struct {
 	EventTime     time.Time          `json:"eventTime"`
 }
 
-type EventDataBasic struct{
-    EventData `json:"eventData"`
+type EventDataBasic struct {
+	EventData `json:"eventData"`
 }
 
 type EventDataAgentOnline struct {

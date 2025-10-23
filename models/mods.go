@@ -4,7 +4,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Mods struct {
+type ModSchema struct {
 	ID           primitive.ObjectID `json:"_id" bson:"_id"`
 	ModID        string             `json:"id" bson:"modId"`
 	ModName      string             `json:"name" bson:"modName"`

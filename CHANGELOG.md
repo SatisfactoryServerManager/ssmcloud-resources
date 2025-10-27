@@ -1,3 +1,6 @@
+## 0.0.19 (October 27, 2025)
+
+
 ## 0.0.18 (October 27, 2025)
   - Bump version to 0.0.17.
   - feat: Audit types

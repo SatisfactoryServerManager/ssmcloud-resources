@@ -26,9 +26,12 @@ type AccountSchema struct {
 type AuditType string
 
 const (
-	AuditType_UserAddedToAccount        AuditType = "added-user"
-	AuditType_IntegrationAddedToAccount AuditType = "added-integration"
-	AuditType_AgentAddedToAccount       AuditType = "added-agent"
+	AuditType_UserAddedToAccount            AuditType = "added-user"
+	AuditType_UserRemovedFromAccount        AuditType = "removed-user"
+	AuditType_IntegrationAddedToAccount     AuditType = "added-integration"
+	AuditType_IntegrationRemovedFromAccount AuditType = "removed-integration"
+	AuditType_AgentAddedToAccount           AuditType = "added-agent"
+	AuditType_AgentRemoveFromAccount        AuditType = "removed-agent"
 )
 
 type AccountAuditSchema struct {

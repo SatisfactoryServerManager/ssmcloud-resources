@@ -1,3 +1,7 @@
+## 0.0.18 (October 27, 2025)
+  - Bump version to 0.0.17.
+  - feat: Audit types
+
 ## 0.0.17 (October 27, 2025)
   - feat: Audit types
   - feat: Move events to base models

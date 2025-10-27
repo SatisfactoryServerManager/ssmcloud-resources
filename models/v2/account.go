@@ -48,13 +48,17 @@ const (
 	IntegrationDiscord IntegrationType = 1
 )
 
-type IntegrationEventType int64
+type IntegrationEventType string
 
 const (
-	IntegrationEventTypeAgentOnline  IntegrationEventType = 0
-	IntegrationEventTypeAgentOffline IntegrationEventType = 1
-	IntegrationEventTypePlayerJoined IntegrationEventType = 2
-	IntegrationEventTypePlayerLeft   IntegrationEventType = 3
+	IntegrationEventTypeAgentCreated IntegrationEventType = "ssm.agent.created"
+	IntegrationEventTypeAgentRemoved IntegrationEventType = "ssm.agent.removed"
+	IntegrationEventTypeAgentOnline  IntegrationEventType = "ssm.agent.online"
+	IntegrationEventTypeAgentOffline IntegrationEventType = "ssm.agent.offline"
+	IntegrationEventTypeUserAdded    IntegrationEventType = "ssm.user.added"
+	IntegrationEventTypeUserRemoved  IntegrationEventType = "ssm.user.removed"
+	IntegrationEventTypePlayerJoined IntegrationEventType = "game.player.joined"
+	IntegrationEventTypePlayerLeft   IntegrationEventType = "game.player.left"
 )
 
 type AccountIntegrationSchema struct {

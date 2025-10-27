@@ -23,9 +23,17 @@ type AccountSchema struct {
 	UpdatedAt time.Time `json:"updatedAt" bson:"updatedAt"`
 }
 
+type AuditType string
+
+const (
+	AuditType_UserAddedToAccount        AuditType = "added-user"
+	AuditType_IntegrationAddedToAccount AuditType = "added-integration"
+	AuditType_AgentAddedToAccount       AuditType = "added-agent"
+)
+
 type AccountAuditSchema struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	Type      string             `json:"type" bson:"type"`
+	Type      AuditType          `json:"type" bson:"type"`
 	Message   string             `json:"message" bson:"message"`
 	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
 }

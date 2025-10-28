@@ -1,3 +1,6 @@
+## 0.0.21 (October 28, 2025)
+
+
 ## 0.0.20 (October 27, 2025)
   - feat: event types
 

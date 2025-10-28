@@ -13,16 +13,7 @@ type EventData struct {
 	EventTime     time.Time          `json:"eventTime"`
 }
 
-type EventDataBasic struct {
-	EventData `json:"eventData"`
-}
-
-type EventDataAgentOnline struct {
-	EventData `json:"eventData"`
-	AgentName string `json:"agentName"`
-}
-
-type EventDataAgentOffline struct {
-	EventData `json:"eventData"`
+type EventDataAgent struct {
+	EventData
 	AgentName string `json:"agentName"`
 }

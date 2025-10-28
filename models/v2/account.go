@@ -43,6 +43,7 @@ type AccountAuditSchema struct {
 
 type AccountIntegrationSchema struct {
 	ID         primitive.ObjectID     `json:"_id" bson:"_id"`
+	Name       string                 `json:"name" bson:"name"`
 	Type       IntegrationType        `json:"type" bson:"type"`
 	Url        string                 `json:"url" bson:"url"`
 	EventTypes []IntegrationEventType `json:"eventTypes" bson:"eventTypes"`

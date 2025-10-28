@@ -1,3 +1,6 @@
+## 0.0.24 (October 28, 2025)
+  - feat: Remove account integrations from v1
+
 ## 0.0.23 (October 28, 2025)
 
 

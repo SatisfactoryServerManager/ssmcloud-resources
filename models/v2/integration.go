@@ -27,18 +27,32 @@ const (
 )
 
 type IntegrationEventSchema struct {
-	ID              primitive.ObjectID     `json:"_id" bson:"_id,omitempty"`
-	Type            IntegrationType        `json:"type" bson:"type"`
-	EventType       IntegrationEventType   `json:"eventType" bson:"eventType"`
-	IntegrationId   primitive.ObjectID     `bson:"integrationId"`
-	URL             string                 `bson:"url"`
-	Payload         map[string]interface{} `bson:"payload"`
-	Status          string                 `bson:"status"` // pending, processing, sent, failed
-	Attempts        int                    `bson:"attempts"`
-	LastError       string                 `bson:"last_error,omitempty"`
-	NextAttemptAt   time.Time              `bson:"next_attempt_at"`
-	ProcessingUntil *time.Time             `bson:"processing_until,omitempty"`
-	ProcessingBy    string                 `bson:"processing_by,omitempty"`
-	CreatedAt       time.Time              `bson:"created_at"`
-	SentAt          *time.Time             `bson:"sent_at,omitempty"`
+	ID              primitive.ObjectID   `json:"_id" bson:"_id,omitempty"`
+	Type            IntegrationType      `json:"type" bson:"type"`
+	EventType       IntegrationEventType `json:"eventType" bson:"eventType"`
+	IntegrationId   primitive.ObjectID   `bson:"integrationId"`
+	URL             string               `bson:"url"`
+	Payload         interface{}          `bson:"payload"`
+	Status          string               `bson:"status"` // pending, processing, sent, failed
+	Attempts        int                  `bson:"attempts"`
+	LastError       string               `bson:"last_error,omitempty"`
+	NextAttemptAt   time.Time            `bson:"next_attempt_at"`
+	ProcessingUntil *time.Time           `bson:"processing_until,omitempty"`
+	ProcessingBy    string               `bson:"processing_by,omitempty"`
+	CreatedAt       time.Time            `bson:"created_at"`
+	SentAt          *time.Time           `bson:"sent_at,omitempty"`
+}
+
+func NewIntegrationEvent(accountIntegration *AccountIntegrationSchema, eventType IntegrationEventType, payload interface{}) *IntegrationEventSchema {
+
+	return &IntegrationEventSchema{
+		ID:            primitive.NewObjectID(),
+		Type:          accountIntegration.Type,
+		EventType:     eventType,
+		IntegrationId: accountIntegration.ID,
+		URL:           accountIntegration.Url,
+		Payload:       payload,
+		Status:        "pending",
+		CreatedAt:     time.Now(),
+	}
 }

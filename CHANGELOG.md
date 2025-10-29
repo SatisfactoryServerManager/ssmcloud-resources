@@ -1,3 +1,6 @@
+## 0.0.26 (October 29, 2025)
+  - feat: Agent stats
+
 ## 0.0.25 (October 29, 2025)
   - feat: account inactivity sate
 

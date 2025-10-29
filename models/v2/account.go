@@ -19,6 +19,8 @@ type AccountSchema struct {
 	IntegrationIds primitive.A                `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
 	Integrations   []AccountIntegrationSchema `json:"integrations" bson:"-"`
 
+	InactivityState AccountInactivityState `json:"inactivityState" bson:"inactivityState"`
+
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt" bson:"updatedAt"`
 }
@@ -49,6 +51,12 @@ type AccountIntegrationSchema struct {
 	EventTypes []IntegrationEventType `json:"eventTypes" bson:"eventTypes"`
 	CreatedAt  time.Time              `json:"createdAt" bson:"createdAt"`
 	UpdatedAt  time.Time              `json:"updatedAt" bson:"updatedAt"`
+}
+
+type AccountInactivityState struct {
+	Inactive     bool      `json:"inactive" bson:"inactive"`
+	DateInactive time.Time `json:"dateInactive" bson:"dateInactive"`
+	DeleteDate   time.Time `json:"deleteDate" bson:"deleteDate"`
 }
 
 func NewAccount(accountName string) *AccountSchema {

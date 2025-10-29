@@ -1,3 +1,6 @@
+## 0.0.25 (October 29, 2025)
+  - feat: account inactivity sate
+
 ## 0.0.24 (October 28, 2025)
   - feat: Remove account integrations from v1
 

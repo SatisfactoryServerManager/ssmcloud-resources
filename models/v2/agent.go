@@ -25,10 +25,8 @@ type AgentSchema struct {
 
 	Tasks []AgentTask `json:"tasks" bson:"tasks"`
 
-	LogIds  primitive.A       `json:"-" bson:"logs" mson:"collection=agentlogs"`
-	Logs    []AgentLogSchema  `json:"logs" bson:"-"`
-	StatIds primitive.A       `json:"-" bson:"stats" mson:"collection=agentstats"`
-	Stats   []AgentStatSchema `json:"stats" bson:"-"`
+	LogIds primitive.A      `json:"-" bson:"logs" mson:"collection=agentlogs"`
+	Logs   []AgentLogSchema `json:"logs" bson:"-"`
 
 	ModConfig AgentModConfig `json:"modConfig" bson:"modConfig"`
 
@@ -159,6 +157,7 @@ type AgentLogSchema struct {
 
 type AgentStatSchema struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id"`
+	AgentId   primitive.ObjectID `json:"agentId" bson:"agentId"`
 	Running   bool               `json:"running" bson:"running"`
 	CPU       float64            `json:"cpu" bson:"cpu"`
 	MEM       float32            `json:"mem" bson:"mem"`
@@ -177,7 +176,6 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 		APIKey:    apiKey,
 		Tasks:     make([]AgentTask, 0),
 		LogIds:    make(primitive.A, 0),
-		StatIds:   make(primitive.A, 0),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -213,4 +211,15 @@ func NewAgentTask(action string, data interface{}) AgentTask {
 		Action: action,
 		Data:   data,
 	}
+}
+
+func NewAgentStat(theAgent *AgentSchema, running bool, cpu float64, memory float32) *AgentStatSchema{
+    return &AgentStatSchema{
+        ID: primitive.NewObjectID(),
+        AgentId: theAgent.ID,
+        Running: running,
+        CPU: cpu,
+        MEM: memory,
+        CreatedAt: time.Now(),
+    }
 }

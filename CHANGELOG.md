@@ -1,3 +1,6 @@
+## 0.0.27 (October 30, 2025)
+
+
 ## 0.0.26 (October 29, 2025)
   - feat: Agent stats
 

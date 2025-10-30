@@ -1,6 +1,7 @@
 package v2
 
 import (
+	"html/template"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -12,7 +13,8 @@ type UserSchema struct {
 	Email      string             `json:"email" bson:"email"`
 	Username   string             `json:"username" bson:"username"`
 
-	ProfileImageURL string `json:"profileImageUrl" bson:"profileImageUrl"`
+	ProfileImageURL template.URL `bson:"-" json:"-"` // not stored directly
+	ProfileImageStr string       `bson:"profileImageUrl" json:"profileImageUrl"`
 
 	APIKeys []UserAPIKey `json:"apiKeys" bson:"apiKeys"`
 

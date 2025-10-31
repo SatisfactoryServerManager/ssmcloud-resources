@@ -33,6 +33,7 @@ type IntegrationEventSchema struct {
 	IntegrationId   primitive.ObjectID   `bson:"integrationId"`
 	URL             string               `bson:"url"`
 	Payload         interface{}          `bson:"payload"`
+	Response        interface{}          `bson:"response"`
 	Status          string               `bson:"status"` // pending, processing, sent, failed
 	Attempts        int                  `bson:"attempts"`
 	LastError       string               `bson:"last_error,omitempty"`

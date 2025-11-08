@@ -149,7 +149,7 @@ type AgentLogSchema struct {
 	ID        primitive.ObjectID `json:"_id" bson:"_id"`
 	FileName  string             `json:"fileName" bson:"fileName"`
 	Type      string             `json:"type" bson:"type"`
-	Snippet   string             `json:"snippet" bson:"snippet"`
+	LogLines  []string           `json:"lines" bson:"lines"`
 	FileURL   string             `json:"fileUrl" bson:"fileUrl"`
 	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
 	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
@@ -213,13 +213,13 @@ func NewAgentTask(action string, data interface{}) AgentTask {
 	}
 }
 
-func NewAgentStat(theAgent *AgentSchema, running bool, cpu float64, memory float32) *AgentStatSchema{
-    return &AgentStatSchema{
-        ID: primitive.NewObjectID(),
-        AgentId: theAgent.ID,
-        Running: running,
-        CPU: cpu,
-        MEM: memory,
-        CreatedAt: time.Now(),
-    }
+func NewAgentStat(theAgent *AgentSchema, running bool, cpu float64, memory float32) *AgentStatSchema {
+	return &AgentStatSchema{
+		ID:        primitive.NewObjectID(),
+		AgentId:   theAgent.ID,
+		Running:   running,
+		CPU:       cpu,
+		MEM:       memory,
+		CreatedAt: time.Now(),
+	}
 }

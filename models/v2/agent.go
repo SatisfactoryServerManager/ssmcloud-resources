@@ -146,13 +146,14 @@ type AgentTask struct {
 }
 
 type AgentLogSchema struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	FileName  string             `json:"fileName" bson:"fileName"`
-	Type      string             `json:"type" bson:"type"`
-	LogLines  []string           `json:"lines" bson:"lines"`
-	FileURL   string             `json:"fileUrl" bson:"fileUrl"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
-	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
+	ID            primitive.ObjectID `json:"_id" bson:"_id"`
+	FileName      string             `json:"fileName" bson:"fileName"`
+	Type          string             `json:"type" bson:"type"`
+	LogLines      []string           `json:"lines" bson:"lines"`
+	FileURL       string             `json:"fileUrl" bson:"fileUrl"`
+	PendingUpload bool               `json:"pendingUpload" bson:"pendingUpload"`
+	CreatedAt     time.Time          `json:"createdAt" bson:"createdAt"`
+	UpdatedAt     time.Time          `json:"updatedAt" bson:"updatedAt"`
 }
 
 type AgentStatSchema struct {

@@ -1,3 +1,6 @@
+## 0.0.31 (November 09, 2025)
+
+
 ## 0.0.30 (November 08, 2025)
   - update agent log model
 

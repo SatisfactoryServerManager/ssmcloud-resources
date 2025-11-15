@@ -1,3 +1,6 @@
+## 0.0.34 (November 15, 2025)
+  - feat: config response proto
+
 ## 0.0.33 (November 15, 2025)
 
 

@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,7 +20,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentService_GetAgentConfig_FullMethodName = "/AgentService/GetAgentConfig"
+	AgentService_GetAgentConfig_FullMethodName             = "/AgentService/GetAgentConfig"
+	AgentService_UpdateAgentConfigVersionIp_FullMethodName = "/AgentService/UpdateAgentConfigVersionIp"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -27,6 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AgentServiceClient interface {
 	GetAgentConfig(ctx context.Context, in *AgentGenericRequest, opts ...grpc.CallOption) (*AgentConfigResponse, error)
+	UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type agentServiceClient struct {
@@ -47,11 +50,22 @@ func (c *agentServiceClient) GetAgentConfig(ctx context.Context, in *AgentGeneri
 	return out, nil
 }
 
+func (c *agentServiceClient) UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AgentService_UpdateAgentConfigVersionIp_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
 type AgentServiceServer interface {
 	GetAgentConfig(context.Context, *AgentGenericRequest) (*AgentConfigResponse, error)
+	UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -64,6 +78,9 @@ type UnimplementedAgentServiceServer struct{}
 
 func (UnimplementedAgentServiceServer) GetAgentConfig(context.Context, *AgentGenericRequest) (*AgentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgentConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgentConfigVersionIp not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -104,6 +121,24 @@ func _AgentService_GetAgentConfig_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_UpdateAgentConfigVersionIp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).UpdateAgentConfigVersionIp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_UpdateAgentConfigVersionIp_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).UpdateAgentConfigVersionIp(ctx, req.(*AgentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +149,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAgentConfig",
 			Handler:    _AgentService_GetAgentConfig_Handler,
+		},
+		{
+			MethodName: "UpdateAgentConfigVersionIp",
+			Handler:    _AgentService_UpdateAgentConfigVersionIp_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

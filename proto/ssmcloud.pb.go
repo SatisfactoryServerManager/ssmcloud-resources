@@ -182,50 +182,6 @@ func (x *AgentServerConfig) GetDisableSeasonalEvents() bool {
 	return false
 }
 
-type AgentGenericRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ApiKey        string                 `protobuf:"bytes,1,opt,name=apiKey,proto3" json:"apiKey,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AgentGenericRequest) Reset() {
-	*x = AgentGenericRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentGenericRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentGenericRequest) ProtoMessage() {}
-
-func (x *AgentGenericRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentGenericRequest.ProtoReflect.Descriptor instead.
-func (*AgentGenericRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *AgentGenericRequest) GetApiKey() string {
-	if x != nil {
-		return x.ApiKey
-	}
-	return ""
-}
-
 type AgentConfigResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Config        *AgentConfig           `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
@@ -236,7 +192,7 @@ type AgentConfigResponse struct {
 
 func (x *AgentConfigResponse) Reset() {
 	*x = AgentConfigResponse{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[3]
+	mi := &file_proto_ssmcloud_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -248,7 +204,7 @@ func (x *AgentConfigResponse) String() string {
 func (*AgentConfigResponse) ProtoMessage() {}
 
 func (x *AgentConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[3]
+	mi := &file_proto_ssmcloud_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,7 +217,7 @@ func (x *AgentConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentConfigResponse.ProtoReflect.Descriptor instead.
 func (*AgentConfigResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{3}
+	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AgentConfigResponse) GetConfig() *AgentConfig {
@@ -280,7 +236,6 @@ func (x *AgentConfigResponse) GetServerConfig() *AgentServerConfig {
 
 type AgentConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ApiKey        string                 `protobuf:"bytes,1,opt,name=apiKey,proto3" json:"apiKey,omitempty"`
 	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	Ip            string                 `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -289,7 +244,7 @@ type AgentConfigRequest struct {
 
 func (x *AgentConfigRequest) Reset() {
 	*x = AgentConfigRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	mi := &file_proto_ssmcloud_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -301,7 +256,7 @@ func (x *AgentConfigRequest) String() string {
 func (*AgentConfigRequest) ProtoMessage() {}
 
 func (x *AgentConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	mi := &file_proto_ssmcloud_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -314,14 +269,7 @@ func (x *AgentConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentConfigRequest.ProtoReflect.Descriptor instead.
 func (*AgentConfigRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *AgentConfigRequest) GetApiKey() string {
-	if x != nil {
-		return x.ApiKey
-	}
-	return ""
+	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AgentConfigRequest) GetVersion() string {
@@ -357,18 +305,15 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\tautoPause\x18\x06 \x01(\bR\tautoPause\x122\n" +
 	"\x14autoSaveOnDisconnect\x18\a \x01(\bR\x14autoSaveOnDisconnect\x12*\n" +
 	"\x10autoSaveInterval\x18\b \x01(\x05R\x10autoSaveInterval\x124\n" +
-	"\x15disableSeasonalEvents\x18\t \x01(\bR\x15disableSeasonalEvents\"-\n" +
-	"\x13AgentGenericRequest\x12\x16\n" +
-	"\x06apiKey\x18\x01 \x01(\tR\x06apiKey\"s\n" +
+	"\x15disableSeasonalEvents\x18\t \x01(\bR\x15disableSeasonalEvents\"s\n" +
 	"\x13AgentConfigResponse\x12$\n" +
 	"\x06config\x18\x01 \x01(\v2\f.AgentConfigR\x06config\x126\n" +
-	"\fserverConfig\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\"V\n" +
-	"\x12AgentConfigRequest\x12\x16\n" +
-	"\x06apiKey\x18\x01 \x01(\tR\x06apiKey\x12\x18\n" +
+	"\fserverConfig\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\">\n" +
+	"\x12AgentConfigRequest\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x0e\n" +
-	"\x02ip\x18\x03 \x01(\tR\x02ip2\x97\x01\n" +
-	"\fAgentService\x12<\n" +
-	"\x0eGetAgentConfig\x12\x14.AgentGenericRequest\x1a\x14.AgentConfigResponse\x12I\n" +
+	"\x02ip\x18\x03 \x01(\tR\x02ip2\x99\x01\n" +
+	"\fAgentService\x12>\n" +
+	"\x0eGetAgentConfig\x12\x16.google.protobuf.Empty\x1a\x14.AgentConfigResponse\x12I\n" +
 	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x16.google.protobuf.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
@@ -383,22 +328,21 @@ func file_proto_ssmcloud_proto_rawDescGZIP() []byte {
 	return file_proto_ssmcloud_proto_rawDescData
 }
 
-var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_ssmcloud_proto_goTypes = []any{
 	(*AgentConfig)(nil),         // 0: AgentConfig
 	(*AgentServerConfig)(nil),   // 1: AgentServerConfig
-	(*AgentGenericRequest)(nil), // 2: AgentGenericRequest
-	(*AgentConfigResponse)(nil), // 3: AgentConfigResponse
-	(*AgentConfigRequest)(nil),  // 4: AgentConfigRequest
-	(*emptypb.Empty)(nil),       // 5: google.protobuf.Empty
+	(*AgentConfigResponse)(nil), // 2: AgentConfigResponse
+	(*AgentConfigRequest)(nil),  // 3: AgentConfigRequest
+	(*emptypb.Empty)(nil),       // 4: google.protobuf.Empty
 }
 var file_proto_ssmcloud_proto_depIdxs = []int32{
 	0, // 0: AgentConfigResponse.config:type_name -> AgentConfig
 	1, // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
-	2, // 2: AgentService.GetAgentConfig:input_type -> AgentGenericRequest
-	4, // 3: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
-	3, // 4: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
-	5, // 5: AgentService.UpdateAgentConfigVersionIp:output_type -> google.protobuf.Empty
+	4, // 2: AgentService.GetAgentConfig:input_type -> google.protobuf.Empty
+	3, // 3: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
+	2, // 4: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
+	4, // 5: AgentService.UpdateAgentConfigVersionIp:output_type -> google.protobuf.Empty
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -417,7 +361,7 @@ func file_proto_ssmcloud_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ssmcloud_proto_rawDesc), len(file_proto_ssmcloud_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

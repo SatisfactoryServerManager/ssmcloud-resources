@@ -28,7 +28,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AgentServiceClient interface {
-	GetAgentConfig(ctx context.Context, in *AgentGenericRequest, opts ...grpc.CallOption) (*AgentConfigResponse, error)
+	GetAgentConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -40,7 +40,7 @@ func NewAgentServiceClient(cc grpc.ClientConnInterface) AgentServiceClient {
 	return &agentServiceClient{cc}
 }
 
-func (c *agentServiceClient) GetAgentConfig(ctx context.Context, in *AgentGenericRequest, opts ...grpc.CallOption) (*AgentConfigResponse, error) {
+func (c *agentServiceClient) GetAgentConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*AgentConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AgentConfigResponse)
 	err := c.cc.Invoke(ctx, AgentService_GetAgentConfig_FullMethodName, in, out, cOpts...)
@@ -64,7 +64,7 @@ func (c *agentServiceClient) UpdateAgentConfigVersionIp(ctx context.Context, in 
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
 type AgentServiceServer interface {
-	GetAgentConfig(context.Context, *AgentGenericRequest) (*AgentConfigResponse, error)
+	GetAgentConfig(context.Context, *emptypb.Empty) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
@@ -76,7 +76,7 @@ type AgentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAgentServiceServer struct{}
 
-func (UnimplementedAgentServiceServer) GetAgentConfig(context.Context, *AgentGenericRequest) (*AgentConfigResponse, error) {
+func (UnimplementedAgentServiceServer) GetAgentConfig(context.Context, *emptypb.Empty) (*AgentConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgentConfig not implemented")
 }
 func (UnimplementedAgentServiceServer) UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*emptypb.Empty, error) {
@@ -104,7 +104,7 @@ func RegisterAgentServiceServer(s grpc.ServiceRegistrar, srv AgentServiceServer)
 }
 
 func _AgentService_GetAgentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AgentGenericRequest)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func _AgentService_GetAgentConfig_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: AgentService_GetAgentConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentServiceServer).GetAgentConfig(ctx, req.(*AgentGenericRequest))
+		return srv.(AgentServiceServer).GetAgentConfig(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

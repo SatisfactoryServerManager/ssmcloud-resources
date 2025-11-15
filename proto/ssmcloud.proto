@@ -5,7 +5,7 @@ import "google/protobuf/empty.proto";
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
 
 service AgentService {
-  rpc GetAgentConfig (AgentGenericRequest) returns (AgentConfigResponse);
+  rpc GetAgentConfig (google.protobuf.Empty) returns (AgentConfigResponse);
   rpc UpdateAgentConfigVersionIp (AgentConfigRequest) returns (google.protobuf.Empty);
 }
 
@@ -26,17 +26,12 @@ message AgentServerConfig {
     bool disableSeasonalEvents = 9;
 }
 
-message AgentGenericRequest {
-  string apiKey = 1;
-}
-
 message AgentConfigResponse {
   AgentConfig config = 1;
   AgentServerConfig serverConfig = 2;
 }
 
 message AgentConfigRequest {
-    string apiKey = 1;
     string version = 2;
     string ip = 3;
 }

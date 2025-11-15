@@ -82,7 +82,7 @@ type AgentServerConfig struct {
 	AutoRestart           bool                   `protobuf:"varint,5,opt,name=autoRestart,proto3" json:"autoRestart,omitempty"`
 	AutoPause             bool                   `protobuf:"varint,6,opt,name=autoPause,proto3" json:"autoPause,omitempty"`
 	AutoSaveOnDisconnect  bool                   `protobuf:"varint,7,opt,name=autoSaveOnDisconnect,proto3" json:"autoSaveOnDisconnect,omitempty"`
-	AutoSaveInterval      bool                   `protobuf:"varint,8,opt,name=autoSaveInterval,proto3" json:"autoSaveInterval,omitempty"`
+	AutoSaveInterval      int32                  `protobuf:"varint,8,opt,name=autoSaveInterval,proto3" json:"autoSaveInterval,omitempty"`
 	DisableSeasonalEvents bool                   `protobuf:"varint,9,opt,name=disableSeasonalEvents,proto3" json:"disableSeasonalEvents,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -167,11 +167,11 @@ func (x *AgentServerConfig) GetAutoSaveOnDisconnect() bool {
 	return false
 }
 
-func (x *AgentServerConfig) GetAutoSaveInterval() bool {
+func (x *AgentServerConfig) GetAutoSaveInterval() int32 {
 	if x != nil {
 		return x.AutoSaveInterval
 	}
-	return false
+	return 0
 }
 
 func (x *AgentServerConfig) GetDisableSeasonalEvents() bool {
@@ -295,7 +295,7 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\vautoRestart\x18\x05 \x01(\bR\vautoRestart\x12\x1c\n" +
 	"\tautoPause\x18\x06 \x01(\bR\tautoPause\x122\n" +
 	"\x14autoSaveOnDisconnect\x18\a \x01(\bR\x14autoSaveOnDisconnect\x12*\n" +
-	"\x10autoSaveInterval\x18\b \x01(\bR\x10autoSaveInterval\x124\n" +
+	"\x10autoSaveInterval\x18\b \x01(\x05R\x10autoSaveInterval\x124\n" +
 	"\x15disableSeasonalEvents\x18\t \x01(\bR\x15disableSeasonalEvents\"-\n" +
 	"\x13AgentGenericRequest\x12\x16\n" +
 	"\x06apiKey\x18\x01 \x01(\tR\x06apiKey\"s\n" +

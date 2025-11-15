@@ -19,7 +19,7 @@ message AgentServerConfig {
     bool autoRestart = 5;
     bool autoPause = 6;
     bool autoSaveOnDisconnect = 7;
-    bool autoSaveInterval = 8;
+    int32 autoSaveInterval = 8;
     bool disableSeasonalEvents = 9;
 }
 

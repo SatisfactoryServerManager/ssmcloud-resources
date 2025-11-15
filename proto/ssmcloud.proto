@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+
+service AgentService {
+  rpc GetAgentConfig (AgentGenericRequest) returns (AgentConfigResponse);
+}
+
+message AgentGenericRequest {
+  string apiKey = 1;
+}
+
+message AgentConfigResponse {
+  string message = 1;
+}

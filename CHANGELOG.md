@@ -1,3 +1,6 @@
+## 0.0.36 (November 15, 2025)
+  - feat: Update agent config version and ip
+
 ## 0.0.35 (November 15, 2025)
 
 

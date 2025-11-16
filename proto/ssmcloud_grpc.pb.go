@@ -23,6 +23,8 @@ const (
 	AgentService_UpdateAgentConfigVersionIp_FullMethodName = "/AgentService/UpdateAgentConfigVersionIp"
 	AgentService_UpdateAgentState_FullMethodName           = "/AgentService/UpdateAgentState"
 	AgentService_GetAgentTasks_FullMethodName              = "/AgentService/GetAgentTasks"
+	AgentService_MarkAgentTaskCompleted_FullMethodName     = "/AgentService/MarkAgentTaskCompleted"
+	AgentService_MarkAgentTaskFailed_FullMethodName        = "/AgentService/MarkAgentTaskFailed"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -33,6 +35,8 @@ type AgentServiceClient interface {
 	UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*Empty, error)
 	UpdateAgentState(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error)
 	GetAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentTaskList, error)
+	MarkAgentTaskCompleted(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*Empty, error)
+	MarkAgentTaskFailed(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type agentServiceClient struct {
@@ -86,6 +90,26 @@ func (c *agentServiceClient) GetAgentTasks(ctx context.Context, in *Empty, opts 
 	return out, nil
 }
 
+func (c *agentServiceClient) MarkAgentTaskCompleted(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AgentService_MarkAgentTaskCompleted_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) MarkAgentTaskFailed(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AgentService_MarkAgentTaskFailed_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
@@ -94,6 +118,8 @@ type AgentServiceServer interface {
 	UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*Empty, error)
 	UpdateAgentState(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error
 	GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error)
+	MarkAgentTaskCompleted(context.Context, *AgentTaskCompletedRequest) (*Empty, error)
+	MarkAgentTaskFailed(context.Context, *AgentTaskCompletedRequest) (*Empty, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -115,6 +141,12 @@ func (UnimplementedAgentServiceServer) UpdateAgentState(grpc.ClientStreamingServ
 }
 func (UnimplementedAgentServiceServer) GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgentTasks not implemented")
+}
+func (UnimplementedAgentServiceServer) MarkAgentTaskCompleted(context.Context, *AgentTaskCompletedRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkAgentTaskCompleted not implemented")
+}
+func (UnimplementedAgentServiceServer) MarkAgentTaskFailed(context.Context, *AgentTaskCompletedRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkAgentTaskFailed not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -198,6 +230,42 @@ func _AgentService_GetAgentTasks_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_MarkAgentTaskCompleted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentTaskCompletedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).MarkAgentTaskCompleted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_MarkAgentTaskCompleted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).MarkAgentTaskCompleted(ctx, req.(*AgentTaskCompletedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_MarkAgentTaskFailed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentTaskCompletedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).MarkAgentTaskFailed(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_MarkAgentTaskFailed_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).MarkAgentTaskFailed(ctx, req.(*AgentTaskCompletedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -216,6 +284,14 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAgentTasks",
 			Handler:    _AgentService_GetAgentTasks_Handler,
+		},
+		{
+			MethodName: "MarkAgentTaskCompleted",
+			Handler:    _AgentService_MarkAgentTaskCompleted_Handler,
+		},
+		{
+			MethodName: "MarkAgentTaskFailed",
+			Handler:    _AgentService_MarkAgentTaskFailed_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

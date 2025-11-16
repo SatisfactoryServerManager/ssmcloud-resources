@@ -8,6 +8,8 @@ service AgentService {
   rpc UpdateAgentConfigVersionIp (AgentConfigRequest) returns (Empty);
   rpc UpdateAgentState (stream AgentStateRequest) returns (Empty);
   rpc GetAgentTasks(Empty) returns (AgentTaskList);
+  rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (Empty);
+  rpc MarkAgentTaskFailed(AgentTaskCompletedRequest) returns (Empty);
 }
 
 message AgentConfig {
@@ -57,6 +59,14 @@ message AgentTask {
 
 message AgentTaskList {
   repeated AgentTask tasks = 1;
+}
+
+message AgentTaskCompletedRequest {
+    string id = 1;
+}
+
+message AgentTaskFailedRequest {
+    string id = 1;
 }
 
 message Empty {}

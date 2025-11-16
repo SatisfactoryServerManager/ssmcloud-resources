@@ -9,7 +9,7 @@ service AgentService {
   rpc UpdateAgentState (stream AgentStateRequest) returns (Empty);
   rpc GetAgentTasks(Empty) returns (AgentTaskList);
   rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (Empty);
-  rpc MarkAgentTaskFailed(AgentTaskCompletedRequest) returns (Empty);
+  rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (Empty);
 }
 
 message AgentConfig {

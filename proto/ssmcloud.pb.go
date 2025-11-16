@@ -668,14 +668,14 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
 	"\x16AgentTaskFailedRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\a\n" +
-	"\x05Empty2\xcd\x02\n" +
+	"\x05Empty2\xca\x02\n" +
 	"\fAgentService\x12.\n" +
 	"\x0eGetAgentConfig\x12\x06.Empty\x1a\x14.AgentConfigResponse\x129\n" +
 	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x06.Empty\x120\n" +
 	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x06.Empty(\x01\x12'\n" +
 	"\rGetAgentTasks\x12\x06.Empty\x1a\x0e.AgentTaskList\x12<\n" +
-	"\x16MarkAgentTaskCompleted\x12\x1a.AgentTaskCompletedRequest\x1a\x06.Empty\x129\n" +
-	"\x13MarkAgentTaskFailed\x12\x1a.AgentTaskCompletedRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
+	"\x16MarkAgentTaskCompleted\x12\x1a.AgentTaskCompletedRequest\x1a\x06.Empty\x126\n" +
+	"\x13MarkAgentTaskFailed\x12\x17.AgentTaskFailedRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
 	file_proto_ssmcloud_proto_rawDescOnce sync.Once
@@ -711,7 +711,7 @@ var file_proto_ssmcloud_proto_depIdxs = []int32{
 	4, // 5: AgentService.UpdateAgentState:input_type -> AgentStateRequest
 	9, // 6: AgentService.GetAgentTasks:input_type -> Empty
 	7, // 7: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
-	7, // 8: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskCompletedRequest
+	8, // 8: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
 	2, // 9: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
 	9, // 10: AgentService.UpdateAgentConfigVersionIp:output_type -> Empty
 	9, // 11: AgentService.UpdateAgentState:output_type -> Empty

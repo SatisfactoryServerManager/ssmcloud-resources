@@ -668,11 +668,12 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
 	"\x16AgentTaskFailedRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\a\n" +
-	"\x05Empty2\xca\x02\n" +
+	"\x05Empty2\x80\x03\n" +
 	"\fAgentService\x12.\n" +
 	"\x0eGetAgentConfig\x12\x06.Empty\x1a\x14.AgentConfigResponse\x129\n" +
-	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x06.Empty\x120\n" +
-	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x06.Empty(\x01\x12'\n" +
+	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x06.Empty\x126\n" +
+	"\x16UpdateAgentStateStream\x12\x12.AgentStateRequest\x1a\x06.Empty(\x01\x12.\n" +
+	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x06.Empty\x12'\n" +
 	"\rGetAgentTasks\x12\x06.Empty\x1a\x0e.AgentTaskList\x12<\n" +
 	"\x16MarkAgentTaskCompleted\x12\x1a.AgentTaskCompletedRequest\x1a\x06.Empty\x126\n" +
 	"\x13MarkAgentTaskFailed\x12\x17.AgentTaskFailedRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
@@ -703,26 +704,28 @@ var file_proto_ssmcloud_proto_goTypes = []any{
 	(*Empty)(nil),                     // 9: Empty
 }
 var file_proto_ssmcloud_proto_depIdxs = []int32{
-	0, // 0: AgentConfigResponse.config:type_name -> AgentConfig
-	1, // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
-	5, // 2: AgentTaskList.tasks:type_name -> AgentTask
-	9, // 3: AgentService.GetAgentConfig:input_type -> Empty
-	3, // 4: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
-	4, // 5: AgentService.UpdateAgentState:input_type -> AgentStateRequest
-	9, // 6: AgentService.GetAgentTasks:input_type -> Empty
-	7, // 7: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
-	8, // 8: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
-	2, // 9: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
-	9, // 10: AgentService.UpdateAgentConfigVersionIp:output_type -> Empty
-	9, // 11: AgentService.UpdateAgentState:output_type -> Empty
-	6, // 12: AgentService.GetAgentTasks:output_type -> AgentTaskList
-	9, // 13: AgentService.MarkAgentTaskCompleted:output_type -> Empty
-	9, // 14: AgentService.MarkAgentTaskFailed:output_type -> Empty
-	9, // [9:15] is the sub-list for method output_type
-	3, // [3:9] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	0,  // 0: AgentConfigResponse.config:type_name -> AgentConfig
+	1,  // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
+	5,  // 2: AgentTaskList.tasks:type_name -> AgentTask
+	9,  // 3: AgentService.GetAgentConfig:input_type -> Empty
+	3,  // 4: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
+	4,  // 5: AgentService.UpdateAgentStateStream:input_type -> AgentStateRequest
+	4,  // 6: AgentService.UpdateAgentState:input_type -> AgentStateRequest
+	9,  // 7: AgentService.GetAgentTasks:input_type -> Empty
+	7,  // 8: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
+	8,  // 9: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
+	2,  // 10: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
+	9,  // 11: AgentService.UpdateAgentConfigVersionIp:output_type -> Empty
+	9,  // 12: AgentService.UpdateAgentStateStream:output_type -> Empty
+	9,  // 13: AgentService.UpdateAgentState:output_type -> Empty
+	6,  // 14: AgentService.GetAgentTasks:output_type -> AgentTaskList
+	9,  // 15: AgentService.MarkAgentTaskCompleted:output_type -> Empty
+	9,  // 16: AgentService.MarkAgentTaskFailed:output_type -> Empty
+	10, // [10:17] is the sub-list for method output_type
+	3,  // [3:10] is the sub-list for method input_type
+	3,  // [3:3] is the sub-list for extension type_name
+	3,  // [3:3] is the sub-list for extension extendee
+	0,  // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_ssmcloud_proto_init() }

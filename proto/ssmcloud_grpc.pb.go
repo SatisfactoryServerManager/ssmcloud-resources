@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	AgentService_GetAgentConfig_FullMethodName             = "/AgentService/GetAgentConfig"
 	AgentService_UpdateAgentConfigVersionIp_FullMethodName = "/AgentService/UpdateAgentConfigVersionIp"
+	AgentService_UpdateAgentStateStream_FullMethodName     = "/AgentService/UpdateAgentStateStream"
 	AgentService_UpdateAgentState_FullMethodName           = "/AgentService/UpdateAgentState"
 	AgentService_GetAgentTasks_FullMethodName              = "/AgentService/GetAgentTasks"
 	AgentService_MarkAgentTaskCompleted_FullMethodName     = "/AgentService/MarkAgentTaskCompleted"
@@ -33,7 +34,8 @@ const (
 type AgentServiceClient interface {
 	GetAgentConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*Empty, error)
-	UpdateAgentState(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error)
+	UpdateAgentStateStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error)
+	UpdateAgentState(ctx context.Context, in *AgentStateRequest, opts ...grpc.CallOption) (*Empty, error)
 	GetAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentTaskList, error)
 	MarkAgentTaskCompleted(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*Empty, error)
 	MarkAgentTaskFailed(ctx context.Context, in *AgentTaskFailedRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -67,9 +69,9 @@ func (c *agentServiceClient) UpdateAgentConfigVersionIp(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *agentServiceClient) UpdateAgentState(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error) {
+func (c *agentServiceClient) UpdateAgentStateStream(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AgentService_ServiceDesc.Streams[0], AgentService_UpdateAgentState_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &AgentService_ServiceDesc.Streams[0], AgentService_UpdateAgentStateStream_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +80,17 @@ func (c *agentServiceClient) UpdateAgentState(ctx context.Context, opts ...grpc.
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_UpdateAgentStateClient = grpc.ClientStreamingClient[AgentStateRequest, Empty]
+type AgentService_UpdateAgentStateStreamClient = grpc.ClientStreamingClient[AgentStateRequest, Empty]
+
+func (c *agentServiceClient) UpdateAgentState(ctx context.Context, in *AgentStateRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AgentService_UpdateAgentState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 func (c *agentServiceClient) GetAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentTaskList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -116,7 +128,8 @@ func (c *agentServiceClient) MarkAgentTaskFailed(ctx context.Context, in *AgentT
 type AgentServiceServer interface {
 	GetAgentConfig(context.Context, *Empty) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*Empty, error)
-	UpdateAgentState(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error
+	UpdateAgentStateStream(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error
+	UpdateAgentState(context.Context, *AgentStateRequest) (*Empty, error)
 	GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error)
 	MarkAgentTaskCompleted(context.Context, *AgentTaskCompletedRequest) (*Empty, error)
 	MarkAgentTaskFailed(context.Context, *AgentTaskFailedRequest) (*Empty, error)
@@ -136,8 +149,11 @@ func (UnimplementedAgentServiceServer) GetAgentConfig(context.Context, *Empty) (
 func (UnimplementedAgentServiceServer) UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgentConfigVersionIp not implemented")
 }
-func (UnimplementedAgentServiceServer) UpdateAgentState(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error {
-	return status.Errorf(codes.Unimplemented, "method UpdateAgentState not implemented")
+func (UnimplementedAgentServiceServer) UpdateAgentStateStream(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error {
+	return status.Errorf(codes.Unimplemented, "method UpdateAgentStateStream not implemented")
+}
+func (UnimplementedAgentServiceServer) UpdateAgentState(context.Context, *AgentStateRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgentState not implemented")
 }
 func (UnimplementedAgentServiceServer) GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAgentTasks not implemented")
@@ -205,12 +221,30 @@ func _AgentService_UpdateAgentConfigVersionIp_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AgentService_UpdateAgentState_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AgentServiceServer).UpdateAgentState(&grpc.GenericServerStream[AgentStateRequest, Empty]{ServerStream: stream})
+func _AgentService_UpdateAgentStateStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(AgentServiceServer).UpdateAgentStateStream(&grpc.GenericServerStream[AgentStateRequest, Empty]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_UpdateAgentStateServer = grpc.ClientStreamingServer[AgentStateRequest, Empty]
+type AgentService_UpdateAgentStateStreamServer = grpc.ClientStreamingServer[AgentStateRequest, Empty]
+
+func _AgentService_UpdateAgentState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).UpdateAgentState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_UpdateAgentState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).UpdateAgentState(ctx, req.(*AgentStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 func _AgentService_GetAgentTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
@@ -282,6 +316,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AgentService_UpdateAgentConfigVersionIp_Handler,
 		},
 		{
+			MethodName: "UpdateAgentState",
+			Handler:    _AgentService_UpdateAgentState_Handler,
+		},
+		{
 			MethodName: "GetAgentTasks",
 			Handler:    _AgentService_GetAgentTasks_Handler,
 		},
@@ -296,8 +334,8 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "UpdateAgentState",
-			Handler:       _AgentService_UpdateAgentState_Handler,
+			StreamName:    "UpdateAgentStateStream",
+			Handler:       _AgentService_UpdateAgentStateStream_Handler,
 			ClientStreams: true,
 		},
 	},

@@ -1,3 +1,6 @@
+## 0.0.39 (November 16, 2025)
+
+
 ## 0.0.38 (November 16, 2025)
   - feat: AgentState stream
 

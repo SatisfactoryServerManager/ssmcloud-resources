@@ -286,6 +286,98 @@ func (x *AgentConfigRequest) GetIp() string {
 	return ""
 }
 
+type AgentStateRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Online             bool                   `protobuf:"varint,1,opt,name=online,proto3" json:"online,omitempty"`
+	Installed          bool                   `protobuf:"varint,2,opt,name=installed,proto3" json:"installed,omitempty"`
+	Running            bool                   `protobuf:"varint,3,opt,name=running,proto3" json:"running,omitempty"`
+	Cpu                float32                `protobuf:"fixed32,4,opt,name=cpu,proto3" json:"cpu,omitempty"`
+	Ram                float32                `protobuf:"fixed32,5,opt,name=ram,proto3" json:"ram,omitempty"`
+	InstalledSFVersion int64                  `protobuf:"varint,6,opt,name=installedSFVersion,proto3" json:"installedSFVersion,omitempty"`
+	LatestSFVersion    int64                  `protobuf:"varint,7,opt,name=latestSFVersion,proto3" json:"latestSFVersion,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AgentStateRequest) Reset() {
+	*x = AgentStateRequest{}
+	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentStateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentStateRequest) ProtoMessage() {}
+
+func (x *AgentStateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentStateRequest.ProtoReflect.Descriptor instead.
+func (*AgentStateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AgentStateRequest) GetOnline() bool {
+	if x != nil {
+		return x.Online
+	}
+	return false
+}
+
+func (x *AgentStateRequest) GetInstalled() bool {
+	if x != nil {
+		return x.Installed
+	}
+	return false
+}
+
+func (x *AgentStateRequest) GetRunning() bool {
+	if x != nil {
+		return x.Running
+	}
+	return false
+}
+
+func (x *AgentStateRequest) GetCpu() float32 {
+	if x != nil {
+		return x.Cpu
+	}
+	return 0
+}
+
+func (x *AgentStateRequest) GetRam() float32 {
+	if x != nil {
+		return x.Ram
+	}
+	return 0
+}
+
+func (x *AgentStateRequest) GetInstalledSFVersion() int64 {
+	if x != nil {
+		return x.InstalledSFVersion
+	}
+	return 0
+}
+
+func (x *AgentStateRequest) GetLatestSFVersion() int64 {
+	if x != nil {
+		return x.LatestSFVersion
+	}
+	return 0
+}
+
 var File_proto_ssmcloud_proto protoreflect.FileDescriptor
 
 const file_proto_ssmcloud_proto_rawDesc = "" +
@@ -311,10 +403,19 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\fserverConfig\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\">\n" +
 	"\x12AgentConfigRequest\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x0e\n" +
-	"\x02ip\x18\x03 \x01(\tR\x02ip2\x99\x01\n" +
+	"\x02ip\x18\x03 \x01(\tR\x02ip\"\xe1\x01\n" +
+	"\x11AgentStateRequest\x12\x16\n" +
+	"\x06online\x18\x01 \x01(\bR\x06online\x12\x1c\n" +
+	"\tinstalled\x18\x02 \x01(\bR\tinstalled\x12\x18\n" +
+	"\arunning\x18\x03 \x01(\bR\arunning\x12\x10\n" +
+	"\x03cpu\x18\x04 \x01(\x02R\x03cpu\x12\x10\n" +
+	"\x03ram\x18\x05 \x01(\x02R\x03ram\x12.\n" +
+	"\x12installedSFVersion\x18\x06 \x01(\x03R\x12installedSFVersion\x12(\n" +
+	"\x0flatestSFVersion\x18\a \x01(\x03R\x0flatestSFVersion2\xdb\x01\n" +
 	"\fAgentService\x12>\n" +
 	"\x0eGetAgentConfig\x12\x16.google.protobuf.Empty\x1a\x14.AgentConfigResponse\x12I\n" +
-	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x16.google.protobuf.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
+	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x16.google.protobuf.Empty\x12@\n" +
+	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x16.google.protobuf.Empty(\x01B?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
 	file_proto_ssmcloud_proto_rawDescOnce sync.Once
@@ -328,23 +429,26 @@ func file_proto_ssmcloud_proto_rawDescGZIP() []byte {
 	return file_proto_ssmcloud_proto_rawDescData
 }
 
-var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_ssmcloud_proto_goTypes = []any{
 	(*AgentConfig)(nil),         // 0: AgentConfig
 	(*AgentServerConfig)(nil),   // 1: AgentServerConfig
 	(*AgentConfigResponse)(nil), // 2: AgentConfigResponse
 	(*AgentConfigRequest)(nil),  // 3: AgentConfigRequest
-	(*emptypb.Empty)(nil),       // 4: google.protobuf.Empty
+	(*AgentStateRequest)(nil),   // 4: AgentStateRequest
+	(*emptypb.Empty)(nil),       // 5: google.protobuf.Empty
 }
 var file_proto_ssmcloud_proto_depIdxs = []int32{
 	0, // 0: AgentConfigResponse.config:type_name -> AgentConfig
 	1, // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
-	4, // 2: AgentService.GetAgentConfig:input_type -> google.protobuf.Empty
+	5, // 2: AgentService.GetAgentConfig:input_type -> google.protobuf.Empty
 	3, // 3: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
-	2, // 4: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
-	4, // 5: AgentService.UpdateAgentConfigVersionIp:output_type -> google.protobuf.Empty
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
+	4, // 4: AgentService.UpdateAgentState:input_type -> AgentStateRequest
+	2, // 5: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
+	5, // 6: AgentService.UpdateAgentConfigVersionIp:output_type -> google.protobuf.Empty
+	5, // 7: AgentService.UpdateAgentState:output_type -> google.protobuf.Empty
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
 	2, // [2:2] is the sub-list for extension extendee
 	0, // [0:2] is the sub-list for field type_name
@@ -361,7 +465,7 @@ func file_proto_ssmcloud_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ssmcloud_proto_rawDesc), len(file_proto_ssmcloud_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

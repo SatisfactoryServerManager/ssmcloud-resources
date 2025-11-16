@@ -7,6 +7,7 @@ option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/pro
 service AgentService {
   rpc GetAgentConfig (google.protobuf.Empty) returns (AgentConfigResponse);
   rpc UpdateAgentConfigVersionIp (AgentConfigRequest) returns (google.protobuf.Empty);
+  rpc UpdateAgentState (stream AgentStateRequest) returns (google.protobuf.Empty);
 }
 
 message AgentConfig {
@@ -34,4 +35,14 @@ message AgentConfigResponse {
 message AgentConfigRequest {
     string version = 2;
     string ip = 3;
+}
+
+message AgentStateRequest {
+    bool online = 1;
+    bool installed = 2;
+    bool running = 3;
+    float cpu = 4;
+    float ram = 5;
+    int64 installedSFVersion = 6;
+    int64 latestSFVersion = 7;
 }

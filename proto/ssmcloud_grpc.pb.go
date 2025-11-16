@@ -22,7 +22,7 @@ const (
 	AgentService_GetAgentConfig_FullMethodName             = "/AgentService/GetAgentConfig"
 	AgentService_UpdateAgentConfigVersionIp_FullMethodName = "/AgentService/UpdateAgentConfigVersionIp"
 	AgentService_UpdateAgentState_FullMethodName           = "/AgentService/UpdateAgentState"
-	AgentService_StreamAgentTasks_FullMethodName           = "/AgentService/StreamAgentTasks"
+	AgentService_GetAgentTasks_FullMethodName              = "/AgentService/GetAgentTasks"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -32,7 +32,7 @@ type AgentServiceClient interface {
 	GetAgentConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(ctx context.Context, in *AgentConfigRequest, opts ...grpc.CallOption) (*Empty, error)
 	UpdateAgentState(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[AgentStateRequest, Empty], error)
-	StreamAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AgentTask], error)
+	GetAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentTaskList, error)
 }
 
 type agentServiceClient struct {
@@ -76,24 +76,15 @@ func (c *agentServiceClient) UpdateAgentState(ctx context.Context, opts ...grpc.
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AgentService_UpdateAgentStateClient = grpc.ClientStreamingClient[AgentStateRequest, Empty]
 
-func (c *agentServiceClient) StreamAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AgentTask], error) {
+func (c *agentServiceClient) GetAgentTasks(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentTaskList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AgentService_ServiceDesc.Streams[1], AgentService_StreamAgentTasks_FullMethodName, cOpts...)
+	out := new(AgentTaskList)
+	err := c.cc.Invoke(ctx, AgentService_GetAgentTasks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[Empty, AgentTask]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_StreamAgentTasksClient = grpc.ServerStreamingClient[AgentTask]
 
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
@@ -102,7 +93,7 @@ type AgentServiceServer interface {
 	GetAgentConfig(context.Context, *Empty) (*AgentConfigResponse, error)
 	UpdateAgentConfigVersionIp(context.Context, *AgentConfigRequest) (*Empty, error)
 	UpdateAgentState(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error
-	StreamAgentTasks(*Empty, grpc.ServerStreamingServer[AgentTask]) error
+	GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -122,8 +113,8 @@ func (UnimplementedAgentServiceServer) UpdateAgentConfigVersionIp(context.Contex
 func (UnimplementedAgentServiceServer) UpdateAgentState(grpc.ClientStreamingServer[AgentStateRequest, Empty]) error {
 	return status.Errorf(codes.Unimplemented, "method UpdateAgentState not implemented")
 }
-func (UnimplementedAgentServiceServer) StreamAgentTasks(*Empty, grpc.ServerStreamingServer[AgentTask]) error {
-	return status.Errorf(codes.Unimplemented, "method StreamAgentTasks not implemented")
+func (UnimplementedAgentServiceServer) GetAgentTasks(context.Context, *Empty) (*AgentTaskList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAgentTasks not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -189,16 +180,23 @@ func _AgentService_UpdateAgentState_Handler(srv interface{}, stream grpc.ServerS
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type AgentService_UpdateAgentStateServer = grpc.ClientStreamingServer[AgentStateRequest, Empty]
 
-func _AgentService_StreamAgentTasks_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _AgentService_GetAgentTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(AgentServiceServer).StreamAgentTasks(m, &grpc.GenericServerStream[Empty, AgentTask]{ServerStream: stream})
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetAgentTasks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetAgentTasks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetAgentTasks(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_StreamAgentTasksServer = grpc.ServerStreamingServer[AgentTask]
 
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -215,17 +213,16 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateAgentConfigVersionIp",
 			Handler:    _AgentService_UpdateAgentConfigVersionIp_Handler,
 		},
+		{
+			MethodName: "GetAgentTasks",
+			Handler:    _AgentService_GetAgentTasks_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UpdateAgentState",
 			Handler:       _AgentService_UpdateAgentState_Handler,
 			ClientStreams: true,
-		},
-		{
-			StreamName:    "StreamAgentTasks",
-			Handler:       _AgentService_StreamAgentTasks_Handler,
-			ServerStreams: true,
 		},
 	},
 	Metadata: "proto/ssmcloud.proto",

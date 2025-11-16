@@ -7,7 +7,7 @@ service AgentService {
   rpc GetAgentConfig (Empty) returns (AgentConfigResponse);
   rpc UpdateAgentConfigVersionIp (AgentConfigRequest) returns (Empty);
   rpc UpdateAgentState (stream AgentStateRequest) returns (Empty);
-  rpc StreamAgentTasks(Empty) returns (stream AgentTask);
+  rpc GetAgentTasks(Empty) returns (AgentTaskList);
 }
 
 message AgentConfig {
@@ -50,9 +50,13 @@ message AgentStateRequest {
 message AgentTask {
   string id = 1;
   string action = 2;
-  string data = 3; // serialized JSON or string
+  string data = 3; // JSON string
   bool completed = 4;
   int32 retries = 5;
+}
+
+message AgentTaskList {
+  repeated AgentTask tasks = 1;
 }
 
 message Empty {}

@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.12
-// source: proto/ssmcloud.proto
+// source: ssmcloud.proto
 
 package proto
 
@@ -21,270 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AgentConfig struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	BackupInterval   int32                  `protobuf:"varint,1,opt,name=backupInterval,proto3" json:"backupInterval,omitempty"`
-	BackupKeepAmount int32                  `protobuf:"varint,2,opt,name=backupKeepAmount,proto3" json:"backupKeepAmount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AgentConfig) Reset() {
-	*x = AgentConfig{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentConfig) ProtoMessage() {}
-
-func (x *AgentConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentConfig.ProtoReflect.Descriptor instead.
-func (*AgentConfig) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *AgentConfig) GetBackupInterval() int32 {
-	if x != nil {
-		return x.BackupInterval
-	}
-	return 0
-}
-
-func (x *AgentConfig) GetBackupKeepAmount() int32 {
-	if x != nil {
-		return x.BackupKeepAmount
-	}
-	return 0
-}
-
-type AgentServerConfig struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	MaxPlayers            int32                  `protobuf:"varint,1,opt,name=maxPlayers,proto3" json:"maxPlayers,omitempty"`
-	WorkerThreads         int32                  `protobuf:"varint,2,opt,name=workerThreads,proto3" json:"workerThreads,omitempty"`
-	Branch                string                 `protobuf:"bytes,3,opt,name=branch,proto3" json:"branch,omitempty"`
-	UpdateSFOnStart       bool                   `protobuf:"varint,4,opt,name=updateSFOnStart,proto3" json:"updateSFOnStart,omitempty"`
-	AutoRestart           bool                   `protobuf:"varint,5,opt,name=autoRestart,proto3" json:"autoRestart,omitempty"`
-	AutoPause             bool                   `protobuf:"varint,6,opt,name=autoPause,proto3" json:"autoPause,omitempty"`
-	AutoSaveOnDisconnect  bool                   `protobuf:"varint,7,opt,name=autoSaveOnDisconnect,proto3" json:"autoSaveOnDisconnect,omitempty"`
-	AutoSaveInterval      int32                  `protobuf:"varint,8,opt,name=autoSaveInterval,proto3" json:"autoSaveInterval,omitempty"`
-	DisableSeasonalEvents bool                   `protobuf:"varint,9,opt,name=disableSeasonalEvents,proto3" json:"disableSeasonalEvents,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *AgentServerConfig) Reset() {
-	*x = AgentServerConfig{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentServerConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentServerConfig) ProtoMessage() {}
-
-func (x *AgentServerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentServerConfig.ProtoReflect.Descriptor instead.
-func (*AgentServerConfig) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AgentServerConfig) GetMaxPlayers() int32 {
-	if x != nil {
-		return x.MaxPlayers
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetWorkerThreads() int32 {
-	if x != nil {
-		return x.WorkerThreads
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetBranch() string {
-	if x != nil {
-		return x.Branch
-	}
-	return ""
-}
-
-func (x *AgentServerConfig) GetUpdateSFOnStart() bool {
-	if x != nil {
-		return x.UpdateSFOnStart
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoRestart() bool {
-	if x != nil {
-		return x.AutoRestart
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoPause() bool {
-	if x != nil {
-		return x.AutoPause
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoSaveOnDisconnect() bool {
-	if x != nil {
-		return x.AutoSaveOnDisconnect
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoSaveInterval() int32 {
-	if x != nil {
-		return x.AutoSaveInterval
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetDisableSeasonalEvents() bool {
-	if x != nil {
-		return x.DisableSeasonalEvents
-	}
-	return false
-}
-
-type AgentConfigResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Config        *AgentConfig           `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	ServerConfig  *AgentServerConfig     `protobuf:"bytes,2,opt,name=serverConfig,proto3" json:"serverConfig,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AgentConfigResponse) Reset() {
-	*x = AgentConfigResponse{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentConfigResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentConfigResponse) ProtoMessage() {}
-
-func (x *AgentConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentConfigResponse.ProtoReflect.Descriptor instead.
-func (*AgentConfigResponse) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *AgentConfigResponse) GetConfig() *AgentConfig {
-	if x != nil {
-		return x.Config
-	}
-	return nil
-}
-
-func (x *AgentConfigResponse) GetServerConfig() *AgentServerConfig {
-	if x != nil {
-		return x.ServerConfig
-	}
-	return nil
-}
-
-type AgentConfigRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
-	Ip            string                 `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AgentConfigRequest) Reset() {
-	*x = AgentConfigRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentConfigRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentConfigRequest) ProtoMessage() {}
-
-func (x *AgentConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentConfigRequest.ProtoReflect.Descriptor instead.
-func (*AgentConfigRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *AgentConfigRequest) GetVersion() string {
-	if x != nil {
-		return x.Version
-	}
-	return ""
-}
-
-func (x *AgentConfigRequest) GetIp() string {
-	if x != nil {
-		return x.Ip
-	}
-	return ""
-}
-
 type AgentStateRequest struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Online             bool                   `protobuf:"varint,1,opt,name=online,proto3" json:"online,omitempty"`
@@ -300,7 +36,7 @@ type AgentStateRequest struct {
 
 func (x *AgentStateRequest) Reset() {
 	*x = AgentStateRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	mi := &file_ssmcloud_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -312,7 +48,7 @@ func (x *AgentStateRequest) String() string {
 func (*AgentStateRequest) ProtoMessage() {}
 
 func (x *AgentStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[4]
+	mi := &file_ssmcloud_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -325,7 +61,7 @@ func (x *AgentStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentStateRequest.ProtoReflect.Descriptor instead.
 func (*AgentStateRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{4}
+	return file_ssmcloud_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AgentStateRequest) GetOnline() bool {
@@ -390,7 +126,7 @@ type AgentTask struct {
 
 func (x *AgentTask) Reset() {
 	*x = AgentTask{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[5]
+	mi := &file_ssmcloud_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -402,7 +138,7 @@ func (x *AgentTask) String() string {
 func (*AgentTask) ProtoMessage() {}
 
 func (x *AgentTask) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[5]
+	mi := &file_ssmcloud_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -415,7 +151,7 @@ func (x *AgentTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTask.ProtoReflect.Descriptor instead.
 func (*AgentTask) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{5}
+	return file_ssmcloud_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AgentTask) GetId() string {
@@ -462,7 +198,7 @@ type AgentTaskList struct {
 
 func (x *AgentTaskList) Reset() {
 	*x = AgentTaskList{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[6]
+	mi := &file_ssmcloud_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -474,7 +210,7 @@ func (x *AgentTaskList) String() string {
 func (*AgentTaskList) ProtoMessage() {}
 
 func (x *AgentTaskList) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[6]
+	mi := &file_ssmcloud_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -487,7 +223,7 @@ func (x *AgentTaskList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskList.ProtoReflect.Descriptor instead.
 func (*AgentTaskList) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{6}
+	return file_ssmcloud_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AgentTaskList) GetTasks() []*AgentTask {
@@ -506,7 +242,7 @@ type AgentTaskCompletedRequest struct {
 
 func (x *AgentTaskCompletedRequest) Reset() {
 	*x = AgentTaskCompletedRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[7]
+	mi := &file_ssmcloud_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -518,7 +254,7 @@ func (x *AgentTaskCompletedRequest) String() string {
 func (*AgentTaskCompletedRequest) ProtoMessage() {}
 
 func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[7]
+	mi := &file_ssmcloud_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -531,7 +267,7 @@ func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskCompletedRequest.ProtoReflect.Descriptor instead.
 func (*AgentTaskCompletedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{7}
+	return file_ssmcloud_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AgentTaskCompletedRequest) GetId() string {
@@ -550,7 +286,7 @@ type AgentTaskFailedRequest struct {
 
 func (x *AgentTaskFailedRequest) Reset() {
 	*x = AgentTaskFailedRequest{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[8]
+	mi := &file_ssmcloud_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +298,7 @@ func (x *AgentTaskFailedRequest) String() string {
 func (*AgentTaskFailedRequest) ProtoMessage() {}
 
 func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[8]
+	mi := &file_ssmcloud_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -575,7 +311,7 @@ func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskFailedRequest.ProtoReflect.Descriptor instead.
 func (*AgentTaskFailedRequest) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{8}
+	return file_ssmcloud_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AgentTaskFailedRequest) GetId() string {
@@ -585,32 +321,11 @@ func (x *AgentTaskFailedRequest) GetId() string {
 	return ""
 }
 
-var File_proto_ssmcloud_proto protoreflect.FileDescriptor
+var File_ssmcloud_proto protoreflect.FileDescriptor
 
-const file_proto_ssmcloud_proto_rawDesc = "" +
+const file_ssmcloud_proto_rawDesc = "" +
 	"\n" +
-	"\x14proto/ssmcloud.proto\x1a\x11proto/empty.proto\"a\n" +
-	"\vAgentConfig\x12&\n" +
-	"\x0ebackupInterval\x18\x01 \x01(\x05R\x0ebackupInterval\x12*\n" +
-	"\x10backupKeepAmount\x18\x02 \x01(\x05R\x10backupKeepAmount\"\xf1\x02\n" +
-	"\x11AgentServerConfig\x12\x1e\n" +
-	"\n" +
-	"maxPlayers\x18\x01 \x01(\x05R\n" +
-	"maxPlayers\x12$\n" +
-	"\rworkerThreads\x18\x02 \x01(\x05R\rworkerThreads\x12\x16\n" +
-	"\x06branch\x18\x03 \x01(\tR\x06branch\x12(\n" +
-	"\x0fupdateSFOnStart\x18\x04 \x01(\bR\x0fupdateSFOnStart\x12 \n" +
-	"\vautoRestart\x18\x05 \x01(\bR\vautoRestart\x12\x1c\n" +
-	"\tautoPause\x18\x06 \x01(\bR\tautoPause\x122\n" +
-	"\x14autoSaveOnDisconnect\x18\a \x01(\bR\x14autoSaveOnDisconnect\x12*\n" +
-	"\x10autoSaveInterval\x18\b \x01(\x05R\x10autoSaveInterval\x124\n" +
-	"\x15disableSeasonalEvents\x18\t \x01(\bR\x15disableSeasonalEvents\"s\n" +
-	"\x13AgentConfigResponse\x12$\n" +
-	"\x06config\x18\x01 \x01(\v2\f.AgentConfigR\x06config\x126\n" +
-	"\fserverConfig\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\">\n" +
-	"\x12AgentConfigRequest\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\tR\aversion\x12\x0e\n" +
-	"\x02ip\x18\x03 \x01(\tR\x02ip\"\xe1\x01\n" +
+	"\x0essmcloud.proto\x1a\vempty.proto\"\xe1\x01\n" +
 	"\x11AgentStateRequest\x12\x16\n" +
 	"\x06online\x18\x01 \x01(\bR\x06online\x12\x1c\n" +
 	"\tinstalled\x18\x02 \x01(\bR\tinstalled\x12\x18\n" +
@@ -631,10 +346,8 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\x19AgentTaskCompletedRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
 	"\x16AgentTaskFailedRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\x80\x03\n" +
-	"\fAgentService\x12.\n" +
-	"\x0eGetAgentConfig\x12\x06.Empty\x1a\x14.AgentConfigResponse\x129\n" +
-	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x06.Empty\x126\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2\x95\x02\n" +
+	"\fAgentService\x126\n" +
 	"\x16UpdateAgentStateStream\x12\x12.AgentStateRequest\x1a\x06.Empty(\x01\x12.\n" +
 	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x06.Empty\x12'\n" +
 	"\rGetAgentTasks\x12\x06.Empty\x1a\x0e.AgentTaskList\x12<\n" +
@@ -642,76 +355,66 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\x13MarkAgentTaskFailed\x12\x17.AgentTaskFailedRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
-	file_proto_ssmcloud_proto_rawDescOnce sync.Once
-	file_proto_ssmcloud_proto_rawDescData []byte
+	file_ssmcloud_proto_rawDescOnce sync.Once
+	file_ssmcloud_proto_rawDescData []byte
 )
 
-func file_proto_ssmcloud_proto_rawDescGZIP() []byte {
-	file_proto_ssmcloud_proto_rawDescOnce.Do(func() {
-		file_proto_ssmcloud_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_ssmcloud_proto_rawDesc), len(file_proto_ssmcloud_proto_rawDesc)))
+func file_ssmcloud_proto_rawDescGZIP() []byte {
+	file_ssmcloud_proto_rawDescOnce.Do(func() {
+		file_ssmcloud_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_ssmcloud_proto_rawDesc), len(file_ssmcloud_proto_rawDesc)))
 	})
-	return file_proto_ssmcloud_proto_rawDescData
+	return file_ssmcloud_proto_rawDescData
 }
 
-var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
-var file_proto_ssmcloud_proto_goTypes = []any{
-	(*AgentConfig)(nil),               // 0: AgentConfig
-	(*AgentServerConfig)(nil),         // 1: AgentServerConfig
-	(*AgentConfigResponse)(nil),       // 2: AgentConfigResponse
-	(*AgentConfigRequest)(nil),        // 3: AgentConfigRequest
-	(*AgentStateRequest)(nil),         // 4: AgentStateRequest
-	(*AgentTask)(nil),                 // 5: AgentTask
-	(*AgentTaskList)(nil),             // 6: AgentTaskList
-	(*AgentTaskCompletedRequest)(nil), // 7: AgentTaskCompletedRequest
-	(*AgentTaskFailedRequest)(nil),    // 8: AgentTaskFailedRequest
-	(*Empty)(nil),                     // 9: Empty
+var file_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_ssmcloud_proto_goTypes = []any{
+	(*AgentStateRequest)(nil),         // 0: AgentStateRequest
+	(*AgentTask)(nil),                 // 1: AgentTask
+	(*AgentTaskList)(nil),             // 2: AgentTaskList
+	(*AgentTaskCompletedRequest)(nil), // 3: AgentTaskCompletedRequest
+	(*AgentTaskFailedRequest)(nil),    // 4: AgentTaskFailedRequest
+	(*Empty)(nil),                     // 5: Empty
 }
-var file_proto_ssmcloud_proto_depIdxs = []int32{
-	0,  // 0: AgentConfigResponse.config:type_name -> AgentConfig
-	1,  // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
-	5,  // 2: AgentTaskList.tasks:type_name -> AgentTask
-	9,  // 3: AgentService.GetAgentConfig:input_type -> Empty
-	3,  // 4: AgentService.UpdateAgentConfigVersionIp:input_type -> AgentConfigRequest
-	4,  // 5: AgentService.UpdateAgentStateStream:input_type -> AgentStateRequest
-	4,  // 6: AgentService.UpdateAgentState:input_type -> AgentStateRequest
-	9,  // 7: AgentService.GetAgentTasks:input_type -> Empty
-	7,  // 8: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
-	8,  // 9: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
-	2,  // 10: AgentService.GetAgentConfig:output_type -> AgentConfigResponse
-	9,  // 11: AgentService.UpdateAgentConfigVersionIp:output_type -> Empty
-	9,  // 12: AgentService.UpdateAgentStateStream:output_type -> Empty
-	9,  // 13: AgentService.UpdateAgentState:output_type -> Empty
-	6,  // 14: AgentService.GetAgentTasks:output_type -> AgentTaskList
-	9,  // 15: AgentService.MarkAgentTaskCompleted:output_type -> Empty
-	9,  // 16: AgentService.MarkAgentTaskFailed:output_type -> Empty
-	10, // [10:17] is the sub-list for method output_type
-	3,  // [3:10] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+var file_ssmcloud_proto_depIdxs = []int32{
+	1, // 0: AgentTaskList.tasks:type_name -> AgentTask
+	0, // 1: AgentService.UpdateAgentStateStream:input_type -> AgentStateRequest
+	0, // 2: AgentService.UpdateAgentState:input_type -> AgentStateRequest
+	5, // 3: AgentService.GetAgentTasks:input_type -> Empty
+	3, // 4: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
+	4, // 5: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
+	5, // 6: AgentService.UpdateAgentStateStream:output_type -> Empty
+	5, // 7: AgentService.UpdateAgentState:output_type -> Empty
+	2, // 8: AgentService.GetAgentTasks:output_type -> AgentTaskList
+	5, // 9: AgentService.MarkAgentTaskCompleted:output_type -> Empty
+	5, // 10: AgentService.MarkAgentTaskFailed:output_type -> Empty
+	6, // [6:11] is the sub-list for method output_type
+	1, // [1:6] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_proto_ssmcloud_proto_init() }
-func file_proto_ssmcloud_proto_init() {
-	if File_proto_ssmcloud_proto != nil {
+func init() { file_ssmcloud_proto_init() }
+func file_ssmcloud_proto_init() {
+	if File_ssmcloud_proto != nil {
 		return
 	}
-	file_proto_empty_proto_init()
+	file_empty_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ssmcloud_proto_rawDesc), len(file_proto_ssmcloud_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ssmcloud_proto_rawDesc), len(file_ssmcloud_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_ssmcloud_proto_goTypes,
-		DependencyIndexes: file_proto_ssmcloud_proto_depIdxs,
-		MessageInfos:      file_proto_ssmcloud_proto_msgTypes,
+		GoTypes:           file_ssmcloud_proto_goTypes,
+		DependencyIndexes: file_ssmcloud_proto_depIdxs,
+		MessageInfos:      file_ssmcloud_proto_msgTypes,
 	}.Build()
-	File_proto_ssmcloud_proto = out.File
-	file_proto_ssmcloud_proto_goTypes = nil
-	file_proto_ssmcloud_proto_depIdxs = nil
+	File_ssmcloud_proto = out.File
+	file_ssmcloud_proto_goTypes = nil
+	file_ssmcloud_proto_depIdxs = nil
 }

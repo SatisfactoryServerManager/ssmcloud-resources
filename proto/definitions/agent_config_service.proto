@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+import "empty.proto";
+
+service AgentConfigService{
+  rpc GetAgentConfig (Empty) returns (AgentConfigResponse);
+  rpc UpdateAgentConfigVersionIp (UpdateAgentConfigRequest) returns (Empty);
+}
+
+message AgentConfig {
+    int32 backupInterval = 1;
+    int32 backupKeepAmount = 2;
+}
+
+message AgentServerConfig {
+    int32 maxPlayers = 1;
+    int32 workerThreads = 2;
+    string branch = 3;
+    bool updateSFOnStart = 4;
+    bool autoRestart = 5;
+    bool autoPause = 6;
+    bool autoSaveOnDisconnect = 7;
+    int32 autoSaveInterval = 8;
+    bool disableSeasonalEvents = 9;
+}
+
+message AgentConfigResponse {
+  AgentConfig config = 1;
+  AgentServerConfig serverConfig = 2;
+}
+
+message UpdateAgentConfigRequest {
+    string version = 2;
+    string ip = 3;
+}

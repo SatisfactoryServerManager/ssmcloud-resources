@@ -1,3 +1,6 @@
+## 0.0.45 (November 17, 2025)
+  - feat: agent config service proto
+
 ## 0.0.44 (November 17, 2025)
   - feat: Agent log proto
 

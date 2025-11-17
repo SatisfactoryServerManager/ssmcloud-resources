@@ -1,3 +1,6 @@
+## 0.0.44 (November 17, 2025)
+  - feat: Agent log proto
+
 ## 0.0.43 (November 16, 2025)
 
 

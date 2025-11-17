@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+import "empty.proto";
+
+service AgentStateService {
+  rpc UpdateAgentStateStream (stream AgentStateRequest) returns (Empty);
+  rpc UpdateAgentState (AgentStateRequest) returns (Empty);
+}
+
+message AgentStateRequest {
+    bool online = 1;
+    bool installed = 2;
+    bool running = 3;
+    float cpu = 4;
+    float ram = 5;
+    int64 installedSFVersion = 6;
+    int64 latestSFVersion = 7;
+}

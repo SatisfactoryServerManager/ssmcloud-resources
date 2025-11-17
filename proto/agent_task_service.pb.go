@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.12
-// source: ssmcloud.proto
+// source: agent_task_service.proto
 
 package proto
 
@@ -21,98 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AgentStateRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Online             bool                   `protobuf:"varint,1,opt,name=online,proto3" json:"online,omitempty"`
-	Installed          bool                   `protobuf:"varint,2,opt,name=installed,proto3" json:"installed,omitempty"`
-	Running            bool                   `protobuf:"varint,3,opt,name=running,proto3" json:"running,omitempty"`
-	Cpu                float32                `protobuf:"fixed32,4,opt,name=cpu,proto3" json:"cpu,omitempty"`
-	Ram                float32                `protobuf:"fixed32,5,opt,name=ram,proto3" json:"ram,omitempty"`
-	InstalledSFVersion int64                  `protobuf:"varint,6,opt,name=installedSFVersion,proto3" json:"installedSFVersion,omitempty"`
-	LatestSFVersion    int64                  `protobuf:"varint,7,opt,name=latestSFVersion,proto3" json:"latestSFVersion,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *AgentStateRequest) Reset() {
-	*x = AgentStateRequest{}
-	mi := &file_ssmcloud_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentStateRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentStateRequest) ProtoMessage() {}
-
-func (x *AgentStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ssmcloud_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentStateRequest.ProtoReflect.Descriptor instead.
-func (*AgentStateRequest) Descriptor() ([]byte, []int) {
-	return file_ssmcloud_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *AgentStateRequest) GetOnline() bool {
-	if x != nil {
-		return x.Online
-	}
-	return false
-}
-
-func (x *AgentStateRequest) GetInstalled() bool {
-	if x != nil {
-		return x.Installed
-	}
-	return false
-}
-
-func (x *AgentStateRequest) GetRunning() bool {
-	if x != nil {
-		return x.Running
-	}
-	return false
-}
-
-func (x *AgentStateRequest) GetCpu() float32 {
-	if x != nil {
-		return x.Cpu
-	}
-	return 0
-}
-
-func (x *AgentStateRequest) GetRam() float32 {
-	if x != nil {
-		return x.Ram
-	}
-	return 0
-}
-
-func (x *AgentStateRequest) GetInstalledSFVersion() int64 {
-	if x != nil {
-		return x.InstalledSFVersion
-	}
-	return 0
-}
-
-func (x *AgentStateRequest) GetLatestSFVersion() int64 {
-	if x != nil {
-		return x.LatestSFVersion
-	}
-	return 0
-}
-
 type AgentTask struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -126,7 +34,7 @@ type AgentTask struct {
 
 func (x *AgentTask) Reset() {
 	*x = AgentTask{}
-	mi := &file_ssmcloud_proto_msgTypes[1]
+	mi := &file_agent_task_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -138,7 +46,7 @@ func (x *AgentTask) String() string {
 func (*AgentTask) ProtoMessage() {}
 
 func (x *AgentTask) ProtoReflect() protoreflect.Message {
-	mi := &file_ssmcloud_proto_msgTypes[1]
+	mi := &file_agent_task_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -151,7 +59,7 @@ func (x *AgentTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTask.ProtoReflect.Descriptor instead.
 func (*AgentTask) Descriptor() ([]byte, []int) {
-	return file_ssmcloud_proto_rawDescGZIP(), []int{1}
+	return file_agent_task_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AgentTask) GetId() string {
@@ -198,7 +106,7 @@ type AgentTaskList struct {
 
 func (x *AgentTaskList) Reset() {
 	*x = AgentTaskList{}
-	mi := &file_ssmcloud_proto_msgTypes[2]
+	mi := &file_agent_task_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -210,7 +118,7 @@ func (x *AgentTaskList) String() string {
 func (*AgentTaskList) ProtoMessage() {}
 
 func (x *AgentTaskList) ProtoReflect() protoreflect.Message {
-	mi := &file_ssmcloud_proto_msgTypes[2]
+	mi := &file_agent_task_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -223,7 +131,7 @@ func (x *AgentTaskList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskList.ProtoReflect.Descriptor instead.
 func (*AgentTaskList) Descriptor() ([]byte, []int) {
-	return file_ssmcloud_proto_rawDescGZIP(), []int{2}
+	return file_agent_task_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AgentTaskList) GetTasks() []*AgentTask {
@@ -242,7 +150,7 @@ type AgentTaskCompletedRequest struct {
 
 func (x *AgentTaskCompletedRequest) Reset() {
 	*x = AgentTaskCompletedRequest{}
-	mi := &file_ssmcloud_proto_msgTypes[3]
+	mi := &file_agent_task_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -254,7 +162,7 @@ func (x *AgentTaskCompletedRequest) String() string {
 func (*AgentTaskCompletedRequest) ProtoMessage() {}
 
 func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ssmcloud_proto_msgTypes[3]
+	mi := &file_agent_task_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -267,7 +175,7 @@ func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskCompletedRequest.ProtoReflect.Descriptor instead.
 func (*AgentTaskCompletedRequest) Descriptor() ([]byte, []int) {
-	return file_ssmcloud_proto_rawDescGZIP(), []int{3}
+	return file_agent_task_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AgentTaskCompletedRequest) GetId() string {
@@ -286,7 +194,7 @@ type AgentTaskFailedRequest struct {
 
 func (x *AgentTaskFailedRequest) Reset() {
 	*x = AgentTaskFailedRequest{}
-	mi := &file_ssmcloud_proto_msgTypes[4]
+	mi := &file_agent_task_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -298,7 +206,7 @@ func (x *AgentTaskFailedRequest) String() string {
 func (*AgentTaskFailedRequest) ProtoMessage() {}
 
 func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ssmcloud_proto_msgTypes[4]
+	mi := &file_agent_task_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -311,7 +219,7 @@ func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentTaskFailedRequest.ProtoReflect.Descriptor instead.
 func (*AgentTaskFailedRequest) Descriptor() ([]byte, []int) {
-	return file_ssmcloud_proto_rawDescGZIP(), []int{4}
+	return file_agent_task_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AgentTaskFailedRequest) GetId() string {
@@ -321,19 +229,11 @@ func (x *AgentTaskFailedRequest) GetId() string {
 	return ""
 }
 
-var File_ssmcloud_proto protoreflect.FileDescriptor
+var File_agent_task_service_proto protoreflect.FileDescriptor
 
-const file_ssmcloud_proto_rawDesc = "" +
+const file_agent_task_service_proto_rawDesc = "" +
 	"\n" +
-	"\x0essmcloud.proto\x1a\vempty.proto\"\xe1\x01\n" +
-	"\x11AgentStateRequest\x12\x16\n" +
-	"\x06online\x18\x01 \x01(\bR\x06online\x12\x1c\n" +
-	"\tinstalled\x18\x02 \x01(\bR\tinstalled\x12\x18\n" +
-	"\arunning\x18\x03 \x01(\bR\arunning\x12\x10\n" +
-	"\x03cpu\x18\x04 \x01(\x02R\x03cpu\x12\x10\n" +
-	"\x03ram\x18\x05 \x01(\x02R\x03ram\x12.\n" +
-	"\x12installedSFVersion\x18\x06 \x01(\x03R\x12installedSFVersion\x12(\n" +
-	"\x0flatestSFVersion\x18\a \x01(\x03R\x0flatestSFVersion\"\x7f\n" +
+	"\x18agent_task_service.proto\x1a\vempty.proto\"\x7f\n" +
 	"\tAgentTask\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x12\n" +
@@ -346,57 +246,50 @@ const file_ssmcloud_proto_rawDesc = "" +
 	"\x19AgentTaskCompletedRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
 	"\x16AgentTaskFailedRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\x95\x02\n" +
-	"\fAgentService\x126\n" +
-	"\x16UpdateAgentStateStream\x12\x12.AgentStateRequest\x1a\x06.Empty(\x01\x12.\n" +
-	"\x10UpdateAgentState\x12\x12.AgentStateRequest\x1a\x06.Empty\x12'\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2\xb1\x01\n" +
+	"\x10AgentTaskService\x12'\n" +
 	"\rGetAgentTasks\x12\x06.Empty\x1a\x0e.AgentTaskList\x12<\n" +
 	"\x16MarkAgentTaskCompleted\x12\x1a.AgentTaskCompletedRequest\x1a\x06.Empty\x126\n" +
 	"\x13MarkAgentTaskFailed\x12\x17.AgentTaskFailedRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
-	file_ssmcloud_proto_rawDescOnce sync.Once
-	file_ssmcloud_proto_rawDescData []byte
+	file_agent_task_service_proto_rawDescOnce sync.Once
+	file_agent_task_service_proto_rawDescData []byte
 )
 
-func file_ssmcloud_proto_rawDescGZIP() []byte {
-	file_ssmcloud_proto_rawDescOnce.Do(func() {
-		file_ssmcloud_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_ssmcloud_proto_rawDesc), len(file_ssmcloud_proto_rawDesc)))
+func file_agent_task_service_proto_rawDescGZIP() []byte {
+	file_agent_task_service_proto_rawDescOnce.Do(func() {
+		file_agent_task_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_agent_task_service_proto_rawDesc), len(file_agent_task_service_proto_rawDesc)))
 	})
-	return file_ssmcloud_proto_rawDescData
+	return file_agent_task_service_proto_rawDescData
 }
 
-var file_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_ssmcloud_proto_goTypes = []any{
-	(*AgentStateRequest)(nil),         // 0: AgentStateRequest
-	(*AgentTask)(nil),                 // 1: AgentTask
-	(*AgentTaskList)(nil),             // 2: AgentTaskList
-	(*AgentTaskCompletedRequest)(nil), // 3: AgentTaskCompletedRequest
-	(*AgentTaskFailedRequest)(nil),    // 4: AgentTaskFailedRequest
-	(*Empty)(nil),                     // 5: Empty
+var file_agent_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_agent_task_service_proto_goTypes = []any{
+	(*AgentTask)(nil),                 // 0: AgentTask
+	(*AgentTaskList)(nil),             // 1: AgentTaskList
+	(*AgentTaskCompletedRequest)(nil), // 2: AgentTaskCompletedRequest
+	(*AgentTaskFailedRequest)(nil),    // 3: AgentTaskFailedRequest
+	(*Empty)(nil),                     // 4: Empty
 }
-var file_ssmcloud_proto_depIdxs = []int32{
-	1, // 0: AgentTaskList.tasks:type_name -> AgentTask
-	0, // 1: AgentService.UpdateAgentStateStream:input_type -> AgentStateRequest
-	0, // 2: AgentService.UpdateAgentState:input_type -> AgentStateRequest
-	5, // 3: AgentService.GetAgentTasks:input_type -> Empty
-	3, // 4: AgentService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
-	4, // 5: AgentService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
-	5, // 6: AgentService.UpdateAgentStateStream:output_type -> Empty
-	5, // 7: AgentService.UpdateAgentState:output_type -> Empty
-	2, // 8: AgentService.GetAgentTasks:output_type -> AgentTaskList
-	5, // 9: AgentService.MarkAgentTaskCompleted:output_type -> Empty
-	5, // 10: AgentService.MarkAgentTaskFailed:output_type -> Empty
-	6, // [6:11] is the sub-list for method output_type
-	1, // [1:6] is the sub-list for method input_type
+var file_agent_task_service_proto_depIdxs = []int32{
+	0, // 0: AgentTaskList.tasks:type_name -> AgentTask
+	4, // 1: AgentTaskService.GetAgentTasks:input_type -> Empty
+	2, // 2: AgentTaskService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
+	3, // 3: AgentTaskService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
+	1, // 4: AgentTaskService.GetAgentTasks:output_type -> AgentTaskList
+	4, // 5: AgentTaskService.MarkAgentTaskCompleted:output_type -> Empty
+	4, // 6: AgentTaskService.MarkAgentTaskFailed:output_type -> Empty
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_ssmcloud_proto_init() }
-func file_ssmcloud_proto_init() {
-	if File_ssmcloud_proto != nil {
+func init() { file_agent_task_service_proto_init() }
+func file_agent_task_service_proto_init() {
+	if File_agent_task_service_proto != nil {
 		return
 	}
 	file_empty_proto_init()
@@ -404,17 +297,17 @@ func file_ssmcloud_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ssmcloud_proto_rawDesc), len(file_ssmcloud_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_agent_task_service_proto_rawDesc), len(file_agent_task_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_ssmcloud_proto_goTypes,
-		DependencyIndexes: file_ssmcloud_proto_depIdxs,
-		MessageInfos:      file_ssmcloud_proto_msgTypes,
+		GoTypes:           file_agent_task_service_proto_goTypes,
+		DependencyIndexes: file_agent_task_service_proto_depIdxs,
+		MessageInfos:      file_agent_task_service_proto_msgTypes,
 	}.Build()
-	File_ssmcloud_proto = out.File
-	file_ssmcloud_proto_goTypes = nil
-	file_ssmcloud_proto_depIdxs = nil
+	File_agent_task_service_proto = out.File
+	file_agent_task_service_proto_goTypes = nil
+	file_agent_task_service_proto_depIdxs = nil
 }

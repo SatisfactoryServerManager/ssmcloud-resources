@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+import "empty.proto";
+
+service AgentTaskService {
+    rpc GetAgentTasks(Empty) returns (AgentTaskList);
+    rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (Empty);
+    rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (Empty);
+}
+
+message AgentTask {
+  string id = 1;
+  string action = 2;
+  string data = 3;
+  bool completed = 4;
+  int32 retries = 5;
+}
+
+message AgentTaskList {
+  repeated AgentTask tasks = 1;
+}
+
+message AgentTaskCompletedRequest {
+    string id = 1;
+}
+
+message AgentTaskFailedRequest {
+    string id = 1;
+}

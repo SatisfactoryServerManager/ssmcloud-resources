@@ -1,3 +1,6 @@
+## 0.0.46 (November 17, 2025)
+  - feat: service proto files
+
 ## 0.0.45 (November 17, 2025)
   - feat: agent config service proto
 

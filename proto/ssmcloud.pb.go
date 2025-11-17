@@ -381,7 +381,7 @@ type AgentTask struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
-	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"` // JSON string
+	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	Completed     bool                   `protobuf:"varint,4,opt,name=completed,proto3" json:"completed,omitempty"`
 	Retries       int32                  `protobuf:"varint,5,opt,name=retries,proto3" json:"retries,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -585,47 +585,11 @@ func (x *AgentTaskFailedRequest) GetId() string {
 	return ""
 }
 
-type Empty struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Empty) Reset() {
-	*x = Empty{}
-	mi := &file_proto_ssmcloud_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Empty) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Empty) ProtoMessage() {}
-
-func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_ssmcloud_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
-func (*Empty) Descriptor() ([]byte, []int) {
-	return file_proto_ssmcloud_proto_rawDescGZIP(), []int{9}
-}
-
 var File_proto_ssmcloud_proto protoreflect.FileDescriptor
 
 const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\n" +
-	"\x14proto/ssmcloud.proto\"a\n" +
+	"\x14proto/ssmcloud.proto\x1a\x11proto/empty.proto\"a\n" +
 	"\vAgentConfig\x12&\n" +
 	"\x0ebackupInterval\x18\x01 \x01(\x05R\x0ebackupInterval\x12*\n" +
 	"\x10backupKeepAmount\x18\x02 \x01(\x05R\x10backupKeepAmount\"\xf1\x02\n" +
@@ -667,8 +631,7 @@ const file_proto_ssmcloud_proto_rawDesc = "" +
 	"\x19AgentTaskCompletedRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
 	"\x16AgentTaskFailedRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\a\n" +
-	"\x05Empty2\x80\x03\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2\x80\x03\n" +
 	"\fAgentService\x12.\n" +
 	"\x0eGetAgentConfig\x12\x06.Empty\x1a\x14.AgentConfigResponse\x129\n" +
 	"\x1aUpdateAgentConfigVersionIp\x12\x13.AgentConfigRequest\x1a\x06.Empty\x126\n" +
@@ -690,7 +653,7 @@ func file_proto_ssmcloud_proto_rawDescGZIP() []byte {
 	return file_proto_ssmcloud_proto_rawDescData
 }
 
-var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_proto_ssmcloud_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_proto_ssmcloud_proto_goTypes = []any{
 	(*AgentConfig)(nil),               // 0: AgentConfig
 	(*AgentServerConfig)(nil),         // 1: AgentServerConfig
@@ -733,13 +696,14 @@ func file_proto_ssmcloud_proto_init() {
 	if File_proto_ssmcloud_proto != nil {
 		return
 	}
+	file_proto_empty_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_ssmcloud_proto_rawDesc), len(file_proto_ssmcloud_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

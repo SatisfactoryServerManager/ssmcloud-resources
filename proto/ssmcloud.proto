@@ -2,12 +2,15 @@ syntax = "proto3";
 
 
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+import "proto/empty.proto";
 
 service AgentService {
   rpc GetAgentConfig (Empty) returns (AgentConfigResponse);
   rpc UpdateAgentConfigVersionIp (AgentConfigRequest) returns (Empty);
+
   rpc UpdateAgentStateStream (stream AgentStateRequest) returns (Empty);
   rpc UpdateAgentState (AgentStateRequest) returns (Empty);
+
   rpc GetAgentTasks(Empty) returns (AgentTaskList);
   rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (Empty);
   rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (Empty);
@@ -53,7 +56,7 @@ message AgentStateRequest {
 message AgentTask {
   string id = 1;
   string action = 2;
-  string data = 3; // JSON string
+  string data = 3;
   bool completed = 4;
   int32 retries = 5;
 }
@@ -69,5 +72,3 @@ message AgentTaskCompletedRequest {
 message AgentTaskFailedRequest {
     string id = 1;
 }
-
-message Empty {}

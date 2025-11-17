@@ -1,0 +1,13 @@
+syntax = "proto3";
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+
+import "proto/empty.proto";
+
+service AgentLogService {
+    rpc StreamLog(stream AgentLogLineRequest) returns(Empty);
+}
+
+message AgentLogLineRequest {
+    string line = 1;
+    string type = 2;
+}

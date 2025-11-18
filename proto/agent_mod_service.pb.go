@@ -413,7 +413,7 @@ var File_agent_mod_service_proto protoreflect.FileDescriptor
 
 const file_agent_mod_service_proto_rawDesc = "" +
 	"\n" +
-	"\x17agent_mod_service.proto\";\n" +
+	"\x17agent_mod_service.proto\x1a\vempty.proto\";\n" +
 	"\x15AgentModConfigRequest\x12\"\n" +
 	"\x06config\x18\x01 \x01(\v2\n" +
 	".ModConfigR\x06config\"<\n" +
@@ -442,9 +442,10 @@ const file_agent_mod_service_proto_rawDesc = "" +
 	"\n" +
 	"targetName\x18\x01 \x01(\tR\n" +
 	"targetName\x12\x12\n" +
-	"\x04link\x18\x02 \x01(\tR\x04link2^\n" +
-	"\x15AgentModConfigService\x12E\n" +
-	"\x0eSyncModConfigs\x12\x16.AgentModConfigRequest\x1a\x17.AgentModConfigResponse(\x010\x01B?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
+	"\x04link\x18\x02 \x01(\tR\x04link2{\n" +
+	"\x15AgentModConfigService\x12/\n" +
+	"\fGetModConfig\x12\x06.Empty\x1a\x17.AgentModConfigResponse\x121\n" +
+	"\x0fUpdateModConfig\x12\x16.AgentModConfigRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
 	file_agent_mod_service_proto_rawDescOnce sync.Once
@@ -467,6 +468,7 @@ var file_agent_mod_service_proto_goTypes = []any{
 	(*Mod)(nil),                    // 4: Mod
 	(*ModVersion)(nil),             // 5: ModVersion
 	(*ModVersionTarget)(nil),       // 6: ModVersionTarget
+	(*Empty)(nil),                  // 7: Empty
 }
 var file_agent_mod_service_proto_depIdxs = []int32{
 	2, // 0: AgentModConfigRequest.config:type_name -> ModConfig
@@ -475,10 +477,12 @@ var file_agent_mod_service_proto_depIdxs = []int32{
 	4, // 3: SelectedMod.mod:type_name -> Mod
 	5, // 4: Mod.versions:type_name -> ModVersion
 	6, // 5: ModVersion.targets:type_name -> ModVersionTarget
-	0, // 6: AgentModConfigService.SyncModConfigs:input_type -> AgentModConfigRequest
-	1, // 7: AgentModConfigService.SyncModConfigs:output_type -> AgentModConfigResponse
-	7, // [7:8] is the sub-list for method output_type
-	6, // [6:7] is the sub-list for method input_type
+	7, // 6: AgentModConfigService.GetModConfig:input_type -> Empty
+	0, // 7: AgentModConfigService.UpdateModConfig:input_type -> AgentModConfigRequest
+	1, // 8: AgentModConfigService.GetModConfig:output_type -> AgentModConfigResponse
+	7, // 9: AgentModConfigService.UpdateModConfig:output_type -> Empty
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
 	6, // [6:6] is the sub-list for extension extendee
 	0, // [0:6] is the sub-list for field type_name
@@ -489,6 +493,7 @@ func file_agent_mod_service_proto_init() {
 	if File_agent_mod_service_proto != nil {
 		return
 	}
+	file_empty_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

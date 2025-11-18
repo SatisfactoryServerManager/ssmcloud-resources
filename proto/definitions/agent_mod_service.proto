@@ -1,9 +1,11 @@
 syntax = "proto3";
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
 
+import "empty.proto";
 
 service AgentModConfigService {
-    rpc SyncModConfigs(stream AgentModConfigRequest) returns (stream AgentModConfigResponse);
+    rpc GetModConfig(Empty) returns (AgentModConfigResponse);
+    rpc UpdateModConfig(AgentModConfigRequest) returns (Empty);
 }
 
 message AgentModConfigRequest {

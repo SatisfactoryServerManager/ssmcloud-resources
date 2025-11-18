@@ -19,14 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentModConfigService_SyncModConfigs_FullMethodName = "/AgentModConfigService/SyncModConfigs"
+	AgentModConfigService_GetModConfig_FullMethodName    = "/AgentModConfigService/GetModConfig"
+	AgentModConfigService_UpdateModConfig_FullMethodName = "/AgentModConfigService/UpdateModConfig"
 )
 
 // AgentModConfigServiceClient is the client API for AgentModConfigService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AgentModConfigServiceClient interface {
-	SyncModConfigs(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AgentModConfigRequest, AgentModConfigResponse], error)
+	GetModConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentModConfigResponse, error)
+	UpdateModConfig(ctx context.Context, in *AgentModConfigRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type agentModConfigServiceClient struct {
@@ -37,24 +39,32 @@ func NewAgentModConfigServiceClient(cc grpc.ClientConnInterface) AgentModConfigS
 	return &agentModConfigServiceClient{cc}
 }
 
-func (c *agentModConfigServiceClient) SyncModConfigs(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AgentModConfigRequest, AgentModConfigResponse], error) {
+func (c *agentModConfigServiceClient) GetModConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*AgentModConfigResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &AgentModConfigService_ServiceDesc.Streams[0], AgentModConfigService_SyncModConfigs_FullMethodName, cOpts...)
+	out := new(AgentModConfigResponse)
+	err := c.cc.Invoke(ctx, AgentModConfigService_GetModConfig_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[AgentModConfigRequest, AgentModConfigResponse]{ClientStream: stream}
-	return x, nil
+	return out, nil
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentModConfigService_SyncModConfigsClient = grpc.BidiStreamingClient[AgentModConfigRequest, AgentModConfigResponse]
+func (c *agentModConfigServiceClient) UpdateModConfig(ctx context.Context, in *AgentModConfigRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, AgentModConfigService_UpdateModConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
 // AgentModConfigServiceServer is the server API for AgentModConfigService service.
 // All implementations must embed UnimplementedAgentModConfigServiceServer
 // for forward compatibility.
 type AgentModConfigServiceServer interface {
-	SyncModConfigs(grpc.BidiStreamingServer[AgentModConfigRequest, AgentModConfigResponse]) error
+	GetModConfig(context.Context, *Empty) (*AgentModConfigResponse, error)
+	UpdateModConfig(context.Context, *AgentModConfigRequest) (*Empty, error)
 	mustEmbedUnimplementedAgentModConfigServiceServer()
 }
 
@@ -65,8 +75,11 @@ type AgentModConfigServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAgentModConfigServiceServer struct{}
 
-func (UnimplementedAgentModConfigServiceServer) SyncModConfigs(grpc.BidiStreamingServer[AgentModConfigRequest, AgentModConfigResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method SyncModConfigs not implemented")
+func (UnimplementedAgentModConfigServiceServer) GetModConfig(context.Context, *Empty) (*AgentModConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetModConfig not implemented")
+}
+func (UnimplementedAgentModConfigServiceServer) UpdateModConfig(context.Context, *AgentModConfigRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateModConfig not implemented")
 }
 func (UnimplementedAgentModConfigServiceServer) mustEmbedUnimplementedAgentModConfigServiceServer() {}
 func (UnimplementedAgentModConfigServiceServer) testEmbeddedByValue()                               {}
@@ -89,12 +102,41 @@ func RegisterAgentModConfigServiceServer(s grpc.ServiceRegistrar, srv AgentModCo
 	s.RegisterService(&AgentModConfigService_ServiceDesc, srv)
 }
 
-func _AgentModConfigService_SyncModConfigs_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AgentModConfigServiceServer).SyncModConfigs(&grpc.GenericServerStream[AgentModConfigRequest, AgentModConfigResponse]{ServerStream: stream})
+func _AgentModConfigService_GetModConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentModConfigServiceServer).GetModConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentModConfigService_GetModConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentModConfigServiceServer).GetModConfig(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentModConfigService_SyncModConfigsServer = grpc.BidiStreamingServer[AgentModConfigRequest, AgentModConfigResponse]
+func _AgentModConfigService_UpdateModConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentModConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentModConfigServiceServer).UpdateModConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentModConfigService_UpdateModConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentModConfigServiceServer).UpdateModConfig(ctx, req.(*AgentModConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 // AgentModConfigService_ServiceDesc is the grpc.ServiceDesc for AgentModConfigService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -102,14 +144,16 @@ type AgentModConfigService_SyncModConfigsServer = grpc.BidiStreamingServer[Agent
 var AgentModConfigService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "AgentModConfigService",
 	HandlerType: (*AgentModConfigServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
+	Methods: []grpc.MethodDesc{
 		{
-			StreamName:    "SyncModConfigs",
-			Handler:       _AgentModConfigService_SyncModConfigs_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
+			MethodName: "GetModConfig",
+			Handler:    _AgentModConfigService_GetModConfig_Handler,
+		},
+		{
+			MethodName: "UpdateModConfig",
+			Handler:    _AgentModConfigService_UpdateModConfig_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "agent_mod_service.proto",
 }

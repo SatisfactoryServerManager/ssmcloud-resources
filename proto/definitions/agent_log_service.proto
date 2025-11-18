@@ -10,4 +10,5 @@ service AgentLogService {
 message AgentLogLineRequest {
     string line = 1;
     string type = 2;
+    bool inital = 3;
 }

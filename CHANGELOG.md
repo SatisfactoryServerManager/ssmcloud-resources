@@ -1,3 +1,6 @@
+## 0.0.47 (November 18, 2025)
+
+
 ## 0.0.46 (November 17, 2025)
   - feat: service proto files
 

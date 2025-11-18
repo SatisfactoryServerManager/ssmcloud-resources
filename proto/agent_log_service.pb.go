@@ -25,6 +25,7 @@ type AgentLogLineRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Line          string                 `protobuf:"bytes,1,opt,name=line,proto3" json:"line,omitempty"`
 	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Inital        bool                   `protobuf:"varint,3,opt,name=inital,proto3" json:"inital,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73,14 +74,22 @@ func (x *AgentLogLineRequest) GetType() string {
 	return ""
 }
 
+func (x *AgentLogLineRequest) GetInital() bool {
+	if x != nil {
+		return x.Inital
+	}
+	return false
+}
+
 var File_agent_log_service_proto protoreflect.FileDescriptor
 
 const file_agent_log_service_proto_rawDesc = "" +
 	"\n" +
-	"\x17agent_log_service.proto\x1a\vempty.proto\"=\n" +
+	"\x17agent_log_service.proto\x1a\vempty.proto\"U\n" +
 	"\x13AgentLogLineRequest\x12\x12\n" +
 	"\x04line\x18\x01 \x01(\tR\x04line\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type2>\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
+	"\x06inital\x18\x03 \x01(\bR\x06inital2>\n" +
 	"\x0fAgentLogService\x12+\n" +
 	"\tStreamLog\x12\x14.AgentLogLineRequest\x1a\x06.Empty(\x01B?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 

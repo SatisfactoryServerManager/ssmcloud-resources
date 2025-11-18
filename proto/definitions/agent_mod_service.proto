@@ -11,11 +11,36 @@ message AgentModConfigRequest {
 }
 
 message AgentModConfigResponse {
-    repeated ModConfig configs = 1;
+    ModConfig config = 1;
 }
 
 message ModConfig {
+    repeated SelectedMod selectedMods = 1;
+}
+
+message SelectedMod {
+    Mod mod = 1;
+    string desiredVersion = 2;
+    string installedVersion = 3;
+    bool installed = 4;
+    bool needsUpdate = 5;
+}
+
+message Mod {
     string id = 1;
-    string version = 2;
-    string content = 3;
+    string modId = 2;
+    string modReference = 3;
+    repeated ModVersion versions = 4;
+}
+
+message ModVersion {
+    string version = 1;
+    string link = 2;
+    repeated ModVersionTarget targets = 3;
+}
+
+message ModVersionTarget{
+    string targetName = 1;
+    string link = 2;
+
 }

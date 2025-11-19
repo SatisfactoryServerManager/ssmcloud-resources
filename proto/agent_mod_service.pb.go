@@ -231,9 +231,9 @@ func (x *SelectedMod) GetNeedsUpdate() bool {
 
 type Mod struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XId           string                 `protobuf:"bytes,1,opt,name=_id,json=Id,proto3" json:"_id,omitempty"`
 	ModId         string                 `protobuf:"bytes,2,opt,name=modId,proto3" json:"modId,omitempty"`
-	ModReference  string                 `protobuf:"bytes,3,opt,name=modReference,proto3" json:"modReference,omitempty"`
+	ModReference  string                 `protobuf:"bytes,3,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
 	Versions      []*ModVersion          `protobuf:"bytes,4,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -269,9 +269,9 @@ func (*Mod) Descriptor() ([]byte, []int) {
 	return file_agent_mod_service_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Mod) GetId() string {
+func (x *Mod) GetXId() string {
 	if x != nil {
-		return x.Id
+		return x.XId
 	}
 	return ""
 }
@@ -427,11 +427,11 @@ const file_agent_mod_service_proto_rawDesc = "" +
 	"\x0edesiredVersion\x18\x02 \x01(\tR\x0edesiredVersion\x12*\n" +
 	"\x10installedVersion\x18\x03 \x01(\tR\x10installedVersion\x12\x1c\n" +
 	"\tinstalled\x18\x04 \x01(\bR\tinstalled\x12 \n" +
-	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\"x\n" +
-	"\x03Mod\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05modId\x18\x02 \x01(\tR\x05modId\x12\"\n" +
-	"\fmodReference\x18\x03 \x01(\tR\fmodReference\x12'\n" +
+	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\"z\n" +
+	"\x03Mod\x12\x0f\n" +
+	"\x03_id\x18\x01 \x01(\tR\x02Id\x12\x14\n" +
+	"\x05modId\x18\x02 \x01(\tR\x05modId\x12#\n" +
+	"\rmod_reference\x18\x03 \x01(\tR\fmodReference\x12'\n" +
 	"\bversions\x18\x04 \x03(\v2\v.ModVersionR\bversions\"g\n" +
 	"\n" +
 	"ModVersion\x12\x18\n" +

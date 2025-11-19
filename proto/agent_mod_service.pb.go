@@ -160,6 +160,7 @@ type SelectedMod struct {
 	InstalledVersion string                 `protobuf:"bytes,3,opt,name=installedVersion,proto3" json:"installedVersion,omitempty"`
 	Installed        bool                   `protobuf:"varint,4,opt,name=installed,proto3" json:"installed,omitempty"`
 	NeedsUpdate      bool                   `protobuf:"varint,5,opt,name=needsUpdate,proto3" json:"needsUpdate,omitempty"`
+	Config           string                 `protobuf:"bytes,6,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -227,6 +228,13 @@ func (x *SelectedMod) GetNeedsUpdate() bool {
 		return x.NeedsUpdate
 	}
 	return false
+}
+
+func (x *SelectedMod) GetConfig() string {
+	if x != nil {
+		return x.Config
+	}
+	return ""
 }
 
 type Mod struct {
@@ -421,13 +429,14 @@ const file_agent_mod_service_proto_rawDesc = "" +
 	"\x06config\x18\x01 \x01(\v2\n" +
 	".ModConfigR\x06config\"=\n" +
 	"\tModConfig\x120\n" +
-	"\fselectedMods\x18\x01 \x03(\v2\f.SelectedModR\fselectedMods\"\xb9\x01\n" +
+	"\fselectedMods\x18\x01 \x03(\v2\f.SelectedModR\fselectedMods\"\xd1\x01\n" +
 	"\vSelectedMod\x12\x16\n" +
 	"\x03mod\x18\x01 \x01(\v2\x04.ModR\x03mod\x12&\n" +
 	"\x0edesiredVersion\x18\x02 \x01(\tR\x0edesiredVersion\x12*\n" +
 	"\x10installedVersion\x18\x03 \x01(\tR\x10installedVersion\x12\x1c\n" +
 	"\tinstalled\x18\x04 \x01(\bR\tinstalled\x12 \n" +
-	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\"z\n" +
+	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\x12\x16\n" +
+	"\x06config\x18\x06 \x01(\tR\x06config\"z\n" +
 	"\x03Mod\x12\x0f\n" +
 	"\x03_id\x18\x01 \x01(\tR\x02Id\x12\x14\n" +
 	"\x05modId\x18\x02 \x01(\tR\x05modId\x12#\n" +

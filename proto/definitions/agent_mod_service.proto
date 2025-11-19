@@ -26,6 +26,7 @@ message SelectedMod {
     string installedVersion = 3;
     bool installed = 4;
     bool needsUpdate = 5;
+    string config = 6;
 }
 
 message Mod {

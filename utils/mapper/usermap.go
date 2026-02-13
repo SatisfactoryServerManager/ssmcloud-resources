@@ -19,8 +19,6 @@ func MapUserSchemaToProto(u *models.UserSchema) *pb.User {
 		ProfileImageUrl: u.ProfileImageStr,
 
 		ApiKeys:        mapUserAPIKeys(u.APIKeys),
-		LinkedAccounts: mapAccounts(u.LinkedAccounts),
-		ActiveAccount:  MapAccountSchemaToProto(&u.ActiveAccount),
 
 		LastActive: timestamppb.New(u.LastActive),
 		CreatedAt:  timestamppb.New(u.CreatedAt),

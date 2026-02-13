@@ -170,6 +170,182 @@ func (x *GetMyUserResponse) GetUser() *User {
 	return nil
 }
 
+type GetMyUserLinkedAccountsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserLinkedAccountsRequest) Reset() {
+	*x = GetMyUserLinkedAccountsRequest{}
+	mi := &file_frontend_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserLinkedAccountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserLinkedAccountsRequest) ProtoMessage() {}
+
+func (x *GetMyUserLinkedAccountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserLinkedAccountsRequest.ProtoReflect.Descriptor instead.
+func (*GetMyUserLinkedAccountsRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetMyUserLinkedAccountsRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+type GetMyUserLinkedAccountsResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	LinkedAccounts []*Account             `protobuf:"bytes,1,rep,name=linkedAccounts,proto3" json:"linkedAccounts,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetMyUserLinkedAccountsResponse) Reset() {
+	*x = GetMyUserLinkedAccountsResponse{}
+	mi := &file_frontend_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserLinkedAccountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserLinkedAccountsResponse) ProtoMessage() {}
+
+func (x *GetMyUserLinkedAccountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserLinkedAccountsResponse.ProtoReflect.Descriptor instead.
+func (*GetMyUserLinkedAccountsResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetMyUserLinkedAccountsResponse) GetLinkedAccounts() []*Account {
+	if x != nil {
+		return x.LinkedAccounts
+	}
+	return nil
+}
+
+type GetMyUserActiveAccountsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserActiveAccountsRequest) Reset() {
+	*x = GetMyUserActiveAccountsRequest{}
+	mi := &file_frontend_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserActiveAccountsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserActiveAccountsRequest) ProtoMessage() {}
+
+func (x *GetMyUserActiveAccountsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserActiveAccountsRequest.ProtoReflect.Descriptor instead.
+func (*GetMyUserActiveAccountsRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetMyUserActiveAccountsRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+type GetMyUserActiveAccountsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ActiveAccount *Account               `protobuf:"bytes,1,opt,name=activeAccount,proto3" json:"activeAccount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserActiveAccountsResponse) Reset() {
+	*x = GetMyUserActiveAccountsResponse{}
+	mi := &file_frontend_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserActiveAccountsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserActiveAccountsResponse) ProtoMessage() {}
+
+func (x *GetMyUserActiveAccountsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserActiveAccountsResponse.ProtoReflect.Descriptor instead.
+func (*GetMyUserActiveAccountsResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetMyUserActiveAccountsResponse) GetActiveAccount() *Account {
+	if x != nil {
+		return x.ActiveAccount
+	}
+	return nil
+}
+
 type User struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -178,18 +354,16 @@ type User struct {
 	Username        string                 `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
 	ProfileImageUrl string                 `protobuf:"bytes,5,opt,name=profile_image_url,json=profileImageUrl,proto3" json:"profile_image_url,omitempty"`
 	ApiKeys         []*UserAPIKey          `protobuf:"bytes,6,rep,name=api_keys,json=apiKeys,proto3" json:"api_keys,omitempty"`
-	LinkedAccounts  []*Account             `protobuf:"bytes,7,rep,name=linked_accounts,json=linkedAccounts,proto3" json:"linked_accounts,omitempty"`
-	ActiveAccount   *Account               `protobuf:"bytes,8,opt,name=active_account,json=activeAccount,proto3" json:"active_account,omitempty"`
-	LastActive      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_active,json=lastActive,proto3" json:"last_active,omitempty"`
-	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	LastActive      *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=lastActive,proto3" json:"lastActive,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_frontend_service_proto_msgTypes[3]
+	mi := &file_frontend_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -201,7 +375,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[3]
+	mi := &file_frontend_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -214,7 +388,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{3}
+	return file_frontend_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *User) GetId() string {
@@ -259,20 +433,6 @@ func (x *User) GetApiKeys() []*UserAPIKey {
 	return nil
 }
 
-func (x *User) GetLinkedAccounts() []*Account {
-	if x != nil {
-		return x.LinkedAccounts
-	}
-	return nil
-}
-
-func (x *User) GetActiveAccount() *Account {
-	if x != nil {
-		return x.ActiveAccount
-	}
-	return nil
-}
-
 func (x *User) GetLastActive() *timestamppb.Timestamp {
 	if x != nil {
 		return x.LastActive
@@ -304,7 +464,7 @@ type UserAPIKey struct {
 
 func (x *UserAPIKey) Reset() {
 	*x = UserAPIKey{}
-	mi := &file_frontend_service_proto_msgTypes[4]
+	mi := &file_frontend_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -316,7 +476,7 @@ func (x *UserAPIKey) String() string {
 func (*UserAPIKey) ProtoMessage() {}
 
 func (x *UserAPIKey) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[4]
+	mi := &file_frontend_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -329,7 +489,7 @@ func (x *UserAPIKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserAPIKey.ProtoReflect.Descriptor instead.
 func (*UserAPIKey) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{4}
+	return file_frontend_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserAPIKey) GetShortKey() string {
@@ -349,14 +509,17 @@ func (x *UserAPIKey) GetKey() string {
 type Account struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	AccountName   string                 `protobuf:"bytes,2,opt,name=accountName,proto3" json:"accountName,omitempty"` // Add other fields required by frontend
+	AccountName   string                 `protobuf:"bytes,2,opt,name=accountName,proto3" json:"accountName,omitempty"`
+	JoinCode      string                 `protobuf:"bytes,3,opt,name=joinCode,proto3" json:"joinCode,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Account) Reset() {
 	*x = Account{}
-	mi := &file_frontend_service_proto_msgTypes[5]
+	mi := &file_frontend_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -368,7 +531,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[5]
+	mi := &file_frontend_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -381,7 +544,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{5}
+	return file_frontend_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Account) GetId() string {
@@ -398,6 +561,27 @@ func (x *Account) GetAccountName() string {
 	return ""
 }
 
+func (x *Account) GetJoinCode() string {
+	if x != nil {
+		return x.JoinCode
+	}
+	return ""
+}
+
+func (x *Account) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *Account) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
@@ -410,7 +594,15 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x10GetMyUserRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\".\n" +
 	"\x11GetMyUserResponse\x12\x19\n" +
-	"\x04user\x18\x01 \x01(\v2\x05.UserR\x04user\"\xd4\x03\n" +
+	"\x04user\x18\x01 \x01(\v2\x05.UserR\x04user\"2\n" +
+	"\x1eGetMyUserLinkedAccountsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"S\n" +
+	"\x1fGetMyUserLinkedAccountsResponse\x120\n" +
+	"\x0elinkedAccounts\x18\x01 \x03(\v2\b.AccountR\x0elinkedAccounts\"2\n" +
+	"\x1eGetMyUserActiveAccountsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"Q\n" +
+	"\x1fGetMyUserActiveAccountsResponse\x12.\n" +
+	"\ractiveAccount\x18\x01 \x01(\v2\b.AccountR\ractiveAccount\"\xed\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vexternal_id\x18\x02 \x01(\tR\n" +
@@ -418,26 +610,27 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1a\n" +
 	"\busername\x18\x04 \x01(\tR\busername\x12*\n" +
 	"\x11profile_image_url\x18\x05 \x01(\tR\x0fprofileImageUrl\x12&\n" +
-	"\bapi_keys\x18\x06 \x03(\v2\v.UserAPIKeyR\aapiKeys\x121\n" +
-	"\x0flinked_accounts\x18\a \x03(\v2\b.AccountR\x0elinkedAccounts\x12/\n" +
-	"\x0eactive_account\x18\b \x01(\v2\b.AccountR\ractiveAccount\x12;\n" +
-	"\vlast_active\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"lastActive\x129\n" +
+	"\bapi_keys\x18\x06 \x03(\v2\v.UserAPIKeyR\aapiKeys\x12:\n" +
 	"\n" +
-	"created_at\x18\n" +
-	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
-	"\n" +
-	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\";\n" +
+	"lastActive\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"lastActive\x128\n" +
+	"\tcreatedAt\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
+	"\tupdatedAt\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\";\n" +
 	"\n" +
 	"UserAPIKey\x12\x1b\n" +
 	"\tshort_key\x18\x01 \x01(\tR\bshortKey\x12\x10\n" +
-	"\x03key\x18\x02 \x01(\tR\x03key\";\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\"\xcb\x01\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
-	"\vaccountName\x18\x02 \x01(\tR\vaccountName2\x89\x01\n" +
+	"\vaccountName\x18\x02 \x01(\tR\vaccountName\x12\x1a\n" +
+	"\bjoinCode\x18\x03 \x01(\tR\bjoinCode\x128\n" +
+	"\tcreatedAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
+	"\tupdatedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xc4\x02\n" +
 	"\x0fFrontendService\x12B\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\x06.Empty\x122\n" +
-	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponseB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
+	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
+	"\x17GetMyUserLinkedAccounts\x12\x1f.GetMyUserLinkedAccountsRequest\x1a .GetMyUserLinkedAccountsResponse\x12[\n" +
+	"\x16GetMyUserActiveAccount\x12\x1f.GetMyUserActiveAccountsRequest\x1a .GetMyUserActiveAccountsResponseB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -451,34 +644,44 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_frontend_service_proto_goTypes = []any{
-	(*CheckUserExistsOrCreateRequest)(nil), // 0: CheckUserExistsOrCreateRequest
-	(*GetMyUserRequest)(nil),               // 1: GetMyUserRequest
-	(*GetMyUserResponse)(nil),              // 2: GetMyUserResponse
-	(*User)(nil),                           // 3: User
-	(*UserAPIKey)(nil),                     // 4: UserAPIKey
-	(*Account)(nil),                        // 5: Account
-	(*timestamppb.Timestamp)(nil),          // 6: google.protobuf.Timestamp
-	(*Empty)(nil),                          // 7: Empty
+	(*CheckUserExistsOrCreateRequest)(nil),  // 0: CheckUserExistsOrCreateRequest
+	(*GetMyUserRequest)(nil),                // 1: GetMyUserRequest
+	(*GetMyUserResponse)(nil),               // 2: GetMyUserResponse
+	(*GetMyUserLinkedAccountsRequest)(nil),  // 3: GetMyUserLinkedAccountsRequest
+	(*GetMyUserLinkedAccountsResponse)(nil), // 4: GetMyUserLinkedAccountsResponse
+	(*GetMyUserActiveAccountsRequest)(nil),  // 5: GetMyUserActiveAccountsRequest
+	(*GetMyUserActiveAccountsResponse)(nil), // 6: GetMyUserActiveAccountsResponse
+	(*User)(nil),                            // 7: User
+	(*UserAPIKey)(nil),                      // 8: UserAPIKey
+	(*Account)(nil),                         // 9: Account
+	(*timestamppb.Timestamp)(nil),           // 10: google.protobuf.Timestamp
+	(*Empty)(nil),                           // 11: Empty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	3, // 0: GetMyUserResponse.user:type_name -> User
-	4, // 1: User.api_keys:type_name -> UserAPIKey
-	5, // 2: User.linked_accounts:type_name -> Account
-	5, // 3: User.active_account:type_name -> Account
-	6, // 4: User.last_active:type_name -> google.protobuf.Timestamp
-	6, // 5: User.created_at:type_name -> google.protobuf.Timestamp
-	6, // 6: User.updated_at:type_name -> google.protobuf.Timestamp
-	0, // 7: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1, // 8: FrontendService.GetMyUser:input_type -> GetMyUserRequest
-	7, // 9: FrontendService.CheckUserExistsOrCreate:output_type -> Empty
-	2, // 10: FrontendService.GetMyUser:output_type -> GetMyUserResponse
-	9, // [9:11] is the sub-list for method output_type
-	7, // [7:9] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	7,  // 0: GetMyUserResponse.user:type_name -> User
+	9,  // 1: GetMyUserLinkedAccountsResponse.linkedAccounts:type_name -> Account
+	9,  // 2: GetMyUserActiveAccountsResponse.activeAccount:type_name -> Account
+	8,  // 3: User.api_keys:type_name -> UserAPIKey
+	10, // 4: User.lastActive:type_name -> google.protobuf.Timestamp
+	10, // 5: User.createdAt:type_name -> google.protobuf.Timestamp
+	10, // 6: User.updatedAt:type_name -> google.protobuf.Timestamp
+	10, // 7: Account.createdAt:type_name -> google.protobuf.Timestamp
+	10, // 8: Account.updatedAt:type_name -> google.protobuf.Timestamp
+	0,  // 9: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1,  // 10: FrontendService.GetMyUser:input_type -> GetMyUserRequest
+	3,  // 11: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
+	5,  // 12: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountsRequest
+	11, // 13: FrontendService.CheckUserExistsOrCreate:output_type -> Empty
+	2,  // 14: FrontendService.GetMyUser:output_type -> GetMyUserResponse
+	4,  // 15: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
+	6,  // 16: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountsResponse
+	13, // [13:17] is the sub-list for method output_type
+	9,  // [9:13] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -493,7 +696,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

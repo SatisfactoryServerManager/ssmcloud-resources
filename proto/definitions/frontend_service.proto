@@ -7,6 +7,8 @@ import "google/protobuf/timestamp.proto";
 service FrontendService {
     rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (Empty);
     rpc GetMyUser(GetMyUserRequest) returns (GetMyUserResponse);
+    rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
+    rpc GetMyUserActiveAccount(GetMyUserActiveAccountsRequest) returns (GetMyUserActiveAccountsResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -23,6 +25,22 @@ message GetMyUserResponse {
   User user = 1;
 }
 
+message GetMyUserLinkedAccountsRequest {
+    string eid = 1;
+}
+
+message GetMyUserLinkedAccountsResponse {
+    repeated Account linkedAccounts = 1;
+}
+
+message GetMyUserActiveAccountsRequest {
+    string eid = 1;
+}
+
+message GetMyUserActiveAccountsResponse {
+    Account activeAccount = 1;
+}
+
 message User {
   string id = 1;
   string external_id = 2;
@@ -33,12 +51,9 @@ message User {
 
   repeated UserAPIKey api_keys = 6;
 
-  repeated Account linked_accounts = 7;
-  Account active_account = 8;
-
-  google.protobuf.Timestamp last_active = 9;
-  google.protobuf.Timestamp created_at = 10;
-  google.protobuf.Timestamp updated_at = 11;
+  google.protobuf.Timestamp lastActive = 7;
+  google.protobuf.Timestamp createdAt = 8;
+  google.protobuf.Timestamp updatedAt = 9;
 }
 
 message UserAPIKey {
@@ -49,5 +64,9 @@ message UserAPIKey {
 message Account {
   string id = 1;
   string accountName = 2;
-  // Add other fields required by frontend
+  string joinCode = 3;
+
+  google.protobuf.Timestamp createdAt = 4;
+  google.protobuf.Timestamp updatedAt = 5;
+
 }

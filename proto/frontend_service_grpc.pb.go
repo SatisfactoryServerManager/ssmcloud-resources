@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	FrontendService_CheckUserExistsOrCreate_FullMethodName = "/FrontendService/CheckUserExistsOrCreate"
+	FrontendService_GetMyUser_FullMethodName               = "/FrontendService/GetMyUser"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FrontendServiceClient interface {
 	CheckUserExistsOrCreate(ctx context.Context, in *CheckUserExistsOrCreateRequest, opts ...grpc.CallOption) (*Empty, error)
+	GetMyUser(ctx context.Context, in *GetMyUserRequest, opts ...grpc.CallOption) (*GetMyUserResponse, error)
 }
 
 type frontendServiceClient struct {
@@ -47,11 +49,22 @@ func (c *frontendServiceClient) CheckUserExistsOrCreate(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *frontendServiceClient) GetMyUser(ctx context.Context, in *GetMyUserRequest, opts ...grpc.CallOption) (*GetMyUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetMyUserResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetMyUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
 type FrontendServiceServer interface {
 	CheckUserExistsOrCreate(context.Context, *CheckUserExistsOrCreateRequest) (*Empty, error)
+	GetMyUser(context.Context, *GetMyUserRequest) (*GetMyUserResponse, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedFrontendServiceServer struct{}
 
 func (UnimplementedFrontendServiceServer) CheckUserExistsOrCreate(context.Context, *CheckUserExistsOrCreateRequest) (*Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserExistsOrCreate not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetMyUser(context.Context, *GetMyUserRequest) (*GetMyUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMyUser not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -104,6 +120,24 @@ func _FrontendService_CheckUserExistsOrCreate_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_GetMyUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMyUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetMyUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetMyUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetMyUser(ctx, req.(*GetMyUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckUserExistsOrCreate",
 			Handler:    _FrontendService_CheckUserExistsOrCreate_Handler,
+		},
+		{
+			MethodName: "GetMyUser",
+			Handler:    _FrontendService_GetMyUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

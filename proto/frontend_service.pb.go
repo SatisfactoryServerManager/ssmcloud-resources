@@ -9,6 +9,7 @@ package proto
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -81,17 +82,362 @@ func (x *CheckUserExistsOrCreateRequest) GetUsername() string {
 	return ""
 }
 
+type GetMyUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserRequest) Reset() {
+	*x = GetMyUserRequest{}
+	mi := &file_frontend_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserRequest) ProtoMessage() {}
+
+func (x *GetMyUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserRequest.ProtoReflect.Descriptor instead.
+func (*GetMyUserRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetMyUserRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+type GetMyUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserResponse) Reset() {
+	*x = GetMyUserResponse{}
+	mi := &file_frontend_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserResponse) ProtoMessage() {}
+
+func (x *GetMyUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserResponse.ProtoReflect.Descriptor instead.
+func (*GetMyUserResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetMyUserResponse) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type User struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	ExternalId      string                 `protobuf:"bytes,2,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
+	Email           string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Username        string                 `protobuf:"bytes,4,opt,name=username,proto3" json:"username,omitempty"`
+	ProfileImageUrl string                 `protobuf:"bytes,5,opt,name=profile_image_url,json=profileImageUrl,proto3" json:"profile_image_url,omitempty"`
+	ApiKeys         []*UserAPIKey          `protobuf:"bytes,6,rep,name=api_keys,json=apiKeys,proto3" json:"api_keys,omitempty"`
+	LinkedAccounts  []*Account             `protobuf:"bytes,7,rep,name=linked_accounts,json=linkedAccounts,proto3" json:"linked_accounts,omitempty"`
+	ActiveAccount   *Account               `protobuf:"bytes,8,opt,name=active_account,json=activeAccount,proto3" json:"active_account,omitempty"`
+	LastActive      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=last_active,json=lastActive,proto3" json:"last_active,omitempty"`
+	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_frontend_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *User) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *User) GetExternalId() string {
+	if x != nil {
+		return x.ExternalId
+	}
+	return ""
+}
+
+func (x *User) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *User) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *User) GetProfileImageUrl() string {
+	if x != nil {
+		return x.ProfileImageUrl
+	}
+	return ""
+}
+
+func (x *User) GetApiKeys() []*UserAPIKey {
+	if x != nil {
+		return x.ApiKeys
+	}
+	return nil
+}
+
+func (x *User) GetLinkedAccounts() []*Account {
+	if x != nil {
+		return x.LinkedAccounts
+	}
+	return nil
+}
+
+func (x *User) GetActiveAccount() *Account {
+	if x != nil {
+		return x.ActiveAccount
+	}
+	return nil
+}
+
+func (x *User) GetLastActive() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastActive
+	}
+	return nil
+}
+
+func (x *User) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *User) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type UserAPIKey struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShortKey      string                 `protobuf:"bytes,1,opt,name=short_key,json=shortKey,proto3" json:"short_key,omitempty"`
+	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserAPIKey) Reset() {
+	*x = UserAPIKey{}
+	mi := &file_frontend_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserAPIKey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserAPIKey) ProtoMessage() {}
+
+func (x *UserAPIKey) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserAPIKey.ProtoReflect.Descriptor instead.
+func (*UserAPIKey) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UserAPIKey) GetShortKey() string {
+	if x != nil {
+		return x.ShortKey
+	}
+	return ""
+}
+
+func (x *UserAPIKey) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+type Account struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	AccountName   string                 `protobuf:"bytes,2,opt,name=accountName,proto3" json:"accountName,omitempty"` // Add other fields required by frontend
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Account) Reset() {
+	*x = Account{}
+	mi := &file_frontend_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Account) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Account) ProtoMessage() {}
+
+func (x *Account) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Account.ProtoReflect.Descriptor instead.
+func (*Account) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Account) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Account) GetAccountName() string {
+	if x != nil {
+		return x.AccountName
+	}
+	return ""
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
 	"\n" +
-	"\x16frontend_service.proto\x1a\vempty.proto\"d\n" +
+	"\x16frontend_service.proto\x1a\vempty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"d\n" +
 	"\x1eCheckUserExistsOrCreateRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
 	"\x03eid\x18\x02 \x01(\tR\x03eid\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername2U\n" +
+	"\busername\x18\x03 \x01(\tR\busername\"$\n" +
+	"\x10GetMyUserRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\".\n" +
+	"\x11GetMyUserResponse\x12\x19\n" +
+	"\x04user\x18\x01 \x01(\v2\x05.UserR\x04user\"\xd4\x03\n" +
+	"\x04User\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\vexternal_id\x18\x02 \x01(\tR\n" +
+	"externalId\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1a\n" +
+	"\busername\x18\x04 \x01(\tR\busername\x12*\n" +
+	"\x11profile_image_url\x18\x05 \x01(\tR\x0fprofileImageUrl\x12&\n" +
+	"\bapi_keys\x18\x06 \x03(\v2\v.UserAPIKeyR\aapiKeys\x121\n" +
+	"\x0flinked_accounts\x18\a \x03(\v2\b.AccountR\x0elinkedAccounts\x12/\n" +
+	"\x0eactive_account\x18\b \x01(\v2\b.AccountR\ractiveAccount\x12;\n" +
+	"\vlast_active\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"lastActive\x129\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\";\n" +
+	"\n" +
+	"UserAPIKey\x12\x1b\n" +
+	"\tshort_key\x18\x01 \x01(\tR\bshortKey\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\";\n" +
+	"\aAccount\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
+	"\vaccountName\x18\x02 \x01(\tR\vaccountName2\x89\x01\n" +
 	"\x0fFrontendService\x12B\n" +
-	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
+	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\x06.Empty\x122\n" +
+	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponseB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -105,19 +451,34 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_frontend_service_proto_goTypes = []any{
 	(*CheckUserExistsOrCreateRequest)(nil), // 0: CheckUserExistsOrCreateRequest
-	(*Empty)(nil),                          // 1: Empty
+	(*GetMyUserRequest)(nil),               // 1: GetMyUserRequest
+	(*GetMyUserResponse)(nil),              // 2: GetMyUserResponse
+	(*User)(nil),                           // 3: User
+	(*UserAPIKey)(nil),                     // 4: UserAPIKey
+	(*Account)(nil),                        // 5: Account
+	(*timestamppb.Timestamp)(nil),          // 6: google.protobuf.Timestamp
+	(*Empty)(nil),                          // 7: Empty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	0, // 0: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1, // 1: FrontendService.CheckUserExistsOrCreate:output_type -> Empty
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: GetMyUserResponse.user:type_name -> User
+	4, // 1: User.api_keys:type_name -> UserAPIKey
+	5, // 2: User.linked_accounts:type_name -> Account
+	5, // 3: User.active_account:type_name -> Account
+	6, // 4: User.last_active:type_name -> google.protobuf.Timestamp
+	6, // 5: User.created_at:type_name -> google.protobuf.Timestamp
+	6, // 6: User.updated_at:type_name -> google.protobuf.Timestamp
+	0, // 7: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1, // 8: FrontendService.GetMyUser:input_type -> GetMyUserRequest
+	7, // 9: FrontendService.CheckUserExistsOrCreate:output_type -> Empty
+	2, // 10: FrontendService.GetMyUser:output_type -> GetMyUserResponse
+	9, // [9:11] is the sub-list for method output_type
+	7, // [7:9] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -132,7 +493,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

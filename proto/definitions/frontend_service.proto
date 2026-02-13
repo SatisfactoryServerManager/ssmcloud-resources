@@ -2,13 +2,52 @@ syntax = "proto3";
 
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
 import "empty.proto";
+import "google/protobuf/timestamp.proto";
 
 service FrontendService {
     rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (Empty);
+    rpc GetMyUser(GetMyUserRequest) returns (GetMyUserResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
     string email = 1;
     string eid = 2;
     string username = 3;
+}
+
+message GetMyUserRequest {
+    string eid = 1;
+}
+
+message GetMyUserResponse {
+  User user = 1;
+}
+
+message User {
+  string id = 1;
+  string external_id = 2;
+  string email = 3;
+  string username = 4;
+
+  string profile_image_url = 5;
+
+  repeated UserAPIKey api_keys = 6;
+
+  repeated Account linked_accounts = 7;
+  Account active_account = 8;
+
+  google.protobuf.Timestamp last_active = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+message UserAPIKey {
+  string short_key = 1;
+  string key = 2;
+}
+
+message Account {
+  string id = 1;
+  string accountName = 2;
+  // Add other fields required by frontend
 }

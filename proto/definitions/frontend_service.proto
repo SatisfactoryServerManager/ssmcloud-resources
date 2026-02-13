@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
+import "empty.proto";
+
+service FrontendService {
+    rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (Empty);
+}
+
+message CheckUserExistsOrCreateRequest {
+    string email = 1;
+    string eid = 2;
+}

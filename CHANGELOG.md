@@ -1,3 +1,6 @@
+## 0.0.53 (February 13, 2026)
+  - fix: Fixed file permissions
+
 ## 0.0.52 (November 19, 2025)
 
 

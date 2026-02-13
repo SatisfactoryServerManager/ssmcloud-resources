@@ -25,6 +25,7 @@ type CheckUserExistsOrCreateRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Eid           string                 `protobuf:"bytes,2,opt,name=eid,proto3" json:"eid,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73,14 +74,22 @@ func (x *CheckUserExistsOrCreateRequest) GetEid() string {
 	return ""
 }
 
+func (x *CheckUserExistsOrCreateRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
 	"\n" +
-	"\x16frontend_service.proto\x1a\vempty.proto\"H\n" +
+	"\x16frontend_service.proto\x1a\vempty.proto\"d\n" +
 	"\x1eCheckUserExistsOrCreateRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
-	"\x03eid\x18\x02 \x01(\tR\x03eid2U\n" +
+	"\x03eid\x18\x02 \x01(\tR\x03eid\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername2U\n" +
 	"\x0fFrontendService\x12B\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\x06.EmptyB?Z=github.com/SatisfactoryServerManager/ssmcloud-resources/protob\x06proto3"
 

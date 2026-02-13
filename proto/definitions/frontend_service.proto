@@ -10,4 +10,5 @@ service FrontendService {
 message CheckUserExistsOrCreateRequest {
     string email = 1;
     string eid = 2;
+    string username = 3;
 }

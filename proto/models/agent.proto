@@ -15,10 +15,13 @@ message Agent{
     AgentServerConfig server_config = 6;
     ModConfig mod_config = 7;
 
-    repeated AgentLog logs = 11;
-
     string latest_agent_version = 10;
 
+    repeated AgentLog logs = 11;
+
+    repeated AgentSave saves = 12;
+    repeated AgentBackup backups = 13;
+    AgentMapData map_data = 14;
 
     google.protobuf.Timestamp created_at = 8;
     google.protobuf.Timestamp updated_at = 9;
@@ -68,4 +71,53 @@ message AgentLog {
     bool pending_upload = 6;
     google.protobuf.Timestamp created_at = 7;
     google.protobuf.Timestamp updated_at = 8;
+}
+
+message Vector3F {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message BoundingBox {
+    Vector3F min = 1;
+    Vector3F max = 2;
+}
+
+message AgentSave {
+    string uuid = 1;
+    string file_name = 2;
+    int64 size = 3;
+    string file_url = 4;
+    google.protobuf.Timestamp mod_time = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message AgentBackup {
+    string uuid = 1;
+    string file_name = 2;
+    int64 size = 3;
+    string file_url = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message AgentMapDataPlayer {
+    string username = 1;
+    Vector3F location = 2;
+    bool online = 3;
+}
+
+message AgentMapDataBuilding {
+    string name = 1;
+    string class = 2;
+    Vector3F location = 3;
+    float rotation = 4;
+    BoundingBox bounding_box = 5;
+}
+
+message AgentMapData {
+    repeated AgentMapDataPlayer players = 1;
+    repeated AgentMapDataBuilding buildings = 2;
 }

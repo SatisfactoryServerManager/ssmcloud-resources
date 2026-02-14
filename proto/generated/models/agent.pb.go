@@ -32,8 +32,11 @@ type Agent struct {
 	Config             *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	ServerConfig       *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
 	ModConfig          *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
-	Logs               []*AgentLog            `protobuf:"bytes,11,rep,name=logs,proto3" json:"logs,omitempty"`
 	LatestAgentVersion string                 `protobuf:"bytes,10,opt,name=latest_agent_version,json=latestAgentVersion,proto3" json:"latest_agent_version,omitempty"`
+	Logs               []*AgentLog            `protobuf:"bytes,11,rep,name=logs,proto3" json:"logs,omitempty"`
+	Saves              []*AgentSave           `protobuf:"bytes,12,rep,name=saves,proto3" json:"saves,omitempty"`
+	Backups            []*AgentBackup         `protobuf:"bytes,13,rep,name=backups,proto3" json:"backups,omitempty"`
+	MapData            *AgentMapData          `protobuf:"bytes,14,opt,name=map_data,json=mapData,proto3" json:"map_data,omitempty"`
 	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields      protoimpl.UnknownFields
@@ -119,6 +122,13 @@ func (x *Agent) GetModConfig() *ModConfig {
 	return nil
 }
 
+func (x *Agent) GetLatestAgentVersion() string {
+	if x != nil {
+		return x.LatestAgentVersion
+	}
+	return ""
+}
+
 func (x *Agent) GetLogs() []*AgentLog {
 	if x != nil {
 		return x.Logs
@@ -126,11 +136,25 @@ func (x *Agent) GetLogs() []*AgentLog {
 	return nil
 }
 
-func (x *Agent) GetLatestAgentVersion() string {
+func (x *Agent) GetSaves() []*AgentSave {
 	if x != nil {
-		return x.LatestAgentVersion
+		return x.Saves
 	}
-	return ""
+	return nil
+}
+
+func (x *Agent) GetBackups() []*AgentBackup {
+	if x != nil {
+		return x.Backups
+	}
+	return nil
+}
+
+func (x *Agent) GetMapData() *AgentMapData {
+	if x != nil {
+		return x.MapData
+	}
+	return nil
 }
 
 func (x *Agent) GetCreatedAt() *timestamppb.Timestamp {
@@ -539,11 +563,487 @@ func (x *AgentLog) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+type Vector3F struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	X             float32                `protobuf:"fixed32,1,opt,name=x,proto3" json:"x,omitempty"`
+	Y             float32                `protobuf:"fixed32,2,opt,name=y,proto3" json:"y,omitempty"`
+	Z             float32                `protobuf:"fixed32,3,opt,name=z,proto3" json:"z,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Vector3F) Reset() {
+	*x = Vector3F{}
+	mi := &file_models_agent_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Vector3F) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Vector3F) ProtoMessage() {}
+
+func (x *Vector3F) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Vector3F.ProtoReflect.Descriptor instead.
+func (*Vector3F) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Vector3F) GetX() float32 {
+	if x != nil {
+		return x.X
+	}
+	return 0
+}
+
+func (x *Vector3F) GetY() float32 {
+	if x != nil {
+		return x.Y
+	}
+	return 0
+}
+
+func (x *Vector3F) GetZ() float32 {
+	if x != nil {
+		return x.Z
+	}
+	return 0
+}
+
+type BoundingBox struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Min           *Vector3F              `protobuf:"bytes,1,opt,name=min,proto3" json:"min,omitempty"`
+	Max           *Vector3F              `protobuf:"bytes,2,opt,name=max,proto3" json:"max,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BoundingBox) Reset() {
+	*x = BoundingBox{}
+	mi := &file_models_agent_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BoundingBox) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BoundingBox) ProtoMessage() {}
+
+func (x *BoundingBox) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BoundingBox.ProtoReflect.Descriptor instead.
+func (*BoundingBox) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BoundingBox) GetMin() *Vector3F {
+	if x != nil {
+		return x.Min
+	}
+	return nil
+}
+
+func (x *BoundingBox) GetMax() *Vector3F {
+	if x != nil {
+		return x.Max
+	}
+	return nil
+}
+
+type AgentSave struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	FileName      string                 `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,4,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	ModTime       *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=mod_time,json=modTime,proto3" json:"mod_time,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentSave) Reset() {
+	*x = AgentSave{}
+	mi := &file_models_agent_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentSave) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentSave) ProtoMessage() {}
+
+func (x *AgentSave) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentSave.ProtoReflect.Descriptor instead.
+func (*AgentSave) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AgentSave) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *AgentSave) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *AgentSave) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *AgentSave) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *AgentSave) GetModTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ModTime
+	}
+	return nil
+}
+
+func (x *AgentSave) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AgentSave) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type AgentBackup struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	FileName      string                 `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	Size          int64                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,4,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentBackup) Reset() {
+	*x = AgentBackup{}
+	mi := &file_models_agent_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentBackup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentBackup) ProtoMessage() {}
+
+func (x *AgentBackup) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentBackup.ProtoReflect.Descriptor instead.
+func (*AgentBackup) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AgentBackup) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *AgentBackup) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *AgentBackup) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *AgentBackup) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *AgentBackup) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AgentBackup) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type AgentMapDataPlayer struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Location      *Vector3F              `protobuf:"bytes,2,opt,name=location,proto3" json:"location,omitempty"`
+	Online        bool                   `protobuf:"varint,3,opt,name=online,proto3" json:"online,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentMapDataPlayer) Reset() {
+	*x = AgentMapDataPlayer{}
+	mi := &file_models_agent_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentMapDataPlayer) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentMapDataPlayer) ProtoMessage() {}
+
+func (x *AgentMapDataPlayer) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentMapDataPlayer.ProtoReflect.Descriptor instead.
+func (*AgentMapDataPlayer) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *AgentMapDataPlayer) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *AgentMapDataPlayer) GetLocation() *Vector3F {
+	if x != nil {
+		return x.Location
+	}
+	return nil
+}
+
+func (x *AgentMapDataPlayer) GetOnline() bool {
+	if x != nil {
+		return x.Online
+	}
+	return false
+}
+
+type AgentMapDataBuilding struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Class         string                 `protobuf:"bytes,2,opt,name=class,proto3" json:"class,omitempty"`
+	Location      *Vector3F              `protobuf:"bytes,3,opt,name=location,proto3" json:"location,omitempty"`
+	Rotation      float32                `protobuf:"fixed32,4,opt,name=rotation,proto3" json:"rotation,omitempty"`
+	BoundingBox   *BoundingBox           `protobuf:"bytes,5,opt,name=bounding_box,json=boundingBox,proto3" json:"bounding_box,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentMapDataBuilding) Reset() {
+	*x = AgentMapDataBuilding{}
+	mi := &file_models_agent_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentMapDataBuilding) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentMapDataBuilding) ProtoMessage() {}
+
+func (x *AgentMapDataBuilding) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentMapDataBuilding.ProtoReflect.Descriptor instead.
+func (*AgentMapDataBuilding) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AgentMapDataBuilding) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AgentMapDataBuilding) GetClass() string {
+	if x != nil {
+		return x.Class
+	}
+	return ""
+}
+
+func (x *AgentMapDataBuilding) GetLocation() *Vector3F {
+	if x != nil {
+		return x.Location
+	}
+	return nil
+}
+
+func (x *AgentMapDataBuilding) GetRotation() float32 {
+	if x != nil {
+		return x.Rotation
+	}
+	return 0
+}
+
+func (x *AgentMapDataBuilding) GetBoundingBox() *BoundingBox {
+	if x != nil {
+		return x.BoundingBox
+	}
+	return nil
+}
+
+type AgentMapData struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Players       []*AgentMapDataPlayer   `protobuf:"bytes,1,rep,name=players,proto3" json:"players,omitempty"`
+	Buildings     []*AgentMapDataBuilding `protobuf:"bytes,2,rep,name=buildings,proto3" json:"buildings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentMapData) Reset() {
+	*x = AgentMapData{}
+	mi := &file_models_agent_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentMapData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentMapData) ProtoMessage() {}
+
+func (x *AgentMapData) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentMapData.ProtoReflect.Descriptor instead.
+func (*AgentMapData) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AgentMapData) GetPlayers() []*AgentMapDataPlayer {
+	if x != nil {
+		return x.Players
+	}
+	return nil
+}
+
+func (x *AgentMapData) GetBuildings() []*AgentMapDataBuilding {
+	if x != nil {
+		return x.Buildings
+	}
+	return nil
+}
+
 var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xc6\x03\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xba\x04\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -554,10 +1054,14 @@ const file_models_agent_proto_rawDesc = "" +
 	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x12)\n" +
 	"\n" +
 	"mod_config\x18\a \x01(\v2\n" +
-	".ModConfigR\tmodConfig\x12\x1d\n" +
-	"\x04logs\x18\v \x03(\v2\t.AgentLogR\x04logs\x120\n" +
+	".ModConfigR\tmodConfig\x120\n" +
 	"\x14latest_agent_version\x18\n" +
-	" \x01(\tR\x12latestAgentVersion\x129\n" +
+	" \x01(\tR\x12latestAgentVersion\x12\x1d\n" +
+	"\x04logs\x18\v \x03(\v2\t.AgentLogR\x04logs\x12 \n" +
+	"\x05saves\x18\f \x03(\v2\n" +
+	".AgentSaveR\x05saves\x12&\n" +
+	"\abackups\x18\r \x03(\v2\f.AgentBackupR\abackups\x12(\n" +
+	"\bmap_data\x18\x0e \x01(\v2\r.AgentMapDataR\amapData\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -601,7 +1105,46 @@ const file_models_agent_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"4\n" +
+	"\bVector3F\x12\f\n" +
+	"\x01x\x18\x01 \x01(\x02R\x01x\x12\f\n" +
+	"\x01y\x18\x02 \x01(\x02R\x01y\x12\f\n" +
+	"\x01z\x18\x03 \x01(\x02R\x01z\"G\n" +
+	"\vBoundingBox\x12\x1b\n" +
+	"\x03min\x18\x01 \x01(\v2\t.Vector3FR\x03min\x12\x1b\n" +
+	"\x03max\x18\x02 \x01(\v2\t.Vector3FR\x03max\"\x98\x02\n" +
+	"\tAgentSave\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x19\n" +
+	"\bfile_url\x18\x04 \x01(\tR\afileUrl\x125\n" +
+	"\bmod_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\amodTime\x129\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xe3\x01\n" +
+	"\vAgentBackup\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x1b\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\x12\x19\n" +
+	"\bfile_url\x18\x04 \x01(\tR\afileUrl\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"o\n" +
+	"\x12AgentMapDataPlayer\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12%\n" +
+	"\blocation\x18\x02 \x01(\v2\t.Vector3FR\blocation\x12\x16\n" +
+	"\x06online\x18\x03 \x01(\bR\x06online\"\xb4\x01\n" +
+	"\x14AgentMapDataBuilding\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
+	"\x05class\x18\x02 \x01(\tR\x05class\x12%\n" +
+	"\blocation\x18\x03 \x01(\v2\t.Vector3FR\blocation\x12\x1a\n" +
+	"\brotation\x18\x04 \x01(\x02R\brotation\x12/\n" +
+	"\fbounding_box\x18\x05 \x01(\v2\f.BoundingBoxR\vboundingBox\"r\n" +
+	"\fAgentMapData\x12-\n" +
+	"\aplayers\x18\x01 \x03(\v2\x13.AgentMapDataPlayerR\aplayers\x123\n" +
+	"\tbuildings\x18\x02 \x03(\v2\x15.AgentMapDataBuildingR\tbuildingsBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_agent_proto_rawDescOnce sync.Once
@@ -615,38 +1158,60 @@ func file_models_agent_proto_rawDescGZIP() []byte {
 	return file_models_agent_proto_rawDescData
 }
 
-var file_models_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_models_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_models_agent_proto_goTypes = []any{
 	(*Agent)(nil),                 // 0: Agent
 	(*AgentStatus)(nil),           // 1: AgentStatus
 	(*AgentConfig)(nil),           // 2: AgentConfig
 	(*AgentServerConfig)(nil),     // 3: AgentServerConfig
 	(*AgentLog)(nil),              // 4: AgentLog
-	(*ModConfig)(nil),             // 5: ModConfig
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 7: google.protobuf.BoolValue
+	(*Vector3F)(nil),              // 5: Vector3F
+	(*BoundingBox)(nil),           // 6: BoundingBox
+	(*AgentSave)(nil),             // 7: AgentSave
+	(*AgentBackup)(nil),           // 8: AgentBackup
+	(*AgentMapDataPlayer)(nil),    // 9: AgentMapDataPlayer
+	(*AgentMapDataBuilding)(nil),  // 10: AgentMapDataBuilding
+	(*AgentMapData)(nil),          // 11: AgentMapData
+	(*ModConfig)(nil),             // 12: ModConfig
+	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 14: google.protobuf.BoolValue
 }
 var file_models_agent_proto_depIdxs = []int32{
 	1,  // 0: Agent.status:type_name -> AgentStatus
 	2,  // 1: Agent.config:type_name -> AgentConfig
 	3,  // 2: Agent.server_config:type_name -> AgentServerConfig
-	5,  // 3: Agent.mod_config:type_name -> ModConfig
+	12, // 3: Agent.mod_config:type_name -> ModConfig
 	4,  // 4: Agent.logs:type_name -> AgentLog
-	6,  // 5: Agent.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 6: Agent.updated_at:type_name -> google.protobuf.Timestamp
-	6,  // 7: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
-	7,  // 8: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
-	7,  // 9: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
-	7,  // 10: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
-	7,  // 11: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
-	7,  // 12: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
-	6,  // 13: AgentLog.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 14: AgentLog.updated_at:type_name -> google.protobuf.Timestamp
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	7,  // 5: Agent.saves:type_name -> AgentSave
+	8,  // 6: Agent.backups:type_name -> AgentBackup
+	11, // 7: Agent.map_data:type_name -> AgentMapData
+	13, // 8: Agent.created_at:type_name -> google.protobuf.Timestamp
+	13, // 9: Agent.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 10: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
+	14, // 11: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
+	14, // 12: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
+	14, // 13: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
+	14, // 14: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
+	14, // 15: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
+	13, // 16: AgentLog.created_at:type_name -> google.protobuf.Timestamp
+	13, // 17: AgentLog.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 18: BoundingBox.min:type_name -> Vector3F
+	5,  // 19: BoundingBox.max:type_name -> Vector3F
+	13, // 20: AgentSave.mod_time:type_name -> google.protobuf.Timestamp
+	13, // 21: AgentSave.created_at:type_name -> google.protobuf.Timestamp
+	13, // 22: AgentSave.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 23: AgentBackup.created_at:type_name -> google.protobuf.Timestamp
+	13, // 24: AgentBackup.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 25: AgentMapDataPlayer.location:type_name -> Vector3F
+	5,  // 26: AgentMapDataBuilding.location:type_name -> Vector3F
+	6,  // 27: AgentMapDataBuilding.bounding_box:type_name -> BoundingBox
+	9,  // 28: AgentMapData.players:type_name -> AgentMapDataPlayer
+	10, // 29: AgentMapData.buildings:type_name -> AgentMapDataBuilding
+	30, // [30:30] is the sub-list for method output_type
+	30, // [30:30] is the sub-list for method input_type
+	30, // [30:30] is the sub-list for extension type_name
+	30, // [30:30] is the sub-list for extension extendee
+	0,  // [0:30] is the sub-list for field type_name
 }
 
 func init() { file_models_agent_proto_init() }
@@ -661,7 +1226,7 @@ func file_models_agent_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_agent_proto_rawDesc), len(file_models_agent_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

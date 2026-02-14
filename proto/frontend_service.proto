@@ -11,6 +11,7 @@ service FrontendService {
     rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
     rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
     rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
+    rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -49,6 +50,15 @@ message GetMyUserActiveAccountAgentsRequest {
 
 message GetMyUserActiveAccountAgentsResponse {
     repeated Agent agents = 1;
+}
+
+message GetMyUserActiveAccountSingleAgentRequest {
+    string eid = 1;
+    string agent_id = 2;
+}
+
+message GetMyUserActiveAccountSingleAgentResponse {
+    Agent agent = 1;
 }
 
 message User {

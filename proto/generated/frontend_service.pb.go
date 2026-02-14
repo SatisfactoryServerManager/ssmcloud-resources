@@ -435,6 +435,102 @@ func (x *GetMyUserActiveAccountAgentsResponse) GetAgents() []*models.Agent {
 	return nil
 }
 
+type GetMyUserActiveAccountSingleAgentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserActiveAccountSingleAgentRequest) Reset() {
+	*x = GetMyUserActiveAccountSingleAgentRequest{}
+	mi := &file_frontend_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserActiveAccountSingleAgentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserActiveAccountSingleAgentRequest) ProtoMessage() {}
+
+func (x *GetMyUserActiveAccountSingleAgentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserActiveAccountSingleAgentRequest.ProtoReflect.Descriptor instead.
+func (*GetMyUserActiveAccountSingleAgentRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetMyUserActiveAccountSingleAgentRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *GetMyUserActiveAccountSingleAgentRequest) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+type GetMyUserActiveAccountSingleAgentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Agent         *models.Agent          `protobuf:"bytes,1,opt,name=agent,proto3" json:"agent,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetMyUserActiveAccountSingleAgentResponse) Reset() {
+	*x = GetMyUserActiveAccountSingleAgentResponse{}
+	mi := &file_frontend_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetMyUserActiveAccountSingleAgentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMyUserActiveAccountSingleAgentResponse) ProtoMessage() {}
+
+func (x *GetMyUserActiveAccountSingleAgentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMyUserActiveAccountSingleAgentResponse.ProtoReflect.Descriptor instead.
+func (*GetMyUserActiveAccountSingleAgentResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetMyUserActiveAccountSingleAgentResponse) GetAgent() *models.Agent {
+	if x != nil {
+		return x.Agent
+	}
+	return nil
+}
+
 type User struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Id              string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -452,7 +548,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_frontend_service_proto_msgTypes[9]
+	mi := &file_frontend_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +560,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[9]
+	mi := &file_frontend_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +573,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{9}
+	return file_frontend_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *User) GetId() string {
@@ -553,7 +649,7 @@ type UserAPIKey struct {
 
 func (x *UserAPIKey) Reset() {
 	*x = UserAPIKey{}
-	mi := &file_frontend_service_proto_msgTypes[10]
+	mi := &file_frontend_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -565,7 +661,7 @@ func (x *UserAPIKey) String() string {
 func (*UserAPIKey) ProtoMessage() {}
 
 func (x *UserAPIKey) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[10]
+	mi := &file_frontend_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -578,7 +674,7 @@ func (x *UserAPIKey) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserAPIKey.ProtoReflect.Descriptor instead.
 func (*UserAPIKey) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{10}
+	return file_frontend_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UserAPIKey) GetShortKey() string {
@@ -608,7 +704,7 @@ type Account struct {
 
 func (x *Account) Reset() {
 	*x = Account{}
-	mi := &file_frontend_service_proto_msgTypes[11]
+	mi := &file_frontend_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -620,7 +716,7 @@ func (x *Account) String() string {
 func (*Account) ProtoMessage() {}
 
 func (x *Account) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[11]
+	mi := &file_frontend_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -633,7 +729,7 @@ func (x *Account) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Account.ProtoReflect.Descriptor instead.
 func (*Account) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{11}
+	return file_frontend_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Account) GetId() string {
@@ -695,7 +791,12 @@ const file_frontend_service_proto_rawDesc = "" +
 	"#GetMyUserActiveAccountAgentsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\"F\n" +
 	"$GetMyUserActiveAccountAgentsResponse\x12\x1e\n" +
-	"\x06agents\x18\x01 \x03(\v2\x06.AgentR\x06agents\"\xed\x02\n" +
+	"\x06agents\x18\x01 \x03(\v2\x06.AgentR\x06agents\"W\n" +
+	"(GetMyUserActiveAccountSingleAgentRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\"I\n" +
+	")GetMyUserActiveAccountSingleAgentResponse\x12\x1c\n" +
+	"\x05agent\x18\x01 \x01(\v2\x06.AgentR\x05agent\"\xed\x02\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vexternal_id\x18\x02 \x01(\tR\n" +
@@ -718,13 +819,14 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\vaccountName\x18\x02 \x01(\tR\vaccountName\x12\x1a\n" +
 	"\bjoinCode\x18\x03 \x01(\tR\bjoinCode\x128\n" +
 	"\tcreatedAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
-	"\tupdatedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xb2\x03\n" +
+	"\tupdatedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xae\x04\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x122\n" +
 	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
 	"\x17GetMyUserLinkedAccounts\x12\x1f.GetMyUserLinkedAccountsRequest\x1a .GetMyUserLinkedAccountsResponse\x12Y\n" +
 	"\x16GetMyUserActiveAccount\x12\x1e.GetMyUserActiveAccountRequest\x1a\x1f.GetMyUserActiveAccountResponse\x12k\n" +
-	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponse\x12z\n" +
+	"!GetMyUserActiveAccountSingleAgent\x12).GetMyUserActiveAccountSingleAgentRequest\x1a*.GetMyUserActiveAccountSingleAgentResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -738,50 +840,55 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_frontend_service_proto_goTypes = []any{
-	(*CheckUserExistsOrCreateRequest)(nil),       // 0: CheckUserExistsOrCreateRequest
-	(*GetMyUserRequest)(nil),                     // 1: GetMyUserRequest
-	(*GetMyUserResponse)(nil),                    // 2: GetMyUserResponse
-	(*GetMyUserLinkedAccountsRequest)(nil),       // 3: GetMyUserLinkedAccountsRequest
-	(*GetMyUserLinkedAccountsResponse)(nil),      // 4: GetMyUserLinkedAccountsResponse
-	(*GetMyUserActiveAccountRequest)(nil),        // 5: GetMyUserActiveAccountRequest
-	(*GetMyUserActiveAccountResponse)(nil),       // 6: GetMyUserActiveAccountResponse
-	(*GetMyUserActiveAccountAgentsRequest)(nil),  // 7: GetMyUserActiveAccountAgentsRequest
-	(*GetMyUserActiveAccountAgentsResponse)(nil), // 8: GetMyUserActiveAccountAgentsResponse
-	(*User)(nil),                  // 9: User
-	(*UserAPIKey)(nil),            // 10: UserAPIKey
-	(*Account)(nil),               // 11: Account
-	(*models.Agent)(nil),          // 12: Agent
-	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
-	(*models.SSMEmpty)(nil),       // 14: SSMEmpty
+	(*CheckUserExistsOrCreateRequest)(nil),            // 0: CheckUserExistsOrCreateRequest
+	(*GetMyUserRequest)(nil),                          // 1: GetMyUserRequest
+	(*GetMyUserResponse)(nil),                         // 2: GetMyUserResponse
+	(*GetMyUserLinkedAccountsRequest)(nil),            // 3: GetMyUserLinkedAccountsRequest
+	(*GetMyUserLinkedAccountsResponse)(nil),           // 4: GetMyUserLinkedAccountsResponse
+	(*GetMyUserActiveAccountRequest)(nil),             // 5: GetMyUserActiveAccountRequest
+	(*GetMyUserActiveAccountResponse)(nil),            // 6: GetMyUserActiveAccountResponse
+	(*GetMyUserActiveAccountAgentsRequest)(nil),       // 7: GetMyUserActiveAccountAgentsRequest
+	(*GetMyUserActiveAccountAgentsResponse)(nil),      // 8: GetMyUserActiveAccountAgentsResponse
+	(*GetMyUserActiveAccountSingleAgentRequest)(nil),  // 9: GetMyUserActiveAccountSingleAgentRequest
+	(*GetMyUserActiveAccountSingleAgentResponse)(nil), // 10: GetMyUserActiveAccountSingleAgentResponse
+	(*User)(nil),                  // 11: User
+	(*UserAPIKey)(nil),            // 12: UserAPIKey
+	(*Account)(nil),               // 13: Account
+	(*models.Agent)(nil),          // 14: Agent
+	(*timestamppb.Timestamp)(nil), // 15: google.protobuf.Timestamp
+	(*models.SSMEmpty)(nil),       // 16: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	9,  // 0: GetMyUserResponse.user:type_name -> User
-	11, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	11, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
-	12, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	10, // 4: User.api_keys:type_name -> UserAPIKey
-	13, // 5: User.lastActive:type_name -> google.protobuf.Timestamp
-	13, // 6: User.createdAt:type_name -> google.protobuf.Timestamp
-	13, // 7: User.updatedAt:type_name -> google.protobuf.Timestamp
-	13, // 8: Account.createdAt:type_name -> google.protobuf.Timestamp
-	13, // 9: Account.updatedAt:type_name -> google.protobuf.Timestamp
-	0,  // 10: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1,  // 11: FrontendService.GetMyUser:input_type -> GetMyUserRequest
-	3,  // 12: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
-	5,  // 13: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
-	7,  // 14: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
-	14, // 15: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	2,  // 16: FrontendService.GetMyUser:output_type -> GetMyUserResponse
-	4,  // 17: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
-	6,  // 18: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
-	8,  // 19: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	11, // 0: GetMyUserResponse.user:type_name -> User
+	13, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	13, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
+	14, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	14, // 4: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
+	12, // 5: User.api_keys:type_name -> UserAPIKey
+	15, // 6: User.lastActive:type_name -> google.protobuf.Timestamp
+	15, // 7: User.createdAt:type_name -> google.protobuf.Timestamp
+	15, // 8: User.updatedAt:type_name -> google.protobuf.Timestamp
+	15, // 9: Account.createdAt:type_name -> google.protobuf.Timestamp
+	15, // 10: Account.updatedAt:type_name -> google.protobuf.Timestamp
+	0,  // 11: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1,  // 12: FrontendService.GetMyUser:input_type -> GetMyUserRequest
+	3,  // 13: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
+	5,  // 14: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
+	7,  // 15: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
+	9,  // 16: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
+	16, // 17: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	2,  // 18: FrontendService.GetMyUser:output_type -> GetMyUserResponse
+	4,  // 19: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
+	6,  // 20: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
+	8,  // 21: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
+	10, // 22: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
+	17, // [17:23] is the sub-list for method output_type
+	11, // [11:17] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -795,7 +902,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

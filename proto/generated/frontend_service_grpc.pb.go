@@ -26,6 +26,7 @@ const (
 	FrontendService_GetMyUserActiveAccount_FullMethodName            = "/FrontendService/GetMyUserActiveAccount"
 	FrontendService_GetMyUserActiveAccountAgents_FullMethodName      = "/FrontendService/GetMyUserActiveAccountAgents"
 	FrontendService_GetMyUserActiveAccountSingleAgent_FullMethodName = "/FrontendService/GetMyUserActiveAccountSingleAgent"
+	FrontendService_GetAgentLogs_FullMethodName                      = "/FrontendService/GetAgentLogs"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -38,6 +39,7 @@ type FrontendServiceClient interface {
 	GetMyUserActiveAccount(ctx context.Context, in *GetMyUserActiveAccountRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountResponse, error)
 	GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error)
 	GetMyUserActiveAccountSingleAgent(ctx context.Context, in *GetMyUserActiveAccountSingleAgentRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountSingleAgentResponse, error)
+	GetAgentLogs(ctx context.Context, in *GetAgentLogsRequest, opts ...grpc.CallOption) (*GetAgentLogsResponse, error)
 }
 
 type frontendServiceClient struct {
@@ -108,6 +110,16 @@ func (c *frontendServiceClient) GetMyUserActiveAccountSingleAgent(ctx context.Co
 	return out, nil
 }
 
+func (c *frontendServiceClient) GetAgentLogs(ctx context.Context, in *GetAgentLogsRequest, opts ...grpc.CallOption) (*GetAgentLogsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgentLogsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentLogs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
@@ -118,6 +130,7 @@ type FrontendServiceServer interface {
 	GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error)
 	GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error)
 	GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error)
+	GetAgentLogs(context.Context, *GetAgentLogsRequest) (*GetAgentLogsResponse, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -145,6 +158,9 @@ func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountAgents(context.C
 }
 func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountSingleAgent not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAgentLogs(context.Context, *GetAgentLogsRequest) (*GetAgentLogsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentLogs not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -275,6 +291,24 @@ func _FrontendService_GetMyUserActiveAccountSingleAgent_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_GetAgentLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAgentLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAgentLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAgentLogs(ctx, req.(*GetAgentLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -305,6 +339,10 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMyUserActiveAccountSingleAgent",
 			Handler:    _FrontendService_GetMyUserActiveAccountSingleAgent_Handler,
+		},
+		{
+			MethodName: "GetAgentLogs",
+			Handler:    _FrontendService_GetAgentLogs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

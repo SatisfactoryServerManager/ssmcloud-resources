@@ -12,6 +12,8 @@ service FrontendService {
     rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
     rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
     rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
+
+    rpc GetAgentLogs(GetAgentLogsRequest) returns (GetAgentLogsResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -59,6 +61,16 @@ message GetMyUserActiveAccountSingleAgentRequest {
 
 message GetMyUserActiveAccountSingleAgentResponse {
     Agent agent = 1;
+}
+
+message GetAgentLogsRequest {
+    string eid = 1;
+    string agent_id = 2;
+    string type = 3;
+}
+
+message GetAgentLogsResponse {
+    repeated AgentLog logs = 1;
 }
 
 message User {

@@ -93,13 +93,13 @@ func MapAgentLogsToProto(logs []v2.AgentLogSchema) []*pb.AgentLog {
 	pbLogs := make([]*pb.AgentLog, 0, len(logs))
 
 	for i := range logs {
-		pbLogs = append(pbLogs, MapAgentLogToProto(logs[i]))
+		pbLogs = append(pbLogs, MapAgentLogToProto(&logs[i]))
 	}
 
 	return pbLogs
 }
 
-func MapAgentLogToProto(log v2.AgentLogSchema) *pb.AgentLog {
+func MapAgentLogToProto(log *v2.AgentLogSchema) *pb.AgentLog {
 	return &pb.AgentLog{
 		Id:            log.ID.Hex(),
 		FileName:      log.FileName,

@@ -24,18 +24,19 @@ const (
 )
 
 type Agent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	AgentName     string                 `protobuf:"bytes,2,opt,name=agent_name,json=agentName,proto3" json:"agent_name,omitempty"`
-	ApiKey        string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
-	Status        *AgentStatus           `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Config        *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
-	ServerConfig  *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
-	ModConfig     *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Id                 string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	AgentName          string                 `protobuf:"bytes,2,opt,name=agent_name,json=agentName,proto3" json:"agent_name,omitempty"`
+	ApiKey             string                 `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	Status             *AgentStatus           `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Config             *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
+	ServerConfig       *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
+	ModConfig          *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
+	LatestAgentVersion string                 `protobuf:"bytes,10,opt,name=latest_agent_version,json=latestAgentVersion,proto3" json:"latest_agent_version,omitempty"`
+	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Agent) Reset() {
@@ -115,6 +116,13 @@ func (x *Agent) GetModConfig() *ModConfig {
 		return x.ModConfig
 	}
 	return nil
+}
+
+func (x *Agent) GetLatestAgentVersion() string {
+	if x != nil {
+		return x.LatestAgentVersion
+	}
+	return ""
 }
 
 func (x *Agent) GetCreatedAt() *timestamppb.Timestamp {
@@ -427,7 +435,7 @@ var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xf5\x02\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xa7\x03\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -438,7 +446,9 @@ const file_models_agent_proto_rawDesc = "" +
 	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x12)\n" +
 	"\n" +
 	"mod_config\x18\a \x01(\v2\n" +
-	".ModConfigR\tmodConfig\x129\n" +
+	".ModConfigR\tmodConfig\x120\n" +
+	"\x14latest_agent_version\x18\n" +
+	" \x01(\tR\x12latestAgentVersion\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +

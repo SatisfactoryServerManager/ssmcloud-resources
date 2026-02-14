@@ -22,177 +22,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AgentConfig struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	BackupInterval   int32                  `protobuf:"varint,1,opt,name=backupInterval,proto3" json:"backupInterval,omitempty"`
-	BackupKeepAmount int32                  `protobuf:"varint,2,opt,name=backupKeepAmount,proto3" json:"backupKeepAmount,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AgentConfig) Reset() {
-	*x = AgentConfig{}
-	mi := &file_agent_config_service_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentConfig) ProtoMessage() {}
-
-func (x *AgentConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_config_service_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentConfig.ProtoReflect.Descriptor instead.
-func (*AgentConfig) Descriptor() ([]byte, []int) {
-	return file_agent_config_service_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *AgentConfig) GetBackupInterval() int32 {
-	if x != nil {
-		return x.BackupInterval
-	}
-	return 0
-}
-
-func (x *AgentConfig) GetBackupKeepAmount() int32 {
-	if x != nil {
-		return x.BackupKeepAmount
-	}
-	return 0
-}
-
-type AgentServerConfig struct {
-	state                 protoimpl.MessageState `protogen:"open.v1"`
-	MaxPlayers            int32                  `protobuf:"varint,1,opt,name=maxPlayers,proto3" json:"maxPlayers,omitempty"`
-	WorkerThreads         int32                  `protobuf:"varint,2,opt,name=workerThreads,proto3" json:"workerThreads,omitempty"`
-	Branch                string                 `protobuf:"bytes,3,opt,name=branch,proto3" json:"branch,omitempty"`
-	UpdateSFOnStart       bool                   `protobuf:"varint,4,opt,name=updateSFOnStart,proto3" json:"updateSFOnStart,omitempty"`
-	AutoRestart           bool                   `protobuf:"varint,5,opt,name=autoRestart,proto3" json:"autoRestart,omitempty"`
-	AutoPause             bool                   `protobuf:"varint,6,opt,name=autoPause,proto3" json:"autoPause,omitempty"`
-	AutoSaveOnDisconnect  bool                   `protobuf:"varint,7,opt,name=autoSaveOnDisconnect,proto3" json:"autoSaveOnDisconnect,omitempty"`
-	AutoSaveInterval      int32                  `protobuf:"varint,8,opt,name=autoSaveInterval,proto3" json:"autoSaveInterval,omitempty"`
-	DisableSeasonalEvents bool                   `protobuf:"varint,9,opt,name=disableSeasonalEvents,proto3" json:"disableSeasonalEvents,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
-}
-
-func (x *AgentServerConfig) Reset() {
-	*x = AgentServerConfig{}
-	mi := &file_agent_config_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentServerConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentServerConfig) ProtoMessage() {}
-
-func (x *AgentServerConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_config_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AgentServerConfig.ProtoReflect.Descriptor instead.
-func (*AgentServerConfig) Descriptor() ([]byte, []int) {
-	return file_agent_config_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AgentServerConfig) GetMaxPlayers() int32 {
-	if x != nil {
-		return x.MaxPlayers
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetWorkerThreads() int32 {
-	if x != nil {
-		return x.WorkerThreads
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetBranch() string {
-	if x != nil {
-		return x.Branch
-	}
-	return ""
-}
-
-func (x *AgentServerConfig) GetUpdateSFOnStart() bool {
-	if x != nil {
-		return x.UpdateSFOnStart
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoRestart() bool {
-	if x != nil {
-		return x.AutoRestart
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoPause() bool {
-	if x != nil {
-		return x.AutoPause
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoSaveOnDisconnect() bool {
-	if x != nil {
-		return x.AutoSaveOnDisconnect
-	}
-	return false
-}
-
-func (x *AgentServerConfig) GetAutoSaveInterval() int32 {
-	if x != nil {
-		return x.AutoSaveInterval
-	}
-	return 0
-}
-
-func (x *AgentServerConfig) GetDisableSeasonalEvents() bool {
-	if x != nil {
-		return x.DisableSeasonalEvents
-	}
-	return false
-}
-
 type AgentConfigResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Config        *AgentConfig           `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	ServerConfig  *AgentServerConfig     `protobuf:"bytes,2,opt,name=serverConfig,proto3" json:"serverConfig,omitempty"`
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Config        *models.AgentConfig       `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	ServerConfig  *models.AgentServerConfig `protobuf:"bytes,2,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AgentConfigResponse) Reset() {
 	*x = AgentConfigResponse{}
-	mi := &file_agent_config_service_proto_msgTypes[2]
+	mi := &file_agent_config_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -204,7 +44,7 @@ func (x *AgentConfigResponse) String() string {
 func (*AgentConfigResponse) ProtoMessage() {}
 
 func (x *AgentConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_config_service_proto_msgTypes[2]
+	mi := &file_agent_config_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -217,17 +57,17 @@ func (x *AgentConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentConfigResponse.ProtoReflect.Descriptor instead.
 func (*AgentConfigResponse) Descriptor() ([]byte, []int) {
-	return file_agent_config_service_proto_rawDescGZIP(), []int{2}
+	return file_agent_config_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AgentConfigResponse) GetConfig() *AgentConfig {
+func (x *AgentConfigResponse) GetConfig() *models.AgentConfig {
 	if x != nil {
 		return x.Config
 	}
 	return nil
 }
 
-func (x *AgentConfigResponse) GetServerConfig() *AgentServerConfig {
+func (x *AgentConfigResponse) GetServerConfig() *models.AgentServerConfig {
 	if x != nil {
 		return x.ServerConfig
 	}
@@ -244,7 +84,7 @@ type UpdateAgentConfigRequest struct {
 
 func (x *UpdateAgentConfigRequest) Reset() {
 	*x = UpdateAgentConfigRequest{}
-	mi := &file_agent_config_service_proto_msgTypes[3]
+	mi := &file_agent_config_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -256,7 +96,7 @@ func (x *UpdateAgentConfigRequest) String() string {
 func (*UpdateAgentConfigRequest) ProtoMessage() {}
 
 func (x *UpdateAgentConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_config_service_proto_msgTypes[3]
+	mi := &file_agent_config_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,7 +109,7 @@ func (x *UpdateAgentConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAgentConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAgentConfigRequest) Descriptor() ([]byte, []int) {
-	return file_agent_config_service_proto_rawDescGZIP(), []int{3}
+	return file_agent_config_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *UpdateAgentConfigRequest) GetVersion() string {
@@ -290,25 +130,10 @@ var File_agent_config_service_proto protoreflect.FileDescriptor
 
 const file_agent_config_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1aagent_config_service.proto\x1a\x12models/empty.proto\"a\n" +
-	"\vAgentConfig\x12&\n" +
-	"\x0ebackupInterval\x18\x01 \x01(\x05R\x0ebackupInterval\x12*\n" +
-	"\x10backupKeepAmount\x18\x02 \x01(\x05R\x10backupKeepAmount\"\xf1\x02\n" +
-	"\x11AgentServerConfig\x12\x1e\n" +
-	"\n" +
-	"maxPlayers\x18\x01 \x01(\x05R\n" +
-	"maxPlayers\x12$\n" +
-	"\rworkerThreads\x18\x02 \x01(\x05R\rworkerThreads\x12\x16\n" +
-	"\x06branch\x18\x03 \x01(\tR\x06branch\x12(\n" +
-	"\x0fupdateSFOnStart\x18\x04 \x01(\bR\x0fupdateSFOnStart\x12 \n" +
-	"\vautoRestart\x18\x05 \x01(\bR\vautoRestart\x12\x1c\n" +
-	"\tautoPause\x18\x06 \x01(\bR\tautoPause\x122\n" +
-	"\x14autoSaveOnDisconnect\x18\a \x01(\bR\x14autoSaveOnDisconnect\x12*\n" +
-	"\x10autoSaveInterval\x18\b \x01(\x05R\x10autoSaveInterval\x124\n" +
-	"\x15disableSeasonalEvents\x18\t \x01(\bR\x15disableSeasonalEvents\"s\n" +
+	"\x1aagent_config_service.proto\x1a\x12models/empty.proto\x1a\x12models/agent.proto\"t\n" +
 	"\x13AgentConfigResponse\x12$\n" +
-	"\x06config\x18\x01 \x01(\v2\f.AgentConfigR\x06config\x126\n" +
-	"\fserverConfig\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\"D\n" +
+	"\x06config\x18\x01 \x01(\v2\f.AgentConfigR\x06config\x127\n" +
+	"\rserver_config\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\"D\n" +
 	"\x18UpdateAgentConfigRequest\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x0e\n" +
 	"\x02ip\x18\x03 \x01(\tR\x02ip2\x8b\x01\n" +
@@ -328,20 +153,20 @@ func file_agent_config_service_proto_rawDescGZIP() []byte {
 	return file_agent_config_service_proto_rawDescData
 }
 
-var file_agent_config_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_agent_config_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_agent_config_service_proto_goTypes = []any{
-	(*AgentConfig)(nil),              // 0: AgentConfig
-	(*AgentServerConfig)(nil),        // 1: AgentServerConfig
-	(*AgentConfigResponse)(nil),      // 2: AgentConfigResponse
-	(*UpdateAgentConfigRequest)(nil), // 3: UpdateAgentConfigRequest
+	(*AgentConfigResponse)(nil),      // 0: AgentConfigResponse
+	(*UpdateAgentConfigRequest)(nil), // 1: UpdateAgentConfigRequest
+	(*models.AgentConfig)(nil),       // 2: AgentConfig
+	(*models.AgentServerConfig)(nil), // 3: AgentServerConfig
 	(*models.SSMEmpty)(nil),          // 4: SSMEmpty
 }
 var file_agent_config_service_proto_depIdxs = []int32{
-	0, // 0: AgentConfigResponse.config:type_name -> AgentConfig
-	1, // 1: AgentConfigResponse.serverConfig:type_name -> AgentServerConfig
+	2, // 0: AgentConfigResponse.config:type_name -> AgentConfig
+	3, // 1: AgentConfigResponse.server_config:type_name -> AgentServerConfig
 	4, // 2: AgentConfigService.GetAgentConfig:input_type -> SSMEmpty
-	3, // 3: AgentConfigService.UpdateAgentConfigVersionIp:input_type -> UpdateAgentConfigRequest
-	2, // 4: AgentConfigService.GetAgentConfig:output_type -> AgentConfigResponse
+	1, // 3: AgentConfigService.UpdateAgentConfigVersionIp:input_type -> UpdateAgentConfigRequest
+	0, // 4: AgentConfigService.GetAgentConfig:output_type -> AgentConfigResponse
 	4, // 5: AgentConfigService.UpdateAgentConfigVersionIp:output_type -> SSMEmpty
 	4, // [4:6] is the sub-list for method output_type
 	2, // [2:4] is the sub-list for method input_type
@@ -361,7 +186,7 @@ func file_agent_config_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_agent_config_service_proto_rawDesc), len(file_agent_config_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

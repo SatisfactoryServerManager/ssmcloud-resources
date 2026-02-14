@@ -16,37 +16,49 @@ func MapAgentToProto(agent *v2.AgentSchema) *pb.Agent {
 		UpdatedAt: timestamppb.New(agent.UpdatedAt),
 	}
 
-	agentProto.Status = &pb.AgentStatus{
-		Online:             agent.Status.Online,
-		Installed:          agent.Status.Installed,
-		Running:            agent.Status.Running,
-		Cpu:                float32(agent.Status.CPU),
-		Ram:                float32(agent.Status.RAM),
-		InstalledSfVersion: agent.Status.InstalledSFVersion,
-		LatestSfVersion:    agent.Status.LatestSFVersion,
-		LastCommDate:       timestamppb.New(agent.Status.LastCommDate),
-	}
+	agentProto.Status = MapAgentStatusToProto(&agent.Status)
 
-	agentProto.Config = &pb.AgentConfig{
-		Version:          agent.Config.Version,
-		Port:             int32(agent.Config.Port),
-		Memory:           agent.Config.Memory,
-		IpAddress:        agent.Config.IP,
-		BackupKeepAmount: int32(agent.Config.BackupKeepAmount),
-		BackupInterval:   int32(agent.Config.BackupInterval),
-	}
+	agentProto.Config = MapAgentConfigToProto(&agent.Config)
 
-	agentProto.ServerConfig = &pb.AgentServerConfig{
-		UpdateOnStart:         wrapperspb.Bool(agent.ServerConfig.UpdateOnStart),
-		Branch:                agent.ServerConfig.Branch,
-		WorkerThreads:         int32(agent.ServerConfig.WorkerThreads),
-		AutoRestart:           wrapperspb.Bool(agent.ServerConfig.AutoRestart),
-		MaxPlayers:            int32(agent.ServerConfig.MaxPlayers),
-		AutoPause:             wrapperspb.Bool(agent.ServerConfig.AutoPause),
-		AutoSaveOnDisconnect:  wrapperspb.Bool(agent.ServerConfig.AutoSaveOnDisconnect),
-		AutoSaveInterval:      int32(agent.ServerConfig.AutoSaveInterval),
-		DisableSeasonalEvents: wrapperspb.Bool(agent.ServerConfig.DisableSeasonalEvents),
-	}
+	agentProto.ServerConfig = MapAgentServerConfigToProto(&agent.ServerConfig)
 
 	return agentProto
+}
+
+func MapAgentStatusToProto(agentStatus *v2.AgentStatus) *pb.AgentStatus {
+	return &pb.AgentStatus{
+		Online:             agentStatus.Online,
+		Installed:          agentStatus.Installed,
+		Running:            agentStatus.Running,
+		Cpu:                float32(agentStatus.CPU),
+		Ram:                float32(agentStatus.RAM),
+		InstalledSfVersion: agentStatus.InstalledSFVersion,
+		LatestSfVersion:    agentStatus.LatestSFVersion,
+		LastCommDate:       timestamppb.New(agentStatus.LastCommDate),
+	}
+}
+
+func MapAgentConfigToProto(agentConfig *v2.AgentConfig) *pb.AgentConfig {
+	return &pb.AgentConfig{
+		Version:          agentConfig.Version,
+		Port:             int32(agentConfig.Port),
+		Memory:           agentConfig.Memory,
+		IpAddress:        agentConfig.IP,
+		BackupKeepAmount: int32(agentConfig.BackupKeepAmount),
+		BackupInterval:   int32(agentConfig.BackupInterval),
+	}
+}
+
+func MapAgentServerConfigToProto(agentServerConfig *v2.AgentServerConfig) *pb.AgentServerConfig {
+	return &pb.AgentServerConfig{
+		UpdateOnStart:         wrapperspb.Bool(agentServerConfig.UpdateOnStart),
+		Branch:                agentServerConfig.Branch,
+		WorkerThreads:         int32(agentServerConfig.WorkerThreads),
+		AutoRestart:           wrapperspb.Bool(agentServerConfig.AutoRestart),
+		MaxPlayers:            int32(agentServerConfig.MaxPlayers),
+		AutoPause:             wrapperspb.Bool(agentServerConfig.AutoPause),
+		AutoSaveOnDisconnect:  wrapperspb.Bool(agentServerConfig.AutoSaveOnDisconnect),
+		AutoSaveInterval:      int32(agentServerConfig.AutoSaveInterval),
+		DisableSeasonalEvents: wrapperspb.Bool(agentServerConfig.DisableSeasonalEvents),
+	}
 }

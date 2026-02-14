@@ -718,13 +718,13 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\vaccountName\x18\x02 \x01(\tR\vaccountName\x12\x1a\n" +
 	"\bjoinCode\x18\x03 \x01(\tR\bjoinCode\x128\n" +
 	"\tcreatedAt\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
-	"\tupdatedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xac\x03\n" +
+	"\tupdatedAt\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt2\xb2\x03\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x122\n" +
 	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
 	"\x17GetMyUserLinkedAccounts\x12\x1f.GetMyUserLinkedAccountsRequest\x1a .GetMyUserLinkedAccountsResponse\x12Y\n" +
-	"\x16GetMyUserActiveAccount\x12\x1e.GetMyUserActiveAccountRequest\x1a\x1f.GetMyUserActiveAccountResponse\x12e\n" +
-	"\x16GetMyUserAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x16GetMyUserActiveAccount\x12\x1e.GetMyUserActiveAccountRequest\x1a\x1f.GetMyUserActiveAccountResponse\x12k\n" +
+	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -771,12 +771,12 @@ var file_frontend_service_proto_depIdxs = []int32{
 	1,  // 11: FrontendService.GetMyUser:input_type -> GetMyUserRequest
 	3,  // 12: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
 	5,  // 13: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
-	7,  // 14: FrontendService.GetMyUserAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
+	7,  // 14: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
 	14, // 15: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
 	2,  // 16: FrontendService.GetMyUser:output_type -> GetMyUserResponse
 	4,  // 17: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
 	6,  // 18: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
-	8,  // 19: FrontendService.GetMyUserAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
+	8,  // 19: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
 	15, // [15:20] is the sub-list for method output_type
 	10, // [10:15] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

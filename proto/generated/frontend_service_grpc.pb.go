@@ -20,11 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FrontendService_CheckUserExistsOrCreate_FullMethodName = "/FrontendService/CheckUserExistsOrCreate"
-	FrontendService_GetMyUser_FullMethodName               = "/FrontendService/GetMyUser"
-	FrontendService_GetMyUserLinkedAccounts_FullMethodName = "/FrontendService/GetMyUserLinkedAccounts"
-	FrontendService_GetMyUserActiveAccount_FullMethodName  = "/FrontendService/GetMyUserActiveAccount"
-	FrontendService_GetMyUserAccountAgents_FullMethodName  = "/FrontendService/GetMyUserAccountAgents"
+	FrontendService_CheckUserExistsOrCreate_FullMethodName      = "/FrontendService/CheckUserExistsOrCreate"
+	FrontendService_GetMyUser_FullMethodName                    = "/FrontendService/GetMyUser"
+	FrontendService_GetMyUserLinkedAccounts_FullMethodName      = "/FrontendService/GetMyUserLinkedAccounts"
+	FrontendService_GetMyUserActiveAccount_FullMethodName       = "/FrontendService/GetMyUserActiveAccount"
+	FrontendService_GetMyUserActiveAccountAgents_FullMethodName = "/FrontendService/GetMyUserActiveAccountAgents"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -35,7 +35,7 @@ type FrontendServiceClient interface {
 	GetMyUser(ctx context.Context, in *GetMyUserRequest, opts ...grpc.CallOption) (*GetMyUserResponse, error)
 	GetMyUserLinkedAccounts(ctx context.Context, in *GetMyUserLinkedAccountsRequest, opts ...grpc.CallOption) (*GetMyUserLinkedAccountsResponse, error)
 	GetMyUserActiveAccount(ctx context.Context, in *GetMyUserActiveAccountRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountResponse, error)
-	GetMyUserAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error)
+	GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error)
 }
 
 type frontendServiceClient struct {
@@ -86,10 +86,10 @@ func (c *frontendServiceClient) GetMyUserActiveAccount(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error) {
+func (c *frontendServiceClient) GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMyUserActiveAccountAgentsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserAccountAgents_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccountAgents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +104,7 @@ type FrontendServiceServer interface {
 	GetMyUser(context.Context, *GetMyUserRequest) (*GetMyUserResponse, error)
 	GetMyUserLinkedAccounts(context.Context, *GetMyUserLinkedAccountsRequest) (*GetMyUserLinkedAccountsResponse, error)
 	GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error)
-	GetMyUserAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error)
+	GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -127,8 +127,8 @@ func (UnimplementedFrontendServiceServer) GetMyUserLinkedAccounts(context.Contex
 func (UnimplementedFrontendServiceServer) GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccount not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserAccountAgents not implemented")
+func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountAgents not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -223,20 +223,20 @@ func _FrontendService_GetMyUserActiveAccount_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserAccountAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FrontendService_GetMyUserActiveAccountAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMyUserActiveAccountAgentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserAccountAgents(ctx, in)
+		return srv.(FrontendServiceServer).GetMyUserActiveAccountAgents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserAccountAgents_FullMethodName,
+		FullMethod: FrontendService_GetMyUserActiveAccountAgents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserAccountAgents(ctx, req.(*GetMyUserActiveAccountAgentsRequest))
+		return srv.(FrontendServiceServer).GetMyUserActiveAccountAgents(ctx, req.(*GetMyUserActiveAccountAgentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -265,8 +265,8 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_GetMyUserActiveAccount_Handler,
 		},
 		{
-			MethodName: "GetMyUserAccountAgents",
-			Handler:    _FrontendService_GetMyUserAccountAgents_Handler,
+			MethodName: "GetMyUserActiveAccountAgents",
+			Handler:    _FrontendService_GetMyUserActiveAccountAgents_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

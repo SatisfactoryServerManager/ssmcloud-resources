@@ -10,7 +10,7 @@ service FrontendService {
     rpc GetMyUser(GetMyUserRequest) returns (GetMyUserResponse);
     rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
     rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
-    rpc GetMyUserAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
+    rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
 }
 
 message CheckUserExistsOrCreateRequest {

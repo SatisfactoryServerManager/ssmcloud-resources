@@ -2,6 +2,7 @@ syntax = "proto3";
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
 
 import "models/empty.proto";
+import "models/mod.proto";
 
 service AgentModConfigService {
     rpc GetModConfig(SSMEmpty) returns (AgentModConfigResponse);
@@ -14,36 +15,4 @@ message AgentModConfigRequest {
 
 message AgentModConfigResponse {
     ModConfig config = 1;
-}
-
-message ModConfig {
-    repeated SelectedMod selectedMods = 1;
-}
-
-message SelectedMod {
-    Mod mod = 1;
-    string desiredVersion = 2;
-    string installedVersion = 3;
-    bool installed = 4;
-    bool needsUpdate = 5;
-    string config = 6;
-}
-
-message Mod {
-    string _id = 1;
-    string modId = 2;
-    string mod_reference = 3;
-    repeated ModVersion versions = 4;
-}
-
-message ModVersion {
-    string version = 1;
-    string link = 2;
-    repeated ModVersionTarget targets = 3;
-}
-
-message ModVersionTarget{
-    string targetName = 1;
-    string link = 2;
-
 }

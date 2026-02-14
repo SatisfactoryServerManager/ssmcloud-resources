@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message Agent{
+    string id = 1;
+    string agent_name = 2;
+    string api_key = 3;
+
+    AgentStatus status = 4;
+    AgentConfig config = 5;
+    AgentServerConfig server_config = 6;
+
+
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message AgentStatus{
+    bool online = 1;
+    bool installed = 2;
+    bool running = 3;
+    float cpu = 4;
+    float ram = 5;
+    int64 installed_sf_version = 6;
+    int64 latest_sf_version = 7;
+    google.protobuf.Timestamp last_comm_date = 8;
+}
+
+message AgentConfig {
+    string version = 1;
+    int32 port = 2;
+    int64 memory = 3;
+    string ip_address = 4;
+    int32 backup_keep_amount = 5;
+    int32 backup_interval= 6;
+}
+
+message AgentServerConfig {
+    google.protobuf.BoolValue update_on_start = 1; 
+    string branch = 2;
+    int32 worker_threads = 3;
+
+    google.protobuf.BoolValue auto_restart = 4; 
+
+    int32 max_players = 5;
+
+    google.protobuf.BoolValue auto_pause = 6;
+    google.protobuf.BoolValue auto_save_on_disconnect = 7;
+    int32 auto_save_interval = 8;
+    google.protobuf.BoolValue disable_seasonal_events = 9;
+}

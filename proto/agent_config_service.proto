@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
-import "empty.proto";
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
+import "models/empty.proto";
 
 service AgentConfigService{
-  rpc GetAgentConfig (Empty) returns (AgentConfigResponse);
-  rpc UpdateAgentConfigVersionIp (UpdateAgentConfigRequest) returns (Empty);
+  rpc GetAgentConfig (SSMEmpty) returns (AgentConfigResponse);
+  rpc UpdateAgentConfigVersionIp (UpdateAgentConfigRequest) returns (SSMEmpty);
 }
 
 message AgentConfig {

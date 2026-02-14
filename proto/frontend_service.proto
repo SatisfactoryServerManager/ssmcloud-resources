@@ -1,14 +1,16 @@
 syntax = "proto3";
 
-option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
-import "empty.proto";
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
+import "models/empty.proto";
+import "models/agent.proto";
 import "google/protobuf/timestamp.proto";
 
 service FrontendService {
-    rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (Empty);
+    rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (SSMEmpty);
     rpc GetMyUser(GetMyUserRequest) returns (GetMyUserResponse);
     rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
-    rpc GetMyUserActiveAccount(GetMyUserActiveAccountsRequest) returns (GetMyUserActiveAccountsResponse);
+    rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
+    rpc GetMyUserAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -30,15 +32,23 @@ message GetMyUserLinkedAccountsRequest {
 }
 
 message GetMyUserLinkedAccountsResponse {
-    repeated Account linkedAccounts = 1;
+    repeated Account linked_accounts = 1;
 }
 
-message GetMyUserActiveAccountsRequest {
+message GetMyUserActiveAccountRequest {
     string eid = 1;
 }
 
-message GetMyUserActiveAccountsResponse {
-    Account activeAccount = 1;
+message GetMyUserActiveAccountResponse {
+    Account active_account = 1;
+}
+
+message GetMyUserActiveAccountAgentsRequest {
+    string eid = 1;
+}
+
+message GetMyUserActiveAccountAgentsResponse {
+    repeated Agent agents = 1;
 }
 
 message User {

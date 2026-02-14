@@ -1,4 +1,0 @@
-syntax = "proto3";
-option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
-
-message Empty {}

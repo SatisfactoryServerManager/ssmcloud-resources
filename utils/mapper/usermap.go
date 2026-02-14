@@ -2,7 +2,7 @@ package mapper
 
 import (
 	models "github.com/SatisfactoryServerManager/ssmcloud-resources/models/v2"
-	pb "github.com/SatisfactoryServerManager/ssmcloud-resources/proto"
+	pb "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -18,7 +18,7 @@ func MapUserSchemaToProto(u *models.UserSchema) *pb.User {
 		Username:        u.Username,
 		ProfileImageUrl: u.ProfileImageStr,
 
-		ApiKeys:        mapUserAPIKeys(u.APIKeys),
+		ApiKeys: mapUserAPIKeys(u.APIKeys),
 
 		LastActive: timestamppb.New(u.LastActive),
 		CreatedAt:  timestamppb.New(u.CreatedAt),

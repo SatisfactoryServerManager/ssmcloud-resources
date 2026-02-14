@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto";
-import "empty.proto";
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
+import "models/empty.proto";
 
 service AgentTaskService {
-    rpc GetAgentTasks(Empty) returns (AgentTaskList);
-    rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (Empty);
-    rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (Empty);
+    rpc GetAgentTasks(SSMEmpty) returns (AgentTaskList);
+    rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (SSMEmpty);
+    rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (SSMEmpty);
 }
 
 message AgentTask {

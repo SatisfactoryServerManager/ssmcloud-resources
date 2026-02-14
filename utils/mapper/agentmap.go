@@ -1,7 +1,6 @@
 package mapper
 
 import (
-	models "github.com/SatisfactoryServerManager/ssmcloud-resources/models"
 	v2 "github.com/SatisfactoryServerManager/ssmcloud-resources/models/v2"
 	pb "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -23,6 +22,7 @@ func MapAgentToProto(agent *v2.AgentSchema) *pb.Agent {
 	agentProto.Config = MapAgentConfigToProto(&agent.Config)
 	agentProto.ServerConfig = MapAgentServerConfigToProto(&agent.ServerConfig)
 	agentProto.ModConfig = MapAgentModConfigToProto(&agent.ModConfig)
+	agentProto.Logs = MapAgentLogsToProto(agent.Logs)
 
 	return agentProto
 }
@@ -89,39 +89,25 @@ func MapSelectedModToProto(selectedMod *v2.AgentModConfigSelectedModSchema) *pb.
 	}
 }
 
-func MapModToProto(mod *models.ModSchema) *pb.Mod {
+func MapAgentLogsToProto(logs []v2.AgentLogSchema) []*pb.AgentLog {
+	pbLogs := make([]*pb.AgentLog, 0, len(logs))
 
-	pbModVersions := make([]*pb.ModVersion, 0, len(mod.Versions))
-
-	for i := range mod.Versions {
-		pbModVersions = append(pbModVersions, MapModVersionToProto(&mod.Versions[i]))
+	for i := range logs {
+		pbLogs = append(pbLogs, MapAgentLogToProto(logs[i]))
 	}
 
-	return &pb.Mod{
-		Id:           mod.ID.Hex(),
-		ModId:        mod.ModID,
-		ModReference: mod.ModReference,
-		Versions:     pbModVersions,
-	}
+	return pbLogs
 }
 
-func MapModVersionToProto(modVersion *models.ModVersion) *pb.ModVersion {
-
-	pbModVersionTargets := make([]*pb.ModVersionTarget, 0, len(modVersion.Targets))
-
-	for i := range modVersion.Targets {
-		pbModVersionTargets = append(pbModVersionTargets, MapModVersionTargetToProto(&modVersion.Targets[i]))
-	}
-
-	return &pb.ModVersion{
-		Version: modVersion.Version,
-		Targets: pbModVersionTargets,
-	}
-}
-
-func MapModVersionTargetToProto(modVersionTarget *models.ModVersionTarget) *pb.ModVersionTarget {
-	return &pb.ModVersionTarget{
-		TargetName: modVersionTarget.TargetName,
-		Link:       modVersionTarget.Link,
+func MapAgentLogToProto(log v2.AgentLogSchema) *pb.AgentLog {
+	return &pb.AgentLog{
+		Id:            log.ID.Hex(),
+		FileName:      log.FileName,
+		Type:          log.Type,
+		LogLines:      log.LogLines,
+		FileUrl:       log.FileURL,
+		PendingUpload: log.PendingUpload,
+		CreatedAt:     timestamppb.New(log.CreatedAt),
+		UpdatedAt:     timestamppb.New(log.UpdatedAt),
 	}
 }

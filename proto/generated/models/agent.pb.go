@@ -32,6 +32,7 @@ type Agent struct {
 	Config             *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	ServerConfig       *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
 	ModConfig          *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
+	Logs               []*AgentLog            `protobuf:"bytes,11,rep,name=logs,proto3" json:"logs,omitempty"`
 	LatestAgentVersion string                 `protobuf:"bytes,10,opt,name=latest_agent_version,json=latestAgentVersion,proto3" json:"latest_agent_version,omitempty"`
 	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -114,6 +115,13 @@ func (x *Agent) GetServerConfig() *AgentServerConfig {
 func (x *Agent) GetModConfig() *ModConfig {
 	if x != nil {
 		return x.ModConfig
+	}
+	return nil
+}
+
+func (x *Agent) GetLogs() []*AgentLog {
+	if x != nil {
+		return x.Logs
 	}
 	return nil
 }
@@ -431,11 +439,111 @@ func (x *AgentServerConfig) GetDisableSeasonalEvents() *wrapperspb.BoolValue {
 	return nil
 }
 
+type AgentLog struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	FileName      string                 `protobuf:"bytes,2,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	LogLines      []string               `protobuf:"bytes,4,rep,name=log_lines,json=logLines,proto3" json:"log_lines,omitempty"`
+	FileUrl       string                 `protobuf:"bytes,5,opt,name=file_url,json=fileUrl,proto3" json:"file_url,omitempty"`
+	PendingUpload bool                   `protobuf:"varint,6,opt,name=pending_upload,json=pendingUpload,proto3" json:"pending_upload,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AgentLog) Reset() {
+	*x = AgentLog{}
+	mi := &file_models_agent_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentLog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentLog) ProtoMessage() {}
+
+func (x *AgentLog) ProtoReflect() protoreflect.Message {
+	mi := &file_models_agent_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentLog.ProtoReflect.Descriptor instead.
+func (*AgentLog) Descriptor() ([]byte, []int) {
+	return file_models_agent_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AgentLog) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AgentLog) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+func (x *AgentLog) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *AgentLog) GetLogLines() []string {
+	if x != nil {
+		return x.LogLines
+	}
+	return nil
+}
+
+func (x *AgentLog) GetFileUrl() string {
+	if x != nil {
+		return x.FileUrl
+	}
+	return ""
+}
+
+func (x *AgentLog) GetPendingUpload() bool {
+	if x != nil {
+		return x.PendingUpload
+	}
+	return false
+}
+
+func (x *AgentLog) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AgentLog) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
 var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xa7\x03\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xc6\x03\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -446,7 +554,8 @@ const file_models_agent_proto_rawDesc = "" +
 	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x12)\n" +
 	"\n" +
 	"mod_config\x18\a \x01(\v2\n" +
-	".ModConfigR\tmodConfig\x120\n" +
+	".ModConfigR\tmodConfig\x12\x1d\n" +
+	"\x04logs\x18\v \x03(\v2\t.AgentLogR\x04logs\x120\n" +
 	"\x14latest_agent_version\x18\n" +
 	" \x01(\tR\x12latestAgentVersion\x129\n" +
 	"\n" +
@@ -481,7 +590,18 @@ const file_models_agent_proto_rawDesc = "" +
 	"auto_pause\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\tautoPause\x12Q\n" +
 	"\x17auto_save_on_disconnect\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\x14autoSaveOnDisconnect\x12,\n" +
 	"\x12auto_save_interval\x18\b \x01(\x05R\x10autoSaveInterval\x12R\n" +
-	"\x17disable_seasonal_events\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x15disableSeasonalEventsBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	"\x17disable_seasonal_events\x18\t \x01(\v2\x1a.google.protobuf.BoolValueR\x15disableSeasonalEvents\"\xa0\x02\n" +
+	"\bAgentLog\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\tfile_name\x18\x02 \x01(\tR\bfileName\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1b\n" +
+	"\tlog_lines\x18\x04 \x03(\tR\blogLines\x12\x19\n" +
+	"\bfile_url\x18\x05 \x01(\tR\afileUrl\x12%\n" +
+	"\x0epending_upload\x18\x06 \x01(\bR\rpendingUpload\x129\n" +
+	"\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_agent_proto_rawDescOnce sync.Once
@@ -495,34 +615,38 @@ func file_models_agent_proto_rawDescGZIP() []byte {
 	return file_models_agent_proto_rawDescData
 }
 
-var file_models_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_models_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_models_agent_proto_goTypes = []any{
 	(*Agent)(nil),                 // 0: Agent
 	(*AgentStatus)(nil),           // 1: AgentStatus
 	(*AgentConfig)(nil),           // 2: AgentConfig
 	(*AgentServerConfig)(nil),     // 3: AgentServerConfig
-	(*ModConfig)(nil),             // 4: ModConfig
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 6: google.protobuf.BoolValue
+	(*AgentLog)(nil),              // 4: AgentLog
+	(*ModConfig)(nil),             // 5: ModConfig
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 7: google.protobuf.BoolValue
 }
 var file_models_agent_proto_depIdxs = []int32{
 	1,  // 0: Agent.status:type_name -> AgentStatus
 	2,  // 1: Agent.config:type_name -> AgentConfig
 	3,  // 2: Agent.server_config:type_name -> AgentServerConfig
-	4,  // 3: Agent.mod_config:type_name -> ModConfig
-	5,  // 4: Agent.created_at:type_name -> google.protobuf.Timestamp
-	5,  // 5: Agent.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 6: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
-	6,  // 7: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
-	6,  // 8: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
-	6,  // 9: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
-	6,  // 10: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
-	6,  // 11: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	5,  // 3: Agent.mod_config:type_name -> ModConfig
+	4,  // 4: Agent.logs:type_name -> AgentLog
+	6,  // 5: Agent.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 6: Agent.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 7: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
+	7,  // 8: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
+	7,  // 9: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
+	7,  // 10: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
+	7,  // 11: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
+	7,  // 12: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
+	6,  // 13: AgentLog.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 14: AgentLog.updated_at:type_name -> google.protobuf.Timestamp
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_models_agent_proto_init() }
@@ -537,7 +661,7 @@ func file_models_agent_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_agent_proto_rawDesc), len(file_models_agent_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

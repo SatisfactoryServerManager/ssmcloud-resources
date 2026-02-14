@@ -19,7 +19,7 @@ message SelectedMod {
 }
 
 message Mod {
-    string _id = 1;
+    string id = 1;
     string modId = 2;
     string mod_reference = 3;
     repeated ModVersion versions = 4;

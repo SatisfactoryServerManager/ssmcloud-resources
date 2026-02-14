@@ -31,8 +31,9 @@ type Agent struct {
 	Status        *AgentStatus           `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Config        *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	ServerConfig  *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ModConfig     *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -105,6 +106,13 @@ func (x *Agent) GetConfig() *AgentConfig {
 func (x *Agent) GetServerConfig() *AgentServerConfig {
 	if x != nil {
 		return x.ServerConfig
+	}
+	return nil
+}
+
+func (x *Agent) GetModConfig() *ModConfig {
+	if x != nil {
+		return x.ModConfig
 	}
 	return nil
 }
@@ -419,7 +427,7 @@ var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xca\x02\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xf5\x02\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -427,11 +435,14 @@ const file_models_agent_proto_rawDesc = "" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12$\n" +
 	"\x06status\x18\x04 \x01(\v2\f.AgentStatusR\x06status\x12$\n" +
 	"\x06config\x18\x05 \x01(\v2\f.AgentConfigR\x06config\x127\n" +
-	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x129\n" +
+	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x12)\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"mod_config\x18\a \x01(\v2\n" +
+	".ModConfigR\tmodConfig\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa1\x02\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa1\x02\n" +
 	"\vAgentStatus\x12\x16\n" +
 	"\x06online\x18\x01 \x01(\bR\x06online\x12\x1c\n" +
 	"\tinstalled\x18\x02 \x01(\bR\tinstalled\x12\x18\n" +
@@ -480,26 +491,28 @@ var file_models_agent_proto_goTypes = []any{
 	(*AgentStatus)(nil),           // 1: AgentStatus
 	(*AgentConfig)(nil),           // 2: AgentConfig
 	(*AgentServerConfig)(nil),     // 3: AgentServerConfig
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 5: google.protobuf.BoolValue
+	(*ModConfig)(nil),             // 4: ModConfig
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 6: google.protobuf.BoolValue
 }
 var file_models_agent_proto_depIdxs = []int32{
 	1,  // 0: Agent.status:type_name -> AgentStatus
 	2,  // 1: Agent.config:type_name -> AgentConfig
 	3,  // 2: Agent.server_config:type_name -> AgentServerConfig
-	4,  // 3: Agent.created_at:type_name -> google.protobuf.Timestamp
-	4,  // 4: Agent.updated_at:type_name -> google.protobuf.Timestamp
-	4,  // 5: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
-	5,  // 6: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
-	5,  // 7: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
-	5,  // 8: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
-	5,  // 9: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
-	5,  // 10: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	4,  // 3: Agent.mod_config:type_name -> ModConfig
+	5,  // 4: Agent.created_at:type_name -> google.protobuf.Timestamp
+	5,  // 5: Agent.updated_at:type_name -> google.protobuf.Timestamp
+	5,  // 6: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
+	6,  // 7: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
+	6,  // 8: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
+	6,  // 9: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
+	6,  // 10: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
+	6,  // 11: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_models_agent_proto_init() }
@@ -507,6 +520,7 @@ func file_models_agent_proto_init() {
 	if File_models_agent_proto != nil {
 		return
 	}
+	file_models_mod_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

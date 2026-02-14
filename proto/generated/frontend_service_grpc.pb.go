@@ -26,7 +26,7 @@ const (
 	FrontendService_GetMyUserActiveAccount_FullMethodName            = "/FrontendService/GetMyUserActiveAccount"
 	FrontendService_GetMyUserActiveAccountAgents_FullMethodName      = "/FrontendService/GetMyUserActiveAccountAgents"
 	FrontendService_GetMyUserActiveAccountSingleAgent_FullMethodName = "/FrontendService/GetMyUserActiveAccountSingleAgent"
-	FrontendService_GetAgentLogs_FullMethodName                      = "/FrontendService/GetAgentLogs"
+	FrontendService_GetAgentLog_FullMethodName                       = "/FrontendService/GetAgentLog"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -39,7 +39,7 @@ type FrontendServiceClient interface {
 	GetMyUserActiveAccount(ctx context.Context, in *GetMyUserActiveAccountRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountResponse, error)
 	GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error)
 	GetMyUserActiveAccountSingleAgent(ctx context.Context, in *GetMyUserActiveAccountSingleAgentRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountSingleAgentResponse, error)
-	GetAgentLogs(ctx context.Context, in *GetAgentLogsRequest, opts ...grpc.CallOption) (*GetAgentLogsResponse, error)
+	GetAgentLog(ctx context.Context, in *GetAgentLogRequest, opts ...grpc.CallOption) (*GetAgentLogResponse, error)
 }
 
 type frontendServiceClient struct {
@@ -110,10 +110,10 @@ func (c *frontendServiceClient) GetMyUserActiveAccountSingleAgent(ctx context.Co
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetAgentLogs(ctx context.Context, in *GetAgentLogsRequest, opts ...grpc.CallOption) (*GetAgentLogsResponse, error) {
+func (c *frontendServiceClient) GetAgentLog(ctx context.Context, in *GetAgentLogRequest, opts ...grpc.CallOption) (*GetAgentLogResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAgentLogsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetAgentLogs_FullMethodName, in, out, cOpts...)
+	out := new(GetAgentLogResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentLog_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ type FrontendServiceServer interface {
 	GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error)
 	GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error)
 	GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error)
-	GetAgentLogs(context.Context, *GetAgentLogsRequest) (*GetAgentLogsResponse, error)
+	GetAgentLog(context.Context, *GetAgentLogRequest) (*GetAgentLogResponse, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -159,8 +159,8 @@ func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountAgents(context.C
 func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountSingleAgent not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetAgentLogs(context.Context, *GetAgentLogsRequest) (*GetAgentLogsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAgentLogs not implemented")
+func (UnimplementedFrontendServiceServer) GetAgentLog(context.Context, *GetAgentLogRequest) (*GetAgentLogResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentLog not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -291,20 +291,20 @@ func _FrontendService_GetMyUserActiveAccountSingleAgent_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetAgentLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAgentLogsRequest)
+func _FrontendService_GetAgentLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentLogRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetAgentLogs(ctx, in)
+		return srv.(FrontendServiceServer).GetAgentLog(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetAgentLogs_FullMethodName,
+		FullMethod: FrontendService_GetAgentLog_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetAgentLogs(ctx, req.(*GetAgentLogsRequest))
+		return srv.(FrontendServiceServer).GetAgentLog(ctx, req.(*GetAgentLogRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -341,8 +341,8 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_GetMyUserActiveAccountSingleAgent_Handler,
 		},
 		{
-			MethodName: "GetAgentLogs",
-			Handler:    _FrontendService_GetAgentLogs_Handler,
+			MethodName: "GetAgentLog",
+			Handler:    _FrontendService_GetAgentLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

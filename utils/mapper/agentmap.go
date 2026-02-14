@@ -10,9 +10,11 @@ import (
 
 func MapAgentToProto(agent *v2.AgentSchema) *pb.Agent {
 	agentProto := &pb.Agent{
-		Id:        agent.ID.Hex(),
-		AgentName: agent.AgentName,
-		ApiKey:    agent.APIKey,
+		Id:                 agent.ID.Hex(),
+		AgentName:          agent.AgentName,
+		ApiKey:             agent.APIKey,
+		LatestAgentVersion: agent.LatestAgentVersion,
+
 		CreatedAt: timestamppb.New(agent.CreatedAt),
 		UpdatedAt: timestamppb.New(agent.UpdatedAt),
 	}

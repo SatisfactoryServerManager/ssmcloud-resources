@@ -67,6 +67,7 @@ message GetAgentLogsRequest {
     string eid = 1;
     string agent_id = 2;
     string type = 3;
+    int32 last_index = 4;
 }
 
 message GetAgentLogsResponse {

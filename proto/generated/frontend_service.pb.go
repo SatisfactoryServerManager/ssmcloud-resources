@@ -536,6 +536,7 @@ type GetAgentLogsRequest struct {
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 	Type          string                 `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	LastIndex     int32                  `protobuf:"varint,4,opt,name=last_index,json=lastIndex,proto3" json:"last_index,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -589,6 +590,13 @@ func (x *GetAgentLogsRequest) GetType() string {
 		return x.Type
 	}
 	return ""
+}
+
+func (x *GetAgentLogsRequest) GetLastIndex() int32 {
+	if x != nil {
+		return x.LastIndex
+	}
+	return 0
 }
 
 type GetAgentLogsResponse struct {
@@ -900,11 +908,13 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\"I\n" +
 	")GetMyUserActiveAccountSingleAgentResponse\x12\x1c\n" +
-	"\x05agent\x18\x01 \x01(\v2\x06.AgentR\x05agent\"V\n" +
+	"\x05agent\x18\x01 \x01(\v2\x06.AgentR\x05agent\"u\n" +
 	"\x13GetAgentLogsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\tR\x04type\"5\n" +
+	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1d\n" +
+	"\n" +
+	"last_index\x18\x04 \x01(\x05R\tlastIndex\"5\n" +
 	"\x14GetAgentLogsResponse\x12\x1d\n" +
 	"\x04logs\x18\x01 \x03(\v2\t.AgentLogR\x04logs\"\xed\x02\n" +
 	"\x04User\x12\x0e\n" +

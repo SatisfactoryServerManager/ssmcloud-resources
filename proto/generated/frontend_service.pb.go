@@ -1070,6 +1070,214 @@ func (x *UninstallAgentModRequest) GetModReference() string {
 	return ""
 }
 
+type UpdateAgentSettingsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Settings      *ServerSettings        `protobuf:"bytes,3,opt,name=settings,proto3" json:"settings,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateAgentSettingsRequest) Reset() {
+	*x = UpdateAgentSettingsRequest{}
+	mi := &file_frontend_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateAgentSettingsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAgentSettingsRequest) ProtoMessage() {}
+
+func (x *UpdateAgentSettingsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAgentSettingsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAgentSettingsRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *UpdateAgentSettingsRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *UpdateAgentSettingsRequest) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+func (x *UpdateAgentSettingsRequest) GetSettings() *ServerSettings {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+type ServerSettings struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	ConfigSetting        string                 `protobuf:"bytes,1,opt,name=config_setting,json=configSetting,proto3" json:"config_setting,omitempty"`
+	UpdateOnStart        string                 `protobuf:"bytes,2,opt,name=update_on_start,json=updateOnStart,proto3" json:"update_on_start,omitempty"`
+	AutoRestart          string                 `protobuf:"bytes,3,opt,name=auto_restart,json=autoRestart,proto3" json:"auto_restart,omitempty"`
+	AutoPause            string                 `protobuf:"bytes,4,opt,name=auto_pause,json=autoPause,proto3" json:"auto_pause,omitempty"`
+	AutoSaveOnDisconnect string                 `protobuf:"bytes,5,opt,name=auto_save_on_disconnect,json=autoSaveOnDisconnect,proto3" json:"auto_save_on_disconnect,omitempty"`
+	AutoSaveInterval     int32                  `protobuf:"varint,6,opt,name=auto_save_interval,json=autoSaveInterval,proto3" json:"auto_save_interval,omitempty"`
+	SeasonalEvents       string                 `protobuf:"bytes,7,opt,name=seasonal_events,json=seasonalEvents,proto3" json:"seasonal_events,omitempty"`
+	MaxPlayers           int32                  `protobuf:"varint,8,opt,name=max_players,json=maxPlayers,proto3" json:"max_players,omitempty"`
+	WorkerThreads        int32                  `protobuf:"varint,9,opt,name=worker_threads,json=workerThreads,proto3" json:"worker_threads,omitempty"`
+	Branch               string                 `protobuf:"bytes,10,opt,name=branch,proto3" json:"branch,omitempty"`
+	BackupInterval       float32                `protobuf:"fixed32,11,opt,name=backup_interval,json=backupInterval,proto3" json:"backup_interval,omitempty"`
+	BackupKeep           int32                  `protobuf:"varint,12,opt,name=backup_keep,json=backupKeep,proto3" json:"backup_keep,omitempty"`
+	ModReference         string                 `protobuf:"bytes,13,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
+	ModConfig            string                 `protobuf:"bytes,14,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ServerSettings) Reset() {
+	*x = ServerSettings{}
+	mi := &file_frontend_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ServerSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ServerSettings) ProtoMessage() {}
+
+func (x *ServerSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ServerSettings.ProtoReflect.Descriptor instead.
+func (*ServerSettings) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ServerSettings) GetConfigSetting() string {
+	if x != nil {
+		return x.ConfigSetting
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetUpdateOnStart() string {
+	if x != nil {
+		return x.UpdateOnStart
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetAutoRestart() string {
+	if x != nil {
+		return x.AutoRestart
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetAutoPause() string {
+	if x != nil {
+		return x.AutoPause
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetAutoSaveOnDisconnect() string {
+	if x != nil {
+		return x.AutoSaveOnDisconnect
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetAutoSaveInterval() int32 {
+	if x != nil {
+		return x.AutoSaveInterval
+	}
+	return 0
+}
+
+func (x *ServerSettings) GetSeasonalEvents() string {
+	if x != nil {
+		return x.SeasonalEvents
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetMaxPlayers() int32 {
+	if x != nil {
+		return x.MaxPlayers
+	}
+	return 0
+}
+
+func (x *ServerSettings) GetWorkerThreads() int32 {
+	if x != nil {
+		return x.WorkerThreads
+	}
+	return 0
+}
+
+func (x *ServerSettings) GetBranch() string {
+	if x != nil {
+		return x.Branch
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetBackupInterval() float32 {
+	if x != nil {
+		return x.BackupInterval
+	}
+	return 0
+}
+
+func (x *ServerSettings) GetBackupKeep() int32 {
+	if x != nil {
+		return x.BackupKeep
+	}
+	return 0
+}
+
+func (x *ServerSettings) GetModReference() string {
+	if x != nil {
+		return x.ModReference
+	}
+	return ""
+}
+
+func (x *ServerSettings) GetModConfig() string {
+	if x != nil {
+		return x.ModConfig
+	}
+	return ""
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
@@ -1139,7 +1347,31 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x18UninstallAgentModRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12#\n" +
-	"\rmod_reference\x18\x03 \x01(\tR\fmodReference2\x8e\a\n" +
+	"\rmod_reference\x18\x03 \x01(\tR\fmodReference\"v\n" +
+	"\x1aUpdateAgentSettingsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12+\n" +
+	"\bsettings\x18\x03 \x01(\v2\x0f.ServerSettingsR\bsettings\"\x9d\x04\n" +
+	"\x0eServerSettings\x12%\n" +
+	"\x0econfig_setting\x18\x01 \x01(\tR\rconfigSetting\x12&\n" +
+	"\x0fupdate_on_start\x18\x02 \x01(\tR\rupdateOnStart\x12!\n" +
+	"\fauto_restart\x18\x03 \x01(\tR\vautoRestart\x12\x1d\n" +
+	"\n" +
+	"auto_pause\x18\x04 \x01(\tR\tautoPause\x125\n" +
+	"\x17auto_save_on_disconnect\x18\x05 \x01(\tR\x14autoSaveOnDisconnect\x12,\n" +
+	"\x12auto_save_interval\x18\x06 \x01(\x05R\x10autoSaveInterval\x12'\n" +
+	"\x0fseasonal_events\x18\a \x01(\tR\x0eseasonalEvents\x12\x1f\n" +
+	"\vmax_players\x18\b \x01(\x05R\n" +
+	"maxPlayers\x12%\n" +
+	"\x0eworker_threads\x18\t \x01(\x05R\rworkerThreads\x12\x16\n" +
+	"\x06branch\x18\n" +
+	" \x01(\tR\x06branch\x12'\n" +
+	"\x0fbackup_interval\x18\v \x01(\x02R\x0ebackupInterval\x12\x1f\n" +
+	"\vbackup_keep\x18\f \x01(\x05R\n" +
+	"backupKeep\x12#\n" +
+	"\rmod_reference\x18\r \x01(\tR\fmodReference\x12\x1d\n" +
+	"\n" +
+	"mod_config\x18\x0e \x01(\tR\tmodConfig2\xcd\a\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x122\n" +
 	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
@@ -1152,7 +1384,8 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\t.SSMEmpty\x12;\n" +
 	"\fGetAgentMods\x12\x14.GetAgentModsRequest\x1a\x15.GetAgentModsResponse\x125\n" +
 	"\x0fInstallAgentMod\x12\x17.InstallAgentModRequest\x1a\t.SSMEmpty\x129\n" +
-	"\x11UninstallAgentMod\x12\x19.UninstallAgentModRequest\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x11UninstallAgentMod\x12\x19.UninstallAgentModRequest\x1a\t.SSMEmpty\x12=\n" +
+	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -1166,7 +1399,7 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_frontend_service_proto_goTypes = []any{
 	(*CheckUserExistsOrCreateRequest)(nil),            // 0: CheckUserExistsOrCreateRequest
 	(*GetMyUserRequest)(nil),                          // 1: GetMyUserRequest
@@ -1188,54 +1421,59 @@ var file_frontend_service_proto_goTypes = []any{
 	(*GetAgentModsResponse)(nil),                      // 17: GetAgentModsResponse
 	(*InstallAgentModRequest)(nil),                    // 18: InstallAgentModRequest
 	(*UninstallAgentModRequest)(nil),                  // 19: UninstallAgentModRequest
-	(*models.User)(nil),                               // 20: User
-	(*models.Account)(nil),                            // 21: Account
-	(*models.Agent)(nil),                              // 22: Agent
-	(*models.AgentLog)(nil),                           // 23: AgentLog
-	(*models.AgentStat)(nil),                          // 24: AgentStat
-	(*models.Mod)(nil),                                // 25: Mod
-	(*models.ModConfig)(nil),                          // 26: ModConfig
-	(*models.SSMEmpty)(nil),                           // 27: SSMEmpty
+	(*UpdateAgentSettingsRequest)(nil),                // 20: UpdateAgentSettingsRequest
+	(*ServerSettings)(nil),                            // 21: ServerSettings
+	(*models.User)(nil),                               // 22: User
+	(*models.Account)(nil),                            // 23: Account
+	(*models.Agent)(nil),                              // 24: Agent
+	(*models.AgentLog)(nil),                           // 25: AgentLog
+	(*models.AgentStat)(nil),                          // 26: AgentStat
+	(*models.Mod)(nil),                                // 27: Mod
+	(*models.ModConfig)(nil),                          // 28: ModConfig
+	(*models.SSMEmpty)(nil),                           // 29: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	20, // 0: GetMyUserResponse.user:type_name -> User
-	21, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	21, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
-	22, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	22, // 4: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
-	23, // 5: GetAgentLogResponse.log:type_name -> AgentLog
-	24, // 6: GetAgentStatsResponse.stats:type_name -> AgentStat
-	25, // 7: GetAgentModsResponse.mods:type_name -> Mod
-	26, // 8: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
-	0,  // 9: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1,  // 10: FrontendService.GetMyUser:input_type -> GetMyUserRequest
-	3,  // 11: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
-	5,  // 12: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
-	7,  // 13: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
-	9,  // 14: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
-	11, // 15: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
-	13, // 16: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
-	15, // 17: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
-	16, // 18: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
-	18, // 19: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
-	19, // 20: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
-	27, // 21: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	2,  // 22: FrontendService.GetMyUser:output_type -> GetMyUserResponse
-	4,  // 23: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
-	6,  // 24: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
-	8,  // 25: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
-	10, // 26: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
-	12, // 27: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
-	14, // 28: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
-	27, // 29: FrontendService.CreateAgentTask:output_type -> SSMEmpty
-	17, // 30: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
-	27, // 31: FrontendService.InstallAgentMod:output_type -> SSMEmpty
-	27, // 32: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
-	21, // [21:33] is the sub-list for method output_type
-	9,  // [9:21] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	22, // 0: GetMyUserResponse.user:type_name -> User
+	23, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	23, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
+	24, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	24, // 4: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
+	25, // 5: GetAgentLogResponse.log:type_name -> AgentLog
+	26, // 6: GetAgentStatsResponse.stats:type_name -> AgentStat
+	27, // 7: GetAgentModsResponse.mods:type_name -> Mod
+	28, // 8: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
+	21, // 9: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
+	0,  // 10: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1,  // 11: FrontendService.GetMyUser:input_type -> GetMyUserRequest
+	3,  // 12: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
+	5,  // 13: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
+	7,  // 14: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
+	9,  // 15: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
+	11, // 16: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
+	13, // 17: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
+	15, // 18: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
+	16, // 19: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
+	18, // 20: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
+	19, // 21: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
+	20, // 22: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
+	29, // 23: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	2,  // 24: FrontendService.GetMyUser:output_type -> GetMyUserResponse
+	4,  // 25: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
+	6,  // 26: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
+	8,  // 27: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
+	10, // 28: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
+	12, // 29: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
+	14, // 30: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
+	29, // 31: FrontendService.CreateAgentTask:output_type -> SSMEmpty
+	17, // 32: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
+	29, // 33: FrontendService.InstallAgentMod:output_type -> SSMEmpty
+	29, // 34: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
+	29, // 35: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
+	23, // [23:36] is the sub-list for method output_type
+	10, // [10:23] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -1249,7 +1487,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

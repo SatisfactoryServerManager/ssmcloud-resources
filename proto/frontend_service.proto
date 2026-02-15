@@ -23,6 +23,9 @@ service FrontendService {
     rpc GetAgentMods(GetAgentModsRequest) returns (GetAgentModsResponse);
     rpc InstallAgentMod(InstallAgentModRequest) returns (SSMEmpty);
     rpc UninstallAgentMod(UninstallAgentModRequest) returns (SSMEmpty);
+
+
+    rpc UpdateAgentSettings(UpdateAgentSettingsRequest) returns (SSMEmpty);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -125,4 +128,27 @@ message UninstallAgentModRequest {
     string eid = 1;
     string agent_id = 2;
     string mod_reference = 3;
+}
+
+message UpdateAgentSettingsRequest{
+    string eid = 1;
+    string agent_id = 2;
+    ServerSettings settings = 3;
+}
+
+message ServerSettings {
+    string config_setting = 1;
+    string update_on_start = 2;
+    string auto_restart = 3;
+    string auto_pause = 4;
+    string auto_save_on_disconnect = 5;
+    int32 auto_save_interval = 6;
+    string seasonal_events = 7;
+    int32 max_players = 8;
+    int32 worker_threads = 9;
+    string branch = 10;
+    float backup_interval = 11;
+    int32 backup_keep = 12;
+    string mod_reference = 13;
+    string mod_config = 14;
 }

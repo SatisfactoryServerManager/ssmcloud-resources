@@ -32,6 +32,7 @@ const (
 	FrontendService_GetAgentMods_FullMethodName                      = "/FrontendService/GetAgentMods"
 	FrontendService_InstallAgentMod_FullMethodName                   = "/FrontendService/InstallAgentMod"
 	FrontendService_UninstallAgentMod_FullMethodName                 = "/FrontendService/UninstallAgentMod"
+	FrontendService_UpdateAgentSettings_FullMethodName               = "/FrontendService/UpdateAgentSettings"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -50,6 +51,7 @@ type FrontendServiceClient interface {
 	GetAgentMods(ctx context.Context, in *GetAgentModsRequest, opts ...grpc.CallOption) (*GetAgentModsResponse, error)
 	InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 }
 
 type frontendServiceClient struct {
@@ -180,6 +182,16 @@ func (c *frontendServiceClient) UninstallAgentMod(ctx context.Context, in *Unins
 	return out, nil
 }
 
+func (c *frontendServiceClient) UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_UpdateAgentSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
@@ -196,6 +208,7 @@ type FrontendServiceServer interface {
 	GetAgentMods(context.Context, *GetAgentModsRequest) (*GetAgentModsResponse, error)
 	InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error)
 	UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error)
+	UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -241,6 +254,9 @@ func (UnimplementedFrontendServiceServer) InstallAgentMod(context.Context, *Inst
 }
 func (UnimplementedFrontendServiceServer) UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UninstallAgentMod not implemented")
+}
+func (UnimplementedFrontendServiceServer) UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAgentSettings not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -479,6 +495,24 @@ func _FrontendService_UninstallAgentMod_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_UpdateAgentSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAgentSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).UpdateAgentSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_UpdateAgentSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).UpdateAgentSettings(ctx, req.(*UpdateAgentSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -533,6 +567,10 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UninstallAgentMod",
 			Handler:    _FrontendService_UninstallAgentMod_Handler,
+		},
+		{
+			MethodName: "UpdateAgentSettings",
+			Handler:    _FrontendService_UpdateAgentSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

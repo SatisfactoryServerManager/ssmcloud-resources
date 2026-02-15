@@ -802,6 +802,10 @@ type GetAgentModsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	Sort          string                 `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
+	Direction     string                 `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
+	Search        string                 `protobuf:"bytes,6,opt,name=search,proto3" json:"search,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -846,6 +850,34 @@ func (x *GetAgentModsRequest) GetEid() string {
 func (x *GetAgentModsRequest) GetAgentId() string {
 	if x != nil {
 		return x.AgentId
+	}
+	return ""
+}
+
+func (x *GetAgentModsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetAgentModsRequest) GetSort() string {
+	if x != nil {
+		return x.Sort
+	}
+	return ""
+}
+
+func (x *GetAgentModsRequest) GetDirection() string {
+	if x != nil {
+		return x.Direction
+	}
+	return ""
+}
+
+func (x *GetAgentModsRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
 	}
 	return ""
 }
@@ -1069,10 +1101,14 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x16CreateAgentTaskRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\"B\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"\xa0\x01\n" +
 	"\x13GetAgentModsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
-	"\bagent_id\x18\x02 \x01(\tR\aagentId\"f\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x12\n" +
+	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04sort\x18\x04 \x01(\tR\x04sort\x12\x1c\n" +
+	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x16\n" +
+	"\x06search\x18\x06 \x01(\tR\x06search\"f\n" +
 	"\x14GetAgentModsResponse\x12\x18\n" +
 	"\x04mods\x18\x01 \x03(\v2\x04.ModR\x04mods\x124\n" +
 	"\x10agent_mod_config\x18\x02 \x01(\v2\n" +

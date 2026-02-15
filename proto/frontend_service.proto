@@ -102,6 +102,10 @@ message CreateAgentTaskRequest{
 message GetAgentModsRequest {
     string eid = 1;
     string agent_id = 2;
+    int32 page = 3;
+    string sort = 4;
+    string direction = 5;
+    string search = 6;
 }
 
 message GetAgentModsResponse {

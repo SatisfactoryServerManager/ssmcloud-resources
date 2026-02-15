@@ -525,6 +525,7 @@ func (x *GetMyUserActiveAccountUsersResponse) GetUsers() []*models.User {
 type GetMyUserActiveAccountAuditsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -562,6 +563,13 @@ func (*GetMyUserActiveAccountAuditsRequest) Descriptor() ([]byte, []int) {
 func (x *GetMyUserActiveAccountAuditsRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
+	}
+	return ""
+}
+
+func (x *GetMyUserActiveAccountAuditsRequest) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -1676,9 +1684,10 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\"GetMyUserActiveAccountUsersRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\"B\n" +
 	"#GetMyUserActiveAccountUsersResponse\x12\x1b\n" +
-	"\x05users\x18\x01 \x03(\v2\x05.UserR\x05users\"7\n" +
+	"\x05users\x18\x01 \x03(\v2\x05.UserR\x05users\"K\n" +
 	"#GetMyUserActiveAccountAuditsRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\"M\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\"M\n" +
 	"$GetMyUserActiveAccountAuditsResponse\x12%\n" +
 	"\x06audits\x18\x01 \x03(\v2\r.AccountAuditR\x06audits\"W\n" +
 	"(GetMyUserActiveAccountSingleAgentRequest\x12\x10\n" +
@@ -1766,10 +1775,10 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
 	"\x17GetMyUserLinkedAccounts\x12\x1f.GetMyUserLinkedAccountsRequest\x1a .GetMyUserLinkedAccountsResponse\x12Y\n" +
 	"\x16GetMyUserActiveAccount\x12\x1e.GetMyUserActiveAccountRequest\x1a\x1f.GetMyUserActiveAccountResponse\x12k\n" +
-	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponse\x12h\n" +
+	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponse\x12z\n" +
+	"!GetMyUserActiveAccountSingleAgent\x12).GetMyUserActiveAccountSingleAgentRequest\x1a*.GetMyUserActiveAccountSingleAgentResponse\x12h\n" +
 	"\x1bGetMyUserActiveAccountUsers\x12#.GetMyUserActiveAccountUsersRequest\x1a$.GetMyUserActiveAccountUsersResponse\x12k\n" +
-	"\x1cGetMyUserActiveAccountAudits\x12$.GetMyUserActiveAccountAuditsRequest\x1a%.GetMyUserActiveAccountAuditsResponse\x12z\n" +
-	"!GetMyUserActiveAccountSingleAgent\x12).GetMyUserActiveAccountSingleAgentRequest\x1a*.GetMyUserActiveAccountSingleAgentResponse\x128\n" +
+	"\x1cGetMyUserActiveAccountAudits\x12$.GetMyUserActiveAccountAuditsRequest\x1a%.GetMyUserActiveAccountAuditsResponse\x128\n" +
 	"\vGetAgentLog\x12\x13.GetAgentLogRequest\x1a\x14.GetAgentLogResponse\x12>\n" +
 	"\rGetAgentStats\x12\x15.GetAgentStatsRequest\x1a\x16.GetAgentStatsResponse\x125\n" +
 	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\t.SSMEmpty\x12;\n" +
@@ -1851,9 +1860,9 @@ var file_frontend_service_proto_depIdxs = []int32{
 	3,  // 15: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
 	5,  // 16: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
 	7,  // 17: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
-	9,  // 18: FrontendService.GetMyUserActiveAccountUsers:input_type -> GetMyUserActiveAccountUsersRequest
-	11, // 19: FrontendService.GetMyUserActiveAccountAudits:input_type -> GetMyUserActiveAccountAuditsRequest
-	13, // 20: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
+	13, // 18: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
+	9,  // 19: FrontendService.GetMyUserActiveAccountUsers:input_type -> GetMyUserActiveAccountUsersRequest
+	11, // 20: FrontendService.GetMyUserActiveAccountAudits:input_type -> GetMyUserActiveAccountAuditsRequest
 	15, // 21: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
 	17, // 22: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
 	19, // 23: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
@@ -1867,9 +1876,9 @@ var file_frontend_service_proto_depIdxs = []int32{
 	4,  // 31: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
 	6,  // 32: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
 	8,  // 33: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
-	10, // 34: FrontendService.GetMyUserActiveAccountUsers:output_type -> GetMyUserActiveAccountUsersResponse
-	12, // 35: FrontendService.GetMyUserActiveAccountAudits:output_type -> GetMyUserActiveAccountAuditsResponse
-	14, // 36: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
+	14, // 34: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
+	10, // 35: FrontendService.GetMyUserActiveAccountUsers:output_type -> GetMyUserActiveAccountUsersResponse
+	12, // 36: FrontendService.GetMyUserActiveAccountAudits:output_type -> GetMyUserActiveAccountAuditsResponse
 	16, // 37: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
 	18, // 38: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
 	37, // 39: FrontendService.CreateAgentTask:output_type -> SSMEmpty

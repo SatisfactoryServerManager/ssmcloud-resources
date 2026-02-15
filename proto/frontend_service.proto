@@ -13,7 +13,7 @@ service FrontendService {
     rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
     rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
     rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
-    
+
     rpc GetMyUserActiveAccountUsers(GetMyUserActiveAccountUsersRequest) returns (GetMyUserActiveAccountUsersResponse);
     rpc GetMyUserActiveAccountAudits(GetMyUserActiveAccountAuditsRequest) returns (GetMyUserActiveAccountAuditsResponse);
     
@@ -82,6 +82,7 @@ message GetMyUserActiveAccountUsersResponse {
 
 message GetMyUserActiveAccountAuditsRequest {
     string eid = 1;
+    string type = 2;
 }
 
 message GetMyUserActiveAccountAuditsResponse {

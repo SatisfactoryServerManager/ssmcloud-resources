@@ -886,6 +886,8 @@ type GetAgentModsResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Mods           []*models.Mod          `protobuf:"bytes,1,rep,name=mods,proto3" json:"mods,omitempty"`
 	AgentModConfig *models.ModConfig      `protobuf:"bytes,2,opt,name=agent_mod_config,json=agentModConfig,proto3" json:"agent_mod_config,omitempty"`
+	TotalMods      int32                  `protobuf:"varint,3,opt,name=total_mods,json=totalMods,proto3" json:"total_mods,omitempty"`
+	Pages          int32                  `protobuf:"varint,4,opt,name=pages,proto3" json:"pages,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -932,6 +934,20 @@ func (x *GetAgentModsResponse) GetAgentModConfig() *models.ModConfig {
 		return x.AgentModConfig
 	}
 	return nil
+}
+
+func (x *GetAgentModsResponse) GetTotalMods() int32 {
+	if x != nil {
+		return x.TotalMods
+	}
+	return 0
+}
+
+func (x *GetAgentModsResponse) GetPages() int32 {
+	if x != nil {
+		return x.Pages
+	}
+	return 0
 }
 
 type InstallAgentModRequest struct {
@@ -1108,11 +1124,14 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x12\n" +
 	"\x04sort\x18\x04 \x01(\tR\x04sort\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x16\n" +
-	"\x06search\x18\x06 \x01(\tR\x06search\"f\n" +
+	"\x06search\x18\x06 \x01(\tR\x06search\"\x9b\x01\n" +
 	"\x14GetAgentModsResponse\x12\x18\n" +
 	"\x04mods\x18\x01 \x03(\v2\x04.ModR\x04mods\x124\n" +
 	"\x10agent_mod_config\x18\x02 \x01(\v2\n" +
-	".ModConfigR\x0eagentModConfig\"j\n" +
+	".ModConfigR\x0eagentModConfig\x12\x1d\n" +
+	"\n" +
+	"total_mods\x18\x03 \x01(\x05R\ttotalMods\x12\x14\n" +
+	"\x05pages\x18\x04 \x01(\x05R\x05pages\"j\n" +
 	"\x16InstallAgentModRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12#\n" +

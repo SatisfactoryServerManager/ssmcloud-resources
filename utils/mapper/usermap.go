@@ -2,16 +2,16 @@ package mapper
 
 import (
 	models "github.com/SatisfactoryServerManager/ssmcloud-resources/models/v2"
-	pb "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated"
+	pbModels "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func MapUserSchemaToProto(u *models.UserSchema) *pb.User {
+func MapUserSchemaToProto(u *models.UserSchema) *pbModels.User {
 	if u == nil {
 		return nil
 	}
 
-	return &pb.User{
+	return &pbModels.User{
 		Id:              objectIDToString(u.ID),
 		ExternalId:      u.ExternalID,
 		Email:           u.Email,
@@ -26,15 +26,15 @@ func MapUserSchemaToProto(u *models.UserSchema) *pb.User {
 	}
 }
 
-func mapUserAPIKeys(keys []models.UserAPIKey) []*pb.UserAPIKey {
+func mapUserAPIKeys(keys []models.UserAPIKey) []*pbModels.UserAPIKey {
 	if len(keys) == 0 {
 		return nil
 	}
 
-	result := make([]*pb.UserAPIKey, 0, len(keys))
+	result := make([]*pbModels.UserAPIKey, 0, len(keys))
 
 	for _, k := range keys {
-		result = append(result, &pb.UserAPIKey{
+		result = append(result, &pbModels.UserAPIKey{
 			ShortKey: k.ShortKey,
 			Key:      k.Key, // Enable ONLY if required
 		})
@@ -43,12 +43,12 @@ func mapUserAPIKeys(keys []models.UserAPIKey) []*pb.UserAPIKey {
 	return result
 }
 
-func mapAccounts(accounts []models.AccountSchema) []*pb.Account {
+func mapAccounts(accounts []models.AccountSchema) []*pbModels.Account {
 	if len(accounts) == 0 {
 		return nil
 	}
 
-	result := make([]*pb.Account, 0, len(accounts))
+	result := make([]*pbModels.Account, 0, len(accounts))
 
 	for i := range accounts {
 		result = append(result, MapAccountSchemaToProto(&accounts[i]))
@@ -57,12 +57,12 @@ func mapAccounts(accounts []models.AccountSchema) []*pb.Account {
 	return result
 }
 
-func MapAccountSchemaToProto(a *models.AccountSchema) *pb.Account {
+func MapAccountSchemaToProto(a *models.AccountSchema) *pbModels.Account {
 	if a == nil {
 		return nil
 	}
 
-	return &pb.Account{
+	return &pbModels.Account{
 		Id:          objectIDToString(a.ID),
 		AccountName: a.AccountName,
 		// Map other required fields

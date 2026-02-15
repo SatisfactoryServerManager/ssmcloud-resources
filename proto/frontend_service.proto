@@ -111,6 +111,8 @@ message GetAgentModsRequest {
 message GetAgentModsResponse {
     repeated Mod mods = 1;
     ModConfig agent_mod_config = 2;
+    int32 total_mods = 3;
+    int32 pages = 4;
 }
 
 message InstallAgentModRequest {

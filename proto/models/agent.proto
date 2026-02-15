@@ -73,6 +73,15 @@ message AgentLog {
     google.protobuf.Timestamp updated_at = 8;
 }
 
+message AgentStat {
+    string id = 1;
+    string agent_id = 2;
+    google.protobuf.BoolValue running = 3;
+    float cpu = 4;
+    float mem = 5;
+    google.protobuf.Timestamp created_at = 6;
+}
+
 message Vector3F {
     float x = 1;
     float y = 2;

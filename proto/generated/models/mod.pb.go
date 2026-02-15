@@ -9,6 +9,7 @@ package models
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -152,9 +153,13 @@ func (x *SelectedMod) GetConfig() string {
 type Mod struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	ModId         string                 `protobuf:"bytes,2,opt,name=modId,proto3" json:"modId,omitempty"`
-	ModReference  string                 `protobuf:"bytes,3,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
-	Versions      []*ModVersion          `protobuf:"bytes,4,rep,name=versions,proto3" json:"versions,omitempty"`
+	ModId         string                 `protobuf:"bytes,2,opt,name=mod_id,json=modId,proto3" json:"mod_id,omitempty"`
+	ModName       string                 `protobuf:"bytes,3,opt,name=mod_name,json=modName,proto3" json:"mod_name,omitempty"`
+	ModReference  string                 `protobuf:"bytes,4,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
+	Hidden        bool                   `protobuf:"varint,5,opt,name=hidden,proto3" json:"hidden,omitempty"`
+	LogoUrl       string                 `protobuf:"bytes,6,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
+	Downloads     int32                  `protobuf:"varint,7,opt,name=downloads,proto3" json:"downloads,omitempty"`
+	Versions      []*ModVersion          `protobuf:"bytes,8,rep,name=versions,proto3" json:"versions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -203,11 +208,39 @@ func (x *Mod) GetModId() string {
 	return ""
 }
 
+func (x *Mod) GetModName() string {
+	if x != nil {
+		return x.ModName
+	}
+	return ""
+}
+
 func (x *Mod) GetModReference() string {
 	if x != nil {
 		return x.ModReference
 	}
 	return ""
+}
+
+func (x *Mod) GetHidden() bool {
+	if x != nil {
+		return x.Hidden
+	}
+	return false
+}
+
+func (x *Mod) GetLogoUrl() string {
+	if x != nil {
+		return x.LogoUrl
+	}
+	return ""
+}
+
+func (x *Mod) GetDownloads() int32 {
+	if x != nil {
+		return x.Downloads
+	}
+	return 0
 }
 
 func (x *Mod) GetVersions() []*ModVersion {
@@ -218,10 +251,12 @@ func (x *Mod) GetVersions() []*ModVersion {
 }
 
 type ModVersion struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	Link          string                 `protobuf:"bytes,2,opt,name=link,proto3" json:"link,omitempty"`
-	Targets       []*ModVersionTarget    `protobuf:"bytes,3,rep,name=targets,proto3" json:"targets,omitempty"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Version       string                  `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	Link          string                  `protobuf:"bytes,2,opt,name=link,proto3" json:"link,omitempty"`
+	Targets       []*ModVersionTarget     `protobuf:"bytes,3,rep,name=targets,proto3" json:"targets,omitempty"`
+	Dependencies  []*ModVersionDependency `protobuf:"bytes,4,rep,name=dependencies,proto3" json:"dependencies,omitempty"`
+	CreatedAt     *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -273,6 +308,20 @@ func (x *ModVersion) GetLink() string {
 func (x *ModVersion) GetTargets() []*ModVersionTarget {
 	if x != nil {
 		return x.Targets
+	}
+	return nil
+}
+
+func (x *ModVersion) GetDependencies() []*ModVersionDependency {
+	if x != nil {
+		return x.Dependencies
+	}
+	return nil
+}
+
+func (x *ModVersion) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
 	}
 	return nil
 }
@@ -329,11 +378,71 @@ func (x *ModVersionTarget) GetLink() string {
 	return ""
 }
 
+type ModVersionDependency struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ModReference  string                 `protobuf:"bytes,1,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
+	Condition     string                 `protobuf:"bytes,2,opt,name=condition,proto3" json:"condition,omitempty"`
+	Optional      bool                   `protobuf:"varint,3,opt,name=optional,proto3" json:"optional,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ModVersionDependency) Reset() {
+	*x = ModVersionDependency{}
+	mi := &file_models_mod_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ModVersionDependency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ModVersionDependency) ProtoMessage() {}
+
+func (x *ModVersionDependency) ProtoReflect() protoreflect.Message {
+	mi := &file_models_mod_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ModVersionDependency.ProtoReflect.Descriptor instead.
+func (*ModVersionDependency) Descriptor() ([]byte, []int) {
+	return file_models_mod_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ModVersionDependency) GetModReference() string {
+	if x != nil {
+		return x.ModReference
+	}
+	return ""
+}
+
+func (x *ModVersionDependency) GetCondition() string {
+	if x != nil {
+		return x.Condition
+	}
+	return ""
+}
+
+func (x *ModVersionDependency) GetOptional() bool {
+	if x != nil {
+		return x.Optional
+	}
+	return false
+}
+
 var File_models_mod_proto protoreflect.FileDescriptor
 
 const file_models_mod_proto_rawDesc = "" +
 	"\n" +
-	"\x10models/mod.proto\"=\n" +
+	"\x10models/mod.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"=\n" +
 	"\tModConfig\x120\n" +
 	"\fselectedMods\x18\x01 \x03(\v2\f.SelectedModR\fselectedMods\"\xd1\x01\n" +
 	"\vSelectedMod\x12\x16\n" +
@@ -342,22 +451,33 @@ const file_models_mod_proto_rawDesc = "" +
 	"\x10installedVersion\x18\x03 \x01(\tR\x10installedVersion\x12\x1c\n" +
 	"\tinstalled\x18\x04 \x01(\bR\tinstalled\x12 \n" +
 	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\x12\x16\n" +
-	"\x06config\x18\x06 \x01(\tR\x06config\"y\n" +
+	"\x06config\x18\x06 \x01(\tR\x06config\"\xe6\x01\n" +
 	"\x03Mod\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
-	"\x05modId\x18\x02 \x01(\tR\x05modId\x12#\n" +
-	"\rmod_reference\x18\x03 \x01(\tR\fmodReference\x12'\n" +
-	"\bversions\x18\x04 \x03(\v2\v.ModVersionR\bversions\"g\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
+	"\x06mod_id\x18\x02 \x01(\tR\x05modId\x12\x19\n" +
+	"\bmod_name\x18\x03 \x01(\tR\amodName\x12#\n" +
+	"\rmod_reference\x18\x04 \x01(\tR\fmodReference\x12\x16\n" +
+	"\x06hidden\x18\x05 \x01(\bR\x06hidden\x12\x19\n" +
+	"\blogo_url\x18\x06 \x01(\tR\alogoUrl\x12\x1c\n" +
+	"\tdownloads\x18\a \x01(\x05R\tdownloads\x12'\n" +
+	"\bversions\x18\b \x03(\v2\v.ModVersionR\bversions\"\xdd\x01\n" +
 	"\n" +
 	"ModVersion\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12\x12\n" +
 	"\x04link\x18\x02 \x01(\tR\x04link\x12+\n" +
-	"\atargets\x18\x03 \x03(\v2\x11.ModVersionTargetR\atargets\"F\n" +
+	"\atargets\x18\x03 \x03(\v2\x11.ModVersionTargetR\atargets\x129\n" +
+	"\fdependencies\x18\x04 \x03(\v2\x15.ModVersionDependencyR\fdependencies\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"F\n" +
 	"\x10ModVersionTarget\x12\x1e\n" +
 	"\n" +
 	"targetName\x18\x01 \x01(\tR\n" +
 	"targetName\x12\x12\n" +
-	"\x04link\x18\x02 \x01(\tR\x04linkBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	"\x04link\x18\x02 \x01(\tR\x04link\"u\n" +
+	"\x14ModVersionDependency\x12#\n" +
+	"\rmod_reference\x18\x01 \x01(\tR\fmodReference\x12\x1c\n" +
+	"\tcondition\x18\x02 \x01(\tR\tcondition\x12\x1a\n" +
+	"\boptional\x18\x03 \x01(\bR\boptionalBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_mod_proto_rawDescOnce sync.Once
@@ -371,24 +491,28 @@ func file_models_mod_proto_rawDescGZIP() []byte {
 	return file_models_mod_proto_rawDescData
 }
 
-var file_models_mod_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_models_mod_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_models_mod_proto_goTypes = []any{
-	(*ModConfig)(nil),        // 0: ModConfig
-	(*SelectedMod)(nil),      // 1: SelectedMod
-	(*Mod)(nil),              // 2: Mod
-	(*ModVersion)(nil),       // 3: ModVersion
-	(*ModVersionTarget)(nil), // 4: ModVersionTarget
+	(*ModConfig)(nil),             // 0: ModConfig
+	(*SelectedMod)(nil),           // 1: SelectedMod
+	(*Mod)(nil),                   // 2: Mod
+	(*ModVersion)(nil),            // 3: ModVersion
+	(*ModVersionTarget)(nil),      // 4: ModVersionTarget
+	(*ModVersionDependency)(nil),  // 5: ModVersionDependency
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
 }
 var file_models_mod_proto_depIdxs = []int32{
 	1, // 0: ModConfig.selectedMods:type_name -> SelectedMod
 	2, // 1: SelectedMod.mod:type_name -> Mod
 	3, // 2: Mod.versions:type_name -> ModVersion
 	4, // 3: ModVersion.targets:type_name -> ModVersionTarget
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 4: ModVersion.dependencies:type_name -> ModVersionDependency
+	6, // 5: ModVersion.created_at:type_name -> google.protobuf.Timestamp
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_models_mod_proto_init() }
@@ -402,7 +526,7 @@ func file_models_mod_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_mod_proto_rawDesc), len(file_models_mod_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

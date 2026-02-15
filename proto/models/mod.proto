@@ -1,5 +1,6 @@
 
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
 
@@ -20,19 +21,32 @@ message SelectedMod {
 
 message Mod {
     string id = 1;
-    string modId = 2;
-    string mod_reference = 3;
-    repeated ModVersion versions = 4;
+    string mod_id = 2;
+    string mod_name = 3;
+    string mod_reference = 4;
+    bool hidden = 5;
+    string logo_url = 6;
+    int32 downloads = 7;
+    repeated ModVersion versions = 8;
 }
 
 message ModVersion {
     string version = 1;
     string link = 2;
     repeated ModVersionTarget targets = 3;
+    repeated ModVersionDependency dependencies = 4;
+
+    google.protobuf.Timestamp created_at = 5;
 }
 
 message ModVersionTarget{
     string targetName = 1;
     string link = 2;
 
+}
+
+message ModVersionDependency{
+    string mod_reference = 1;
+    string condition = 2;
+    bool optional = 3;
 }

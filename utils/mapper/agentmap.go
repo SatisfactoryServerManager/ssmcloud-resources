@@ -213,3 +213,14 @@ func MapBoundingBoxToProto(bb models.BoundingBox) *pb.BoundingBox {
 		Max: MapVector3FToProto(bb.Max),
 	}
 }
+
+func MapAgentStatToProto(stat *v2.AgentStatSchema) *pb.AgentStat {
+	return &pb.AgentStat{
+		Id:        stat.ID.Hex(),
+		AgentId:   stat.AgentId.Hex(),
+		Running:   wrapperspb.Bool(stat.Running),
+		Cpu:       float32(stat.CPU),
+		Mem:       float32(stat.MEM),
+		CreatedAt: timestamppb.New(stat.CreatedAt),
+	}
+}

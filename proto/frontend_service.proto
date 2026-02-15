@@ -26,6 +26,8 @@ service FrontendService {
 
 
     rpc UpdateAgentSettings(UpdateAgentSettingsRequest) returns (SSMEmpty);
+
+    rpc UploadSaveFile(stream UploadSaveFileRequest) returns (UploadSaveFileResponse);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -151,4 +153,22 @@ message ServerSettings {
     int32 backup_keep = 12;
     string mod_reference = 13;
     string mod_config = 14;
+}
+
+message UploadSaveFileRequest {
+  oneof data {
+    FileMetadata metadata = 1;
+    bytes chunk = 2;
+  }
+}
+
+message FileMetadata {
+  string eid = 1;
+  string agent_id = 2;
+  string filename = 3;
+  string content_type = 4;
+}
+
+message UploadSaveFileResponse {
+  string message = 1;
 }

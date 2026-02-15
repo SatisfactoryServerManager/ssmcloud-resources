@@ -33,6 +33,7 @@ const (
 	FrontendService_InstallAgentMod_FullMethodName                   = "/FrontendService/InstallAgentMod"
 	FrontendService_UninstallAgentMod_FullMethodName                 = "/FrontendService/UninstallAgentMod"
 	FrontendService_UpdateAgentSettings_FullMethodName               = "/FrontendService/UpdateAgentSettings"
+	FrontendService_UploadSaveFile_FullMethodName                    = "/FrontendService/UploadSaveFile"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -52,6 +53,7 @@ type FrontendServiceClient interface {
 	InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error)
 }
 
 type frontendServiceClient struct {
@@ -192,6 +194,19 @@ func (c *frontendServiceClient) UpdateAgentSettings(ctx context.Context, in *Upd
 	return out, nil
 }
 
+func (c *frontendServiceClient) UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &FrontendService_ServiceDesc.Streams[0], FrontendService_UploadSaveFile_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[UploadSaveFileRequest, UploadSaveFileResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type FrontendService_UploadSaveFileClient = grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse]
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
@@ -209,6 +224,7 @@ type FrontendServiceServer interface {
 	InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error)
 	UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error)
 	UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error)
+	UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -257,6 +273,9 @@ func (UnimplementedFrontendServiceServer) UninstallAgentMod(context.Context, *Un
 }
 func (UnimplementedFrontendServiceServer) UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAgentSettings not implemented")
+}
+func (UnimplementedFrontendServiceServer) UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error {
+	return status.Error(codes.Unimplemented, "method UploadSaveFile not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -513,6 +532,13 @@ func _FrontendService_UpdateAgentSettings_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_UploadSaveFile_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(FrontendServiceServer).UploadSaveFile(&grpc.GenericServerStream[UploadSaveFileRequest, UploadSaveFileResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type FrontendService_UploadSaveFileServer = grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -573,6 +599,12 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_UpdateAgentSettings_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "UploadSaveFile",
+			Handler:       _FrontendService_UploadSaveFile_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "frontend_service.proto",
 }

@@ -1278,6 +1278,200 @@ func (x *ServerSettings) GetModConfig() string {
 	return ""
 }
 
+type UploadSaveFileRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Data:
+	//
+	//	*UploadSaveFileRequest_Metadata
+	//	*UploadSaveFileRequest_Chunk
+	Data          isUploadSaveFileRequest_Data `protobuf_oneof:"data"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadSaveFileRequest) Reset() {
+	*x = UploadSaveFileRequest{}
+	mi := &file_frontend_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadSaveFileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadSaveFileRequest) ProtoMessage() {}
+
+func (x *UploadSaveFileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadSaveFileRequest.ProtoReflect.Descriptor instead.
+func (*UploadSaveFileRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UploadSaveFileRequest) GetData() isUploadSaveFileRequest_Data {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *UploadSaveFileRequest) GetMetadata() *FileMetadata {
+	if x != nil {
+		if x, ok := x.Data.(*UploadSaveFileRequest_Metadata); ok {
+			return x.Metadata
+		}
+	}
+	return nil
+}
+
+func (x *UploadSaveFileRequest) GetChunk() []byte {
+	if x != nil {
+		if x, ok := x.Data.(*UploadSaveFileRequest_Chunk); ok {
+			return x.Chunk
+		}
+	}
+	return nil
+}
+
+type isUploadSaveFileRequest_Data interface {
+	isUploadSaveFileRequest_Data()
+}
+
+type UploadSaveFileRequest_Metadata struct {
+	Metadata *FileMetadata `protobuf:"bytes,1,opt,name=metadata,proto3,oneof"`
+}
+
+type UploadSaveFileRequest_Chunk struct {
+	Chunk []byte `protobuf:"bytes,2,opt,name=chunk,proto3,oneof"`
+}
+
+func (*UploadSaveFileRequest_Metadata) isUploadSaveFileRequest_Data() {}
+
+func (*UploadSaveFileRequest_Chunk) isUploadSaveFileRequest_Data() {}
+
+type FileMetadata struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Filename      string                 `protobuf:"bytes,3,opt,name=filename,proto3" json:"filename,omitempty"`
+	ContentType   string                 `protobuf:"bytes,4,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FileMetadata) Reset() {
+	*x = FileMetadata{}
+	mi := &file_frontend_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FileMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FileMetadata) ProtoMessage() {}
+
+func (x *FileMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FileMetadata.ProtoReflect.Descriptor instead.
+func (*FileMetadata) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *FileMetadata) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *FileMetadata) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+func (x *FileMetadata) GetFilename() string {
+	if x != nil {
+		return x.Filename
+	}
+	return ""
+}
+
+func (x *FileMetadata) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+type UploadSaveFileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadSaveFileResponse) Reset() {
+	*x = UploadSaveFileResponse{}
+	mi := &file_frontend_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadSaveFileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadSaveFileResponse) ProtoMessage() {}
+
+func (x *UploadSaveFileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadSaveFileResponse.ProtoReflect.Descriptor instead.
+func (*UploadSaveFileResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *UploadSaveFileResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
@@ -1371,7 +1565,18 @@ const file_frontend_service_proto_rawDesc = "" +
 	"backupKeep\x12#\n" +
 	"\rmod_reference\x18\r \x01(\tR\fmodReference\x12\x1d\n" +
 	"\n" +
-	"mod_config\x18\x0e \x01(\tR\tmodConfig2\xcd\a\n" +
+	"mod_config\x18\x0e \x01(\tR\tmodConfig\"d\n" +
+	"\x15UploadSaveFileRequest\x12+\n" +
+	"\bmetadata\x18\x01 \x01(\v2\r.FileMetadataH\x00R\bmetadata\x12\x16\n" +
+	"\x05chunk\x18\x02 \x01(\fH\x00R\x05chunkB\x06\n" +
+	"\x04data\"z\n" +
+	"\fFileMetadata\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x1a\n" +
+	"\bfilename\x18\x03 \x01(\tR\bfilename\x12!\n" +
+	"\fcontent_type\x18\x04 \x01(\tR\vcontentType\"2\n" +
+	"\x16UploadSaveFileResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\x92\b\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x122\n" +
 	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
@@ -1385,7 +1590,8 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\fGetAgentMods\x12\x14.GetAgentModsRequest\x1a\x15.GetAgentModsResponse\x125\n" +
 	"\x0fInstallAgentMod\x12\x17.InstallAgentModRequest\x1a\t.SSMEmpty\x129\n" +
 	"\x11UninstallAgentMod\x12\x19.UninstallAgentModRequest\x1a\t.SSMEmpty\x12=\n" +
-	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmpty\x12C\n" +
+	"\x0eUploadSaveFile\x12\x16.UploadSaveFileRequest\x1a\x17.UploadSaveFileResponse(\x01BIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -1399,7 +1605,7 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_frontend_service_proto_goTypes = []any{
 	(*CheckUserExistsOrCreateRequest)(nil),            // 0: CheckUserExistsOrCreateRequest
 	(*GetMyUserRequest)(nil),                          // 1: GetMyUserRequest
@@ -1423,57 +1629,63 @@ var file_frontend_service_proto_goTypes = []any{
 	(*UninstallAgentModRequest)(nil),                  // 19: UninstallAgentModRequest
 	(*UpdateAgentSettingsRequest)(nil),                // 20: UpdateAgentSettingsRequest
 	(*ServerSettings)(nil),                            // 21: ServerSettings
-	(*models.User)(nil),                               // 22: User
-	(*models.Account)(nil),                            // 23: Account
-	(*models.Agent)(nil),                              // 24: Agent
-	(*models.AgentLog)(nil),                           // 25: AgentLog
-	(*models.AgentStat)(nil),                          // 26: AgentStat
-	(*models.Mod)(nil),                                // 27: Mod
-	(*models.ModConfig)(nil),                          // 28: ModConfig
-	(*models.SSMEmpty)(nil),                           // 29: SSMEmpty
+	(*UploadSaveFileRequest)(nil),                     // 22: UploadSaveFileRequest
+	(*FileMetadata)(nil),                              // 23: FileMetadata
+	(*UploadSaveFileResponse)(nil),                    // 24: UploadSaveFileResponse
+	(*models.User)(nil),                               // 25: User
+	(*models.Account)(nil),                            // 26: Account
+	(*models.Agent)(nil),                              // 27: Agent
+	(*models.AgentLog)(nil),                           // 28: AgentLog
+	(*models.AgentStat)(nil),                          // 29: AgentStat
+	(*models.Mod)(nil),                                // 30: Mod
+	(*models.ModConfig)(nil),                          // 31: ModConfig
+	(*models.SSMEmpty)(nil),                           // 32: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	22, // 0: GetMyUserResponse.user:type_name -> User
-	23, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	23, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
-	24, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	24, // 4: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
-	25, // 5: GetAgentLogResponse.log:type_name -> AgentLog
-	26, // 6: GetAgentStatsResponse.stats:type_name -> AgentStat
-	27, // 7: GetAgentModsResponse.mods:type_name -> Mod
-	28, // 8: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
+	25, // 0: GetMyUserResponse.user:type_name -> User
+	26, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	26, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
+	27, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	27, // 4: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
+	28, // 5: GetAgentLogResponse.log:type_name -> AgentLog
+	29, // 6: GetAgentStatsResponse.stats:type_name -> AgentStat
+	30, // 7: GetAgentModsResponse.mods:type_name -> Mod
+	31, // 8: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
 	21, // 9: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
-	0,  // 10: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1,  // 11: FrontendService.GetMyUser:input_type -> GetMyUserRequest
-	3,  // 12: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
-	5,  // 13: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
-	7,  // 14: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
-	9,  // 15: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
-	11, // 16: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
-	13, // 17: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
-	15, // 18: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
-	16, // 19: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
-	18, // 20: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
-	19, // 21: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
-	20, // 22: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
-	29, // 23: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	2,  // 24: FrontendService.GetMyUser:output_type -> GetMyUserResponse
-	4,  // 25: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
-	6,  // 26: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
-	8,  // 27: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
-	10, // 28: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
-	12, // 29: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
-	14, // 30: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
-	29, // 31: FrontendService.CreateAgentTask:output_type -> SSMEmpty
-	17, // 32: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
-	29, // 33: FrontendService.InstallAgentMod:output_type -> SSMEmpty
-	29, // 34: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
-	29, // 35: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
-	23, // [23:36] is the sub-list for method output_type
-	10, // [10:23] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	23, // 10: UploadSaveFileRequest.metadata:type_name -> FileMetadata
+	0,  // 11: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1,  // 12: FrontendService.GetMyUser:input_type -> GetMyUserRequest
+	3,  // 13: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
+	5,  // 14: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
+	7,  // 15: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
+	9,  // 16: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
+	11, // 17: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
+	13, // 18: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
+	15, // 19: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
+	16, // 20: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
+	18, // 21: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
+	19, // 22: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
+	20, // 23: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
+	22, // 24: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
+	32, // 25: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	2,  // 26: FrontendService.GetMyUser:output_type -> GetMyUserResponse
+	4,  // 27: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
+	6,  // 28: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
+	8,  // 29: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
+	10, // 30: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
+	12, // 31: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
+	14, // 32: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
+	32, // 33: FrontendService.CreateAgentTask:output_type -> SSMEmpty
+	17, // 34: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
+	32, // 35: FrontendService.InstallAgentMod:output_type -> SSMEmpty
+	32, // 36: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
+	32, // 37: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
+	24, // 38: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
+	25, // [25:39] is the sub-list for method output_type
+	11, // [11:25] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -1481,13 +1693,17 @@ func file_frontend_service_proto_init() {
 	if File_frontend_service_proto != nil {
 		return
 	}
+	file_frontend_service_proto_msgTypes[22].OneofWrappers = []any{
+		(*UploadSaveFileRequest_Metadata)(nil),
+		(*UploadSaveFileRequest_Chunk)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

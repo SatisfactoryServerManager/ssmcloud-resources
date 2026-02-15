@@ -52,15 +52,15 @@ func MapAccountSchemaToProto(a *models.AccountSchema) *pbModels.Account {
 		Id:              objectIDToString(a.ID),
 		AccountName:     a.AccountName,
 		JoinCode:        a.JoinCode,
-		Audit:           mapAccountAudits(a.Audits),
-		Integrations:    mapAccountIntegrations(a.Integrations),
-		InactivityState: mapAccountInactivityState(a.InactivityState),
+		Audit:           MapAccountAudits(a.Audits),
+		Integrations:    MapAccountIntegrations(a.Integrations),
+		InactivityState: MapAccountInactivityState(a.InactivityState),
 		CreatedAt:       timestamppb.New(a.CreatedAt),
 		UpdatedAt:       timestamppb.New(a.UpdatedAt),
 	}
 }
 
-func mapAccountAudits(audits []models.AccountAuditSchema) []*pbModels.AccountAudit {
+func MapAccountAudits(audits []models.AccountAuditSchema) []*pbModels.AccountAudit {
 	if len(audits) == 0 {
 		return nil
 	}
@@ -79,7 +79,7 @@ func mapAccountAudits(audits []models.AccountAuditSchema) []*pbModels.AccountAud
 	return out
 }
 
-func mapAccountIntegrations(integrations []models.AccountIntegrationSchema) []*pbModels.AccountIntegration {
+func MapAccountIntegrations(integrations []models.AccountIntegrationSchema) []*pbModels.AccountIntegration {
 	if len(integrations) == 0 {
 		return nil
 	}
@@ -107,7 +107,7 @@ func mapAccountIntegrations(integrations []models.AccountIntegrationSchema) []*p
 	return out
 }
 
-func mapAccountInactivityState(s models.AccountInactivityState) *pbModels.AccountInactivityState {
+func MapAccountInactivityState(s models.AccountInactivityState) *pbModels.AccountInactivityState {
 	return &pbModels.AccountInactivityState{
 		Inactive:     s.Inactive,
 		DateInactive: timestamppb.New(s.DateInactive),

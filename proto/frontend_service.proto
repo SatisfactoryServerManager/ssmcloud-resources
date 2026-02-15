@@ -12,9 +12,11 @@ service FrontendService {
     rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
     rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
     rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
+    rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
+    
     rpc GetMyUserActiveAccountUsers(GetMyUserActiveAccountUsersRequest) returns (GetMyUserActiveAccountUsersResponse);
     rpc GetMyUserActiveAccountAudits(GetMyUserActiveAccountAuditsRequest) returns (GetMyUserActiveAccountAuditsResponse);
-    rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
+    
 
     rpc GetAgentLog(GetAgentLogRequest) returns (GetAgentLogResponse);
 

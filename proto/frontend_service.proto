@@ -3,7 +3,8 @@ syntax = "proto3";
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
 import "models/empty.proto";
 import "models/agent.proto";
-import "google/protobuf/timestamp.proto";
+import "models/user.proto";
+import "models/mod.proto";
 
 service FrontendService {
     rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (SSMEmpty);
@@ -18,6 +19,10 @@ service FrontendService {
     rpc GetAgentStats(GetAgentStatsRequest) returns (GetAgentStatsResponse);
 
     rpc CreateAgentTask(CreateAgentTaskRequest) returns (SSMEmpty);
+
+    rpc GetAgentMods(GetAgentModsRequest) returns (GetAgentModsResponse);
+    rpc InstallAgentMod(InstallAgentModRequest) returns (SSMEmpty);
+    rpc UninstallAgentMod(UninstallAgentModRequest) returns (SSMEmpty);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -93,32 +98,25 @@ message CreateAgentTaskRequest{
     string action = 3;
 }
 
-message User {
-  string id = 1;
-  string external_id = 2;
-  string email = 3;
-  string username = 4;
 
-  string profile_image_url = 5;
-
-  repeated UserAPIKey api_keys = 6;
-
-  google.protobuf.Timestamp last_active = 7;
-  google.protobuf.Timestamp created_at = 8;
-  google.protobuf.Timestamp updated_at = 9;
+message GetAgentModsRequest {
+    string eid = 1;
+    string agent_id = 2;
 }
 
-message UserAPIKey {
-  string short_key = 1;
-  string key = 2;
+message GetAgentModsResponse {
+    repeated Mod mods = 1;
+    ModConfig agent_mod_config = 2;
 }
 
-message Account {
-  string id = 1;
-  string account_name = 2;
-  string join_code = 3;
+message InstallAgentModRequest {
+    string eid = 1;
+    string agent_id = 2;
+    string mod_reference = 3;
+}
 
-  google.protobuf.Timestamp created_at = 4;
-  google.protobuf.Timestamp updated_at = 5;
-
+message UninstallAgentModRequest {
+    string eid = 1;
+    string agent_id = 2;
+    string mod_reference = 3;
 }

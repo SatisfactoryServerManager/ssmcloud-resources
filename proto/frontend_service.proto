@@ -16,6 +16,8 @@ service FrontendService {
     rpc GetAgentLog(GetAgentLogRequest) returns (GetAgentLogResponse);
 
     rpc GetAgentStats(GetAgentStatsRequest) returns (GetAgentStatsResponse);
+
+    rpc CreateAgentTask(CreateAgentTaskRequest) returns (SSMEmpty);
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -85,6 +87,12 @@ message GetAgentStatsResponse {
     repeated AgentStat stats = 1;
 }
 
+message CreateAgentTaskRequest{
+    string eid = 1;
+    string agent_id = 2;
+    string action = 3;
+}
+
 message User {
   string id = 1;
   string external_id = 2;
@@ -95,9 +103,9 @@ message User {
 
   repeated UserAPIKey api_keys = 6;
 
-  google.protobuf.Timestamp lastActive = 7;
-  google.protobuf.Timestamp createdAt = 8;
-  google.protobuf.Timestamp updatedAt = 9;
+  google.protobuf.Timestamp last_active = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
 }
 
 message UserAPIKey {
@@ -107,10 +115,10 @@ message UserAPIKey {
 
 message Account {
   string id = 1;
-  string accountName = 2;
-  string joinCode = 3;
+  string account_name = 2;
+  string join_code = 3;
 
-  google.protobuf.Timestamp createdAt = 4;
-  google.protobuf.Timestamp updatedAt = 5;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
 
 }

@@ -28,7 +28,34 @@ message Account {
   string account_name = 2;
   string join_code = 3;
 
-  google.protobuf.Timestamp created_at = 4;
-  google.protobuf.Timestamp updated_at = 5;
+  repeated AccountAudit audit = 4;
+  repeated AccountIntegration integrations = 5;
+  AccountInactivityState inactivity_state = 6;
 
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+
+}
+
+message AccountAudit {
+  string id = 1;
+  string type = 2;
+  string message = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message AccountIntegration {
+  string id = 1;
+  string name = 2;
+  int32 type = 3;
+  string url = 4;
+  repeated string event_types = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+message AccountInactivityState {
+  bool inactive = 1;
+  google.protobuf.Timestamp date_inactive = 2;
+  google.protobuf.Timestamp delete_date = 3;
 }

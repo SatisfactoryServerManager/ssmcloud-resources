@@ -183,14 +183,17 @@ func (x *UserAPIKey) GetKey() string {
 }
 
 type Account struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	AccountName   string                 `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
-	JoinCode      string                 `protobuf:"bytes,3,opt,name=join_code,json=joinCode,proto3" json:"join_code,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState  `protogen:"open.v1"`
+	Id              string                  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	AccountName     string                  `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	JoinCode        string                  `protobuf:"bytes,3,opt,name=join_code,json=joinCode,proto3" json:"join_code,omitempty"`
+	Audit           []*AccountAudit         `protobuf:"bytes,4,rep,name=audit,proto3" json:"audit,omitempty"`
+	Integrations    []*AccountIntegration   `protobuf:"bytes,5,rep,name=integrations,proto3" json:"integrations,omitempty"`
+	InactivityState *AccountInactivityState `protobuf:"bytes,6,opt,name=inactivity_state,json=inactivityState,proto3" json:"inactivity_state,omitempty"`
+	CreatedAt       *timestamppb.Timestamp  `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt       *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Account) Reset() {
@@ -244,6 +247,27 @@ func (x *Account) GetJoinCode() string {
 	return ""
 }
 
+func (x *Account) GetAudit() []*AccountAudit {
+	if x != nil {
+		return x.Audit
+	}
+	return nil
+}
+
+func (x *Account) GetIntegrations() []*AccountIntegration {
+	if x != nil {
+		return x.Integrations
+	}
+	return nil
+}
+
+func (x *Account) GetInactivityState() *AccountInactivityState {
+	if x != nil {
+		return x.InactivityState
+	}
+	return nil
+}
+
 func (x *Account) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -254,6 +278,226 @@ func (x *Account) GetCreatedAt() *timestamppb.Timestamp {
 func (x *Account) GetUpdatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.UpdatedAt
+	}
+	return nil
+}
+
+type AccountAudit struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountAudit) Reset() {
+	*x = AccountAudit{}
+	mi := &file_models_user_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountAudit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountAudit) ProtoMessage() {}
+
+func (x *AccountAudit) ProtoReflect() protoreflect.Message {
+	mi := &file_models_user_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountAudit.ProtoReflect.Descriptor instead.
+func (*AccountAudit) Descriptor() ([]byte, []int) {
+	return file_models_user_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AccountAudit) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AccountAudit) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *AccountAudit) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *AccountAudit) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type AccountIntegration struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
+	Url           string                 `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	EventTypes    []string               `protobuf:"bytes,5,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountIntegration) Reset() {
+	*x = AccountIntegration{}
+	mi := &file_models_user_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountIntegration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountIntegration) ProtoMessage() {}
+
+func (x *AccountIntegration) ProtoReflect() protoreflect.Message {
+	mi := &file_models_user_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountIntegration.ProtoReflect.Descriptor instead.
+func (*AccountIntegration) Descriptor() ([]byte, []int) {
+	return file_models_user_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AccountIntegration) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AccountIntegration) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AccountIntegration) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *AccountIntegration) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *AccountIntegration) GetEventTypes() []string {
+	if x != nil {
+		return x.EventTypes
+	}
+	return nil
+}
+
+func (x *AccountIntegration) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AccountIntegration) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+type AccountInactivityState struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Inactive      bool                   `protobuf:"varint,1,opt,name=inactive,proto3" json:"inactive,omitempty"`
+	DateInactive  *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=date_inactive,json=dateInactive,proto3" json:"date_inactive,omitempty"`
+	DeleteDate    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=delete_date,json=deleteDate,proto3" json:"delete_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccountInactivityState) Reset() {
+	*x = AccountInactivityState{}
+	mi := &file_models_user_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccountInactivityState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccountInactivityState) ProtoMessage() {}
+
+func (x *AccountInactivityState) ProtoReflect() protoreflect.Message {
+	mi := &file_models_user_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccountInactivityState.ProtoReflect.Descriptor instead.
+func (*AccountInactivityState) Descriptor() ([]byte, []int) {
+	return file_models_user_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AccountInactivityState) GetInactive() bool {
+	if x != nil {
+		return x.Inactive
+	}
+	return false
+}
+
+func (x *AccountInactivityState) GetDateInactive() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DateInactive
+	}
+	return nil
+}
+
+func (x *AccountInactivityState) GetDeleteDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeleteDate
 	}
 	return nil
 }
@@ -280,15 +524,40 @@ const file_models_user_proto_rawDesc = "" +
 	"\n" +
 	"UserAPIKey\x12\x1b\n" +
 	"\tshort_key\x18\x01 \x01(\tR\bshortKey\x12\x10\n" +
-	"\x03key\x18\x02 \x01(\tR\x03key\"\xcf\x01\n" +
+	"\x03key\x18\x02 \x01(\tR\x03key\"\xf1\x02\n" +
 	"\aAccount\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\faccount_name\x18\x02 \x01(\tR\vaccountName\x12\x1b\n" +
-	"\tjoin_code\x18\x03 \x01(\tR\bjoinCode\x129\n" +
+	"\tjoin_code\x18\x03 \x01(\tR\bjoinCode\x12#\n" +
+	"\x05audit\x18\x04 \x03(\v2\r.AccountAuditR\x05audit\x127\n" +
+	"\fintegrations\x18\x05 \x03(\v2\x13.AccountIntegrationR\fintegrations\x12B\n" +
+	"\x10inactivity_state\x18\x06 \x01(\v2\x17.AccountInactivityStateR\x0finactivityState\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\x87\x01\n" +
+	"\fAccountAudit\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf5\x01\n" +
+	"\x12AccountIntegration\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
+	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x10\n" +
+	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1f\n" +
+	"\vevent_types\x18\x05 \x03(\tR\n" +
+	"eventTypes\x129\n" +
+	"\n" +
+	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xb2\x01\n" +
+	"\x16AccountInactivityState\x12\x1a\n" +
+	"\binactive\x18\x01 \x01(\bR\binactive\x12?\n" +
+	"\rdate_inactive\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\fdateInactive\x12;\n" +
+	"\vdelete_date\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"deleteDateBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_user_proto_rawDescOnce sync.Once
@@ -302,25 +571,36 @@ func file_models_user_proto_rawDescGZIP() []byte {
 	return file_models_user_proto_rawDescData
 }
 
-var file_models_user_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_models_user_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_models_user_proto_goTypes = []any{
-	(*User)(nil),                  // 0: User
-	(*UserAPIKey)(nil),            // 1: UserAPIKey
-	(*Account)(nil),               // 2: Account
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*User)(nil),                   // 0: User
+	(*UserAPIKey)(nil),             // 1: UserAPIKey
+	(*Account)(nil),                // 2: Account
+	(*AccountAudit)(nil),           // 3: AccountAudit
+	(*AccountIntegration)(nil),     // 4: AccountIntegration
+	(*AccountInactivityState)(nil), // 5: AccountInactivityState
+	(*timestamppb.Timestamp)(nil),  // 6: google.protobuf.Timestamp
 }
 var file_models_user_proto_depIdxs = []int32{
-	1, // 0: User.api_keys:type_name -> UserAPIKey
-	3, // 1: User.last_active:type_name -> google.protobuf.Timestamp
-	3, // 2: User.created_at:type_name -> google.protobuf.Timestamp
-	3, // 3: User.updated_at:type_name -> google.protobuf.Timestamp
-	3, // 4: Account.created_at:type_name -> google.protobuf.Timestamp
-	3, // 5: Account.updated_at:type_name -> google.protobuf.Timestamp
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	1,  // 0: User.api_keys:type_name -> UserAPIKey
+	6,  // 1: User.last_active:type_name -> google.protobuf.Timestamp
+	6,  // 2: User.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 3: User.updated_at:type_name -> google.protobuf.Timestamp
+	3,  // 4: Account.audit:type_name -> AccountAudit
+	4,  // 5: Account.integrations:type_name -> AccountIntegration
+	5,  // 6: Account.inactivity_state:type_name -> AccountInactivityState
+	6,  // 7: Account.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 8: Account.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 9: AccountAudit.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 10: AccountIntegration.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 11: AccountIntegration.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 12: AccountInactivityState.date_inactive:type_name -> google.protobuf.Timestamp
+	6,  // 13: AccountInactivityState.delete_date:type_name -> google.protobuf.Timestamp
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_models_user_proto_init() }
@@ -334,7 +614,7 @@ func file_models_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_user_proto_rawDesc), len(file_models_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

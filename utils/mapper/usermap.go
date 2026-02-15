@@ -43,28 +43,74 @@ func mapUserAPIKeys(keys []models.UserAPIKey) []*pbModels.UserAPIKey {
 	return result
 }
 
-func mapAccounts(accounts []models.AccountSchema) []*pbModels.Account {
-	if len(accounts) == 0 {
-		return nil
-	}
-
-	result := make([]*pbModels.Account, 0, len(accounts))
-
-	for i := range accounts {
-		result = append(result, MapAccountSchemaToProto(&accounts[i]))
-	}
-
-	return result
-}
-
 func MapAccountSchemaToProto(a *models.AccountSchema) *pbModels.Account {
 	if a == nil {
 		return nil
 	}
 
 	return &pbModels.Account{
-		Id:          objectIDToString(a.ID),
-		AccountName: a.AccountName,
-		// Map other required fields
+		Id:              objectIDToString(a.ID),
+		AccountName:     a.AccountName,
+		JoinCode:        a.JoinCode,
+		Audit:           mapAccountAudits(a.Audits),
+		Integrations:    mapAccountIntegrations(a.Integrations),
+		InactivityState: mapAccountInactivityState(a.InactivityState),
+		CreatedAt:       timestamppb.New(a.CreatedAt),
+		UpdatedAt:       timestamppb.New(a.UpdatedAt),
+	}
+}
+
+func mapAccountAudits(audits []models.AccountAuditSchema) []*pbModels.AccountAudit {
+	if len(audits) == 0 {
+		return nil
+	}
+
+	out := make([]*pbModels.AccountAudit, 0, len(audits))
+	for i := range audits {
+		a := &audits[i]
+		out = append(out, &pbModels.AccountAudit{
+			Id:        objectIDToString(a.ID),
+			Type:      string(a.Type),
+			Message:   a.Message,
+			CreatedAt: timestamppb.New(a.CreatedAt),
+		})
+	}
+
+	return out
+}
+
+func mapAccountIntegrations(integrations []models.AccountIntegrationSchema) []*pbModels.AccountIntegration {
+	if len(integrations) == 0 {
+		return nil
+	}
+
+	out := make([]*pbModels.AccountIntegration, 0, len(integrations))
+	for i := range integrations {
+		it := &integrations[i]
+		// convert event types to strings
+		ev := make([]string, 0, len(it.EventTypes))
+		for j := range it.EventTypes {
+			ev = append(ev, string(it.EventTypes[j]))
+		}
+
+		out = append(out, &pbModels.AccountIntegration{
+			Id:         objectIDToString(it.ID),
+			Name:       it.Name,
+			Type:       int32(it.Type),
+			Url:        it.Url,
+			EventTypes: ev,
+			CreatedAt:  timestamppb.New(it.CreatedAt),
+			UpdatedAt:  timestamppb.New(it.UpdatedAt),
+		})
+	}
+
+	return out
+}
+
+func mapAccountInactivityState(s models.AccountInactivityState) *pbModels.AccountInactivityState {
+	return &pbModels.AccountInactivityState{
+		Inactive:     s.Inactive,
+		DateInactive: timestamppb.New(s.DateInactive),
+		DeleteDate:   timestamppb.New(s.DeleteDate),
 	}
 }

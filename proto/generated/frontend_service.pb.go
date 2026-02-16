@@ -82,27 +82,27 @@ func (x *CheckUserExistsOrCreateRequest) GetUsername() string {
 	return ""
 }
 
-type GetMyUserRequest struct {
+type GetUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserRequest) Reset() {
-	*x = GetMyUserRequest{}
+func (x *GetUserRequest) Reset() {
+	*x = GetUserRequest{}
 	mi := &file_frontend_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserRequest) String() string {
+func (x *GetUserRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserRequest) ProtoMessage() {}
+func (*GetUserRequest) ProtoMessage() {}
 
-func (x *GetMyUserRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -114,39 +114,39 @@ func (x *GetMyUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
+func (*GetUserRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetMyUserRequest) GetEid() string {
+func (x *GetUserRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetMyUserResponse struct {
+type GetUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *models.User           `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserResponse) Reset() {
-	*x = GetMyUserResponse{}
+func (x *GetUserResponse) Reset() {
+	*x = GetUserResponse{}
 	mi := &file_frontend_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserResponse) String() string {
+func (x *GetUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserResponse) ProtoMessage() {}
+func (*GetUserResponse) ProtoMessage() {}
 
-func (x *GetMyUserResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -158,39 +158,39 @@ func (x *GetMyUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
+func (*GetUserResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GetMyUserResponse) GetUser() *models.User {
+func (x *GetUserResponse) GetUser() *models.User {
 	if x != nil {
 		return x.User
 	}
 	return nil
 }
 
-type GetMyUserLinkedAccountsRequest struct {
+type GetUserLinkedAccountsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserLinkedAccountsRequest) Reset() {
-	*x = GetMyUserLinkedAccountsRequest{}
+func (x *GetUserLinkedAccountsRequest) Reset() {
+	*x = GetUserLinkedAccountsRequest{}
 	mi := &file_frontend_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserLinkedAccountsRequest) String() string {
+func (x *GetUserLinkedAccountsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserLinkedAccountsRequest) ProtoMessage() {}
+func (*GetUserLinkedAccountsRequest) ProtoMessage() {}
 
-func (x *GetMyUserLinkedAccountsRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserLinkedAccountsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -202,39 +202,39 @@ func (x *GetMyUserLinkedAccountsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserLinkedAccountsRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserLinkedAccountsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserLinkedAccountsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserLinkedAccountsRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetMyUserLinkedAccountsRequest) GetEid() string {
+func (x *GetUserLinkedAccountsRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetMyUserLinkedAccountsResponse struct {
+type GetUserLinkedAccountsResponse struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	LinkedAccounts []*models.Account      `protobuf:"bytes,1,rep,name=linked_accounts,json=linkedAccounts,proto3" json:"linked_accounts,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
-func (x *GetMyUserLinkedAccountsResponse) Reset() {
-	*x = GetMyUserLinkedAccountsResponse{}
+func (x *GetUserLinkedAccountsResponse) Reset() {
+	*x = GetUserLinkedAccountsResponse{}
 	mi := &file_frontend_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserLinkedAccountsResponse) String() string {
+func (x *GetUserLinkedAccountsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserLinkedAccountsResponse) ProtoMessage() {}
+func (*GetUserLinkedAccountsResponse) ProtoMessage() {}
 
-func (x *GetMyUserLinkedAccountsResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserLinkedAccountsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -246,39 +246,39 @@ func (x *GetMyUserLinkedAccountsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserLinkedAccountsResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserLinkedAccountsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserLinkedAccountsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserLinkedAccountsResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetMyUserLinkedAccountsResponse) GetLinkedAccounts() []*models.Account {
+func (x *GetUserLinkedAccountsResponse) GetLinkedAccounts() []*models.Account {
 	if x != nil {
 		return x.LinkedAccounts
 	}
 	return nil
 }
 
-type GetMyUserActiveAccountRequest struct {
+type GetUserActiveAccountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountRequest) Reset() {
-	*x = GetMyUserActiveAccountRequest{}
+func (x *GetUserActiveAccountRequest) Reset() {
+	*x = GetUserActiveAccountRequest{}
 	mi := &file_frontend_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountRequest) String() string {
+func (x *GetUserActiveAccountRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountRequest) ProtoMessage() {}
+func (*GetUserActiveAccountRequest) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -290,39 +290,39 @@ func (x *GetMyUserActiveAccountRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountRequest.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *GetMyUserActiveAccountRequest) GetEid() string {
+func (x *GetUserActiveAccountRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetMyUserActiveAccountResponse struct {
+type GetUserActiveAccountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ActiveAccount *models.Account        `protobuf:"bytes,1,opt,name=active_account,json=activeAccount,proto3" json:"active_account,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountResponse) Reset() {
-	*x = GetMyUserActiveAccountResponse{}
+func (x *GetUserActiveAccountResponse) Reset() {
+	*x = GetUserActiveAccountResponse{}
 	mi := &file_frontend_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountResponse) String() string {
+func (x *GetUserActiveAccountResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountResponse) ProtoMessage() {}
+func (*GetUserActiveAccountResponse) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -334,39 +334,39 @@ func (x *GetMyUserActiveAccountResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountResponse.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *GetMyUserActiveAccountResponse) GetActiveAccount() *models.Account {
+func (x *GetUserActiveAccountResponse) GetActiveAccount() *models.Account {
 	if x != nil {
 		return x.ActiveAccount
 	}
 	return nil
 }
 
-type GetMyUserActiveAccountAgentsRequest struct {
+type GetUserActiveAccountAgentsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountAgentsRequest) Reset() {
-	*x = GetMyUserActiveAccountAgentsRequest{}
+func (x *GetUserActiveAccountAgentsRequest) Reset() {
+	*x = GetUserActiveAccountAgentsRequest{}
 	mi := &file_frontend_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountAgentsRequest) String() string {
+func (x *GetUserActiveAccountAgentsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountAgentsRequest) ProtoMessage() {}
+func (*GetUserActiveAccountAgentsRequest) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountAgentsRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountAgentsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -378,39 +378,39 @@ func (x *GetMyUserActiveAccountAgentsRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountAgentsRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountAgentsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountAgentsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountAgentsRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *GetMyUserActiveAccountAgentsRequest) GetEid() string {
+func (x *GetUserActiveAccountAgentsRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetMyUserActiveAccountAgentsResponse struct {
+type GetUserActiveAccountAgentsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Agents        []*models.Agent        `protobuf:"bytes,1,rep,name=agents,proto3" json:"agents,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountAgentsResponse) Reset() {
-	*x = GetMyUserActiveAccountAgentsResponse{}
+func (x *GetUserActiveAccountAgentsResponse) Reset() {
+	*x = GetUserActiveAccountAgentsResponse{}
 	mi := &file_frontend_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountAgentsResponse) String() string {
+func (x *GetUserActiveAccountAgentsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountAgentsResponse) ProtoMessage() {}
+func (*GetUserActiveAccountAgentsResponse) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountAgentsResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountAgentsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -422,39 +422,39 @@ func (x *GetMyUserActiveAccountAgentsResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountAgentsResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountAgentsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountAgentsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountAgentsResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *GetMyUserActiveAccountAgentsResponse) GetAgents() []*models.Agent {
+func (x *GetUserActiveAccountAgentsResponse) GetAgents() []*models.Agent {
 	if x != nil {
 		return x.Agents
 	}
 	return nil
 }
 
-type GetMyUserActiveAccountUsersRequest struct {
+type GetUserActiveAccountUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountUsersRequest) Reset() {
-	*x = GetMyUserActiveAccountUsersRequest{}
+func (x *GetUserActiveAccountUsersRequest) Reset() {
+	*x = GetUserActiveAccountUsersRequest{}
 	mi := &file_frontend_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountUsersRequest) String() string {
+func (x *GetUserActiveAccountUsersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountUsersRequest) ProtoMessage() {}
+func (*GetUserActiveAccountUsersRequest) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountUsersRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountUsersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -466,39 +466,39 @@ func (x *GetMyUserActiveAccountUsersRequest) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountUsersRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountUsersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountUsersRequest.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountUsersRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *GetMyUserActiveAccountUsersRequest) GetEid() string {
+func (x *GetUserActiveAccountUsersRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-type GetMyUserActiveAccountUsersResponse struct {
+type GetUserActiveAccountUsersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*models.User         `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountUsersResponse) Reset() {
-	*x = GetMyUserActiveAccountUsersResponse{}
+func (x *GetUserActiveAccountUsersResponse) Reset() {
+	*x = GetUserActiveAccountUsersResponse{}
 	mi := &file_frontend_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountUsersResponse) String() string {
+func (x *GetUserActiveAccountUsersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountUsersResponse) ProtoMessage() {}
+func (*GetUserActiveAccountUsersResponse) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountUsersResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountUsersResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -510,19 +510,19 @@ func (x *GetMyUserActiveAccountUsersResponse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountUsersResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountUsersResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountUsersResponse.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountUsersResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GetMyUserActiveAccountUsersResponse) GetUsers() []*models.User {
+func (x *GetUserActiveAccountUsersResponse) GetUsers() []*models.User {
 	if x != nil {
 		return x.Users
 	}
 	return nil
 }
 
-type GetMyUserActiveAccountAuditsRequest struct {
+type GetUserActiveAccountAuditsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
@@ -530,20 +530,20 @@ type GetMyUserActiveAccountAuditsRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountAuditsRequest) Reset() {
-	*x = GetMyUserActiveAccountAuditsRequest{}
+func (x *GetUserActiveAccountAuditsRequest) Reset() {
+	*x = GetUserActiveAccountAuditsRequest{}
 	mi := &file_frontend_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountAuditsRequest) String() string {
+func (x *GetUserActiveAccountAuditsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountAuditsRequest) ProtoMessage() {}
+func (*GetUserActiveAccountAuditsRequest) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountAuditsRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountAuditsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -555,46 +555,46 @@ func (x *GetMyUserActiveAccountAuditsRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountAuditsRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountAuditsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountAuditsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountAuditsRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *GetMyUserActiveAccountAuditsRequest) GetEid() string {
+func (x *GetUserActiveAccountAuditsRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-func (x *GetMyUserActiveAccountAuditsRequest) GetType() string {
+func (x *GetUserActiveAccountAuditsRequest) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-type GetMyUserActiveAccountAuditsResponse struct {
+type GetUserActiveAccountAuditsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Audits        []*models.AccountAudit `protobuf:"bytes,1,rep,name=audits,proto3" json:"audits,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountAuditsResponse) Reset() {
-	*x = GetMyUserActiveAccountAuditsResponse{}
+func (x *GetUserActiveAccountAuditsResponse) Reset() {
+	*x = GetUserActiveAccountAuditsResponse{}
 	mi := &file_frontend_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountAuditsResponse) String() string {
+func (x *GetUserActiveAccountAuditsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountAuditsResponse) ProtoMessage() {}
+func (*GetUserActiveAccountAuditsResponse) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountAuditsResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserActiveAccountAuditsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -606,19 +606,19 @@ func (x *GetMyUserActiveAccountAuditsResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountAuditsResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountAuditsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserActiveAccountAuditsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountAuditsResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *GetMyUserActiveAccountAuditsResponse) GetAudits() []*models.AccountAudit {
+func (x *GetUserActiveAccountAuditsResponse) GetAudits() []*models.AccountAudit {
 	if x != nil {
 		return x.Audits
 	}
 	return nil
 }
 
-type GetMyUserActiveAccountSingleAgentRequest struct {
+type GetAgentRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
 	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
@@ -626,20 +626,20 @@ type GetMyUserActiveAccountSingleAgentRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountSingleAgentRequest) Reset() {
-	*x = GetMyUserActiveAccountSingleAgentRequest{}
+func (x *GetAgentRequest) Reset() {
+	*x = GetAgentRequest{}
 	mi := &file_frontend_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountSingleAgentRequest) String() string {
+func (x *GetAgentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountSingleAgentRequest) ProtoMessage() {}
+func (*GetAgentRequest) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountSingleAgentRequest) ProtoReflect() protoreflect.Message {
+func (x *GetAgentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -651,46 +651,46 @@ func (x *GetMyUserActiveAccountSingleAgentRequest) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountSingleAgentRequest.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountSingleAgentRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAgentRequest.ProtoReflect.Descriptor instead.
+func (*GetAgentRequest) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *GetMyUserActiveAccountSingleAgentRequest) GetEid() string {
+func (x *GetAgentRequest) GetEid() string {
 	if x != nil {
 		return x.Eid
 	}
 	return ""
 }
 
-func (x *GetMyUserActiveAccountSingleAgentRequest) GetAgentId() string {
+func (x *GetAgentRequest) GetAgentId() string {
 	if x != nil {
 		return x.AgentId
 	}
 	return ""
 }
 
-type GetMyUserActiveAccountSingleAgentResponse struct {
+type GetAgentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Agent         *models.Agent          `protobuf:"bytes,1,opt,name=agent,proto3" json:"agent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetMyUserActiveAccountSingleAgentResponse) Reset() {
-	*x = GetMyUserActiveAccountSingleAgentResponse{}
+func (x *GetAgentResponse) Reset() {
+	*x = GetAgentResponse{}
 	mi := &file_frontend_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetMyUserActiveAccountSingleAgentResponse) String() string {
+func (x *GetAgentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetMyUserActiveAccountSingleAgentResponse) ProtoMessage() {}
+func (*GetAgentResponse) ProtoMessage() {}
 
-func (x *GetMyUserActiveAccountSingleAgentResponse) ProtoReflect() protoreflect.Message {
+func (x *GetAgentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_frontend_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -702,12 +702,12 @@ func (x *GetMyUserActiveAccountSingleAgentResponse) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMyUserActiveAccountSingleAgentResponse.ProtoReflect.Descriptor instead.
-func (*GetMyUserActiveAccountSingleAgentResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetAgentResponse.ProtoReflect.Descriptor instead.
+func (*GetAgentResponse) Descriptor() ([]byte, []int) {
 	return file_frontend_service_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *GetMyUserActiveAccountSingleAgentResponse) GetAgent() *models.Agent {
+func (x *GetAgentResponse) GetAgent() *models.Agent {
 	if x != nil {
 		return x.Agent
 	}
@@ -1656,44 +1656,704 @@ func (x *UploadSaveFileResponse) GetMessage() string {
 	return ""
 }
 
+type CreateAgentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentName     string                 `protobuf:"bytes,2,opt,name=agent_name,json=agentName,proto3" json:"agent_name,omitempty"`
+	Port          int32                  `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	Memory        float32                `protobuf:"fixed32,4,opt,name=memory,proto3" json:"memory,omitempty"`
+	AdminPass     string                 `protobuf:"bytes,5,opt,name=admin_pass,json=adminPass,proto3" json:"admin_pass,omitempty"`
+	ClientPass    string                 `protobuf:"bytes,6,opt,name=client_pass,json=clientPass,proto3" json:"client_pass,omitempty"`
+	ApiKey        string                 `protobuf:"bytes,7,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAgentRequest) Reset() {
+	*x = CreateAgentRequest{}
+	mi := &file_frontend_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAgentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAgentRequest) ProtoMessage() {}
+
+func (x *CreateAgentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAgentRequest.ProtoReflect.Descriptor instead.
+func (*CreateAgentRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *CreateAgentRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *CreateAgentRequest) GetAgentName() string {
+	if x != nil {
+		return x.AgentName
+	}
+	return ""
+}
+
+func (x *CreateAgentRequest) GetPort() int32 {
+	if x != nil {
+		return x.Port
+	}
+	return 0
+}
+
+func (x *CreateAgentRequest) GetMemory() float32 {
+	if x != nil {
+		return x.Memory
+	}
+	return 0
+}
+
+func (x *CreateAgentRequest) GetAdminPass() string {
+	if x != nil {
+		return x.AdminPass
+	}
+	return ""
+}
+
+func (x *CreateAgentRequest) GetClientPass() string {
+	if x != nil {
+		return x.ClientPass
+	}
+	return ""
+}
+
+func (x *CreateAgentRequest) GetApiKey() string {
+	if x != nil {
+		return x.ApiKey
+	}
+	return ""
+}
+
+type CreateAgentResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WorkflowId    string                 `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAgentResponse) Reset() {
+	*x = CreateAgentResponse{}
+	mi := &file_frontend_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAgentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAgentResponse) ProtoMessage() {}
+
+func (x *CreateAgentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAgentResponse.ProtoReflect.Descriptor instead.
+func (*CreateAgentResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *CreateAgentResponse) GetWorkflowId() string {
+	if x != nil {
+		return x.WorkflowId
+	}
+	return ""
+}
+
+type DeleteAgentRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAgentRequest) Reset() {
+	*x = DeleteAgentRequest{}
+	mi := &file_frontend_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAgentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAgentRequest) ProtoMessage() {}
+
+func (x *DeleteAgentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAgentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAgentRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DeleteAgentRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *DeleteAgentRequest) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+type SwitchActiveAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SwitchActiveAccountRequest) Reset() {
+	*x = SwitchActiveAccountRequest{}
+	mi := &file_frontend_service_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SwitchActiveAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SwitchActiveAccountRequest) ProtoMessage() {}
+
+func (x *SwitchActiveAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SwitchActiveAccountRequest.ProtoReflect.Descriptor instead.
+func (*SwitchActiveAccountRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *SwitchActiveAccountRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *SwitchActiveAccountRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+type CreateAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AccountName   string                 `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAccountRequest) Reset() {
+	*x = CreateAccountRequest{}
+	mi := &file_frontend_service_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountRequest) ProtoMessage() {}
+
+func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountRequest.ProtoReflect.Descriptor instead.
+func (*CreateAccountRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *CreateAccountRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetAccountName() string {
+	if x != nil {
+		return x.AccountName
+	}
+	return ""
+}
+
+type JoinAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	JoinCode      string                 `protobuf:"bytes,2,opt,name=join_code,json=joinCode,proto3" json:"join_code,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *JoinAccountRequest) Reset() {
+	*x = JoinAccountRequest{}
+	mi := &file_frontend_service_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *JoinAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JoinAccountRequest) ProtoMessage() {}
+
+func (x *JoinAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JoinAccountRequest.ProtoReflect.Descriptor instead.
+func (*JoinAccountRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *JoinAccountRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *JoinAccountRequest) GetJoinCode() string {
+	if x != nil {
+		return x.JoinCode
+	}
+	return ""
+}
+
+type GetAgentWorkflowRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	WorkflowId    string                 `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAgentWorkflowRequest) Reset() {
+	*x = GetAgentWorkflowRequest{}
+	mi := &file_frontend_service_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAgentWorkflowRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAgentWorkflowRequest) ProtoMessage() {}
+
+func (x *GetAgentWorkflowRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAgentWorkflowRequest.ProtoReflect.Descriptor instead.
+func (*GetAgentWorkflowRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetAgentWorkflowRequest) GetWorkflowId() string {
+	if x != nil {
+		return x.WorkflowId
+	}
+	return ""
+}
+
+type GetAgentWorkflowResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Workflow      *models.Workflow       `protobuf:"bytes,1,opt,name=workflow,proto3" json:"workflow,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAgentWorkflowResponse) Reset() {
+	*x = GetAgentWorkflowResponse{}
+	mi := &file_frontend_service_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAgentWorkflowResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAgentWorkflowResponse) ProtoMessage() {}
+
+func (x *GetAgentWorkflowResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAgentWorkflowResponse.ProtoReflect.Descriptor instead.
+func (*GetAgentWorkflowResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *GetAgentWorkflowResponse) GetWorkflow() *models.Workflow {
+	if x != nil {
+		return x.Workflow
+	}
+	return nil
+}
+
+type DeleteAccountRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteAccountRequest) Reset() {
+	*x = DeleteAccountRequest{}
+	mi := &file_frontend_service_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAccountRequest) ProtoMessage() {}
+
+func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAccountRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAccountRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *DeleteAccountRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *DeleteAccountRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+type GetUserActiveAccountIntegrationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserActiveAccountIntegrationsRequest) Reset() {
+	*x = GetUserActiveAccountIntegrationsRequest{}
+	mi := &file_frontend_service_proto_msgTypes[38]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserActiveAccountIntegrationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserActiveAccountIntegrationsRequest) ProtoMessage() {}
+
+func (x *GetUserActiveAccountIntegrationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[38]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserActiveAccountIntegrationsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountIntegrationsRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *GetUserActiveAccountIntegrationsRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+type GetUserActiveAccountIntegrationsResponse struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Integrations  []*models.AccountIntegration `protobuf:"bytes,1,rep,name=integrations,proto3" json:"integrations,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserActiveAccountIntegrationsResponse) Reset() {
+	*x = GetUserActiveAccountIntegrationsResponse{}
+	mi := &file_frontend_service_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserActiveAccountIntegrationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserActiveAccountIntegrationsResponse) ProtoMessage() {}
+
+func (x *GetUserActiveAccountIntegrationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserActiveAccountIntegrationsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserActiveAccountIntegrationsResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *GetUserActiveAccountIntegrationsResponse) GetIntegrations() []*models.AccountIntegration {
+	if x != nil {
+		return x.Integrations
+	}
+	return nil
+}
+
+type GetAccountIntegrationEventsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IntegrationId string                 `protobuf:"bytes,1,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountIntegrationEventsRequest) Reset() {
+	*x = GetAccountIntegrationEventsRequest{}
+	mi := &file_frontend_service_proto_msgTypes[40]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountIntegrationEventsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountIntegrationEventsRequest) ProtoMessage() {}
+
+func (x *GetAccountIntegrationEventsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[40]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountIntegrationEventsRequest.ProtoReflect.Descriptor instead.
+func (*GetAccountIntegrationEventsRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetAccountIntegrationEventsRequest) GetIntegrationId() string {
+	if x != nil {
+		return x.IntegrationId
+	}
+	return ""
+}
+
+type GetAccountIntegrationEventsResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Events        []*models.IntegrationEvent `protobuf:"bytes,1,rep,name=events,proto3" json:"events,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAccountIntegrationEventsResponse) Reset() {
+	*x = GetAccountIntegrationEventsResponse{}
+	mi := &file_frontend_service_proto_msgTypes[41]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAccountIntegrationEventsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAccountIntegrationEventsResponse) ProtoMessage() {}
+
+func (x *GetAccountIntegrationEventsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[41]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAccountIntegrationEventsResponse.ProtoReflect.Descriptor instead.
+func (*GetAccountIntegrationEventsResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetAccountIntegrationEventsResponse) GetEvents() []*models.IntegrationEvent {
+	if x != nil {
+		return x.Events
+	}
+	return nil
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
 	"\n" +
-	"\x16frontend_service.proto\x1a\x12models/empty.proto\x1a\x12models/agent.proto\x1a\x11models/user.proto\x1a\x10models/mod.proto\"d\n" +
+	"\x16frontend_service.proto\x1a\x12models/agent.proto\x1a\x11models/user.proto\x1a\x10models/mod.proto\x1a\x12models/empty.proto\x1a\x15models/workflow.proto\x1a\x18models/integration.proto\"d\n" +
 	"\x1eCheckUserExistsOrCreateRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
 	"\x03eid\x18\x02 \x01(\tR\x03eid\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\"$\n" +
-	"\x10GetMyUserRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\".\n" +
-	"\x11GetMyUserResponse\x12\x19\n" +
-	"\x04user\x18\x01 \x01(\v2\x05.UserR\x04user\"2\n" +
-	"\x1eGetMyUserLinkedAccountsRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\"T\n" +
-	"\x1fGetMyUserLinkedAccountsResponse\x121\n" +
-	"\x0flinked_accounts\x18\x01 \x03(\v2\b.AccountR\x0elinkedAccounts\"1\n" +
-	"\x1dGetMyUserActiveAccountRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\"Q\n" +
-	"\x1eGetMyUserActiveAccountResponse\x12/\n" +
-	"\x0eactive_account\x18\x01 \x01(\v2\b.AccountR\ractiveAccount\"7\n" +
-	"#GetMyUserActiveAccountAgentsRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\"F\n" +
-	"$GetMyUserActiveAccountAgentsResponse\x12\x1e\n" +
-	"\x06agents\x18\x01 \x03(\v2\x06.AgentR\x06agents\"6\n" +
-	"\"GetMyUserActiveAccountUsersRequest\x12\x10\n" +
-	"\x03eid\x18\x01 \x01(\tR\x03eid\"B\n" +
-	"#GetMyUserActiveAccountUsersResponse\x12\x1b\n" +
-	"\x05users\x18\x01 \x03(\v2\x05.UserR\x05users\"K\n" +
-	"#GetMyUserActiveAccountAuditsRequest\x12\x10\n" +
+	"\busername\x18\x03 \x01(\tR\busername\"\"\n" +
+	"\x0eGetUserRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\",\n" +
+	"\x0fGetUserResponse\x12\x19\n" +
+	"\x04user\x18\x01 \x01(\v2\x05.UserR\x04user\"0\n" +
+	"\x1cGetUserLinkedAccountsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"R\n" +
+	"\x1dGetUserLinkedAccountsResponse\x121\n" +
+	"\x0flinked_accounts\x18\x01 \x03(\v2\b.AccountR\x0elinkedAccounts\"/\n" +
+	"\x1bGetUserActiveAccountRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"O\n" +
+	"\x1cGetUserActiveAccountResponse\x12/\n" +
+	"\x0eactive_account\x18\x01 \x01(\v2\b.AccountR\ractiveAccount\"5\n" +
+	"!GetUserActiveAccountAgentsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"D\n" +
+	"\"GetUserActiveAccountAgentsResponse\x12\x1e\n" +
+	"\x06agents\x18\x01 \x03(\v2\x06.AgentR\x06agents\"4\n" +
+	" GetUserActiveAccountUsersRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"@\n" +
+	"!GetUserActiveAccountUsersResponse\x12\x1b\n" +
+	"\x05users\x18\x01 \x03(\v2\x05.UserR\x05users\"I\n" +
+	"!GetUserActiveAccountAuditsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\"M\n" +
-	"$GetMyUserActiveAccountAuditsResponse\x12%\n" +
-	"\x06audits\x18\x01 \x03(\v2\r.AccountAuditR\x06audits\"W\n" +
-	"(GetMyUserActiveAccountSingleAgentRequest\x12\x10\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\"K\n" +
+	"\"GetUserActiveAccountAuditsResponse\x12%\n" +
+	"\x06audits\x18\x01 \x03(\v2\r.AccountAuditR\x06audits\">\n" +
+	"\x0fGetAgentRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
-	"\bagent_id\x18\x02 \x01(\tR\aagentId\"I\n" +
-	")GetMyUserActiveAccountSingleAgentResponse\x12\x1c\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\"0\n" +
+	"\x10GetAgentResponse\x12\x1c\n" +
 	"\x05agent\x18\x01 \x01(\v2\x06.AgentR\x05agent\"t\n" +
 	"\x12GetAgentLogRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
@@ -1769,24 +2429,77 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\bfilename\x18\x03 \x01(\tR\bfilename\x12!\n" +
 	"\fcontent_type\x18\x04 \x01(\tR\vcontentType\"2\n" +
 	"\x16UploadSaveFileResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\xe9\t\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xca\x01\n" +
+	"\x12CreateAgentRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x1d\n" +
+	"\n" +
+	"agent_name\x18\x02 \x01(\tR\tagentName\x12\x12\n" +
+	"\x04port\x18\x03 \x01(\x05R\x04port\x12\x16\n" +
+	"\x06memory\x18\x04 \x01(\x02R\x06memory\x12\x1d\n" +
+	"\n" +
+	"admin_pass\x18\x05 \x01(\tR\tadminPass\x12\x1f\n" +
+	"\vclient_pass\x18\x06 \x01(\tR\n" +
+	"clientPass\x12\x17\n" +
+	"\aapi_key\x18\a \x01(\tR\x06apiKey\"6\n" +
+	"\x13CreateAgentResponse\x12\x1f\n" +
+	"\vworkflow_id\x18\x01 \x01(\tR\n" +
+	"workflowId\"A\n" +
+	"\x12DeleteAgentRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\"M\n" +
+	"\x1aSwitchActiveAccountRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\"K\n" +
+	"\x14CreateAccountRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12!\n" +
+	"\faccount_name\x18\x02 \x01(\tR\vaccountName\"C\n" +
+	"\x12JoinAccountRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x1b\n" +
+	"\tjoin_code\x18\x02 \x01(\tR\bjoinCode\":\n" +
+	"\x17GetAgentWorkflowRequest\x12\x1f\n" +
+	"\vworkflow_id\x18\x01 \x01(\tR\n" +
+	"workflowId\"A\n" +
+	"\x18GetAgentWorkflowResponse\x12%\n" +
+	"\bworkflow\x18\x01 \x01(\v2\t.WorkflowR\bworkflow\"G\n" +
+	"\x14DeleteAccountRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x02 \x01(\tR\taccountId\";\n" +
+	"'GetUserActiveAccountIntegrationsRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"c\n" +
+	"(GetUserActiveAccountIntegrationsResponse\x127\n" +
+	"\fintegrations\x18\x01 \x03(\v2\x13.AccountIntegrationR\fintegrations\"K\n" +
+	"\"GetAccountIntegrationEventsRequest\x12%\n" +
+	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId\"P\n" +
+	"#GetAccountIntegrationEventsResponse\x12)\n" +
+	"\x06events\x18\x01 \x03(\v2\x11.IntegrationEventR\x06events2\xe3\r\n" +
 	"\x0fFrontendService\x12E\n" +
-	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x122\n" +
-	"\tGetMyUser\x12\x11.GetMyUserRequest\x1a\x12.GetMyUserResponse\x12\\\n" +
-	"\x17GetMyUserLinkedAccounts\x12\x1f.GetMyUserLinkedAccountsRequest\x1a .GetMyUserLinkedAccountsResponse\x12Y\n" +
-	"\x16GetMyUserActiveAccount\x12\x1e.GetMyUserActiveAccountRequest\x1a\x1f.GetMyUserActiveAccountResponse\x12k\n" +
-	"\x1cGetMyUserActiveAccountAgents\x12$.GetMyUserActiveAccountAgentsRequest\x1a%.GetMyUserActiveAccountAgentsResponse\x12z\n" +
-	"!GetMyUserActiveAccountSingleAgent\x12).GetMyUserActiveAccountSingleAgentRequest\x1a*.GetMyUserActiveAccountSingleAgentResponse\x12h\n" +
-	"\x1bGetMyUserActiveAccountUsers\x12#.GetMyUserActiveAccountUsersRequest\x1a$.GetMyUserActiveAccountUsersResponse\x12k\n" +
-	"\x1cGetMyUserActiveAccountAudits\x12$.GetMyUserActiveAccountAuditsRequest\x1a%.GetMyUserActiveAccountAuditsResponse\x128\n" +
+	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x12,\n" +
+	"\aGetUser\x12\x0f.GetUserRequest\x1a\x10.GetUserResponse\x12V\n" +
+	"\x15GetUserLinkedAccounts\x12\x1d.GetUserLinkedAccountsRequest\x1a\x1e.GetUserLinkedAccountsResponse\x12S\n" +
+	"\x14GetUserActiveAccount\x12\x1c.GetUserActiveAccountRequest\x1a\x1d.GetUserActiveAccountResponse\x12e\n" +
+	"\x1aGetUserActiveAccountAgents\x12\".GetUserActiveAccountAgentsRequest\x1a#.GetUserActiveAccountAgentsResponse\x12b\n" +
+	"\x19GetUserActiveAccountUsers\x12!.GetUserActiveAccountUsersRequest\x1a\".GetUserActiveAccountUsersResponse\x12e\n" +
+	"\x1aGetUserActiveAccountAudits\x12\".GetUserActiveAccountAuditsRequest\x1a#.GetUserActiveAccountAuditsResponse\x12w\n" +
+	" GetUserActiveAccountIntegrations\x12(.GetUserActiveAccountIntegrationsRequest\x1a).GetUserActiveAccountIntegrationsResponse\x12/\n" +
+	"\bGetAgent\x12\x10.GetAgentRequest\x1a\x11.GetAgentResponse\x128\n" +
 	"\vGetAgentLog\x12\x13.GetAgentLogRequest\x1a\x14.GetAgentLogResponse\x12>\n" +
-	"\rGetAgentStats\x12\x15.GetAgentStatsRequest\x1a\x16.GetAgentStatsResponse\x125\n" +
-	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\t.SSMEmpty\x12;\n" +
+	"\rGetAgentStats\x12\x15.GetAgentStatsRequest\x1a\x16.GetAgentStatsResponse\x12;\n" +
 	"\fGetAgentMods\x12\x14.GetAgentModsRequest\x1a\x15.GetAgentModsResponse\x125\n" +
+	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\t.SSMEmpty\x125\n" +
 	"\x0fInstallAgentMod\x12\x17.InstallAgentModRequest\x1a\t.SSMEmpty\x129\n" +
 	"\x11UninstallAgentMod\x12\x19.UninstallAgentModRequest\x1a\t.SSMEmpty\x12=\n" +
-	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmpty\x12C\n" +
-	"\x0eUploadSaveFile\x12\x16.UploadSaveFileRequest\x1a\x17.UploadSaveFileResponse(\x01BIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmpty\x128\n" +
+	"\vCreateAgent\x12\x13.CreateAgentRequest\x1a\x14.CreateAgentResponse\x12-\n" +
+	"\vDeleteAgent\x12\x13.DeleteAgentRequest\x1a\t.SSMEmpty\x12=\n" +
+	"\x13SwitchActiveAccount\x12\x1b.SwitchActiveAccountRequest\x1a\t.SSMEmpty\x121\n" +
+	"\rCreateAccount\x12\x15.CreateAccountRequest\x1a\t.SSMEmpty\x12-\n" +
+	"\vJoinAccount\x12\x13.JoinAccountRequest\x1a\t.SSMEmpty\x121\n" +
+	"\rDeleteAccount\x12\x15.DeleteAccountRequest\x1a\t.SSMEmpty\x12h\n" +
+	"\x1bGetAccountIntegrationEvents\x12#.GetAccountIntegrationEventsRequest\x1a$.GetAccountIntegrationEventsResponse\x12C\n" +
+	"\x0eUploadSaveFile\x12\x16.UploadSaveFileRequest\x1a\x17.UploadSaveFileResponse(\x01\x12G\n" +
+	"\x10GetAgentWorkflow\x12\x18.GetAgentWorkflowRequest\x1a\x19.GetAgentWorkflowResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_frontend_service_proto_rawDescOnce sync.Once
@@ -1800,98 +2513,135 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 	return file_frontend_service_proto_rawDescData
 }
 
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_frontend_service_proto_goTypes = []any{
-	(*CheckUserExistsOrCreateRequest)(nil),            // 0: CheckUserExistsOrCreateRequest
-	(*GetMyUserRequest)(nil),                          // 1: GetMyUserRequest
-	(*GetMyUserResponse)(nil),                         // 2: GetMyUserResponse
-	(*GetMyUserLinkedAccountsRequest)(nil),            // 3: GetMyUserLinkedAccountsRequest
-	(*GetMyUserLinkedAccountsResponse)(nil),           // 4: GetMyUserLinkedAccountsResponse
-	(*GetMyUserActiveAccountRequest)(nil),             // 5: GetMyUserActiveAccountRequest
-	(*GetMyUserActiveAccountResponse)(nil),            // 6: GetMyUserActiveAccountResponse
-	(*GetMyUserActiveAccountAgentsRequest)(nil),       // 7: GetMyUserActiveAccountAgentsRequest
-	(*GetMyUserActiveAccountAgentsResponse)(nil),      // 8: GetMyUserActiveAccountAgentsResponse
-	(*GetMyUserActiveAccountUsersRequest)(nil),        // 9: GetMyUserActiveAccountUsersRequest
-	(*GetMyUserActiveAccountUsersResponse)(nil),       // 10: GetMyUserActiveAccountUsersResponse
-	(*GetMyUserActiveAccountAuditsRequest)(nil),       // 11: GetMyUserActiveAccountAuditsRequest
-	(*GetMyUserActiveAccountAuditsResponse)(nil),      // 12: GetMyUserActiveAccountAuditsResponse
-	(*GetMyUserActiveAccountSingleAgentRequest)(nil),  // 13: GetMyUserActiveAccountSingleAgentRequest
-	(*GetMyUserActiveAccountSingleAgentResponse)(nil), // 14: GetMyUserActiveAccountSingleAgentResponse
-	(*GetAgentLogRequest)(nil),                        // 15: GetAgentLogRequest
-	(*GetAgentLogResponse)(nil),                       // 16: GetAgentLogResponse
-	(*GetAgentStatsRequest)(nil),                      // 17: GetAgentStatsRequest
-	(*GetAgentStatsResponse)(nil),                     // 18: GetAgentStatsResponse
-	(*CreateAgentTaskRequest)(nil),                    // 19: CreateAgentTaskRequest
-	(*GetAgentModsRequest)(nil),                       // 20: GetAgentModsRequest
-	(*GetAgentModsResponse)(nil),                      // 21: GetAgentModsResponse
-	(*InstallAgentModRequest)(nil),                    // 22: InstallAgentModRequest
-	(*UninstallAgentModRequest)(nil),                  // 23: UninstallAgentModRequest
-	(*UpdateAgentSettingsRequest)(nil),                // 24: UpdateAgentSettingsRequest
-	(*ServerSettings)(nil),                            // 25: ServerSettings
-	(*UploadSaveFileRequest)(nil),                     // 26: UploadSaveFileRequest
-	(*FileMetadata)(nil),                              // 27: FileMetadata
-	(*UploadSaveFileResponse)(nil),                    // 28: UploadSaveFileResponse
-	(*models.User)(nil),                               // 29: User
-	(*models.Account)(nil),                            // 30: Account
-	(*models.Agent)(nil),                              // 31: Agent
-	(*models.AccountAudit)(nil),                       // 32: AccountAudit
-	(*models.AgentLog)(nil),                           // 33: AgentLog
-	(*models.AgentStat)(nil),                          // 34: AgentStat
-	(*models.Mod)(nil),                                // 35: Mod
-	(*models.ModConfig)(nil),                          // 36: ModConfig
-	(*models.SSMEmpty)(nil),                           // 37: SSMEmpty
+	(*CheckUserExistsOrCreateRequest)(nil),           // 0: CheckUserExistsOrCreateRequest
+	(*GetUserRequest)(nil),                           // 1: GetUserRequest
+	(*GetUserResponse)(nil),                          // 2: GetUserResponse
+	(*GetUserLinkedAccountsRequest)(nil),             // 3: GetUserLinkedAccountsRequest
+	(*GetUserLinkedAccountsResponse)(nil),            // 4: GetUserLinkedAccountsResponse
+	(*GetUserActiveAccountRequest)(nil),              // 5: GetUserActiveAccountRequest
+	(*GetUserActiveAccountResponse)(nil),             // 6: GetUserActiveAccountResponse
+	(*GetUserActiveAccountAgentsRequest)(nil),        // 7: GetUserActiveAccountAgentsRequest
+	(*GetUserActiveAccountAgentsResponse)(nil),       // 8: GetUserActiveAccountAgentsResponse
+	(*GetUserActiveAccountUsersRequest)(nil),         // 9: GetUserActiveAccountUsersRequest
+	(*GetUserActiveAccountUsersResponse)(nil),        // 10: GetUserActiveAccountUsersResponse
+	(*GetUserActiveAccountAuditsRequest)(nil),        // 11: GetUserActiveAccountAuditsRequest
+	(*GetUserActiveAccountAuditsResponse)(nil),       // 12: GetUserActiveAccountAuditsResponse
+	(*GetAgentRequest)(nil),                          // 13: GetAgentRequest
+	(*GetAgentResponse)(nil),                         // 14: GetAgentResponse
+	(*GetAgentLogRequest)(nil),                       // 15: GetAgentLogRequest
+	(*GetAgentLogResponse)(nil),                      // 16: GetAgentLogResponse
+	(*GetAgentStatsRequest)(nil),                     // 17: GetAgentStatsRequest
+	(*GetAgentStatsResponse)(nil),                    // 18: GetAgentStatsResponse
+	(*CreateAgentTaskRequest)(nil),                   // 19: CreateAgentTaskRequest
+	(*GetAgentModsRequest)(nil),                      // 20: GetAgentModsRequest
+	(*GetAgentModsResponse)(nil),                     // 21: GetAgentModsResponse
+	(*InstallAgentModRequest)(nil),                   // 22: InstallAgentModRequest
+	(*UninstallAgentModRequest)(nil),                 // 23: UninstallAgentModRequest
+	(*UpdateAgentSettingsRequest)(nil),               // 24: UpdateAgentSettingsRequest
+	(*ServerSettings)(nil),                           // 25: ServerSettings
+	(*UploadSaveFileRequest)(nil),                    // 26: UploadSaveFileRequest
+	(*FileMetadata)(nil),                             // 27: FileMetadata
+	(*UploadSaveFileResponse)(nil),                   // 28: UploadSaveFileResponse
+	(*CreateAgentRequest)(nil),                       // 29: CreateAgentRequest
+	(*CreateAgentResponse)(nil),                      // 30: CreateAgentResponse
+	(*DeleteAgentRequest)(nil),                       // 31: DeleteAgentRequest
+	(*SwitchActiveAccountRequest)(nil),               // 32: SwitchActiveAccountRequest
+	(*CreateAccountRequest)(nil),                     // 33: CreateAccountRequest
+	(*JoinAccountRequest)(nil),                       // 34: JoinAccountRequest
+	(*GetAgentWorkflowRequest)(nil),                  // 35: GetAgentWorkflowRequest
+	(*GetAgentWorkflowResponse)(nil),                 // 36: GetAgentWorkflowResponse
+	(*DeleteAccountRequest)(nil),                     // 37: DeleteAccountRequest
+	(*GetUserActiveAccountIntegrationsRequest)(nil),  // 38: GetUserActiveAccountIntegrationsRequest
+	(*GetUserActiveAccountIntegrationsResponse)(nil), // 39: GetUserActiveAccountIntegrationsResponse
+	(*GetAccountIntegrationEventsRequest)(nil),       // 40: GetAccountIntegrationEventsRequest
+	(*GetAccountIntegrationEventsResponse)(nil),      // 41: GetAccountIntegrationEventsResponse
+	(*models.User)(nil),                              // 42: User
+	(*models.Account)(nil),                           // 43: Account
+	(*models.Agent)(nil),                             // 44: Agent
+	(*models.AccountAudit)(nil),                      // 45: AccountAudit
+	(*models.AgentLog)(nil),                          // 46: AgentLog
+	(*models.AgentStat)(nil),                         // 47: AgentStat
+	(*models.Mod)(nil),                               // 48: Mod
+	(*models.ModConfig)(nil),                         // 49: ModConfig
+	(*models.Workflow)(nil),                          // 50: Workflow
+	(*models.AccountIntegration)(nil),                // 51: AccountIntegration
+	(*models.IntegrationEvent)(nil),                  // 52: IntegrationEvent
+	(*models.SSMEmpty)(nil),                          // 53: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
-	29, // 0: GetMyUserResponse.user:type_name -> User
-	30, // 1: GetMyUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	30, // 2: GetMyUserActiveAccountResponse.active_account:type_name -> Account
-	31, // 3: GetMyUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	29, // 4: GetMyUserActiveAccountUsersResponse.users:type_name -> User
-	32, // 5: GetMyUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
-	31, // 6: GetMyUserActiveAccountSingleAgentResponse.agent:type_name -> Agent
-	33, // 7: GetAgentLogResponse.log:type_name -> AgentLog
-	34, // 8: GetAgentStatsResponse.stats:type_name -> AgentStat
-	35, // 9: GetAgentModsResponse.mods:type_name -> Mod
-	36, // 10: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
+	42, // 0: GetUserResponse.user:type_name -> User
+	43, // 1: GetUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	43, // 2: GetUserActiveAccountResponse.active_account:type_name -> Account
+	44, // 3: GetUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	42, // 4: GetUserActiveAccountUsersResponse.users:type_name -> User
+	45, // 5: GetUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
+	44, // 6: GetAgentResponse.agent:type_name -> Agent
+	46, // 7: GetAgentLogResponse.log:type_name -> AgentLog
+	47, // 8: GetAgentStatsResponse.stats:type_name -> AgentStat
+	48, // 9: GetAgentModsResponse.mods:type_name -> Mod
+	49, // 10: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
 	25, // 11: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
 	27, // 12: UploadSaveFileRequest.metadata:type_name -> FileMetadata
-	0,  // 13: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	1,  // 14: FrontendService.GetMyUser:input_type -> GetMyUserRequest
-	3,  // 15: FrontendService.GetMyUserLinkedAccounts:input_type -> GetMyUserLinkedAccountsRequest
-	5,  // 16: FrontendService.GetMyUserActiveAccount:input_type -> GetMyUserActiveAccountRequest
-	7,  // 17: FrontendService.GetMyUserActiveAccountAgents:input_type -> GetMyUserActiveAccountAgentsRequest
-	13, // 18: FrontendService.GetMyUserActiveAccountSingleAgent:input_type -> GetMyUserActiveAccountSingleAgentRequest
-	9,  // 19: FrontendService.GetMyUserActiveAccountUsers:input_type -> GetMyUserActiveAccountUsersRequest
-	11, // 20: FrontendService.GetMyUserActiveAccountAudits:input_type -> GetMyUserActiveAccountAuditsRequest
-	15, // 21: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
-	17, // 22: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
-	19, // 23: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
-	20, // 24: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
-	22, // 25: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
-	23, // 26: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
-	24, // 27: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
-	26, // 28: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
-	37, // 29: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	2,  // 30: FrontendService.GetMyUser:output_type -> GetMyUserResponse
-	4,  // 31: FrontendService.GetMyUserLinkedAccounts:output_type -> GetMyUserLinkedAccountsResponse
-	6,  // 32: FrontendService.GetMyUserActiveAccount:output_type -> GetMyUserActiveAccountResponse
-	8,  // 33: FrontendService.GetMyUserActiveAccountAgents:output_type -> GetMyUserActiveAccountAgentsResponse
-	14, // 34: FrontendService.GetMyUserActiveAccountSingleAgent:output_type -> GetMyUserActiveAccountSingleAgentResponse
-	10, // 35: FrontendService.GetMyUserActiveAccountUsers:output_type -> GetMyUserActiveAccountUsersResponse
-	12, // 36: FrontendService.GetMyUserActiveAccountAudits:output_type -> GetMyUserActiveAccountAuditsResponse
-	16, // 37: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
-	18, // 38: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
-	37, // 39: FrontendService.CreateAgentTask:output_type -> SSMEmpty
-	21, // 40: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
-	37, // 41: FrontendService.InstallAgentMod:output_type -> SSMEmpty
-	37, // 42: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
-	37, // 43: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
-	28, // 44: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
-	29, // [29:45] is the sub-list for method output_type
-	13, // [13:29] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	50, // 13: GetAgentWorkflowResponse.workflow:type_name -> Workflow
+	51, // 14: GetUserActiveAccountIntegrationsResponse.integrations:type_name -> AccountIntegration
+	52, // 15: GetAccountIntegrationEventsResponse.events:type_name -> IntegrationEvent
+	0,  // 16: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	1,  // 17: FrontendService.GetUser:input_type -> GetUserRequest
+	3,  // 18: FrontendService.GetUserLinkedAccounts:input_type -> GetUserLinkedAccountsRequest
+	5,  // 19: FrontendService.GetUserActiveAccount:input_type -> GetUserActiveAccountRequest
+	7,  // 20: FrontendService.GetUserActiveAccountAgents:input_type -> GetUserActiveAccountAgentsRequest
+	9,  // 21: FrontendService.GetUserActiveAccountUsers:input_type -> GetUserActiveAccountUsersRequest
+	11, // 22: FrontendService.GetUserActiveAccountAudits:input_type -> GetUserActiveAccountAuditsRequest
+	38, // 23: FrontendService.GetUserActiveAccountIntegrations:input_type -> GetUserActiveAccountIntegrationsRequest
+	13, // 24: FrontendService.GetAgent:input_type -> GetAgentRequest
+	15, // 25: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
+	17, // 26: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
+	20, // 27: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
+	19, // 28: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
+	22, // 29: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
+	23, // 30: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
+	24, // 31: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
+	29, // 32: FrontendService.CreateAgent:input_type -> CreateAgentRequest
+	31, // 33: FrontendService.DeleteAgent:input_type -> DeleteAgentRequest
+	32, // 34: FrontendService.SwitchActiveAccount:input_type -> SwitchActiveAccountRequest
+	33, // 35: FrontendService.CreateAccount:input_type -> CreateAccountRequest
+	34, // 36: FrontendService.JoinAccount:input_type -> JoinAccountRequest
+	37, // 37: FrontendService.DeleteAccount:input_type -> DeleteAccountRequest
+	40, // 38: FrontendService.GetAccountIntegrationEvents:input_type -> GetAccountIntegrationEventsRequest
+	26, // 39: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
+	35, // 40: FrontendService.GetAgentWorkflow:input_type -> GetAgentWorkflowRequest
+	53, // 41: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	2,  // 42: FrontendService.GetUser:output_type -> GetUserResponse
+	4,  // 43: FrontendService.GetUserLinkedAccounts:output_type -> GetUserLinkedAccountsResponse
+	6,  // 44: FrontendService.GetUserActiveAccount:output_type -> GetUserActiveAccountResponse
+	8,  // 45: FrontendService.GetUserActiveAccountAgents:output_type -> GetUserActiveAccountAgentsResponse
+	10, // 46: FrontendService.GetUserActiveAccountUsers:output_type -> GetUserActiveAccountUsersResponse
+	12, // 47: FrontendService.GetUserActiveAccountAudits:output_type -> GetUserActiveAccountAuditsResponse
+	39, // 48: FrontendService.GetUserActiveAccountIntegrations:output_type -> GetUserActiveAccountIntegrationsResponse
+	14, // 49: FrontendService.GetAgent:output_type -> GetAgentResponse
+	16, // 50: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
+	18, // 51: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
+	21, // 52: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
+	53, // 53: FrontendService.CreateAgentTask:output_type -> SSMEmpty
+	53, // 54: FrontendService.InstallAgentMod:output_type -> SSMEmpty
+	53, // 55: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
+	53, // 56: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
+	30, // 57: FrontendService.CreateAgent:output_type -> CreateAgentResponse
+	53, // 58: FrontendService.DeleteAgent:output_type -> SSMEmpty
+	53, // 59: FrontendService.SwitchActiveAccount:output_type -> SSMEmpty
+	53, // 60: FrontendService.CreateAccount:output_type -> SSMEmpty
+	53, // 61: FrontendService.JoinAccount:output_type -> SSMEmpty
+	53, // 62: FrontendService.DeleteAccount:output_type -> SSMEmpty
+	41, // 63: FrontendService.GetAccountIntegrationEvents:output_type -> GetAccountIntegrationEventsResponse
+	28, // 64: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
+	36, // 65: FrontendService.GetAgentWorkflow:output_type -> GetAgentWorkflowResponse
+	41, // [41:66] is the sub-list for method output_type
+	16, // [16:41] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -1909,7 +2659,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

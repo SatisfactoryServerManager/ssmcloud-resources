@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -105,4 +106,9 @@ func ReadLastNBtyesFromFile(fname string, nbytes int64) (string, error) {
 func TrackTime(start time.Time, name string) {
 	elapsed := time.Since(start)
 	fmt.Printf("%s took %s\n", name, elapsed)
+}
+
+func ToJSON(a interface{}) string {
+	bytes, _ := json.Marshal(a)
+	return string(bytes)
 }

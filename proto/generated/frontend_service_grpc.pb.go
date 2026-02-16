@@ -20,22 +20,31 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FrontendService_CheckUserExistsOrCreate_FullMethodName           = "/FrontendService/CheckUserExistsOrCreate"
-	FrontendService_GetMyUser_FullMethodName                         = "/FrontendService/GetMyUser"
-	FrontendService_GetMyUserLinkedAccounts_FullMethodName           = "/FrontendService/GetMyUserLinkedAccounts"
-	FrontendService_GetMyUserActiveAccount_FullMethodName            = "/FrontendService/GetMyUserActiveAccount"
-	FrontendService_GetMyUserActiveAccountAgents_FullMethodName      = "/FrontendService/GetMyUserActiveAccountAgents"
-	FrontendService_GetMyUserActiveAccountSingleAgent_FullMethodName = "/FrontendService/GetMyUserActiveAccountSingleAgent"
-	FrontendService_GetMyUserActiveAccountUsers_FullMethodName       = "/FrontendService/GetMyUserActiveAccountUsers"
-	FrontendService_GetMyUserActiveAccountAudits_FullMethodName      = "/FrontendService/GetMyUserActiveAccountAudits"
-	FrontendService_GetAgentLog_FullMethodName                       = "/FrontendService/GetAgentLog"
-	FrontendService_GetAgentStats_FullMethodName                     = "/FrontendService/GetAgentStats"
-	FrontendService_CreateAgentTask_FullMethodName                   = "/FrontendService/CreateAgentTask"
-	FrontendService_GetAgentMods_FullMethodName                      = "/FrontendService/GetAgentMods"
-	FrontendService_InstallAgentMod_FullMethodName                   = "/FrontendService/InstallAgentMod"
-	FrontendService_UninstallAgentMod_FullMethodName                 = "/FrontendService/UninstallAgentMod"
-	FrontendService_UpdateAgentSettings_FullMethodName               = "/FrontendService/UpdateAgentSettings"
-	FrontendService_UploadSaveFile_FullMethodName                    = "/FrontendService/UploadSaveFile"
+	FrontendService_CheckUserExistsOrCreate_FullMethodName          = "/FrontendService/CheckUserExistsOrCreate"
+	FrontendService_GetUser_FullMethodName                          = "/FrontendService/GetUser"
+	FrontendService_GetUserLinkedAccounts_FullMethodName            = "/FrontendService/GetUserLinkedAccounts"
+	FrontendService_GetUserActiveAccount_FullMethodName             = "/FrontendService/GetUserActiveAccount"
+	FrontendService_GetUserActiveAccountAgents_FullMethodName       = "/FrontendService/GetUserActiveAccountAgents"
+	FrontendService_GetUserActiveAccountUsers_FullMethodName        = "/FrontendService/GetUserActiveAccountUsers"
+	FrontendService_GetUserActiveAccountAudits_FullMethodName       = "/FrontendService/GetUserActiveAccountAudits"
+	FrontendService_GetUserActiveAccountIntegrations_FullMethodName = "/FrontendService/GetUserActiveAccountIntegrations"
+	FrontendService_GetAgent_FullMethodName                         = "/FrontendService/GetAgent"
+	FrontendService_GetAgentLog_FullMethodName                      = "/FrontendService/GetAgentLog"
+	FrontendService_GetAgentStats_FullMethodName                    = "/FrontendService/GetAgentStats"
+	FrontendService_GetAgentMods_FullMethodName                     = "/FrontendService/GetAgentMods"
+	FrontendService_CreateAgentTask_FullMethodName                  = "/FrontendService/CreateAgentTask"
+	FrontendService_InstallAgentMod_FullMethodName                  = "/FrontendService/InstallAgentMod"
+	FrontendService_UninstallAgentMod_FullMethodName                = "/FrontendService/UninstallAgentMod"
+	FrontendService_UpdateAgentSettings_FullMethodName              = "/FrontendService/UpdateAgentSettings"
+	FrontendService_CreateAgent_FullMethodName                      = "/FrontendService/CreateAgent"
+	FrontendService_DeleteAgent_FullMethodName                      = "/FrontendService/DeleteAgent"
+	FrontendService_SwitchActiveAccount_FullMethodName              = "/FrontendService/SwitchActiveAccount"
+	FrontendService_CreateAccount_FullMethodName                    = "/FrontendService/CreateAccount"
+	FrontendService_JoinAccount_FullMethodName                      = "/FrontendService/JoinAccount"
+	FrontendService_DeleteAccount_FullMethodName                    = "/FrontendService/DeleteAccount"
+	FrontendService_GetAccountIntegrationEvents_FullMethodName      = "/FrontendService/GetAccountIntegrationEvents"
+	FrontendService_UploadSaveFile_FullMethodName                   = "/FrontendService/UploadSaveFile"
+	FrontendService_GetAgentWorkflow_FullMethodName                 = "/FrontendService/GetAgentWorkflow"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -43,21 +52,30 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FrontendServiceClient interface {
 	CheckUserExistsOrCreate(ctx context.Context, in *CheckUserExistsOrCreateRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
-	GetMyUser(ctx context.Context, in *GetMyUserRequest, opts ...grpc.CallOption) (*GetMyUserResponse, error)
-	GetMyUserLinkedAccounts(ctx context.Context, in *GetMyUserLinkedAccountsRequest, opts ...grpc.CallOption) (*GetMyUserLinkedAccountsResponse, error)
-	GetMyUserActiveAccount(ctx context.Context, in *GetMyUserActiveAccountRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountResponse, error)
-	GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error)
-	GetMyUserActiveAccountSingleAgent(ctx context.Context, in *GetMyUserActiveAccountSingleAgentRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountSingleAgentResponse, error)
-	GetMyUserActiveAccountUsers(ctx context.Context, in *GetMyUserActiveAccountUsersRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountUsersResponse, error)
-	GetMyUserActiveAccountAudits(ctx context.Context, in *GetMyUserActiveAccountAuditsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAuditsResponse, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	GetUserLinkedAccounts(ctx context.Context, in *GetUserLinkedAccountsRequest, opts ...grpc.CallOption) (*GetUserLinkedAccountsResponse, error)
+	GetUserActiveAccount(ctx context.Context, in *GetUserActiveAccountRequest, opts ...grpc.CallOption) (*GetUserActiveAccountResponse, error)
+	GetUserActiveAccountAgents(ctx context.Context, in *GetUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountAgentsResponse, error)
+	GetUserActiveAccountUsers(ctx context.Context, in *GetUserActiveAccountUsersRequest, opts ...grpc.CallOption) (*GetUserActiveAccountUsersResponse, error)
+	GetUserActiveAccountAudits(ctx context.Context, in *GetUserActiveAccountAuditsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountAuditsResponse, error)
+	GetUserActiveAccountIntegrations(ctx context.Context, in *GetUserActiveAccountIntegrationsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountIntegrationsResponse, error)
+	GetAgent(ctx context.Context, in *GetAgentRequest, opts ...grpc.CallOption) (*GetAgentResponse, error)
 	GetAgentLog(ctx context.Context, in *GetAgentLogRequest, opts ...grpc.CallOption) (*GetAgentLogResponse, error)
 	GetAgentStats(ctx context.Context, in *GetAgentStatsRequest, opts ...grpc.CallOption) (*GetAgentStatsResponse, error)
-	CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	GetAgentMods(ctx context.Context, in *GetAgentModsRequest, opts ...grpc.CallOption) (*GetAgentModsResponse, error)
+	CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	CreateAgent(ctx context.Context, in *CreateAgentRequest, opts ...grpc.CallOption) (*CreateAgentResponse, error)
+	DeleteAgent(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	SwitchActiveAccount(ctx context.Context, in *SwitchActiveAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	JoinAccount(ctx context.Context, in *JoinAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	GetAccountIntegrationEvents(ctx context.Context, in *GetAccountIntegrationEventsRequest, opts ...grpc.CallOption) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error)
+	GetAgentWorkflow(ctx context.Context, in *GetAgentWorkflowRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
 }
 
 type frontendServiceClient struct {
@@ -78,70 +96,80 @@ func (c *frontendServiceClient) CheckUserExistsOrCreate(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUser(ctx context.Context, in *GetMyUserRequest, opts ...grpc.CallOption) (*GetMyUserResponse, error) {
+func (c *frontendServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUser_FullMethodName, in, out, cOpts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUser_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserLinkedAccounts(ctx context.Context, in *GetMyUserLinkedAccountsRequest, opts ...grpc.CallOption) (*GetMyUserLinkedAccountsResponse, error) {
+func (c *frontendServiceClient) GetUserLinkedAccounts(ctx context.Context, in *GetUserLinkedAccountsRequest, opts ...grpc.CallOption) (*GetUserLinkedAccountsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserLinkedAccountsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserLinkedAccounts_FullMethodName, in, out, cOpts...)
+	out := new(GetUserLinkedAccountsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserLinkedAccounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserActiveAccount(ctx context.Context, in *GetMyUserActiveAccountRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountResponse, error) {
+func (c *frontendServiceClient) GetUserActiveAccount(ctx context.Context, in *GetUserActiveAccountRequest, opts ...grpc.CallOption) (*GetUserActiveAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserActiveAccountResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccount_FullMethodName, in, out, cOpts...)
+	out := new(GetUserActiveAccountResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserActiveAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserActiveAccountAgents(ctx context.Context, in *GetMyUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAgentsResponse, error) {
+func (c *frontendServiceClient) GetUserActiveAccountAgents(ctx context.Context, in *GetUserActiveAccountAgentsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountAgentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserActiveAccountAgentsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccountAgents_FullMethodName, in, out, cOpts...)
+	out := new(GetUserActiveAccountAgentsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserActiveAccountAgents_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserActiveAccountSingleAgent(ctx context.Context, in *GetMyUserActiveAccountSingleAgentRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountSingleAgentResponse, error) {
+func (c *frontendServiceClient) GetUserActiveAccountUsers(ctx context.Context, in *GetUserActiveAccountUsersRequest, opts ...grpc.CallOption) (*GetUserActiveAccountUsersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserActiveAccountSingleAgentResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccountSingleAgent_FullMethodName, in, out, cOpts...)
+	out := new(GetUserActiveAccountUsersResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserActiveAccountUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserActiveAccountUsers(ctx context.Context, in *GetMyUserActiveAccountUsersRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountUsersResponse, error) {
+func (c *frontendServiceClient) GetUserActiveAccountAudits(ctx context.Context, in *GetUserActiveAccountAuditsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountAuditsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserActiveAccountUsersResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccountUsers_FullMethodName, in, out, cOpts...)
+	out := new(GetUserActiveAccountAuditsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserActiveAccountAudits_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetMyUserActiveAccountAudits(ctx context.Context, in *GetMyUserActiveAccountAuditsRequest, opts ...grpc.CallOption) (*GetMyUserActiveAccountAuditsResponse, error) {
+func (c *frontendServiceClient) GetUserActiveAccountIntegrations(ctx context.Context, in *GetUserActiveAccountIntegrationsRequest, opts ...grpc.CallOption) (*GetUserActiveAccountIntegrationsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMyUserActiveAccountAuditsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetMyUserActiveAccountAudits_FullMethodName, in, out, cOpts...)
+	out := new(GetUserActiveAccountIntegrationsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetUserActiveAccountIntegrations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) GetAgent(ctx context.Context, in *GetAgentRequest, opts ...grpc.CallOption) (*GetAgentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgentResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -168,20 +196,20 @@ func (c *frontendServiceClient) GetAgentStats(ctx context.Context, in *GetAgentS
 	return out, nil
 }
 
-func (c *frontendServiceClient) CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+func (c *frontendServiceClient) GetAgentMods(ctx context.Context, in *GetAgentModsRequest, opts ...grpc.CallOption) (*GetAgentModsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, FrontendService_CreateAgentTask_FullMethodName, in, out, cOpts...)
+	out := new(GetAgentModsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentMods_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) GetAgentMods(ctx context.Context, in *GetAgentModsRequest, opts ...grpc.CallOption) (*GetAgentModsResponse, error) {
+func (c *frontendServiceClient) CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAgentModsResponse)
-	err := c.cc.Invoke(ctx, FrontendService_GetAgentMods_FullMethodName, in, out, cOpts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_CreateAgentTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -218,6 +246,76 @@ func (c *frontendServiceClient) UpdateAgentSettings(ctx context.Context, in *Upd
 	return out, nil
 }
 
+func (c *frontendServiceClient) CreateAgent(ctx context.Context, in *CreateAgentRequest, opts ...grpc.CallOption) (*CreateAgentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAgentResponse)
+	err := c.cc.Invoke(ctx, FrontendService_CreateAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) DeleteAgent(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_DeleteAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) SwitchActiveAccount(ctx context.Context, in *SwitchActiveAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_SwitchActiveAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_CreateAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) JoinAccount(ctx context.Context, in *JoinAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_JoinAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) GetAccountIntegrationEvents(ctx context.Context, in *GetAccountIntegrationEventsRequest, opts ...grpc.CallOption) (*GetAccountIntegrationEventsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountIntegrationEventsResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAccountIntegrationEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *frontendServiceClient) UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &FrontendService_ServiceDesc.Streams[0], FrontendService_UploadSaveFile_FullMethodName, cOpts...)
@@ -231,26 +329,45 @@ func (c *frontendServiceClient) UploadSaveFile(ctx context.Context, opts ...grpc
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type FrontendService_UploadSaveFileClient = grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse]
 
+func (c *frontendServiceClient) GetAgentWorkflow(ctx context.Context, in *GetAgentWorkflowRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgentWorkflowResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
 type FrontendServiceServer interface {
 	CheckUserExistsOrCreate(context.Context, *CheckUserExistsOrCreateRequest) (*models.SSMEmpty, error)
-	GetMyUser(context.Context, *GetMyUserRequest) (*GetMyUserResponse, error)
-	GetMyUserLinkedAccounts(context.Context, *GetMyUserLinkedAccountsRequest) (*GetMyUserLinkedAccountsResponse, error)
-	GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error)
-	GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error)
-	GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error)
-	GetMyUserActiveAccountUsers(context.Context, *GetMyUserActiveAccountUsersRequest) (*GetMyUserActiveAccountUsersResponse, error)
-	GetMyUserActiveAccountAudits(context.Context, *GetMyUserActiveAccountAuditsRequest) (*GetMyUserActiveAccountAuditsResponse, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	GetUserLinkedAccounts(context.Context, *GetUserLinkedAccountsRequest) (*GetUserLinkedAccountsResponse, error)
+	GetUserActiveAccount(context.Context, *GetUserActiveAccountRequest) (*GetUserActiveAccountResponse, error)
+	GetUserActiveAccountAgents(context.Context, *GetUserActiveAccountAgentsRequest) (*GetUserActiveAccountAgentsResponse, error)
+	GetUserActiveAccountUsers(context.Context, *GetUserActiveAccountUsersRequest) (*GetUserActiveAccountUsersResponse, error)
+	GetUserActiveAccountAudits(context.Context, *GetUserActiveAccountAuditsRequest) (*GetUserActiveAccountAuditsResponse, error)
+	GetUserActiveAccountIntegrations(context.Context, *GetUserActiveAccountIntegrationsRequest) (*GetUserActiveAccountIntegrationsResponse, error)
+	GetAgent(context.Context, *GetAgentRequest) (*GetAgentResponse, error)
 	GetAgentLog(context.Context, *GetAgentLogRequest) (*GetAgentLogResponse, error)
 	GetAgentStats(context.Context, *GetAgentStatsRequest) (*GetAgentStatsResponse, error)
-	CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error)
 	GetAgentMods(context.Context, *GetAgentModsRequest) (*GetAgentModsResponse, error)
+	CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error)
 	InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error)
 	UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error)
 	UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error)
+	CreateAgent(context.Context, *CreateAgentRequest) (*CreateAgentResponse, error)
+	DeleteAgent(context.Context, *DeleteAgentRequest) (*models.SSMEmpty, error)
+	SwitchActiveAccount(context.Context, *SwitchActiveAccountRequest) (*models.SSMEmpty, error)
+	CreateAccount(context.Context, *CreateAccountRequest) (*models.SSMEmpty, error)
+	JoinAccount(context.Context, *JoinAccountRequest) (*models.SSMEmpty, error)
+	DeleteAccount(context.Context, *DeleteAccountRequest) (*models.SSMEmpty, error)
+	GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error
+	GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -264,26 +381,29 @@ type UnimplementedFrontendServiceServer struct{}
 func (UnimplementedFrontendServiceServer) CheckUserExistsOrCreate(context.Context, *CheckUserExistsOrCreateRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method CheckUserExistsOrCreate not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUser(context.Context, *GetMyUserRequest) (*GetMyUserResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUser not implemented")
+func (UnimplementedFrontendServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserLinkedAccounts(context.Context, *GetMyUserLinkedAccountsRequest) (*GetMyUserLinkedAccountsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserLinkedAccounts not implemented")
+func (UnimplementedFrontendServiceServer) GetUserLinkedAccounts(context.Context, *GetUserLinkedAccountsRequest) (*GetUserLinkedAccountsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserLinkedAccounts not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserActiveAccount(context.Context, *GetMyUserActiveAccountRequest) (*GetMyUserActiveAccountResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccount not implemented")
+func (UnimplementedFrontendServiceServer) GetUserActiveAccount(context.Context, *GetUserActiveAccountRequest) (*GetUserActiveAccountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserActiveAccount not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountAgents(context.Context, *GetMyUserActiveAccountAgentsRequest) (*GetMyUserActiveAccountAgentsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountAgents not implemented")
+func (UnimplementedFrontendServiceServer) GetUserActiveAccountAgents(context.Context, *GetUserActiveAccountAgentsRequest) (*GetUserActiveAccountAgentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserActiveAccountAgents not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountSingleAgent(context.Context, *GetMyUserActiveAccountSingleAgentRequest) (*GetMyUserActiveAccountSingleAgentResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountSingleAgent not implemented")
+func (UnimplementedFrontendServiceServer) GetUserActiveAccountUsers(context.Context, *GetUserActiveAccountUsersRequest) (*GetUserActiveAccountUsersResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserActiveAccountUsers not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountUsers(context.Context, *GetMyUserActiveAccountUsersRequest) (*GetMyUserActiveAccountUsersResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountUsers not implemented")
+func (UnimplementedFrontendServiceServer) GetUserActiveAccountAudits(context.Context, *GetUserActiveAccountAuditsRequest) (*GetUserActiveAccountAuditsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserActiveAccountAudits not implemented")
 }
-func (UnimplementedFrontendServiceServer) GetMyUserActiveAccountAudits(context.Context, *GetMyUserActiveAccountAuditsRequest) (*GetMyUserActiveAccountAuditsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetMyUserActiveAccountAudits not implemented")
+func (UnimplementedFrontendServiceServer) GetUserActiveAccountIntegrations(context.Context, *GetUserActiveAccountIntegrationsRequest) (*GetUserActiveAccountIntegrationsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUserActiveAccountIntegrations not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAgent(context.Context, *GetAgentRequest) (*GetAgentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgent not implemented")
 }
 func (UnimplementedFrontendServiceServer) GetAgentLog(context.Context, *GetAgentLogRequest) (*GetAgentLogResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentLog not implemented")
@@ -291,11 +411,11 @@ func (UnimplementedFrontendServiceServer) GetAgentLog(context.Context, *GetAgent
 func (UnimplementedFrontendServiceServer) GetAgentStats(context.Context, *GetAgentStatsRequest) (*GetAgentStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentStats not implemented")
 }
-func (UnimplementedFrontendServiceServer) CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error) {
-	return nil, status.Error(codes.Unimplemented, "method CreateAgentTask not implemented")
-}
 func (UnimplementedFrontendServiceServer) GetAgentMods(context.Context, *GetAgentModsRequest) (*GetAgentModsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentMods not implemented")
+}
+func (UnimplementedFrontendServiceServer) CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAgentTask not implemented")
 }
 func (UnimplementedFrontendServiceServer) InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method InstallAgentMod not implemented")
@@ -306,8 +426,32 @@ func (UnimplementedFrontendServiceServer) UninstallAgentMod(context.Context, *Un
 func (UnimplementedFrontendServiceServer) UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAgentSettings not implemented")
 }
+func (UnimplementedFrontendServiceServer) CreateAgent(context.Context, *CreateAgentRequest) (*CreateAgentResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAgent not implemented")
+}
+func (UnimplementedFrontendServiceServer) DeleteAgent(context.Context, *DeleteAgentRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAgent not implemented")
+}
+func (UnimplementedFrontendServiceServer) SwitchActiveAccount(context.Context, *SwitchActiveAccountRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SwitchActiveAccount not implemented")
+}
+func (UnimplementedFrontendServiceServer) CreateAccount(context.Context, *CreateAccountRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedFrontendServiceServer) JoinAccount(context.Context, *JoinAccountRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method JoinAccount not implemented")
+}
+func (UnimplementedFrontendServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAccountIntegrationEvents not implemented")
+}
 func (UnimplementedFrontendServiceServer) UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error {
 	return status.Error(codes.Unimplemented, "method UploadSaveFile not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentWorkflow not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -348,128 +492,146 @@ func _FrontendService_CheckUserExistsOrCreate_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserRequest)
+func _FrontendService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUser(ctx, in)
+		return srv.(FrontendServiceServer).GetUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUser_FullMethodName,
+		FullMethod: FrontendService_GetUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUser(ctx, req.(*GetMyUserRequest))
+		return srv.(FrontendServiceServer).GetUser(ctx, req.(*GetUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserLinkedAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserLinkedAccountsRequest)
+func _FrontendService_GetUserLinkedAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserLinkedAccountsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserLinkedAccounts(ctx, in)
+		return srv.(FrontendServiceServer).GetUserLinkedAccounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserLinkedAccounts_FullMethodName,
+		FullMethod: FrontendService_GetUserLinkedAccounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserLinkedAccounts(ctx, req.(*GetMyUserLinkedAccountsRequest))
+		return srv.(FrontendServiceServer).GetUserLinkedAccounts(ctx, req.(*GetUserLinkedAccountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserActiveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserActiveAccountRequest)
+func _FrontendService_GetUserActiveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccount(ctx, in)
+		return srv.(FrontendServiceServer).GetUserActiveAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserActiveAccount_FullMethodName,
+		FullMethod: FrontendService_GetUserActiveAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccount(ctx, req.(*GetMyUserActiveAccountRequest))
+		return srv.(FrontendServiceServer).GetUserActiveAccount(ctx, req.(*GetUserActiveAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserActiveAccountAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserActiveAccountAgentsRequest)
+func _FrontendService_GetUserActiveAccountAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveAccountAgentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountAgents(ctx, in)
+		return srv.(FrontendServiceServer).GetUserActiveAccountAgents(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserActiveAccountAgents_FullMethodName,
+		FullMethod: FrontendService_GetUserActiveAccountAgents_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountAgents(ctx, req.(*GetMyUserActiveAccountAgentsRequest))
+		return srv.(FrontendServiceServer).GetUserActiveAccountAgents(ctx, req.(*GetUserActiveAccountAgentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserActiveAccountSingleAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserActiveAccountSingleAgentRequest)
+func _FrontendService_GetUserActiveAccountUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveAccountUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountSingleAgent(ctx, in)
+		return srv.(FrontendServiceServer).GetUserActiveAccountUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserActiveAccountSingleAgent_FullMethodName,
+		FullMethod: FrontendService_GetUserActiveAccountUsers_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountSingleAgent(ctx, req.(*GetMyUserActiveAccountSingleAgentRequest))
+		return srv.(FrontendServiceServer).GetUserActiveAccountUsers(ctx, req.(*GetUserActiveAccountUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserActiveAccountUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserActiveAccountUsersRequest)
+func _FrontendService_GetUserActiveAccountAudits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveAccountAuditsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountUsers(ctx, in)
+		return srv.(FrontendServiceServer).GetUserActiveAccountAudits(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserActiveAccountUsers_FullMethodName,
+		FullMethod: FrontendService_GetUserActiveAccountAudits_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountUsers(ctx, req.(*GetMyUserActiveAccountUsersRequest))
+		return srv.(FrontendServiceServer).GetUserActiveAccountAudits(ctx, req.(*GetUserActiveAccountAuditsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_GetMyUserActiveAccountAudits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMyUserActiveAccountAuditsRequest)
+func _FrontendService_GetUserActiveAccountIntegrations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserActiveAccountIntegrationsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountAudits(ctx, in)
+		return srv.(FrontendServiceServer).GetUserActiveAccountIntegrations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_GetMyUserActiveAccountAudits_FullMethodName,
+		FullMethod: FrontendService_GetUserActiveAccountIntegrations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).GetMyUserActiveAccountAudits(ctx, req.(*GetMyUserActiveAccountAuditsRequest))
+		return srv.(FrontendServiceServer).GetUserActiveAccountIntegrations(ctx, req.(*GetUserActiveAccountIntegrationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_GetAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAgent(ctx, req.(*GetAgentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -510,24 +672,6 @@ func _FrontendService_GetAgentStats_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_CreateAgentTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAgentTaskRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FrontendServiceServer).CreateAgentTask(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FrontendService_CreateAgentTask_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).CreateAgentTask(ctx, req.(*CreateAgentTaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FrontendService_GetAgentMods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAgentModsRequest)
 	if err := dec(in); err != nil {
@@ -542,6 +686,24 @@ func _FrontendService_GetAgentMods_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FrontendServiceServer).GetAgentMods(ctx, req.(*GetAgentModsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_CreateAgentTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAgentTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).CreateAgentTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_CreateAgentTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).CreateAgentTask(ctx, req.(*CreateAgentTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -600,12 +762,156 @@ func _FrontendService_UpdateAgentSettings_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_CreateAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).CreateAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_CreateAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).CreateAgent(ctx, req.(*CreateAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_DeleteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).DeleteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_DeleteAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).DeleteAgent(ctx, req.(*DeleteAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_SwitchActiveAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SwitchActiveAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).SwitchActiveAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_SwitchActiveAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).SwitchActiveAccount(ctx, req.(*SwitchActiveAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_CreateAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_JoinAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).JoinAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_JoinAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).JoinAccount(ctx, req.(*JoinAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).DeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_DeleteAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_GetAccountIntegrationEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountIntegrationEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAccountIntegrationEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAccountIntegrationEvents_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAccountIntegrationEvents(ctx, req.(*GetAccountIntegrationEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FrontendService_UploadSaveFile_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(FrontendServiceServer).UploadSaveFile(&grpc.GenericServerStream[UploadSaveFileRequest, UploadSaveFileResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type FrontendService_UploadSaveFileServer = grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]
+
+func _FrontendService_GetAgentWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAgentWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAgentWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAgentWorkflow(ctx, req.(*GetAgentWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
 
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -619,32 +925,36 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_CheckUserExistsOrCreate_Handler,
 		},
 		{
-			MethodName: "GetMyUser",
-			Handler:    _FrontendService_GetMyUser_Handler,
+			MethodName: "GetUser",
+			Handler:    _FrontendService_GetUser_Handler,
 		},
 		{
-			MethodName: "GetMyUserLinkedAccounts",
-			Handler:    _FrontendService_GetMyUserLinkedAccounts_Handler,
+			MethodName: "GetUserLinkedAccounts",
+			Handler:    _FrontendService_GetUserLinkedAccounts_Handler,
 		},
 		{
-			MethodName: "GetMyUserActiveAccount",
-			Handler:    _FrontendService_GetMyUserActiveAccount_Handler,
+			MethodName: "GetUserActiveAccount",
+			Handler:    _FrontendService_GetUserActiveAccount_Handler,
 		},
 		{
-			MethodName: "GetMyUserActiveAccountAgents",
-			Handler:    _FrontendService_GetMyUserActiveAccountAgents_Handler,
+			MethodName: "GetUserActiveAccountAgents",
+			Handler:    _FrontendService_GetUserActiveAccountAgents_Handler,
 		},
 		{
-			MethodName: "GetMyUserActiveAccountSingleAgent",
-			Handler:    _FrontendService_GetMyUserActiveAccountSingleAgent_Handler,
+			MethodName: "GetUserActiveAccountUsers",
+			Handler:    _FrontendService_GetUserActiveAccountUsers_Handler,
 		},
 		{
-			MethodName: "GetMyUserActiveAccountUsers",
-			Handler:    _FrontendService_GetMyUserActiveAccountUsers_Handler,
+			MethodName: "GetUserActiveAccountAudits",
+			Handler:    _FrontendService_GetUserActiveAccountAudits_Handler,
 		},
 		{
-			MethodName: "GetMyUserActiveAccountAudits",
-			Handler:    _FrontendService_GetMyUserActiveAccountAudits_Handler,
+			MethodName: "GetUserActiveAccountIntegrations",
+			Handler:    _FrontendService_GetUserActiveAccountIntegrations_Handler,
+		},
+		{
+			MethodName: "GetAgent",
+			Handler:    _FrontendService_GetAgent_Handler,
 		},
 		{
 			MethodName: "GetAgentLog",
@@ -655,12 +965,12 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_GetAgentStats_Handler,
 		},
 		{
-			MethodName: "CreateAgentTask",
-			Handler:    _FrontendService_CreateAgentTask_Handler,
-		},
-		{
 			MethodName: "GetAgentMods",
 			Handler:    _FrontendService_GetAgentMods_Handler,
+		},
+		{
+			MethodName: "CreateAgentTask",
+			Handler:    _FrontendService_CreateAgentTask_Handler,
 		},
 		{
 			MethodName: "InstallAgentMod",
@@ -673,6 +983,38 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAgentSettings",
 			Handler:    _FrontendService_UpdateAgentSettings_Handler,
+		},
+		{
+			MethodName: "CreateAgent",
+			Handler:    _FrontendService_CreateAgent_Handler,
+		},
+		{
+			MethodName: "DeleteAgent",
+			Handler:    _FrontendService_DeleteAgent_Handler,
+		},
+		{
+			MethodName: "SwitchActiveAccount",
+			Handler:    _FrontendService_SwitchActiveAccount_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _FrontendService_CreateAccount_Handler,
+		},
+		{
+			MethodName: "JoinAccount",
+			Handler:    _FrontendService_JoinAccount_Handler,
+		},
+		{
+			MethodName: "DeleteAccount",
+			Handler:    _FrontendService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "GetAccountIntegrationEvents",
+			Handler:    _FrontendService_GetAccountIntegrationEvents_Handler,
+		},
+		{
+			MethodName: "GetAgentWorkflow",
+			Handler:    _FrontendService_GetAgentWorkflow_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

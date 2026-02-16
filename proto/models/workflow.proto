@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
+
+message Workflow {
+    string id = 1;
+    string type = 2;
+    repeated WorkflowAction actions = 3;
+    string status = 4;
+}
+
+message WorkflowAction {
+    string type = 1;
+    string status = 2;
+    string error_message = 3;
+    int32 retry_count = 4;
+}

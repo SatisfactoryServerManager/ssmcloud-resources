@@ -1,37 +1,51 @@
 syntax = "proto3";
 
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
-import "models/empty.proto";
+
 import "models/agent.proto";
 import "models/user.proto";
 import "models/mod.proto";
+import "models/empty.proto";
+import "models/workflow.proto";
+import "models/integration.proto";
 
 service FrontendService {
     rpc CheckUserExistsOrCreate(CheckUserExistsOrCreateRequest) returns (SSMEmpty);
-    rpc GetMyUser(GetMyUserRequest) returns (GetMyUserResponse);
-    rpc GetMyUserLinkedAccounts(GetMyUserLinkedAccountsRequest) returns (GetMyUserLinkedAccountsResponse);
-    rpc GetMyUserActiveAccount(GetMyUserActiveAccountRequest) returns (GetMyUserActiveAccountResponse);
-    rpc GetMyUserActiveAccountAgents(GetMyUserActiveAccountAgentsRequest) returns (GetMyUserActiveAccountAgentsResponse);
-    rpc GetMyUserActiveAccountSingleAgent(GetMyUserActiveAccountSingleAgentRequest) returns (GetMyUserActiveAccountSingleAgentResponse);
 
-    rpc GetMyUserActiveAccountUsers(GetMyUserActiveAccountUsersRequest) returns (GetMyUserActiveAccountUsersResponse);
-    rpc GetMyUserActiveAccountAudits(GetMyUserActiveAccountAuditsRequest) returns (GetMyUserActiveAccountAuditsResponse);
-    
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc GetUserLinkedAccounts(GetUserLinkedAccountsRequest) returns (GetUserLinkedAccountsResponse);
+    rpc GetUserActiveAccount(GetUserActiveAccountRequest) returns (GetUserActiveAccountResponse);
+    rpc GetUserActiveAccountAgents(GetUserActiveAccountAgentsRequest) returns (GetUserActiveAccountAgentsResponse);
+    rpc GetUserActiveAccountUsers(GetUserActiveAccountUsersRequest) returns (GetUserActiveAccountUsersResponse);
+    rpc GetUserActiveAccountAudits(GetUserActiveAccountAuditsRequest) returns (GetUserActiveAccountAuditsResponse);
+    rpc GetUserActiveAccountIntegrations(GetUserActiveAccountIntegrationsRequest) returns (GetUserActiveAccountIntegrationsResponse);
 
+
+    rpc GetAgent(GetAgentRequest) returns (GetAgentResponse);
     rpc GetAgentLog(GetAgentLogRequest) returns (GetAgentLogResponse);
-
     rpc GetAgentStats(GetAgentStatsRequest) returns (GetAgentStatsResponse);
+    rpc GetAgentMods(GetAgentModsRequest) returns (GetAgentModsResponse);
 
     rpc CreateAgentTask(CreateAgentTaskRequest) returns (SSMEmpty);
-
-    rpc GetAgentMods(GetAgentModsRequest) returns (GetAgentModsResponse);
     rpc InstallAgentMod(InstallAgentModRequest) returns (SSMEmpty);
     rpc UninstallAgentMod(UninstallAgentModRequest) returns (SSMEmpty);
-
-
     rpc UpdateAgentSettings(UpdateAgentSettingsRequest) returns (SSMEmpty);
+    rpc CreateAgent(CreateAgentRequest) returns(CreateAgentResponse);
+    rpc DeleteAgent(DeleteAgentRequest) returns(SSMEmpty);
+
+    rpc SwitchActiveAccount(SwitchActiveAccountRequest) returns (SSMEmpty);
+    rpc CreateAccount(CreateAccountRequest) returns (SSMEmpty);
+    rpc JoinAccount(JoinAccountRequest) returns (SSMEmpty);
+    rpc DeleteAccount(DeleteAccountRequest) returns(SSMEmpty);
+
+    rpc GetAccountIntegrationEvents(GetAccountIntegrationEventsRequest) returns (GetAccountIntegrationEventsResponse);
+
+
 
     rpc UploadSaveFile(stream UploadSaveFileRequest) returns (UploadSaveFileResponse);
+
+    rpc GetAgentWorkflow(GetAgentWorkflowRequest) returns(GetAgentWorkflowResponse);
+    
 }
 
 message CheckUserExistsOrCreateRequest {
@@ -40,61 +54,61 @@ message CheckUserExistsOrCreateRequest {
     string username = 3;
 }
 
-message GetMyUserRequest {
+message GetUserRequest {
     string eid = 1;
 }
 
-message GetMyUserResponse {
+message GetUserResponse {
   User user = 1;
 }
 
-message GetMyUserLinkedAccountsRequest {
+message GetUserLinkedAccountsRequest {
     string eid = 1;
 }
 
-message GetMyUserLinkedAccountsResponse {
+message GetUserLinkedAccountsResponse {
     repeated Account linked_accounts = 1;
 }
 
-message GetMyUserActiveAccountRequest {
+message GetUserActiveAccountRequest {
     string eid = 1;
 }
 
-message GetMyUserActiveAccountResponse {
+message GetUserActiveAccountResponse {
     Account active_account = 1;
 }
 
-message GetMyUserActiveAccountAgentsRequest {
+message GetUserActiveAccountAgentsRequest {
     string eid = 1;
 }
 
-message GetMyUserActiveAccountAgentsResponse {
+message GetUserActiveAccountAgentsResponse {
     repeated Agent agents = 1;
 }
 
-message GetMyUserActiveAccountUsersRequest {
+message GetUserActiveAccountUsersRequest {
     string eid = 1;
 }
 
-message GetMyUserActiveAccountUsersResponse {
+message GetUserActiveAccountUsersResponse {
     repeated User users = 1;
 }
 
-message GetMyUserActiveAccountAuditsRequest {
+message GetUserActiveAccountAuditsRequest {
     string eid = 1;
     string type = 2;
 }
 
-message GetMyUserActiveAccountAuditsResponse {
+message GetUserActiveAccountAuditsResponse {
     repeated AccountAudit audits = 1;
 }
 
-message GetMyUserActiveAccountSingleAgentRequest {
+message GetAgentRequest {
     string eid = 1;
     string agent_id = 2;
 }
 
-message GetMyUserActiveAccountSingleAgentResponse {
+message GetAgentResponse {
     Agent agent = 1;
 }
 
@@ -192,4 +206,67 @@ message FileMetadata {
 
 message UploadSaveFileResponse {
   string message = 1;
+}
+
+message CreateAgentRequest {
+    string eid = 1;
+    string agent_name = 2;
+    int32 port = 3;
+    float memory = 4;
+    string admin_pass = 5;
+    string client_pass = 6;
+    string api_key = 7;
+}
+
+message CreateAgentResponse {
+    string workflow_id = 1;
+}
+
+message DeleteAgentRequest {
+    string eid = 1;
+    string agent_id = 2;
+}
+
+message SwitchActiveAccountRequest {
+    string eid = 1;
+    string account_id = 2;
+}
+
+message CreateAccountRequest {
+    string eid = 1;
+    string account_name = 2;
+}
+
+message JoinAccountRequest {
+    string eid = 1;
+    string join_code = 2;
+}
+
+message GetAgentWorkflowRequest {
+    string workflow_id = 1;
+}
+
+message GetAgentWorkflowResponse {
+    Workflow workflow = 1;
+}
+
+message DeleteAccountRequest {
+    string eid = 1;
+    string account_id = 2;
+}
+
+message GetUserActiveAccountIntegrationsRequest {
+    string eid = 1;
+}
+
+message GetUserActiveAccountIntegrationsResponse {
+    repeated AccountIntegration integrations = 1;
+}
+
+message GetAccountIntegrationEventsRequest {
+    string integration_id = 1;
+}
+
+message GetAccountIntegrationEventsResponse {
+    repeated IntegrationEvent events = 1;
 }

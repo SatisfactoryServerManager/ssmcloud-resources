@@ -1,0 +1,16 @@
+syntax = "proto3";
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
+
+
+message IntegrationEvent {
+    string id = 1;
+    int32 type = 2;
+    string event_type = 3;
+    string url = 4;
+    string payload = 5;
+    string response = 6;
+    int32 response_code = 7;
+    string status = 8;
+    int32 attempts = 9;
+    string last_error = 10;
+}

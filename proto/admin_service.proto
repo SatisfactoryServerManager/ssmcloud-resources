@@ -1,0 +1,194 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
+
+import "models/empty.proto";
+import "models/user.proto";
+import "models/agent.proto";
+
+// AdminService provides privileged CRUD operations over core entities.
+// This service is intended to be used by the ssmcloud-admin panel only.
+service AdminService {
+  // GetUser returns a single user by ID, external ID, or email.
+  rpc GetUser(AdminGetUserRequest) returns (AdminGetUserResponse);
+
+  // ListUsers returns users matching an optional search string.
+  rpc ListUsers(AdminListUsersRequest) returns (AdminListUsersResponse);
+
+  // UpdateUser updates a user's basic fields.
+  rpc UpdateUser(AdminUpdateUserRequest) returns (AdminUpdateUserResponse);
+
+  // DeleteUser deletes a user by ID.
+  rpc DeleteUser(AdminDeleteUserRequest) returns (SSMEmpty);
+
+  // GetAccount returns a single account by ID.
+  rpc GetAccount(AdminGetAccountRequest) returns (AdminGetAccountResponse);
+
+  // ListAccounts returns accounts matching an optional search string.
+  rpc ListAccounts(AdminListAccountsRequest) returns (AdminListAccountsResponse);
+
+  // UpdateAccount updates an account's basic fields.
+  rpc UpdateAccount(AdminUpdateAccountRequest) returns (AdminUpdateAccountResponse);
+
+  // DeleteAccount deletes an account by ID.
+  rpc DeleteAccount(AdminDeleteAccountRequest) returns (SSMEmpty);
+
+  // GetAgent returns a single agent by ID.
+  rpc GetAgent(AdminGetAgentRequest) returns (AdminGetAgentResponse);
+
+  // ListAgents returns agents matching an optional search string.
+  rpc ListAgents(AdminListAgentsRequest) returns (AdminListAgentsResponse);
+
+  // UpdateAgent updates an agent's basic fields.
+  rpc UpdateAgent(AdminUpdateAgentRequest) returns (AdminUpdateAgentResponse);
+
+  // DeleteAgent deletes an agent by ID.
+  rpc DeleteAgent(AdminDeleteAgentRequest) returns (SSMEmpty);
+
+  // AddUserToAccount links a user to an account.
+  rpc AddUserToAccount(AdminAddUserToAccountRequest) returns (SSMEmpty);
+
+  // ListUserAccounts returns all linked accounts for a user.
+  rpc ListUserAccounts(AdminListUserAccountsRequest) returns (AdminListUserAccountsResponse);
+
+  // RemoveUserFromAccount unlinks a user from an account.
+  rpc RemoveUserFromAccount(AdminRemoveUserFromAccountRequest) returns (SSMEmpty);
+
+  // SetUserActiveAccount sets a user's active account (must already be linked).
+  rpc SetUserActiveAccount(AdminSetUserActiveAccountRequest) returns (SSMEmpty);
+}
+
+// ---- Users ----
+
+message AdminGetUserRequest {
+  // Provide one identifier (priority: user_id, external_id, email)
+  string user_id = 1;
+  string external_id = 2;
+  string email = 3;
+}
+
+message AdminGetUserResponse {
+  User user = 1;
+}
+
+message AdminListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string search = 3; // matches email/username/external_id
+}
+
+message AdminListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+}
+
+message AdminUpdateUserRequest {
+  string user_id = 1;
+  string external_id = 2;
+  string email = 3;
+  string username = 4;
+}
+
+message AdminUpdateUserResponse {
+  User user = 1;
+}
+
+message AdminDeleteUserRequest {
+  string user_id = 1;
+}
+
+// ---- Accounts ----
+
+message AdminGetAccountRequest {
+  string account_id = 1;
+}
+
+message AdminGetAccountResponse {
+  Account account = 1;
+}
+
+message AdminListAccountsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string search = 3; // matches account_name/join_code
+}
+
+message AdminListAccountsResponse {
+  repeated Account accounts = 1;
+  int32 total = 2;
+}
+
+message AdminUpdateAccountRequest {
+  string account_id = 1;
+  string account_name = 2;
+}
+
+message AdminUpdateAccountResponse {
+  Account account = 1;
+}
+
+message AdminDeleteAccountRequest {
+  string account_id = 1;
+}
+
+// ---- Agents ----
+
+message AdminGetAgentRequest {
+  string agent_id = 1;
+}
+
+message AdminGetAgentResponse {
+  Agent agent = 1;
+}
+
+message AdminListAgentsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string search = 3; // matches agent_name/api_key
+}
+
+message AdminListAgentsResponse {
+  repeated Agent agents = 1;
+  int32 total = 2;
+}
+
+message AdminUpdateAgentRequest {
+  string agent_id = 1;
+  string agent_name = 2;
+  string api_key = 3;
+}
+
+message AdminUpdateAgentResponse {
+  Agent agent = 1;
+}
+
+message AdminDeleteAgentRequest {
+  string agent_id = 1;
+}
+
+// ---- Relationships ----
+
+message AdminAddUserToAccountRequest {
+  string user_id = 1;
+  string account_id = 2;
+  bool set_active = 3;
+}
+
+message AdminListUserAccountsRequest {
+  string user_id = 1;
+}
+
+message AdminListUserAccountsResponse {
+  repeated Account accounts = 1;
+  string active_account_id = 2;
+}
+
+message AdminRemoveUserFromAccountRequest {
+  string user_id = 1;
+  string account_id = 2;
+}
+
+message AdminSetUserActiveAccountRequest {
+  string user_id = 1;
+  string account_id = 2;
+}

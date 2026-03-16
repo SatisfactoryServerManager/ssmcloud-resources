@@ -1,3 +1,7 @@
+## 0.0.87 (March 16, 2026)
+  - feat: Added new grpc function
+  - feat: Updates to proto files and functions
+
 ## 0.0.86 (February 15, 2026)
 
 

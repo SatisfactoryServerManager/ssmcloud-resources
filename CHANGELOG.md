@@ -1,3 +1,6 @@
+## 0.0.88 (May 07, 2026)
+  - feat: Update to use mongo driver v2
+
 ## 0.0.87 (March 16, 2026)
   - feat: Added new grpc function
   - feat: Updates to proto files and functions

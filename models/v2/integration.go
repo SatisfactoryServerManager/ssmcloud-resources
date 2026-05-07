@@ -3,10 +3,10 @@ package v2
 import (
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
-type IntegrationType int64
+type IntegrationType int
 
 const (
 	IntegrationWebhook IntegrationType = 0
@@ -27,10 +27,10 @@ const (
 )
 
 type IntegrationEventSchema struct {
-	ID              primitive.ObjectID   `json:"_id" bson:"_id,omitempty"`
+	ID              bson.ObjectID        `json:"_id" bson:"_id,omitempty"`
 	Type            IntegrationType      `json:"type" bson:"type"`
 	EventType       IntegrationEventType `json:"eventType" bson:"eventType"`
-	IntegrationId   primitive.ObjectID   `bson:"integrationId"`
+	IntegrationId   bson.ObjectID        `bson:"integrationId"`
 	URL             string               `bson:"url"`
 	Payload         interface{}          `bson:"payload"`
 	Response        interface{}          `bson:"response"`
@@ -48,7 +48,7 @@ type IntegrationEventSchema struct {
 func NewIntegrationEvent(accountIntegration *AccountIntegrationSchema, eventType IntegrationEventType, payload interface{}) *IntegrationEventSchema {
 
 	return &IntegrationEventSchema{
-		ID:            primitive.NewObjectID(),
+		ID:            bson.NewObjectID(),
 		Type:          accountIntegration.Type,
 		EventType:     eventType,
 		IntegrationId: accountIntegration.ID,

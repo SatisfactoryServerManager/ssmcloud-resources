@@ -4,19 +4,19 @@ import (
 	"time"
 
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type AccountSchema struct {
-	ID          primitive.ObjectID `json:"_id" bson:"_id"`
-	AccountName string             `json:"accountName" bson:"accountName"`
-	JoinCode    string             `json:"joinCode" bson:"joinCode"`
+	ID          bson.ObjectID `json:"_id" bson:"_id"`
+	AccountName string        `json:"accountName" bson:"accountName"`
+	JoinCode    string        `json:"joinCode" bson:"joinCode"`
 
-	AgentIds       primitive.A                `json:"-" bson:"agents" mson:"collection=agents"`
+	AgentIds       bson.A                     `json:"-" bson:"agents" mson:"collection=agents"`
 	Agents         []AgentSchema              `json:"agents" bson:"-"`
-	AuditIds       primitive.A                `json:"-" bson:"audit" mson:"collection=accountaudits"`
+	AuditIds       bson.A                     `json:"-" bson:"audit" mson:"collection=accountaudits"`
 	Audits         []AccountAuditSchema       `json:"audit" bson:"-"`
-	IntegrationIds primitive.A                `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
+	IntegrationIds bson.A                     `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
 	Integrations   []AccountIntegrationSchema `json:"integrations" bson:"-"`
 
 	InactivityState AccountInactivityState `json:"inactivityState" bson:"inactivityState"`
@@ -37,14 +37,14 @@ const (
 )
 
 type AccountAuditSchema struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	Type      AuditType          `json:"type" bson:"type"`
-	Message   string             `json:"message" bson:"message"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	Type      AuditType     `json:"type" bson:"type"`
+	Message   string        `json:"message" bson:"message"`
+	CreatedAt time.Time     `json:"createdAt" bson:"createdAt"`
 }
 
 type AccountIntegrationSchema struct {
-	ID         primitive.ObjectID     `json:"_id" bson:"_id"`
+	ID         bson.ObjectID          `json:"_id" bson:"_id"`
 	Name       string                 `json:"name" bson:"name"`
 	Type       IntegrationType        `json:"type" bson:"type"`
 	Url        string                 `json:"url" bson:"url"`
@@ -61,12 +61,12 @@ type AccountInactivityState struct {
 
 func NewAccount(accountName string) *AccountSchema {
 	return &AccountSchema{
-		ID:             primitive.NewObjectID(),
+		ID:             bson.NewObjectID(),
 		AccountName:    accountName,
 		JoinCode:       utils.RandStringBytes(16),
-		AgentIds:       make(primitive.A, 0),
-		AuditIds:       make(primitive.A, 0),
-		IntegrationIds: make(primitive.A, 0),
+		AgentIds:       make(bson.A, 0),
+		AuditIds:       make(bson.A, 0),
+		IntegrationIds: make(bson.A, 0),
 		CreatedAt:      time.Now(),
 		UpdatedAt:      time.Now(),
 	}

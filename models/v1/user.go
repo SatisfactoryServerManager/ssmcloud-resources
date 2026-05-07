@@ -4,15 +4,14 @@ import (
 	"time"
 
 	"github.com/mrhid6/go-mongoose/mongoose"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type Users struct {
-	ID         primitive.ObjectID `json:"_id" bson:"_id"`
-	ExternalID string             `json:"eid" bson:"eid"`
-	Email      string             `json:"email" bson:"email"`
-	Password   string             `json:"-" bson:"password"`
+	ID         bson.ObjectID `json:"_id" bson:"_id"`
+	ExternalID string        `json:"eid" bson:"eid"`
+	Email      string        `json:"email" bson:"email"`
+	Password   string        `json:"-" bson:"password"`
 
 	IsAccountAdmin bool `json:"isAccountAdmin" bson:"isAccountAdmin"`
 	Active         bool `json:"active" bson:"active"`

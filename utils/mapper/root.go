@@ -1,8 +1,8 @@
 package mapper
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import "go.mongodb.org/mongo-driver/v2/bson"
 
-func objectIDToString(id primitive.ObjectID) string {
+func objectIDToString(id bson.ObjectID) string {
 	if id.IsZero() {
 		return ""
 	}

@@ -3,14 +3,14 @@ package models
 import (
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type EventData struct {
-	IntegrationId primitive.ObjectID `json:"integrationId"`
-	EventId       primitive.ObjectID `json:"eventId"`
-	EventType     string             `json:"eventType"`
-	EventTime     time.Time          `json:"eventTime"`
+	IntegrationId bson.ObjectID `json:"integrationId"`
+	EventId       bson.ObjectID `json:"eventId"`
+	EventType     string        `json:"eventType"`
+	EventTime     time.Time     `json:"eventTime"`
 }
 
 type EventDataAgent struct {

@@ -6,14 +6,14 @@ import (
 
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/models"
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type AgentSchema struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	AgentName string             `json:"agentName" bson:"agentName"`
-	APIKey    string             `json:"apiKey" bson:"apiKey"`
-	Status    AgentStatus        `json:"status" bson:"status"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	AgentName string        `json:"agentName" bson:"agentName"`
+	APIKey    string        `json:"apiKey" bson:"apiKey"`
+	Status    AgentStatus   `json:"status" bson:"status"`
 
 	Config       AgentConfig       `json:"config" bson:"config"`
 	ServerConfig AgentServerConfig `json:"serverConfig" bson:"serverConfig"`
@@ -25,7 +25,7 @@ type AgentSchema struct {
 
 	Tasks []AgentTask `json:"tasks" bson:"tasks"`
 
-	LogIds primitive.A      `json:"-" bson:"logs" mson:"collection=agentlogs"`
+	LogIds bson.A           `json:"-" bson:"logs" mson:"collection=agentlogs"`
 	Logs   []AgentLogSchema `json:"logs" bson:"-"`
 
 	ModConfig AgentModConfig `json:"modConfig" bson:"modConfig"`
@@ -126,43 +126,43 @@ type AgentModConfig struct {
 }
 
 type AgentModConfigSelectedModSchema struct {
-	ModId            primitive.ObjectID `json:"-" bson:"mod" mson:"collection=mods"`
-	Mod              models.ModSchema   `json:"mod" bson:"-"`
-	DesiredVersion   string             `json:"desiredVersion" bson:"desiredVersion"`
-	InstalledVersion string             `json:"installedVersion" bson:"installedVersion"`
-	Installed        bool               `json:"installed" bson:"installed"`
-	NeedsUpdate      bool               `json:"needsUpdate" bson:"needsUpdate"`
-	Config           string             `json:"config" bson:"config"`
+	ModId            bson.ObjectID    `json:"-" bson:"mod" mson:"collection=mods"`
+	Mod              models.ModSchema `json:"mod" bson:"-"`
+	DesiredVersion   string           `json:"desiredVersion" bson:"desiredVersion"`
+	InstalledVersion string           `json:"installedVersion" bson:"installedVersion"`
+	Installed        bool             `json:"installed" bson:"installed"`
+	NeedsUpdate      bool             `json:"needsUpdate" bson:"needsUpdate"`
+	Config           string           `json:"config" bson:"config"`
 }
 
 // Task Data
 
 type AgentTask struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	Action    string             `json:"action" bson:"action"`
-	Data      interface{}        `json:"data" bson:"data"`
-	Completed bool               `json:"completed" bson:"completed"`
-	Retries   int                `json:"retries" bson:"retries"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	Action    string        `json:"action" bson:"action"`
+	Data      interface{}   `json:"data" bson:"data"`
+	Completed bool          `json:"completed" bson:"completed"`
+	Retries   int           `json:"retries" bson:"retries"`
 }
 
 type AgentLogSchema struct {
-	ID            primitive.ObjectID `json:"_id" bson:"_id"`
-	FileName      string             `json:"fileName" bson:"fileName"`
-	Type          string             `json:"type" bson:"type"`
-	LogLines      []string           `json:"lines" bson:"lines"`
-	FileURL       string             `json:"fileUrl" bson:"fileUrl"`
-	PendingUpload bool               `json:"pendingUpload" bson:"pendingUpload"`
-	CreatedAt     time.Time          `json:"createdAt" bson:"createdAt"`
-	UpdatedAt     time.Time          `json:"updatedAt" bson:"updatedAt"`
+	ID            bson.ObjectID `json:"_id" bson:"_id"`
+	FileName      string        `json:"fileName" bson:"fileName"`
+	Type          string        `json:"type" bson:"type"`
+	LogLines      []string      `json:"lines" bson:"lines"`
+	FileURL       string        `json:"fileUrl" bson:"fileUrl"`
+	PendingUpload bool          `json:"pendingUpload" bson:"pendingUpload"`
+	CreatedAt     time.Time     `json:"createdAt" bson:"createdAt"`
+	UpdatedAt     time.Time     `json:"updatedAt" bson:"updatedAt"`
 }
 
 type AgentStatSchema struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	AgentId   primitive.ObjectID `json:"agentId" bson:"agentId"`
-	Running   bool               `json:"running" bson:"running"`
-	CPU       float64            `json:"cpu" bson:"cpu"`
-	MEM       float32            `json:"mem" bson:"mem"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	AgentId   bson.ObjectID `json:"agentId" bson:"agentId"`
+	Running   bool          `json:"running" bson:"running"`
+	CPU       float64       `json:"cpu" bson:"cpu"`
+	MEM       float32       `json:"mem" bson:"mem"`
+	CreatedAt time.Time     `json:"createdAt" bson:"createdAt"`
 }
 
 func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSchema {
@@ -172,11 +172,11 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 	}
 
 	newAgent := AgentSchema{
-		ID:        primitive.NewObjectID(),
+		ID:        bson.NewObjectID(),
 		AgentName: agentName,
 		APIKey:    apiKey,
 		Tasks:     make([]AgentTask, 0),
-		LogIds:    make(primitive.A, 0),
+		LogIds:    make(bson.A, 0),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -208,7 +208,7 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 
 func NewAgentTask(action string, data interface{}) AgentTask {
 	return AgentTask{
-		ID:     primitive.NewObjectID(),
+		ID:     bson.NewObjectID(),
 		Action: action,
 		Data:   data,
 	}
@@ -216,7 +216,7 @@ func NewAgentTask(action string, data interface{}) AgentTask {
 
 func NewAgentStat(theAgent *AgentSchema, running bool, cpu float64, memory float32) *AgentStatSchema {
 	return &AgentStatSchema{
-		ID:        primitive.NewObjectID(),
+		ID:        bson.NewObjectID(),
 		AgentId:   theAgent.ID,
 		Running:   running,
 		CPU:       cpu,

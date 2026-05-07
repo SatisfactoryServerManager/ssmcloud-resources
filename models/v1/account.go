@@ -5,29 +5,28 @@ import (
 	"time"
 
 	"github.com/mrhid6/go-mongoose/mongoose"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type Accounts struct {
-	ID          primitive.ObjectID `json:"_id" bson:"_id"`
-	AccountName string             `json:"accountName" bson:"accountName"`
+	ID          bson.ObjectID `json:"_id" bson:"_id"`
+	AccountName string        `json:"accountName" bson:"accountName"`
 
-	Sessions       primitive.A       `json:"-" bson:"sessions" mson:"collection=accountsessions"`
+	Sessions       bson.A            `json:"-" bson:"sessions" mson:"collection=accountsessions"`
 	SessionObjects []AccountSessions `json:"sessions" bson:"-"`
 
-	Users       primitive.A `json:"-" bson:"users" mson:"collection=users"`
-	UserObjects []Users     `json:"users" bson:"-"`
+	Users       bson.A  `json:"-" bson:"users" mson:"collection=users"`
+	UserObjects []Users `json:"users" bson:"-"`
 
-	Agents       primitive.A `json:"-" bson:"agents" mson:"collection=agents"`
-	AgentObjects []Agents    `json:"agents" bson:"-"`
+	Agents       bson.A   `json:"-" bson:"agents" mson:"collection=agents"`
+	AgentObjects []Agents `json:"agents" bson:"-"`
 
-	Audit        primitive.A    `json:"-" bson:"audit" mson:"collection=accountaudit"`
+	Audit        bson.A         `json:"-" bson:"audit" mson:"collection=accountaudit"`
 	AuditObjects []AccountAudit `json:"audit" bson:"-"`
 
 	State AccountState `json:"state" bson:"state"`
 
-	Integrations       primitive.A           `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
+	Integrations       bson.A                `json:"-" bson:"integrations" mson:"collection=accountintegrations"`
 	IntegrationObjects []AccountIntegrations `json:"integrations" bson:"-"`
 
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
@@ -35,10 +34,10 @@ type Accounts struct {
 }
 
 type AccountSessions struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	AccountID primitive.ObjectID `json:"accountId" bson:"accountId"`
-	UserID    primitive.ObjectID `json:"userId" bson:"userId"`
-	Expiry    time.Time          `json:"expiry" bson:"expiry"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	AccountID bson.ObjectID `json:"accountId" bson:"accountId"`
+	UserID    bson.ObjectID `json:"userId" bson:"userId"`
+	Expiry    time.Time     `json:"expiry" bson:"expiry"`
 }
 
 type AccountState struct {
@@ -48,9 +47,9 @@ type AccountState struct {
 }
 
 type AccountAudit struct {
-	ID      primitive.ObjectID `json:"_id" bson:"_id"`
-	Type    string             `json:"type" bson:"type"`
-	Message string             `json:"message" bson:"message"`
+	ID      bson.ObjectID `json:"_id" bson:"_id"`
+	Type    string        `json:"type" bson:"type"`
+	Message string        `json:"message" bson:"message"`
 
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
 }
@@ -72,7 +71,7 @@ const (
 )
 
 type AccountIntegrations struct {
-	ID         primitive.ObjectID        `json:"_id" bson:"_id"`
+	ID         bson.ObjectID             `json:"_id" bson:"_id"`
 	Type       IntegrationType           `json:"type" bson:"type"`
 	Url        string                    `json:"url" bson:"url"`
 	EventTypes []IntegrationEventType    `json:"eventTypes" bson:"eventTypes"`
@@ -82,7 +81,7 @@ type AccountIntegrations struct {
 }
 
 type AccountIntegrationEvent struct {
-	ID           primitive.ObjectID   `json:"_id" bson:"_id"`
+	ID           bson.ObjectID        `json:"_id" bson:"_id"`
 	Type         IntegrationEventType `json:"type" bson:"type"`
 	Retries      int                  `json:"retries" bson:"retries"`
 	Status       string               `json:"status" bson:"status"`
@@ -226,7 +225,7 @@ func (obj *Accounts) PopulateUsers() error {
 func (obj *Accounts) PopulateAgents() error {
 
 	if obj.Agents == nil {
-		obj.Agents = make(primitive.A, 0)
+		obj.Agents = make(bson.A, 0)
 	}
 
 	err := mongoose.PopulateObjectArray(obj, "Agents", &obj.AgentObjects)

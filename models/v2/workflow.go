@@ -1,7 +1,7 @@
 package v2
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 const (
@@ -23,7 +23,7 @@ type IWorkflowAction interface {
 }
 
 type BaseWorkflowData struct {
-	AccountId primitive.ObjectID `json:"accountid" bson:"accountId"`
+	AccountId bson.ObjectID `json:"accountid" bson:"accountId"`
 }
 
 type CreateAgentWorkflowData struct {
@@ -42,11 +42,11 @@ type ClaimServer_PostData struct {
 }
 
 type WorkflowSchema struct {
-	ID      primitive.ObjectID `json:"_id" bson:"_id"`
-	Type    string             `json:"type" bson:"type"`
-	Actions []WorkflowAction   `json:"actions" bson:"actions"`
-	Status  string             `json:"status" bson:"status"`
-	Data    interface{}        `json:"data" bson:"data"`
+	ID      bson.ObjectID    `json:"_id" bson:"_id"`
+	Type    string           `json:"type" bson:"type"`
+	Actions []WorkflowAction `json:"actions" bson:"actions"`
+	Status  string           `json:"status" bson:"status"`
+	Data    interface{}      `json:"data" bson:"data"`
 }
 
 type WorkflowAction struct {

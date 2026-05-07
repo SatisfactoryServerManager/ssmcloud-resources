@@ -8,15 +8,14 @@ import (
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/models"
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
 	"github.com/mrhid6/go-mongoose/mongoose"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type Agents struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	AgentName string             `json:"agentName" bson:"agentName"`
-	APIKey    string             `json:"apiKey" bson:"apiKey"`
-	Status    AgentStatus        `json:"status" bson:"status"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	AgentName string        `json:"agentName" bson:"agentName"`
+	APIKey    string        `json:"apiKey" bson:"apiKey"`
+	Status    AgentStatus   `json:"status" bson:"status"`
 
 	Config       AgentConfig       `json:"config" bson:"config"`
 	ServerConfig AgentServerConfig `json:"serverConfig" bson:"serverConfig"`
@@ -28,10 +27,10 @@ type Agents struct {
 
 	Tasks []AgentTask `json:"tasks" bson:"tasks"`
 
-	Logs       primitive.A `json:"-" bson:"logs" mson:"collection=agentlogs"`
+	Logs       bson.A      `json:"-" bson:"logs" mson:"collection=agentlogs"`
 	LogObjects []AgentLogs `json:"logs" bson:"-"`
 
-	Stats       primitive.A `json:"-" bson:"stats" mson:"collection=agentstats"`
+	Stats       bson.A      `json:"-" bson:"stats" mson:"collection=agentstats"`
 	StatObjects []AgentStat `json:"stats" bson:"-"`
 
 	ModConfig AgentModConfig `json:"modConfig" bson:"modConfig"`
@@ -132,41 +131,41 @@ type AgentModConfig struct {
 }
 
 type AgentModConfigSelectedMod struct {
-	Mod              primitive.ObjectID `json:"-" bson:"mod" mson:"collection=mods"`
-	ModObject        models.ModSchema   `json:"mod" bson:"-"`
-	DesiredVersion   string             `json:"desiredVersion" bson:"desiredVersion"`
-	InstalledVersion string             `json:"installedVersion" bson:"installedVersion"`
-	Installed        bool               `json:"installed" bson:"installed"`
-	NeedsUpdate      bool               `json:"needsUpdate" bson:"needsUpdate"`
-	Config           string             `json:"config" bson:"config"`
+	Mod              bson.ObjectID    `json:"-" bson:"mod" mson:"collection=mods"`
+	ModObject        models.ModSchema `json:"mod" bson:"-"`
+	DesiredVersion   string           `json:"desiredVersion" bson:"desiredVersion"`
+	InstalledVersion string           `json:"installedVersion" bson:"installedVersion"`
+	Installed        bool             `json:"installed" bson:"installed"`
+	NeedsUpdate      bool             `json:"needsUpdate" bson:"needsUpdate"`
+	Config           string           `json:"config" bson:"config"`
 }
 
 // Task Data
 
 type AgentTask struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	Action    string             `json:"action" bson:"action"`
-	Data      interface{}        `json:"data" bson:"data"`
-	Completed bool               `json:"completed" bson:"completed"`
-	Retries   int                `json:"retries" bson:"retries"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	Action    string        `json:"action" bson:"action"`
+	Data      interface{}   `json:"data" bson:"data"`
+	Completed bool          `json:"completed" bson:"completed"`
+	Retries   int           `json:"retries" bson:"retries"`
 }
 
 type AgentLogs struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	FileName  string             `json:"fileName" bson:"fileName"`
-	Type      string             `json:"type" bson:"type"`
-	Snippet   string             `json:"snippet" bson:"snippet"`
-	FileURL   string             `json:"fileUrl" bson:"fileUrl"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
-	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	FileName  string        `json:"fileName" bson:"fileName"`
+	Type      string        `json:"type" bson:"type"`
+	Snippet   string        `json:"snippet" bson:"snippet"`
+	FileURL   string        `json:"fileUrl" bson:"fileUrl"`
+	CreatedAt time.Time     `json:"createdAt" bson:"createdAt"`
+	UpdatedAt time.Time     `json:"updatedAt" bson:"updatedAt"`
 }
 
 type AgentStat struct {
-	ID        primitive.ObjectID `json:"_id" bson:"_id"`
-	Running   bool               `json:"running" bson:"running"`
-	CPU       float64            `json:"cpu" bson:"cpu"`
-	MEM       float32            `json:"mem" bson:"mem"`
-	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	ID        bson.ObjectID `json:"_id" bson:"_id"`
+	Running   bool          `json:"running" bson:"running"`
+	CPU       float64       `json:"cpu" bson:"cpu"`
+	MEM       float32       `json:"mem" bson:"mem"`
+	CreatedAt time.Time     `json:"createdAt" bson:"createdAt"`
 }
 
 func (obj *Agents) AtomicDelete() error {
@@ -329,7 +328,7 @@ func (obj *AgentModConfigSelectedMod) PopulateMod() {
 
 func (obj *Agents) CreateStat(running bool, cpu float64, mem float32) error {
 	newStat := AgentStat{
-		ID:        primitive.NewObjectID(),
+		ID:        bson.NewObjectID(),
 		CPU:       cpu,
 		MEM:       mem,
 		Running:   running,
@@ -366,7 +365,7 @@ func (obj *Agents) PurgeStats() error {
 	now := time.Now()
 	expiry := now.AddDate(0, 0, -3)
 
-	newStats := make(primitive.A, 0)
+	newStats := make(bson.A, 0)
 	deleteStats := make([]AgentStat, 0)
 
 	for idx := range obj.StatObjects {
@@ -407,12 +406,12 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) Agents {
 	}
 
 	newAgent := Agents{
-		ID:        primitive.NewObjectID(),
+		ID:        bson.NewObjectID(),
 		AgentName: agentName,
 		APIKey:    apiKey,
 		Tasks:     make([]AgentTask, 0),
-		Logs:      make(primitive.A, 0),
-		Stats:     make(primitive.A, 0),
+		Logs:      make(bson.A, 0),
+		Stats:     make(bson.A, 0),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -444,7 +443,7 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) Agents {
 
 func NewAgentTask(action string, data interface{}) AgentTask {
 	return AgentTask{
-		ID:     primitive.NewObjectID(),
+		ID:     bson.NewObjectID(),
 		Action: action,
 		Data:   data,
 	}

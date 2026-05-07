@@ -1,18 +1,18 @@
 package models
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 type ModSchema struct {
-	ID           primitive.ObjectID `json:"_id" bson:"_id"`
-	ModID        string             `json:"id" bson:"modId"`
-	ModName      string             `json:"name" bson:"modName"`
-	ModReference string             `json:"mod_reference" bson:"modReference"`
-	Hidden       bool               `json:"hidden" bson:"hidden"`
-	LogoURL      string             `json:"logo" bson:"logoUrl"`
-	Downloads    int                `json:"downloads" bson:"downloads"`
-	Versions     []ModVersion       `json:"versions" bson:"versions"`
+	ID           bson.ObjectID `json:"_id" bson:"_id"`
+	ModID        string        `json:"id" bson:"modId"`
+	ModName      string        `json:"name" bson:"modName"`
+	ModReference string        `json:"mod_reference" bson:"modReference"`
+	Hidden       bool          `json:"hidden" bson:"hidden"`
+	LogoURL      string        `json:"logo" bson:"logoUrl"`
+	Downloads    int           `json:"downloads" bson:"downloads"`
+	Versions     []ModVersion  `json:"versions" bson:"versions"`
 }
 
 type ModVersion struct {

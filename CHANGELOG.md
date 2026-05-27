@@ -1,3 +1,6 @@
+## 0.0.89 (May 27, 2026)
+  - feat: Updated deps
+
 ## 0.0.88 (May 07, 2026)
   - feat: Update to use mongo driver v2
 

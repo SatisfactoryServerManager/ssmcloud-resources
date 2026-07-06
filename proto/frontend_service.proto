@@ -49,6 +49,7 @@ service FrontendService {
     rpc DownloadFile(FrontendDownloadRequest) returns (stream DownloadFileChunk);
     rpc AddAccountIntegration(AddAccountIntegrationRequest) returns (SSMEmpty);
     rpc UpdateAccountIntegration(UpdateAccountIntegrationRequest) returns (SSMEmpty);
+    rpc DeleteAccountIntegration(DeleteAccountIntegrationRequest) returns (SSMEmpty);
 
 }
 
@@ -81,6 +82,10 @@ message UpdateAccountIntegrationRequest {
     int32 type = 3;
     string url = 4;
     repeated string event_types = 5;
+}
+message DeleteAccountIntegrationRequest {
+    string eid = 1;
+    string integration_id = 2;
 }
 
 message CheckUserExistsOrCreateRequest {

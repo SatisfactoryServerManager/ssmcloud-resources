@@ -48,6 +48,7 @@ const (
 	FrontendService_DownloadFile_FullMethodName                     = "/FrontendService/DownloadFile"
 	FrontendService_AddAccountIntegration_FullMethodName            = "/FrontendService/AddAccountIntegration"
 	FrontendService_UpdateAccountIntegration_FullMethodName         = "/FrontendService/UpdateAccountIntegration"
+	FrontendService_DeleteAccountIntegration_FullMethodName         = "/FrontendService/DeleteAccountIntegration"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -82,6 +83,7 @@ type FrontendServiceClient interface {
 	DownloadFile(ctx context.Context, in *FrontendDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadFileChunk], error)
 	AddAccountIntegration(ctx context.Context, in *AddAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAccountIntegration(ctx context.Context, in *UpdateAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	DeleteAccountIntegration(ctx context.Context, in *DeleteAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 }
 
 type frontendServiceClient struct {
@@ -384,6 +386,16 @@ func (c *frontendServiceClient) UpdateAccountIntegration(ctx context.Context, in
 	return out, nil
 }
 
+func (c *frontendServiceClient) DeleteAccountIntegration(ctx context.Context, in *DeleteAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_DeleteAccountIntegration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
@@ -416,6 +428,7 @@ type FrontendServiceServer interface {
 	DownloadFile(*FrontendDownloadRequest, grpc.ServerStreamingServer[DownloadFileChunk]) error
 	AddAccountIntegration(context.Context, *AddAccountIntegrationRequest) (*models.SSMEmpty, error)
 	UpdateAccountIntegration(context.Context, *UpdateAccountIntegrationRequest) (*models.SSMEmpty, error)
+	DeleteAccountIntegration(context.Context, *DeleteAccountIntegrationRequest) (*models.SSMEmpty, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -509,6 +522,9 @@ func (UnimplementedFrontendServiceServer) AddAccountIntegration(context.Context,
 }
 func (UnimplementedFrontendServiceServer) UpdateAccountIntegration(context.Context, *UpdateAccountIntegrationRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAccountIntegration not implemented")
+}
+func (UnimplementedFrontendServiceServer) DeleteAccountIntegration(context.Context, *DeleteAccountIntegrationRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAccountIntegration not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -1017,6 +1033,24 @@ func _FrontendService_UpdateAccountIntegration_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_DeleteAccountIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountIntegrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).DeleteAccountIntegration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_DeleteAccountIntegration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).DeleteAccountIntegration(ctx, req.(*DeleteAccountIntegrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1127,6 +1161,10 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAccountIntegration",
 			Handler:    _FrontendService_UpdateAccountIntegration_Handler,
+		},
+		{
+			MethodName: "DeleteAccountIntegration",
+			Handler:    _FrontendService_DeleteAccountIntegration_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

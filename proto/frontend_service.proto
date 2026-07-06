@@ -73,14 +73,14 @@ message AddAccountIntegrationRequest {
     string name = 2;
     int32 type = 3;
     string url = 4;
-    repeated int32 event_types = 5;
+    repeated string event_types = 5;
 }
 message UpdateAccountIntegrationRequest {
     string integration_id = 1;
     string name = 2;
     int32 type = 3;
     string url = 4;
-    repeated int32 event_types = 5;
+    repeated string event_types = 5;
 }
 
 message CheckUserExistsOrCreateRequest {

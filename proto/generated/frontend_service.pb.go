@@ -205,7 +205,7 @@ type AddAccountIntegrationRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
 	Url           string                 `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
-	EventTypes    []int32                `protobuf:"varint,5,rep,packed,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
+	EventTypes    []string               `protobuf:"bytes,5,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -268,7 +268,7 @@ func (x *AddAccountIntegrationRequest) GetUrl() string {
 	return ""
 }
 
-func (x *AddAccountIntegrationRequest) GetEventTypes() []int32 {
+func (x *AddAccountIntegrationRequest) GetEventTypes() []string {
 	if x != nil {
 		return x.EventTypes
 	}
@@ -281,7 +281,7 @@ type UpdateAccountIntegrationRequest struct {
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Type          int32                  `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
 	Url           string                 `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
-	EventTypes    []int32                `protobuf:"varint,5,rep,packed,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
+	EventTypes    []string               `protobuf:"bytes,5,rep,name=event_types,json=eventTypes,proto3" json:"event_types,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -344,7 +344,7 @@ func (x *UpdateAccountIntegrationRequest) GetUrl() string {
 	return ""
 }
 
-func (x *UpdateAccountIntegrationRequest) GetEventTypes() []int32 {
+func (x *UpdateAccountIntegrationRequest) GetEventTypes() []string {
 	if x != nil {
 		return x.EventTypes
 	}
@@ -2664,14 +2664,14 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1f\n" +
-	"\vevent_types\x18\x05 \x03(\x05R\n" +
+	"\vevent_types\x18\x05 \x03(\tR\n" +
 	"eventTypes\"\xa3\x01\n" +
 	"\x1fUpdateAccountIntegrationRequest\x12%\n" +
 	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\x05R\x04type\x12\x10\n" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x1f\n" +
-	"\vevent_types\x18\x05 \x03(\x05R\n" +
+	"\vevent_types\x18\x05 \x03(\tR\n" +
 	"eventTypes\"d\n" +
 	"\x1eCheckUserExistsOrCreateRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +

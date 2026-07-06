@@ -45,6 +45,9 @@ const (
 	FrontendService_GetAccountIntegrationEvents_FullMethodName      = "/FrontendService/GetAccountIntegrationEvents"
 	FrontendService_UploadSaveFile_FullMethodName                   = "/FrontendService/UploadSaveFile"
 	FrontendService_GetAgentWorkflow_FullMethodName                 = "/FrontendService/GetAgentWorkflow"
+	FrontendService_DownloadFile_FullMethodName                     = "/FrontendService/DownloadFile"
+	FrontendService_AddAccountIntegration_FullMethodName            = "/FrontendService/AddAccountIntegration"
+	FrontendService_UpdateAccountIntegration_FullMethodName         = "/FrontendService/UpdateAccountIntegration"
 )
 
 // FrontendServiceClient is the client API for FrontendService service.
@@ -76,6 +79,9 @@ type FrontendServiceClient interface {
 	GetAccountIntegrationEvents(ctx context.Context, in *GetAccountIntegrationEventsRequest, opts ...grpc.CallOption) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error)
 	GetAgentWorkflow(ctx context.Context, in *GetAgentWorkflowRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
+	DownloadFile(ctx context.Context, in *FrontendDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadFileChunk], error)
+	AddAccountIntegration(ctx context.Context, in *AddAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	UpdateAccountIntegration(ctx context.Context, in *UpdateAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 }
 
 type frontendServiceClient struct {
@@ -339,6 +345,45 @@ func (c *frontendServiceClient) GetAgentWorkflow(ctx context.Context, in *GetAge
 	return out, nil
 }
 
+func (c *frontendServiceClient) DownloadFile(ctx context.Context, in *FrontendDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadFileChunk], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &FrontendService_ServiceDesc.Streams[1], FrontendService_DownloadFile_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[FrontendDownloadRequest, DownloadFileChunk]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type FrontendService_DownloadFileClient = grpc.ServerStreamingClient[DownloadFileChunk]
+
+func (c *frontendServiceClient) AddAccountIntegration(ctx context.Context, in *AddAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_AddAccountIntegration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) UpdateAccountIntegration(ctx context.Context, in *UpdateAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_UpdateAccountIntegration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FrontendServiceServer is the server API for FrontendService service.
 // All implementations must embed UnimplementedFrontendServiceServer
 // for forward compatibility.
@@ -368,6 +413,9 @@ type FrontendServiceServer interface {
 	GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error
 	GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error)
+	DownloadFile(*FrontendDownloadRequest, grpc.ServerStreamingServer[DownloadFileChunk]) error
+	AddAccountIntegration(context.Context, *AddAccountIntegrationRequest) (*models.SSMEmpty, error)
+	UpdateAccountIntegration(context.Context, *UpdateAccountIntegrationRequest) (*models.SSMEmpty, error)
 	mustEmbedUnimplementedFrontendServiceServer()
 }
 
@@ -452,6 +500,15 @@ func (UnimplementedFrontendServiceServer) UploadSaveFile(grpc.ClientStreamingSer
 }
 func (UnimplementedFrontendServiceServer) GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentWorkflow not implemented")
+}
+func (UnimplementedFrontendServiceServer) DownloadFile(*FrontendDownloadRequest, grpc.ServerStreamingServer[DownloadFileChunk]) error {
+	return status.Error(codes.Unimplemented, "method DownloadFile not implemented")
+}
+func (UnimplementedFrontendServiceServer) AddAccountIntegration(context.Context, *AddAccountIntegrationRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddAccountIntegration not implemented")
+}
+func (UnimplementedFrontendServiceServer) UpdateAccountIntegration(context.Context, *UpdateAccountIntegrationRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAccountIntegration not implemented")
 }
 func (UnimplementedFrontendServiceServer) mustEmbedUnimplementedFrontendServiceServer() {}
 func (UnimplementedFrontendServiceServer) testEmbeddedByValue()                         {}
@@ -913,6 +970,53 @@ func _FrontendService_GetAgentWorkflow_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_DownloadFile_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(FrontendDownloadRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FrontendServiceServer).DownloadFile(m, &grpc.GenericServerStream[FrontendDownloadRequest, DownloadFileChunk]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type FrontendService_DownloadFileServer = grpc.ServerStreamingServer[DownloadFileChunk]
+
+func _FrontendService_AddAccountIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddAccountIntegrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).AddAccountIntegration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_AddAccountIntegration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).AddAccountIntegration(ctx, req.(*AddAccountIntegrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_UpdateAccountIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountIntegrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).UpdateAccountIntegration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_UpdateAccountIntegration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).UpdateAccountIntegration(ctx, req.(*UpdateAccountIntegrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FrontendService_ServiceDesc is the grpc.ServiceDesc for FrontendService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1016,12 +1120,25 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetAgentWorkflow",
 			Handler:    _FrontendService_GetAgentWorkflow_Handler,
 		},
+		{
+			MethodName: "AddAccountIntegration",
+			Handler:    _FrontendService_AddAccountIntegration_Handler,
+		},
+		{
+			MethodName: "UpdateAccountIntegration",
+			Handler:    _FrontendService_UpdateAccountIntegration_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "UploadSaveFile",
 			Handler:       _FrontendService_UploadSaveFile_Handler,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "DownloadFile",
+			Handler:       _FrontendService_DownloadFile_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "frontend_service.proto",

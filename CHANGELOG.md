@@ -1,3 +1,9 @@
+## 0.0.90 (July 07, 2026)
+  - feat: add DeleteAccountIntegration frontend RPC
+  - fix: integration event_types are strings not ints
+  - feat: add frontend download + integration add/update RPCs
+  - feat: add AgentFileService proto for resumable transfer + save sync
+
 ## 0.0.89 (May 27, 2026)
   - feat: Updated deps
 

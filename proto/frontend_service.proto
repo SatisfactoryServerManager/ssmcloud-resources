@@ -45,7 +45,47 @@ service FrontendService {
     rpc UploadSaveFile(stream UploadSaveFileRequest) returns (UploadSaveFileResponse);
 
     rpc GetAgentWorkflow(GetAgentWorkflowRequest) returns(GetAgentWorkflowResponse);
-    
+
+    rpc DownloadFile(FrontendDownloadRequest) returns (stream DownloadFileChunk);
+    rpc AddAccountIntegration(AddAccountIntegrationRequest) returns (SSMEmpty);
+    rpc UpdateAccountIntegration(UpdateAccountIntegrationRequest) returns (SSMEmpty);
+    rpc DeleteAccountIntegration(DeleteAccountIntegrationRequest) returns (SSMEmpty);
+
+}
+
+enum FrontendDownloadKind {
+    FRONTEND_DOWNLOAD_SAVE = 0;
+    FRONTEND_DOWNLOAD_BACKUP = 1;
+    FRONTEND_DOWNLOAD_LOG = 2;
+}
+
+message FrontendDownloadRequest {
+    string eid = 1;
+    string agent_id = 2;
+    FrontendDownloadKind kind = 3;
+    string uuid = 4;      // for save/backup
+    string logtype = 5;   // for log
+    int64 start_offset = 6;
+}
+message DownloadFileChunk { bytes chunk = 1; }
+
+message AddAccountIntegrationRequest {
+    string eid = 1;
+    string name = 2;
+    int32 type = 3;
+    string url = 4;
+    repeated string event_types = 5;
+}
+message UpdateAccountIntegrationRequest {
+    string integration_id = 1;
+    string name = 2;
+    int32 type = 3;
+    string url = 4;
+    repeated string event_types = 5;
+}
+message DeleteAccountIntegrationRequest {
+    string eid = 1;
+    string integration_id = 2;
 }
 
 message CheckUserExistsOrCreateRequest {

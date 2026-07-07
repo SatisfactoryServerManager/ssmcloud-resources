@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated";
+
+import "models/empty.proto";
+
+service AgentFileService {
+  // Returns bytes already staged server-side for a resumable upload.
+  rpc GetUploadOffset(UploadOffsetRequest) returns (UploadOffsetResponse);
+  // Client-streaming resumable upload: first message MUST be `init`, then chunks.
+  rpc UploadFile(stream UploadFileRequest) returns (UploadFileResponse);
+  // Server-streaming resumable download from start_offset.
+  rpc DownloadFile(DownloadFileRequest) returns (stream DownloadChunk);
+  // Save metadata sync (replaces GET/POST /v1/agent/save/sync).
+  rpc GetSaveSync(SSMEmpty) returns (GetSaveSyncResponse);
+  rpc PostSaveSync(PostSaveSyncRequest) returns (SSMEmpty);
+}
+
+enum FileKind {
+  FILE_KIND_SAVE = 0;
+  FILE_KIND_BACKUP = 1;
+  FILE_KIND_LOG = 2;
+}
+
+message UploadOffsetRequest { string transfer_id = 1; }
+message UploadOffsetResponse { int64 offset = 1; }
+
+message UploadInit {
+  string transfer_id = 1;
+  FileKind kind = 2;
+  string filename = 3;
+}
+
+message UploadFileRequest {
+  oneof data {
+    UploadInit init = 1;
+    bytes chunk = 2;
+  }
+}
+
+message UploadFileResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DownloadFileRequest {
+  string filename = 1;
+  int64 start_offset = 2;
+}
+message DownloadChunk { bytes chunk = 1; }
+
+// Mirrors the JSON fields the agent exchanges on /v1/agent/save/sync.
+message SaveSyncItem {
+  string uuid = 1;
+  string file_name = 2;
+  int64 size = 3;
+  int64 mod_time_unix = 4;
+}
+message GetSaveSyncResponse { repeated SaveSyncItem saves = 1; }
+message PostSaveSyncRequest { repeated SaveSyncItem saves = 1; }

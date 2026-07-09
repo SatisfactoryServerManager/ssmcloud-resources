@@ -1,3 +1,7 @@
+## 0.0.91 (July 09, 2026)
+  - feat: add mod catalogue filter fields to GetAgentModsRequest
+  - Merge pull request #1 from SatisfactoryServerManager/feature/rest-to-grpc-migration
+
 ## 0.0.90 (July 07, 2026)
   - feat: add DeleteAccountIntegration frontend RPC
   - fix: integration event_types are strings not ints

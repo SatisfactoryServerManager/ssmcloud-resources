@@ -1364,15 +1364,19 @@ func (x *CreateAgentTaskRequest) GetAction() string {
 }
 
 type GetAgentModsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
-	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
-	Sort          string                 `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
-	Direction     string                 `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
-	Search        string                 `protobuf:"bytes,6,opt,name=search,proto3" json:"search,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Eid             string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId         string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Page            int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	Sort            string                 `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
+	Direction       string                 `protobuf:"bytes,5,opt,name=direction,proto3" json:"direction,omitempty"`
+	Search          string                 `protobuf:"bytes,6,opt,name=search,proto3" json:"search,omitempty"`
+	FilterAvailable bool                   `protobuf:"varint,7,opt,name=filter_available,json=filterAvailable,proto3" json:"filter_available,omitempty"`
+	FilterInstalled bool                   `protobuf:"varint,8,opt,name=filter_installed,json=filterInstalled,proto3" json:"filter_installed,omitempty"`
+	OnlyUpdatable   bool                   `protobuf:"varint,9,opt,name=only_updatable,json=onlyUpdatable,proto3" json:"only_updatable,omitempty"`
+	IncludeHidden   bool                   `protobuf:"varint,10,opt,name=include_hidden,json=includeHidden,proto3" json:"include_hidden,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetAgentModsRequest) Reset() {
@@ -1445,6 +1449,34 @@ func (x *GetAgentModsRequest) GetSearch() string {
 		return x.Search
 	}
 	return ""
+}
+
+func (x *GetAgentModsRequest) GetFilterAvailable() bool {
+	if x != nil {
+		return x.FilterAvailable
+	}
+	return false
+}
+
+func (x *GetAgentModsRequest) GetFilterInstalled() bool {
+	if x != nil {
+		return x.FilterInstalled
+	}
+	return false
+}
+
+func (x *GetAgentModsRequest) GetOnlyUpdatable() bool {
+	if x != nil {
+		return x.OnlyUpdatable
+	}
+	return false
+}
+
+func (x *GetAgentModsRequest) GetIncludeHidden() bool {
+	if x != nil {
+		return x.IncludeHidden
+	}
+	return false
 }
 
 type GetAgentModsResponse struct {
@@ -2779,14 +2811,19 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x16CreateAgentTaskRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\"\xa0\x01\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"\xc4\x02\n" +
 	"\x13GetAgentModsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x12\n" +
 	"\x04sort\x18\x04 \x01(\tR\x04sort\x12\x1c\n" +
 	"\tdirection\x18\x05 \x01(\tR\tdirection\x12\x16\n" +
-	"\x06search\x18\x06 \x01(\tR\x06search\"\x9b\x01\n" +
+	"\x06search\x18\x06 \x01(\tR\x06search\x12)\n" +
+	"\x10filter_available\x18\a \x01(\bR\x0ffilterAvailable\x12)\n" +
+	"\x10filter_installed\x18\b \x01(\bR\x0ffilterInstalled\x12%\n" +
+	"\x0eonly_updatable\x18\t \x01(\bR\ronlyUpdatable\x12%\n" +
+	"\x0einclude_hidden\x18\n" +
+	" \x01(\bR\rincludeHidden\"\x9b\x01\n" +
 	"\x14GetAgentModsResponse\x12\x18\n" +
 	"\x04mods\x18\x01 \x03(\v2\x04.ModR\x04mods\x124\n" +
 	"\x10agent_mod_config\x18\x02 \x01(\v2\n" +

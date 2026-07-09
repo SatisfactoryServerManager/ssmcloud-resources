@@ -186,6 +186,10 @@ message GetAgentModsRequest {
     string sort = 4;
     string direction = 5;
     string search = 6;
+    bool filter_available = 7;
+    bool filter_installed = 8;
+    bool only_updatable = 9;
+    bool include_hidden = 10;
 }
 
 message GetAgentModsResponse {

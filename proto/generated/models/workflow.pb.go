@@ -103,6 +103,7 @@ type WorkflowAction struct {
 	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	RetryCount    int32                  `protobuf:"varint,4,opt,name=retry_count,json=retryCount,proto3" json:"retry_count,omitempty"`
+	TaskAction    string                 `protobuf:"bytes,5,opt,name=task_action,json=taskAction,proto3" json:"task_action,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -165,6 +166,13 @@ func (x *WorkflowAction) GetRetryCount() int32 {
 	return 0
 }
 
+func (x *WorkflowAction) GetTaskAction() string {
+	if x != nil {
+		return x.TaskAction
+	}
+	return ""
+}
+
 var File_models_workflow_proto protoreflect.FileDescriptor
 
 const file_models_workflow_proto_rawDesc = "" +
@@ -175,13 +183,15 @@ const file_models_workflow_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12)\n" +
 	"\aactions\x18\x03 \x03(\v2\x0f.WorkflowActionR\aactions\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
-	"\bagent_id\x18\x05 \x01(\tR\aagentId\"\x82\x01\n" +
+	"\bagent_id\x18\x05 \x01(\tR\aagentId\"\xa3\x01\n" +
 	"\x0eWorkflowAction\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12#\n" +
 	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\x12\x1f\n" +
 	"\vretry_count\x18\x04 \x01(\x05R\n" +
-	"retryCountBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	"retryCount\x12\x1f\n" +
+	"\vtask_action\x18\x05 \x01(\tR\n" +
+	"taskActionBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_workflow_proto_rawDescOnce sync.Once

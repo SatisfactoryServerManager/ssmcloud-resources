@@ -15,4 +15,5 @@ message WorkflowAction {
     string status = 2;
     string error_message = 3;
     int32 retry_count = 4;
+    string task_action = 5;
 }

@@ -34,5 +34,6 @@ func MapWorkflowActionToProto(workflowAction *v2.WorkflowAction) *pbModels.Workf
 		Status:       workflowAction.Status,
 		ErrorMessage: workflowAction.ErrorMessage,
 		RetryCount:   int32(workflowAction.RetryCount),
+		TaskAction:   workflowAction.TaskAction,
 	}
 }

@@ -1,6 +1,8 @@
 package v2
 
 import (
+	"time"
+
 	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
@@ -9,17 +11,18 @@ const (
 )
 
 const (
-	WorkflowActionType_CreateAgent      = "create-agent"
-	WorkflowActionType_WaitForOnline    = "wait-for-online"
-	WorkflowActionType_InstallServer    = "install-server"
-	WorkflowActionType_WaitForInstalled = "wait-for-installed"
-	WorkflowActionType_StartServer      = "start-server"
-	WorkflowActionType_WaitForRunning   = "wait-for-running"
-	WorkflowActionType_ClaimServer      = "claim-server"
+	WorkflowActionType_CreateAgent   = "create-agent"
+	WorkflowActionType_WaitForOnline = "wait-for-online"
+	WorkflowActionType_AgentTask     = "agent-task"
 )
 
+type WorkflowContext struct {
+	WorkflowID bson.ObjectID
+	ActionIdx  int
+}
+
 type IWorkflowAction interface {
-	Execute(action *WorkflowAction, workflowData interface{}, account *AccountSchema) error
+	Execute(action *WorkflowAction, workflowData interface{}, account *AccountSchema, wctx WorkflowContext) error
 }
 
 type BaseWorkflowData struct {
@@ -56,4 +59,10 @@ type WorkflowAction struct {
 	Status       string `json:"status" bson:"status"`
 	ErrorMessage string `json:"error" bson:"error"`
 	RetryCount   int    `json:"retryCount" bson:"retryCount"`
+
+	// Set when Type == WorkflowActionType_AgentTask.
+	TaskAction string        `json:"taskAction,omitempty" bson:"taskAction,omitempty"`
+	TaskData   interface{}   `json:"taskData,omitempty" bson:"taskData,omitempty"`
+	TaskID     string        `json:"taskId,omitempty" bson:"taskId,omitempty"`
+	Timeout    time.Duration `json:"timeout,omitempty" bson:"timeout,omitempty"`
 }

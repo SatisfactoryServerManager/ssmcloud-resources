@@ -1,3 +1,12 @@
+## 0.0.93 (July 10, 2026)
+  - feat: added workflow task action
+  - feat!: frontend task list, cancel and retry RPCs
+  - refactor!: remove embedded agent task array
+  - feat!: collapse five workflow actions into agent-task
+  - fix!: split agent session id from per-stream connection id
+  - feat!: streaming task dispatch protocol
+  - feat: add AgentTaskSchema and agent stream-connection fields
+
 ## 0.0.92 (July 10, 2026)
   - feat: New workflow changes
 

@@ -33,6 +33,9 @@ const (
 	FrontendService_GetAgentStats_FullMethodName                    = "/FrontendService/GetAgentStats"
 	FrontendService_GetAgentMods_FullMethodName                     = "/FrontendService/GetAgentMods"
 	FrontendService_CreateAgentTask_FullMethodName                  = "/FrontendService/CreateAgentTask"
+	FrontendService_GetAgentTasks_FullMethodName                    = "/FrontendService/GetAgentTasks"
+	FrontendService_CancelAgentTask_FullMethodName                  = "/FrontendService/CancelAgentTask"
+	FrontendService_RetryAgentTask_FullMethodName                   = "/FrontendService/RetryAgentTask"
 	FrontendService_InstallAgentMod_FullMethodName                  = "/FrontendService/InstallAgentMod"
 	FrontendService_UninstallAgentMod_FullMethodName                = "/FrontendService/UninstallAgentMod"
 	FrontendService_UpdateAgentSettings_FullMethodName              = "/FrontendService/UpdateAgentSettings"
@@ -68,7 +71,10 @@ type FrontendServiceClient interface {
 	GetAgentLog(ctx context.Context, in *GetAgentLogRequest, opts ...grpc.CallOption) (*GetAgentLogResponse, error)
 	GetAgentStats(ctx context.Context, in *GetAgentStatsRequest, opts ...grpc.CallOption) (*GetAgentStatsResponse, error)
 	GetAgentMods(ctx context.Context, in *GetAgentModsRequest, opts ...grpc.CallOption) (*GetAgentModsResponse, error)
-	CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*CreateAgentTaskResponse, error)
+	GetAgentTasks(ctx context.Context, in *GetAgentTasksRequest, opts ...grpc.CallOption) (*GetAgentTasksResponse, error)
+	CancelAgentTask(ctx context.Context, in *CancelAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	RetryAgentTask(ctx context.Context, in *RetryAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
@@ -216,10 +222,40 @@ func (c *frontendServiceClient) GetAgentMods(ctx context.Context, in *GetAgentMo
 	return out, nil
 }
 
-func (c *frontendServiceClient) CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+func (c *frontendServiceClient) CreateAgentTask(ctx context.Context, in *CreateAgentTaskRequest, opts ...grpc.CallOption) (*CreateAgentTaskResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAgentTaskResponse)
+	err := c.cc.Invoke(ctx, FrontendService_CreateAgentTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) GetAgentTasks(ctx context.Context, in *GetAgentTasksRequest, opts ...grpc.CallOption) (*GetAgentTasksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgentTasksResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentTasks_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) CancelAgentTask(ctx context.Context, in *CancelAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, FrontendService_CreateAgentTask_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, FrontendService_CancelAgentTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) RetryAgentTask(ctx context.Context, in *RetryAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_RetryAgentTask_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -424,7 +460,10 @@ type FrontendServiceServer interface {
 	GetAgentLog(context.Context, *GetAgentLogRequest) (*GetAgentLogResponse, error)
 	GetAgentStats(context.Context, *GetAgentStatsRequest) (*GetAgentStatsResponse, error)
 	GetAgentMods(context.Context, *GetAgentModsRequest) (*GetAgentModsResponse, error)
-	CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error)
+	CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*CreateAgentTaskResponse, error)
+	GetAgentTasks(context.Context, *GetAgentTasksRequest) (*GetAgentTasksResponse, error)
+	CancelAgentTask(context.Context, *CancelAgentTaskRequest) (*models.SSMEmpty, error)
+	RetryAgentTask(context.Context, *RetryAgentTaskRequest) (*models.SSMEmpty, error)
 	InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error)
 	UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error)
 	UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error)
@@ -488,8 +527,17 @@ func (UnimplementedFrontendServiceServer) GetAgentStats(context.Context, *GetAge
 func (UnimplementedFrontendServiceServer) GetAgentMods(context.Context, *GetAgentModsRequest) (*GetAgentModsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentMods not implemented")
 }
-func (UnimplementedFrontendServiceServer) CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*models.SSMEmpty, error) {
+func (UnimplementedFrontendServiceServer) CreateAgentTask(context.Context, *CreateAgentTaskRequest) (*CreateAgentTaskResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateAgentTask not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAgentTasks(context.Context, *GetAgentTasksRequest) (*GetAgentTasksResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentTasks not implemented")
+}
+func (UnimplementedFrontendServiceServer) CancelAgentTask(context.Context, *CancelAgentTaskRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelAgentTask not implemented")
+}
+func (UnimplementedFrontendServiceServer) RetryAgentTask(context.Context, *RetryAgentTaskRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RetryAgentTask not implemented")
 }
 func (UnimplementedFrontendServiceServer) InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method InstallAgentMod not implemented")
@@ -793,6 +841,60 @@ func _FrontendService_CreateAgentTask_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FrontendServiceServer).CreateAgentTask(ctx, req.(*CreateAgentTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_GetAgentTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentTasksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAgentTasks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAgentTasks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAgentTasks(ctx, req.(*GetAgentTasksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_CancelAgentTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelAgentTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).CancelAgentTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_CancelAgentTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).CancelAgentTask(ctx, req.(*CancelAgentTaskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_RetryAgentTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RetryAgentTaskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).RetryAgentTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_RetryAgentTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).RetryAgentTask(ctx, req.(*RetryAgentTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1143,6 +1245,18 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAgentTask",
 			Handler:    _FrontendService_CreateAgentTask_Handler,
+		},
+		{
+			MethodName: "GetAgentTasks",
+			Handler:    _FrontendService_GetAgentTasks_Handler,
+		},
+		{
+			MethodName: "CancelAgentTask",
+			Handler:    _FrontendService_CancelAgentTask_Handler,
+		},
+		{
+			MethodName: "RetryAgentTask",
+			Handler:    _FrontendService_RetryAgentTask_Handler,
 		},
 		{
 			MethodName: "InstallAgentMod",

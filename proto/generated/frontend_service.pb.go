@@ -1363,6 +1363,398 @@ func (x *CreateAgentTaskRequest) GetAction() string {
 	return ""
 }
 
+type CreateAgentTaskResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateAgentTaskResponse) Reset() {
+	*x = CreateAgentTaskResponse{}
+	mi := &file_frontend_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateAgentTaskResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAgentTaskResponse) ProtoMessage() {}
+
+func (x *CreateAgentTaskResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAgentTaskResponse.ProtoReflect.Descriptor instead.
+func (*CreateAgentTaskResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *CreateAgentTaskResponse) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+type AgentTaskView struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Action                string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	Status                string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Progress              int32                  `protobuf:"varint,4,opt,name=progress,proto3" json:"progress,omitempty"`
+	Message               string                 `protobuf:"bytes,5,opt,name=message,proto3" json:"message,omitempty"`
+	LastError             string                 `protobuf:"bytes,6,opt,name=last_error,json=lastError,proto3" json:"last_error,omitempty"`
+	Attempts              int32                  `protobuf:"varint,7,opt,name=attempts,proto3" json:"attempts,omitempty"`
+	MaxAttempts           int32                  `protobuf:"varint,8,opt,name=max_attempts,json=maxAttempts,proto3" json:"max_attempts,omitempty"`
+	TriggeredByType       string                 `protobuf:"bytes,9,opt,name=triggered_by_type,json=triggeredByType,proto3" json:"triggered_by_type,omitempty"`
+	TriggeredByExternalId string                 `protobuf:"bytes,10,opt,name=triggered_by_external_id,json=triggeredByExternalId,proto3" json:"triggered_by_external_id,omitempty"`
+	CreatedAt             int64                  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	StartedAt             int64                  `protobuf:"varint,12,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	FinishedAt            int64                  `protobuf:"varint,13,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *AgentTaskView) Reset() {
+	*x = AgentTaskView{}
+	mi := &file_frontend_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AgentTaskView) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentTaskView) ProtoMessage() {}
+
+func (x *AgentTaskView) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentTaskView.ProtoReflect.Descriptor instead.
+func (*AgentTaskView) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *AgentTaskView) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetProgress() int32 {
+	if x != nil {
+		return x.Progress
+	}
+	return 0
+}
+
+func (x *AgentTaskView) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetLastError() string {
+	if x != nil {
+		return x.LastError
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetAttempts() int32 {
+	if x != nil {
+		return x.Attempts
+	}
+	return 0
+}
+
+func (x *AgentTaskView) GetMaxAttempts() int32 {
+	if x != nil {
+		return x.MaxAttempts
+	}
+	return 0
+}
+
+func (x *AgentTaskView) GetTriggeredByType() string {
+	if x != nil {
+		return x.TriggeredByType
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetTriggeredByExternalId() string {
+	if x != nil {
+		return x.TriggeredByExternalId
+	}
+	return ""
+}
+
+func (x *AgentTaskView) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *AgentTaskView) GetStartedAt() int64 {
+	if x != nil {
+		return x.StartedAt
+	}
+	return 0
+}
+
+func (x *AgentTaskView) GetFinishedAt() int64 {
+	if x != nil {
+		return x.FinishedAt
+	}
+	return 0
+}
+
+type GetAgentTasksRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	AgentId       string                 `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Limit         int64                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAgentTasksRequest) Reset() {
+	*x = GetAgentTasksRequest{}
+	mi := &file_frontend_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAgentTasksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAgentTasksRequest) ProtoMessage() {}
+
+func (x *GetAgentTasksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAgentTasksRequest.ProtoReflect.Descriptor instead.
+func (*GetAgentTasksRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *GetAgentTasksRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *GetAgentTasksRequest) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
+	}
+	return ""
+}
+
+func (x *GetAgentTasksRequest) GetLimit() int64 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+type GetAgentTasksResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Tasks         []*AgentTaskView       `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAgentTasksResponse) Reset() {
+	*x = GetAgentTasksResponse{}
+	mi := &file_frontend_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAgentTasksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAgentTasksResponse) ProtoMessage() {}
+
+func (x *GetAgentTasksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAgentTasksResponse.ProtoReflect.Descriptor instead.
+func (*GetAgentTasksResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *GetAgentTasksResponse) GetTasks() []*AgentTaskView {
+	if x != nil {
+		return x.Tasks
+	}
+	return nil
+}
+
+type CancelAgentTaskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	TaskId        string                 `protobuf:"bytes,2,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CancelAgentTaskRequest) Reset() {
+	*x = CancelAgentTaskRequest{}
+	mi := &file_frontend_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CancelAgentTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CancelAgentTaskRequest) ProtoMessage() {}
+
+func (x *CancelAgentTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CancelAgentTaskRequest.ProtoReflect.Descriptor instead.
+func (*CancelAgentTaskRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *CancelAgentTaskRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *CancelAgentTaskRequest) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+type RetryAgentTaskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	TaskId        string                 `protobuf:"bytes,2,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RetryAgentTaskRequest) Reset() {
+	*x = RetryAgentTaskRequest{}
+	mi := &file_frontend_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RetryAgentTaskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetryAgentTaskRequest) ProtoMessage() {}
+
+func (x *RetryAgentTaskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetryAgentTaskRequest.ProtoReflect.Descriptor instead.
+func (*RetryAgentTaskRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *RetryAgentTaskRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *RetryAgentTaskRequest) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
 type GetAgentModsRequest struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Eid             string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
@@ -1381,7 +1773,7 @@ type GetAgentModsRequest struct {
 
 func (x *GetAgentModsRequest) Reset() {
 	*x = GetAgentModsRequest{}
-	mi := &file_frontend_service_proto_msgTypes[25]
+	mi := &file_frontend_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1393,7 +1785,7 @@ func (x *GetAgentModsRequest) String() string {
 func (*GetAgentModsRequest) ProtoMessage() {}
 
 func (x *GetAgentModsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[25]
+	mi := &file_frontend_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1406,7 +1798,7 @@ func (x *GetAgentModsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentModsRequest.ProtoReflect.Descriptor instead.
 func (*GetAgentModsRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{25}
+	return file_frontend_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetAgentModsRequest) GetEid() string {
@@ -1491,7 +1883,7 @@ type GetAgentModsResponse struct {
 
 func (x *GetAgentModsResponse) Reset() {
 	*x = GetAgentModsResponse{}
-	mi := &file_frontend_service_proto_msgTypes[26]
+	mi := &file_frontend_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1503,7 +1895,7 @@ func (x *GetAgentModsResponse) String() string {
 func (*GetAgentModsResponse) ProtoMessage() {}
 
 func (x *GetAgentModsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[26]
+	mi := &file_frontend_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1516,7 +1908,7 @@ func (x *GetAgentModsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentModsResponse.ProtoReflect.Descriptor instead.
 func (*GetAgentModsResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{26}
+	return file_frontend_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetAgentModsResponse) GetMods() []*models.Mod {
@@ -1558,7 +1950,7 @@ type InstallAgentModRequest struct {
 
 func (x *InstallAgentModRequest) Reset() {
 	*x = InstallAgentModRequest{}
-	mi := &file_frontend_service_proto_msgTypes[27]
+	mi := &file_frontend_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1570,7 +1962,7 @@ func (x *InstallAgentModRequest) String() string {
 func (*InstallAgentModRequest) ProtoMessage() {}
 
 func (x *InstallAgentModRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[27]
+	mi := &file_frontend_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1583,7 +1975,7 @@ func (x *InstallAgentModRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InstallAgentModRequest.ProtoReflect.Descriptor instead.
 func (*InstallAgentModRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{27}
+	return file_frontend_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *InstallAgentModRequest) GetEid() string {
@@ -1618,7 +2010,7 @@ type UninstallAgentModRequest struct {
 
 func (x *UninstallAgentModRequest) Reset() {
 	*x = UninstallAgentModRequest{}
-	mi := &file_frontend_service_proto_msgTypes[28]
+	mi := &file_frontend_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1630,7 +2022,7 @@ func (x *UninstallAgentModRequest) String() string {
 func (*UninstallAgentModRequest) ProtoMessage() {}
 
 func (x *UninstallAgentModRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[28]
+	mi := &file_frontend_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1643,7 +2035,7 @@ func (x *UninstallAgentModRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UninstallAgentModRequest.ProtoReflect.Descriptor instead.
 func (*UninstallAgentModRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{28}
+	return file_frontend_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *UninstallAgentModRequest) GetEid() string {
@@ -1678,7 +2070,7 @@ type UpdateAgentSettingsRequest struct {
 
 func (x *UpdateAgentSettingsRequest) Reset() {
 	*x = UpdateAgentSettingsRequest{}
-	mi := &file_frontend_service_proto_msgTypes[29]
+	mi := &file_frontend_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1690,7 +2082,7 @@ func (x *UpdateAgentSettingsRequest) String() string {
 func (*UpdateAgentSettingsRequest) ProtoMessage() {}
 
 func (x *UpdateAgentSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[29]
+	mi := &file_frontend_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1703,7 +2095,7 @@ func (x *UpdateAgentSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAgentSettingsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAgentSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{29}
+	return file_frontend_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *UpdateAgentSettingsRequest) GetEid() string {
@@ -1749,7 +2141,7 @@ type ServerSettings struct {
 
 func (x *ServerSettings) Reset() {
 	*x = ServerSettings{}
-	mi := &file_frontend_service_proto_msgTypes[30]
+	mi := &file_frontend_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1761,7 +2153,7 @@ func (x *ServerSettings) String() string {
 func (*ServerSettings) ProtoMessage() {}
 
 func (x *ServerSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[30]
+	mi := &file_frontend_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1774,7 +2166,7 @@ func (x *ServerSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServerSettings.ProtoReflect.Descriptor instead.
 func (*ServerSettings) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{30}
+	return file_frontend_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ServerSettings) GetConfigSetting() string {
@@ -1888,7 +2280,7 @@ type UploadSaveFileRequest struct {
 
 func (x *UploadSaveFileRequest) Reset() {
 	*x = UploadSaveFileRequest{}
-	mi := &file_frontend_service_proto_msgTypes[31]
+	mi := &file_frontend_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1900,7 +2292,7 @@ func (x *UploadSaveFileRequest) String() string {
 func (*UploadSaveFileRequest) ProtoMessage() {}
 
 func (x *UploadSaveFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[31]
+	mi := &file_frontend_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1913,7 +2305,7 @@ func (x *UploadSaveFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadSaveFileRequest.ProtoReflect.Descriptor instead.
 func (*UploadSaveFileRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{31}
+	return file_frontend_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *UploadSaveFileRequest) GetData() isUploadSaveFileRequest_Data {
@@ -1969,7 +2361,7 @@ type FileMetadata struct {
 
 func (x *FileMetadata) Reset() {
 	*x = FileMetadata{}
-	mi := &file_frontend_service_proto_msgTypes[32]
+	mi := &file_frontend_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1981,7 +2373,7 @@ func (x *FileMetadata) String() string {
 func (*FileMetadata) ProtoMessage() {}
 
 func (x *FileMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[32]
+	mi := &file_frontend_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1994,7 +2386,7 @@ func (x *FileMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileMetadata.ProtoReflect.Descriptor instead.
 func (*FileMetadata) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{32}
+	return file_frontend_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *FileMetadata) GetEid() string {
@@ -2034,7 +2426,7 @@ type UploadSaveFileResponse struct {
 
 func (x *UploadSaveFileResponse) Reset() {
 	*x = UploadSaveFileResponse{}
-	mi := &file_frontend_service_proto_msgTypes[33]
+	mi := &file_frontend_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2046,7 +2438,7 @@ func (x *UploadSaveFileResponse) String() string {
 func (*UploadSaveFileResponse) ProtoMessage() {}
 
 func (x *UploadSaveFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[33]
+	mi := &file_frontend_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2059,7 +2451,7 @@ func (x *UploadSaveFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadSaveFileResponse.ProtoReflect.Descriptor instead.
 func (*UploadSaveFileResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{33}
+	return file_frontend_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *UploadSaveFileResponse) GetMessage() string {
@@ -2084,7 +2476,7 @@ type CreateAgentRequest struct {
 
 func (x *CreateAgentRequest) Reset() {
 	*x = CreateAgentRequest{}
-	mi := &file_frontend_service_proto_msgTypes[34]
+	mi := &file_frontend_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2096,7 +2488,7 @@ func (x *CreateAgentRequest) String() string {
 func (*CreateAgentRequest) ProtoMessage() {}
 
 func (x *CreateAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[34]
+	mi := &file_frontend_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2109,7 +2501,7 @@ func (x *CreateAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAgentRequest.ProtoReflect.Descriptor instead.
 func (*CreateAgentRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{34}
+	return file_frontend_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *CreateAgentRequest) GetEid() string {
@@ -2170,7 +2562,7 @@ type CreateAgentResponse struct {
 
 func (x *CreateAgentResponse) Reset() {
 	*x = CreateAgentResponse{}
-	mi := &file_frontend_service_proto_msgTypes[35]
+	mi := &file_frontend_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2182,7 +2574,7 @@ func (x *CreateAgentResponse) String() string {
 func (*CreateAgentResponse) ProtoMessage() {}
 
 func (x *CreateAgentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[35]
+	mi := &file_frontend_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2195,7 +2587,7 @@ func (x *CreateAgentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAgentResponse.ProtoReflect.Descriptor instead.
 func (*CreateAgentResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{35}
+	return file_frontend_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *CreateAgentResponse) GetWorkflowId() string {
@@ -2215,7 +2607,7 @@ type DeleteAgentRequest struct {
 
 func (x *DeleteAgentRequest) Reset() {
 	*x = DeleteAgentRequest{}
-	mi := &file_frontend_service_proto_msgTypes[36]
+	mi := &file_frontend_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2227,7 +2619,7 @@ func (x *DeleteAgentRequest) String() string {
 func (*DeleteAgentRequest) ProtoMessage() {}
 
 func (x *DeleteAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[36]
+	mi := &file_frontend_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2240,7 +2632,7 @@ func (x *DeleteAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAgentRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAgentRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{36}
+	return file_frontend_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *DeleteAgentRequest) GetEid() string {
@@ -2267,7 +2659,7 @@ type SwitchActiveAccountRequest struct {
 
 func (x *SwitchActiveAccountRequest) Reset() {
 	*x = SwitchActiveAccountRequest{}
-	mi := &file_frontend_service_proto_msgTypes[37]
+	mi := &file_frontend_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2279,7 +2671,7 @@ func (x *SwitchActiveAccountRequest) String() string {
 func (*SwitchActiveAccountRequest) ProtoMessage() {}
 
 func (x *SwitchActiveAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[37]
+	mi := &file_frontend_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2292,7 +2684,7 @@ func (x *SwitchActiveAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SwitchActiveAccountRequest.ProtoReflect.Descriptor instead.
 func (*SwitchActiveAccountRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{37}
+	return file_frontend_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *SwitchActiveAccountRequest) GetEid() string {
@@ -2319,7 +2711,7 @@ type CreateAccountRequest struct {
 
 func (x *CreateAccountRequest) Reset() {
 	*x = CreateAccountRequest{}
-	mi := &file_frontend_service_proto_msgTypes[38]
+	mi := &file_frontend_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2331,7 +2723,7 @@ func (x *CreateAccountRequest) String() string {
 func (*CreateAccountRequest) ProtoMessage() {}
 
 func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[38]
+	mi := &file_frontend_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2344,7 +2736,7 @@ func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountRequest.ProtoReflect.Descriptor instead.
 func (*CreateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{38}
+	return file_frontend_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *CreateAccountRequest) GetEid() string {
@@ -2371,7 +2763,7 @@ type JoinAccountRequest struct {
 
 func (x *JoinAccountRequest) Reset() {
 	*x = JoinAccountRequest{}
-	mi := &file_frontend_service_proto_msgTypes[39]
+	mi := &file_frontend_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2383,7 +2775,7 @@ func (x *JoinAccountRequest) String() string {
 func (*JoinAccountRequest) ProtoMessage() {}
 
 func (x *JoinAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[39]
+	mi := &file_frontend_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2396,7 +2788,7 @@ func (x *JoinAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinAccountRequest.ProtoReflect.Descriptor instead.
 func (*JoinAccountRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{39}
+	return file_frontend_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *JoinAccountRequest) GetEid() string {
@@ -2422,7 +2814,7 @@ type GetAgentWorkflowRequest struct {
 
 func (x *GetAgentWorkflowRequest) Reset() {
 	*x = GetAgentWorkflowRequest{}
-	mi := &file_frontend_service_proto_msgTypes[40]
+	mi := &file_frontend_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2434,7 +2826,7 @@ func (x *GetAgentWorkflowRequest) String() string {
 func (*GetAgentWorkflowRequest) ProtoMessage() {}
 
 func (x *GetAgentWorkflowRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[40]
+	mi := &file_frontend_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2447,7 +2839,7 @@ func (x *GetAgentWorkflowRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentWorkflowRequest.ProtoReflect.Descriptor instead.
 func (*GetAgentWorkflowRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{40}
+	return file_frontend_service_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *GetAgentWorkflowRequest) GetWorkflowId() string {
@@ -2466,7 +2858,7 @@ type GetAgentWorkflowByAgentRequest struct {
 
 func (x *GetAgentWorkflowByAgentRequest) Reset() {
 	*x = GetAgentWorkflowByAgentRequest{}
-	mi := &file_frontend_service_proto_msgTypes[41]
+	mi := &file_frontend_service_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2478,7 +2870,7 @@ func (x *GetAgentWorkflowByAgentRequest) String() string {
 func (*GetAgentWorkflowByAgentRequest) ProtoMessage() {}
 
 func (x *GetAgentWorkflowByAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[41]
+	mi := &file_frontend_service_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +2883,7 @@ func (x *GetAgentWorkflowByAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentWorkflowByAgentRequest.ProtoReflect.Descriptor instead.
 func (*GetAgentWorkflowByAgentRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{41}
+	return file_frontend_service_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *GetAgentWorkflowByAgentRequest) GetAgentId() string {
@@ -2510,7 +2902,7 @@ type GetAgentWorkflowResponse struct {
 
 func (x *GetAgentWorkflowResponse) Reset() {
 	*x = GetAgentWorkflowResponse{}
-	mi := &file_frontend_service_proto_msgTypes[42]
+	mi := &file_frontend_service_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2522,7 +2914,7 @@ func (x *GetAgentWorkflowResponse) String() string {
 func (*GetAgentWorkflowResponse) ProtoMessage() {}
 
 func (x *GetAgentWorkflowResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[42]
+	mi := &file_frontend_service_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2535,7 +2927,7 @@ func (x *GetAgentWorkflowResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentWorkflowResponse.ProtoReflect.Descriptor instead.
 func (*GetAgentWorkflowResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{42}
+	return file_frontend_service_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *GetAgentWorkflowResponse) GetWorkflow() *models.Workflow {
@@ -2555,7 +2947,7 @@ type DeleteAccountRequest struct {
 
 func (x *DeleteAccountRequest) Reset() {
 	*x = DeleteAccountRequest{}
-	mi := &file_frontend_service_proto_msgTypes[43]
+	mi := &file_frontend_service_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2567,7 +2959,7 @@ func (x *DeleteAccountRequest) String() string {
 func (*DeleteAccountRequest) ProtoMessage() {}
 
 func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[43]
+	mi := &file_frontend_service_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2580,7 +2972,7 @@ func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAccountRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{43}
+	return file_frontend_service_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *DeleteAccountRequest) GetEid() string {
@@ -2606,7 +2998,7 @@ type GetUserActiveAccountIntegrationsRequest struct {
 
 func (x *GetUserActiveAccountIntegrationsRequest) Reset() {
 	*x = GetUserActiveAccountIntegrationsRequest{}
-	mi := &file_frontend_service_proto_msgTypes[44]
+	mi := &file_frontend_service_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2618,7 +3010,7 @@ func (x *GetUserActiveAccountIntegrationsRequest) String() string {
 func (*GetUserActiveAccountIntegrationsRequest) ProtoMessage() {}
 
 func (x *GetUserActiveAccountIntegrationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[44]
+	mi := &file_frontend_service_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2631,7 +3023,7 @@ func (x *GetUserActiveAccountIntegrationsRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use GetUserActiveAccountIntegrationsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserActiveAccountIntegrationsRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{44}
+	return file_frontend_service_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GetUserActiveAccountIntegrationsRequest) GetEid() string {
@@ -2650,7 +3042,7 @@ type GetUserActiveAccountIntegrationsResponse struct {
 
 func (x *GetUserActiveAccountIntegrationsResponse) Reset() {
 	*x = GetUserActiveAccountIntegrationsResponse{}
-	mi := &file_frontend_service_proto_msgTypes[45]
+	mi := &file_frontend_service_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2662,7 +3054,7 @@ func (x *GetUserActiveAccountIntegrationsResponse) String() string {
 func (*GetUserActiveAccountIntegrationsResponse) ProtoMessage() {}
 
 func (x *GetUserActiveAccountIntegrationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[45]
+	mi := &file_frontend_service_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +3067,7 @@ func (x *GetUserActiveAccountIntegrationsResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use GetUserActiveAccountIntegrationsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserActiveAccountIntegrationsResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{45}
+	return file_frontend_service_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *GetUserActiveAccountIntegrationsResponse) GetIntegrations() []*models.AccountIntegration {
@@ -2694,7 +3086,7 @@ type GetAccountIntegrationEventsRequest struct {
 
 func (x *GetAccountIntegrationEventsRequest) Reset() {
 	*x = GetAccountIntegrationEventsRequest{}
-	mi := &file_frontend_service_proto_msgTypes[46]
+	mi := &file_frontend_service_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2706,7 +3098,7 @@ func (x *GetAccountIntegrationEventsRequest) String() string {
 func (*GetAccountIntegrationEventsRequest) ProtoMessage() {}
 
 func (x *GetAccountIntegrationEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[46]
+	mi := &file_frontend_service_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2719,7 +3111,7 @@ func (x *GetAccountIntegrationEventsRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetAccountIntegrationEventsRequest.ProtoReflect.Descriptor instead.
 func (*GetAccountIntegrationEventsRequest) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{46}
+	return file_frontend_service_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *GetAccountIntegrationEventsRequest) GetIntegrationId() string {
@@ -2738,7 +3130,7 @@ type GetAccountIntegrationEventsResponse struct {
 
 func (x *GetAccountIntegrationEventsResponse) Reset() {
 	*x = GetAccountIntegrationEventsResponse{}
-	mi := &file_frontend_service_proto_msgTypes[47]
+	mi := &file_frontend_service_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2750,7 +3142,7 @@ func (x *GetAccountIntegrationEventsResponse) String() string {
 func (*GetAccountIntegrationEventsResponse) ProtoMessage() {}
 
 func (x *GetAccountIntegrationEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_frontend_service_proto_msgTypes[47]
+	mi := &file_frontend_service_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2763,7 +3155,7 @@ func (x *GetAccountIntegrationEventsResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use GetAccountIntegrationEventsResponse.ProtoReflect.Descriptor instead.
 func (*GetAccountIntegrationEventsResponse) Descriptor() ([]byte, []int) {
-	return file_frontend_service_proto_rawDescGZIP(), []int{47}
+	return file_frontend_service_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *GetAccountIntegrationEventsResponse) GetEvents() []*models.IntegrationEvent {
@@ -2855,7 +3247,40 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x16CreateAgentTaskRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\"\xc4\x02\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"2\n" +
+	"\x17CreateAgentTaskResponse\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\"\xa7\x03\n" +
+	"\rAgentTaskView\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x06action\x18\x02 \x01(\tR\x06action\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1a\n" +
+	"\bprogress\x18\x04 \x01(\x05R\bprogress\x12\x18\n" +
+	"\amessage\x18\x05 \x01(\tR\amessage\x12\x1d\n" +
+	"\n" +
+	"last_error\x18\x06 \x01(\tR\tlastError\x12\x1a\n" +
+	"\battempts\x18\a \x01(\x05R\battempts\x12!\n" +
+	"\fmax_attempts\x18\b \x01(\x05R\vmaxAttempts\x12*\n" +
+	"\x11triggered_by_type\x18\t \x01(\tR\x0ftriggeredByType\x127\n" +
+	"\x18triggered_by_external_id\x18\n" +
+	" \x01(\tR\x15triggeredByExternalId\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\v \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"started_at\x18\f \x01(\x03R\tstartedAt\x12\x1f\n" +
+	"\vfinished_at\x18\r \x01(\x03R\n" +
+	"finishedAt\"Y\n" +
+	"\x14GetAgentTasksRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
+	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x03R\x05limit\"=\n" +
+	"\x15GetAgentTasksResponse\x12$\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x0e.AgentTaskViewR\x05tasks\"C\n" +
+	"\x16CancelAgentTaskRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x17\n" +
+	"\atask_id\x18\x02 \x01(\tR\x06taskId\"B\n" +
+	"\x15RetryAgentTaskRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x17\n" +
+	"\atask_id\x18\x02 \x01(\tR\x06taskId\"\xc4\x02\n" +
 	"\x13GetAgentModsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x12\n" +
@@ -2967,7 +3392,7 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x14FrontendDownloadKind\x12\x1a\n" +
 	"\x16FRONTEND_DOWNLOAD_SAVE\x10\x00\x12\x1c\n" +
 	"\x18FRONTEND_DOWNLOAD_BACKUP\x10\x01\x12\x19\n" +
-	"\x15FRONTEND_DOWNLOAD_LOG\x10\x022\xcf\x10\n" +
+	"\x15FRONTEND_DOWNLOAD_LOG\x10\x022\x8a\x12\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x12,\n" +
 	"\aGetUser\x12\x0f.GetUserRequest\x1a\x10.GetUserResponse\x12V\n" +
@@ -2980,8 +3405,11 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\bGetAgent\x12\x10.GetAgentRequest\x1a\x11.GetAgentResponse\x128\n" +
 	"\vGetAgentLog\x12\x13.GetAgentLogRequest\x1a\x14.GetAgentLogResponse\x12>\n" +
 	"\rGetAgentStats\x12\x15.GetAgentStatsRequest\x1a\x16.GetAgentStatsResponse\x12;\n" +
-	"\fGetAgentMods\x12\x14.GetAgentModsRequest\x1a\x15.GetAgentModsResponse\x125\n" +
-	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\t.SSMEmpty\x125\n" +
+	"\fGetAgentMods\x12\x14.GetAgentModsRequest\x1a\x15.GetAgentModsResponse\x12D\n" +
+	"\x0fCreateAgentTask\x12\x17.CreateAgentTaskRequest\x1a\x18.CreateAgentTaskResponse\x12>\n" +
+	"\rGetAgentTasks\x12\x15.GetAgentTasksRequest\x1a\x16.GetAgentTasksResponse\x125\n" +
+	"\x0fCancelAgentTask\x12\x17.CancelAgentTaskRequest\x1a\t.SSMEmpty\x123\n" +
+	"\x0eRetryAgentTask\x12\x16.RetryAgentTaskRequest\x1a\t.SSMEmpty\x125\n" +
 	"\x0fInstallAgentMod\x12\x17.InstallAgentModRequest\x1a\t.SSMEmpty\x129\n" +
 	"\x11UninstallAgentMod\x12\x19.UninstallAgentModRequest\x1a\t.SSMEmpty\x12=\n" +
 	"\x13UpdateAgentSettings\x12\x1b.UpdateAgentSettingsRequest\x1a\t.SSMEmpty\x128\n" +
@@ -3013,7 +3441,7 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 }
 
 var file_frontend_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 48)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
 var file_frontend_service_proto_goTypes = []any{
 	(FrontendDownloadKind)(0),                        // 0: FrontendDownloadKind
 	(*FrontendDownloadRequest)(nil),                  // 1: FrontendDownloadRequest
@@ -3041,125 +3469,138 @@ var file_frontend_service_proto_goTypes = []any{
 	(*GetAgentStatsRequest)(nil),                     // 23: GetAgentStatsRequest
 	(*GetAgentStatsResponse)(nil),                    // 24: GetAgentStatsResponse
 	(*CreateAgentTaskRequest)(nil),                   // 25: CreateAgentTaskRequest
-	(*GetAgentModsRequest)(nil),                      // 26: GetAgentModsRequest
-	(*GetAgentModsResponse)(nil),                     // 27: GetAgentModsResponse
-	(*InstallAgentModRequest)(nil),                   // 28: InstallAgentModRequest
-	(*UninstallAgentModRequest)(nil),                 // 29: UninstallAgentModRequest
-	(*UpdateAgentSettingsRequest)(nil),               // 30: UpdateAgentSettingsRequest
-	(*ServerSettings)(nil),                           // 31: ServerSettings
-	(*UploadSaveFileRequest)(nil),                    // 32: UploadSaveFileRequest
-	(*FileMetadata)(nil),                             // 33: FileMetadata
-	(*UploadSaveFileResponse)(nil),                   // 34: UploadSaveFileResponse
-	(*CreateAgentRequest)(nil),                       // 35: CreateAgentRequest
-	(*CreateAgentResponse)(nil),                      // 36: CreateAgentResponse
-	(*DeleteAgentRequest)(nil),                       // 37: DeleteAgentRequest
-	(*SwitchActiveAccountRequest)(nil),               // 38: SwitchActiveAccountRequest
-	(*CreateAccountRequest)(nil),                     // 39: CreateAccountRequest
-	(*JoinAccountRequest)(nil),                       // 40: JoinAccountRequest
-	(*GetAgentWorkflowRequest)(nil),                  // 41: GetAgentWorkflowRequest
-	(*GetAgentWorkflowByAgentRequest)(nil),           // 42: GetAgentWorkflowByAgentRequest
-	(*GetAgentWorkflowResponse)(nil),                 // 43: GetAgentWorkflowResponse
-	(*DeleteAccountRequest)(nil),                     // 44: DeleteAccountRequest
-	(*GetUserActiveAccountIntegrationsRequest)(nil),  // 45: GetUserActiveAccountIntegrationsRequest
-	(*GetUserActiveAccountIntegrationsResponse)(nil), // 46: GetUserActiveAccountIntegrationsResponse
-	(*GetAccountIntegrationEventsRequest)(nil),       // 47: GetAccountIntegrationEventsRequest
-	(*GetAccountIntegrationEventsResponse)(nil),      // 48: GetAccountIntegrationEventsResponse
-	(*models.User)(nil),                              // 49: User
-	(*models.Account)(nil),                           // 50: Account
-	(*models.Agent)(nil),                             // 51: Agent
-	(*models.AccountAudit)(nil),                      // 52: AccountAudit
-	(*models.AgentLog)(nil),                          // 53: AgentLog
-	(*models.AgentStat)(nil),                         // 54: AgentStat
-	(*models.Mod)(nil),                               // 55: Mod
-	(*models.ModConfig)(nil),                         // 56: ModConfig
-	(*models.Workflow)(nil),                          // 57: Workflow
-	(*models.AccountIntegration)(nil),                // 58: AccountIntegration
-	(*models.IntegrationEvent)(nil),                  // 59: IntegrationEvent
-	(*models.SSMEmpty)(nil),                          // 60: SSMEmpty
+	(*CreateAgentTaskResponse)(nil),                  // 26: CreateAgentTaskResponse
+	(*AgentTaskView)(nil),                            // 27: AgentTaskView
+	(*GetAgentTasksRequest)(nil),                     // 28: GetAgentTasksRequest
+	(*GetAgentTasksResponse)(nil),                    // 29: GetAgentTasksResponse
+	(*CancelAgentTaskRequest)(nil),                   // 30: CancelAgentTaskRequest
+	(*RetryAgentTaskRequest)(nil),                    // 31: RetryAgentTaskRequest
+	(*GetAgentModsRequest)(nil),                      // 32: GetAgentModsRequest
+	(*GetAgentModsResponse)(nil),                     // 33: GetAgentModsResponse
+	(*InstallAgentModRequest)(nil),                   // 34: InstallAgentModRequest
+	(*UninstallAgentModRequest)(nil),                 // 35: UninstallAgentModRequest
+	(*UpdateAgentSettingsRequest)(nil),               // 36: UpdateAgentSettingsRequest
+	(*ServerSettings)(nil),                           // 37: ServerSettings
+	(*UploadSaveFileRequest)(nil),                    // 38: UploadSaveFileRequest
+	(*FileMetadata)(nil),                             // 39: FileMetadata
+	(*UploadSaveFileResponse)(nil),                   // 40: UploadSaveFileResponse
+	(*CreateAgentRequest)(nil),                       // 41: CreateAgentRequest
+	(*CreateAgentResponse)(nil),                      // 42: CreateAgentResponse
+	(*DeleteAgentRequest)(nil),                       // 43: DeleteAgentRequest
+	(*SwitchActiveAccountRequest)(nil),               // 44: SwitchActiveAccountRequest
+	(*CreateAccountRequest)(nil),                     // 45: CreateAccountRequest
+	(*JoinAccountRequest)(nil),                       // 46: JoinAccountRequest
+	(*GetAgentWorkflowRequest)(nil),                  // 47: GetAgentWorkflowRequest
+	(*GetAgentWorkflowByAgentRequest)(nil),           // 48: GetAgentWorkflowByAgentRequest
+	(*GetAgentWorkflowResponse)(nil),                 // 49: GetAgentWorkflowResponse
+	(*DeleteAccountRequest)(nil),                     // 50: DeleteAccountRequest
+	(*GetUserActiveAccountIntegrationsRequest)(nil),  // 51: GetUserActiveAccountIntegrationsRequest
+	(*GetUserActiveAccountIntegrationsResponse)(nil), // 52: GetUserActiveAccountIntegrationsResponse
+	(*GetAccountIntegrationEventsRequest)(nil),       // 53: GetAccountIntegrationEventsRequest
+	(*GetAccountIntegrationEventsResponse)(nil),      // 54: GetAccountIntegrationEventsResponse
+	(*models.User)(nil),                              // 55: User
+	(*models.Account)(nil),                           // 56: Account
+	(*models.Agent)(nil),                             // 57: Agent
+	(*models.AccountAudit)(nil),                      // 58: AccountAudit
+	(*models.AgentLog)(nil),                          // 59: AgentLog
+	(*models.AgentStat)(nil),                         // 60: AgentStat
+	(*models.Mod)(nil),                               // 61: Mod
+	(*models.ModConfig)(nil),                         // 62: ModConfig
+	(*models.Workflow)(nil),                          // 63: Workflow
+	(*models.AccountIntegration)(nil),                // 64: AccountIntegration
+	(*models.IntegrationEvent)(nil),                  // 65: IntegrationEvent
+	(*models.SSMEmpty)(nil),                          // 66: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
 	0,  // 0: FrontendDownloadRequest.kind:type_name -> FrontendDownloadKind
-	49, // 1: GetUserResponse.user:type_name -> User
-	50, // 2: GetUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	50, // 3: GetUserActiveAccountResponse.active_account:type_name -> Account
-	51, // 4: GetUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	49, // 5: GetUserActiveAccountUsersResponse.users:type_name -> User
-	52, // 6: GetUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
-	51, // 7: GetAgentResponse.agent:type_name -> Agent
-	53, // 8: GetAgentLogResponse.log:type_name -> AgentLog
-	54, // 9: GetAgentStatsResponse.stats:type_name -> AgentStat
-	55, // 10: GetAgentModsResponse.mods:type_name -> Mod
-	56, // 11: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
-	31, // 12: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
-	33, // 13: UploadSaveFileRequest.metadata:type_name -> FileMetadata
-	57, // 14: GetAgentWorkflowResponse.workflow:type_name -> Workflow
-	58, // 15: GetUserActiveAccountIntegrationsResponse.integrations:type_name -> AccountIntegration
-	59, // 16: GetAccountIntegrationEventsResponse.events:type_name -> IntegrationEvent
-	6,  // 17: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
-	7,  // 18: FrontendService.GetUser:input_type -> GetUserRequest
-	9,  // 19: FrontendService.GetUserLinkedAccounts:input_type -> GetUserLinkedAccountsRequest
-	11, // 20: FrontendService.GetUserActiveAccount:input_type -> GetUserActiveAccountRequest
-	13, // 21: FrontendService.GetUserActiveAccountAgents:input_type -> GetUserActiveAccountAgentsRequest
-	15, // 22: FrontendService.GetUserActiveAccountUsers:input_type -> GetUserActiveAccountUsersRequest
-	17, // 23: FrontendService.GetUserActiveAccountAudits:input_type -> GetUserActiveAccountAuditsRequest
-	45, // 24: FrontendService.GetUserActiveAccountIntegrations:input_type -> GetUserActiveAccountIntegrationsRequest
-	19, // 25: FrontendService.GetAgent:input_type -> GetAgentRequest
-	21, // 26: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
-	23, // 27: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
-	26, // 28: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
-	25, // 29: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
-	28, // 30: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
-	29, // 31: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
-	30, // 32: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
-	35, // 33: FrontendService.CreateAgent:input_type -> CreateAgentRequest
-	37, // 34: FrontendService.DeleteAgent:input_type -> DeleteAgentRequest
-	38, // 35: FrontendService.SwitchActiveAccount:input_type -> SwitchActiveAccountRequest
-	39, // 36: FrontendService.CreateAccount:input_type -> CreateAccountRequest
-	40, // 37: FrontendService.JoinAccount:input_type -> JoinAccountRequest
-	44, // 38: FrontendService.DeleteAccount:input_type -> DeleteAccountRequest
-	47, // 39: FrontendService.GetAccountIntegrationEvents:input_type -> GetAccountIntegrationEventsRequest
-	32, // 40: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
-	41, // 41: FrontendService.GetAgentWorkflow:input_type -> GetAgentWorkflowRequest
-	42, // 42: FrontendService.GetAgentWorkflowByAgent:input_type -> GetAgentWorkflowByAgentRequest
-	1,  // 43: FrontendService.DownloadFile:input_type -> FrontendDownloadRequest
-	3,  // 44: FrontendService.AddAccountIntegration:input_type -> AddAccountIntegrationRequest
-	4,  // 45: FrontendService.UpdateAccountIntegration:input_type -> UpdateAccountIntegrationRequest
-	5,  // 46: FrontendService.DeleteAccountIntegration:input_type -> DeleteAccountIntegrationRequest
-	60, // 47: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	8,  // 48: FrontendService.GetUser:output_type -> GetUserResponse
-	10, // 49: FrontendService.GetUserLinkedAccounts:output_type -> GetUserLinkedAccountsResponse
-	12, // 50: FrontendService.GetUserActiveAccount:output_type -> GetUserActiveAccountResponse
-	14, // 51: FrontendService.GetUserActiveAccountAgents:output_type -> GetUserActiveAccountAgentsResponse
-	16, // 52: FrontendService.GetUserActiveAccountUsers:output_type -> GetUserActiveAccountUsersResponse
-	18, // 53: FrontendService.GetUserActiveAccountAudits:output_type -> GetUserActiveAccountAuditsResponse
-	46, // 54: FrontendService.GetUserActiveAccountIntegrations:output_type -> GetUserActiveAccountIntegrationsResponse
-	20, // 55: FrontendService.GetAgent:output_type -> GetAgentResponse
-	22, // 56: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
-	24, // 57: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
-	27, // 58: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
-	60, // 59: FrontendService.CreateAgentTask:output_type -> SSMEmpty
-	60, // 60: FrontendService.InstallAgentMod:output_type -> SSMEmpty
-	60, // 61: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
-	60, // 62: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
-	36, // 63: FrontendService.CreateAgent:output_type -> CreateAgentResponse
-	60, // 64: FrontendService.DeleteAgent:output_type -> SSMEmpty
-	60, // 65: FrontendService.SwitchActiveAccount:output_type -> SSMEmpty
-	60, // 66: FrontendService.CreateAccount:output_type -> SSMEmpty
-	60, // 67: FrontendService.JoinAccount:output_type -> SSMEmpty
-	60, // 68: FrontendService.DeleteAccount:output_type -> SSMEmpty
-	48, // 69: FrontendService.GetAccountIntegrationEvents:output_type -> GetAccountIntegrationEventsResponse
-	34, // 70: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
-	43, // 71: FrontendService.GetAgentWorkflow:output_type -> GetAgentWorkflowResponse
-	43, // 72: FrontendService.GetAgentWorkflowByAgent:output_type -> GetAgentWorkflowResponse
-	2,  // 73: FrontendService.DownloadFile:output_type -> DownloadFileChunk
-	60, // 74: FrontendService.AddAccountIntegration:output_type -> SSMEmpty
-	60, // 75: FrontendService.UpdateAccountIntegration:output_type -> SSMEmpty
-	60, // 76: FrontendService.DeleteAccountIntegration:output_type -> SSMEmpty
-	47, // [47:77] is the sub-list for method output_type
-	17, // [17:47] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	55, // 1: GetUserResponse.user:type_name -> User
+	56, // 2: GetUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	56, // 3: GetUserActiveAccountResponse.active_account:type_name -> Account
+	57, // 4: GetUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	55, // 5: GetUserActiveAccountUsersResponse.users:type_name -> User
+	58, // 6: GetUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
+	57, // 7: GetAgentResponse.agent:type_name -> Agent
+	59, // 8: GetAgentLogResponse.log:type_name -> AgentLog
+	60, // 9: GetAgentStatsResponse.stats:type_name -> AgentStat
+	27, // 10: GetAgentTasksResponse.tasks:type_name -> AgentTaskView
+	61, // 11: GetAgentModsResponse.mods:type_name -> Mod
+	62, // 12: GetAgentModsResponse.agent_mod_config:type_name -> ModConfig
+	37, // 13: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
+	39, // 14: UploadSaveFileRequest.metadata:type_name -> FileMetadata
+	63, // 15: GetAgentWorkflowResponse.workflow:type_name -> Workflow
+	64, // 16: GetUserActiveAccountIntegrationsResponse.integrations:type_name -> AccountIntegration
+	65, // 17: GetAccountIntegrationEventsResponse.events:type_name -> IntegrationEvent
+	6,  // 18: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
+	7,  // 19: FrontendService.GetUser:input_type -> GetUserRequest
+	9,  // 20: FrontendService.GetUserLinkedAccounts:input_type -> GetUserLinkedAccountsRequest
+	11, // 21: FrontendService.GetUserActiveAccount:input_type -> GetUserActiveAccountRequest
+	13, // 22: FrontendService.GetUserActiveAccountAgents:input_type -> GetUserActiveAccountAgentsRequest
+	15, // 23: FrontendService.GetUserActiveAccountUsers:input_type -> GetUserActiveAccountUsersRequest
+	17, // 24: FrontendService.GetUserActiveAccountAudits:input_type -> GetUserActiveAccountAuditsRequest
+	51, // 25: FrontendService.GetUserActiveAccountIntegrations:input_type -> GetUserActiveAccountIntegrationsRequest
+	19, // 26: FrontendService.GetAgent:input_type -> GetAgentRequest
+	21, // 27: FrontendService.GetAgentLog:input_type -> GetAgentLogRequest
+	23, // 28: FrontendService.GetAgentStats:input_type -> GetAgentStatsRequest
+	32, // 29: FrontendService.GetAgentMods:input_type -> GetAgentModsRequest
+	25, // 30: FrontendService.CreateAgentTask:input_type -> CreateAgentTaskRequest
+	28, // 31: FrontendService.GetAgentTasks:input_type -> GetAgentTasksRequest
+	30, // 32: FrontendService.CancelAgentTask:input_type -> CancelAgentTaskRequest
+	31, // 33: FrontendService.RetryAgentTask:input_type -> RetryAgentTaskRequest
+	34, // 34: FrontendService.InstallAgentMod:input_type -> InstallAgentModRequest
+	35, // 35: FrontendService.UninstallAgentMod:input_type -> UninstallAgentModRequest
+	36, // 36: FrontendService.UpdateAgentSettings:input_type -> UpdateAgentSettingsRequest
+	41, // 37: FrontendService.CreateAgent:input_type -> CreateAgentRequest
+	43, // 38: FrontendService.DeleteAgent:input_type -> DeleteAgentRequest
+	44, // 39: FrontendService.SwitchActiveAccount:input_type -> SwitchActiveAccountRequest
+	45, // 40: FrontendService.CreateAccount:input_type -> CreateAccountRequest
+	46, // 41: FrontendService.JoinAccount:input_type -> JoinAccountRequest
+	50, // 42: FrontendService.DeleteAccount:input_type -> DeleteAccountRequest
+	53, // 43: FrontendService.GetAccountIntegrationEvents:input_type -> GetAccountIntegrationEventsRequest
+	38, // 44: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
+	47, // 45: FrontendService.GetAgentWorkflow:input_type -> GetAgentWorkflowRequest
+	48, // 46: FrontendService.GetAgentWorkflowByAgent:input_type -> GetAgentWorkflowByAgentRequest
+	1,  // 47: FrontendService.DownloadFile:input_type -> FrontendDownloadRequest
+	3,  // 48: FrontendService.AddAccountIntegration:input_type -> AddAccountIntegrationRequest
+	4,  // 49: FrontendService.UpdateAccountIntegration:input_type -> UpdateAccountIntegrationRequest
+	5,  // 50: FrontendService.DeleteAccountIntegration:input_type -> DeleteAccountIntegrationRequest
+	66, // 51: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	8,  // 52: FrontendService.GetUser:output_type -> GetUserResponse
+	10, // 53: FrontendService.GetUserLinkedAccounts:output_type -> GetUserLinkedAccountsResponse
+	12, // 54: FrontendService.GetUserActiveAccount:output_type -> GetUserActiveAccountResponse
+	14, // 55: FrontendService.GetUserActiveAccountAgents:output_type -> GetUserActiveAccountAgentsResponse
+	16, // 56: FrontendService.GetUserActiveAccountUsers:output_type -> GetUserActiveAccountUsersResponse
+	18, // 57: FrontendService.GetUserActiveAccountAudits:output_type -> GetUserActiveAccountAuditsResponse
+	52, // 58: FrontendService.GetUserActiveAccountIntegrations:output_type -> GetUserActiveAccountIntegrationsResponse
+	20, // 59: FrontendService.GetAgent:output_type -> GetAgentResponse
+	22, // 60: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
+	24, // 61: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
+	33, // 62: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
+	26, // 63: FrontendService.CreateAgentTask:output_type -> CreateAgentTaskResponse
+	29, // 64: FrontendService.GetAgentTasks:output_type -> GetAgentTasksResponse
+	66, // 65: FrontendService.CancelAgentTask:output_type -> SSMEmpty
+	66, // 66: FrontendService.RetryAgentTask:output_type -> SSMEmpty
+	66, // 67: FrontendService.InstallAgentMod:output_type -> SSMEmpty
+	66, // 68: FrontendService.UninstallAgentMod:output_type -> SSMEmpty
+	66, // 69: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
+	42, // 70: FrontendService.CreateAgent:output_type -> CreateAgentResponse
+	66, // 71: FrontendService.DeleteAgent:output_type -> SSMEmpty
+	66, // 72: FrontendService.SwitchActiveAccount:output_type -> SSMEmpty
+	66, // 73: FrontendService.CreateAccount:output_type -> SSMEmpty
+	66, // 74: FrontendService.JoinAccount:output_type -> SSMEmpty
+	66, // 75: FrontendService.DeleteAccount:output_type -> SSMEmpty
+	54, // 76: FrontendService.GetAccountIntegrationEvents:output_type -> GetAccountIntegrationEventsResponse
+	40, // 77: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
+	49, // 78: FrontendService.GetAgentWorkflow:output_type -> GetAgentWorkflowResponse
+	49, // 79: FrontendService.GetAgentWorkflowByAgent:output_type -> GetAgentWorkflowResponse
+	2,  // 80: FrontendService.DownloadFile:output_type -> DownloadFileChunk
+	66, // 81: FrontendService.AddAccountIntegration:output_type -> SSMEmpty
+	66, // 82: FrontendService.UpdateAccountIntegration:output_type -> SSMEmpty
+	66, // 83: FrontendService.DeleteAccountIntegration:output_type -> SSMEmpty
+	51, // [51:84] is the sub-list for method output_type
+	18, // [18:51] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_frontend_service_proto_init() }
@@ -3167,7 +3608,7 @@ func file_frontend_service_proto_init() {
 	if File_frontend_service_proto != nil {
 		return
 	}
-	file_frontend_service_proto_msgTypes[31].OneofWrappers = []any{
+	file_frontend_service_proto_msgTypes[37].OneofWrappers = []any{
 		(*UploadSaveFileRequest_Metadata)(nil),
 		(*UploadSaveFileRequest_Chunk)(nil),
 	}
@@ -3177,7 +3618,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   48,
+			NumMessages:   54,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

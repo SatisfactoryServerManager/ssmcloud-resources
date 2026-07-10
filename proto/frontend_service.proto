@@ -26,7 +26,10 @@ service FrontendService {
     rpc GetAgentStats(GetAgentStatsRequest) returns (GetAgentStatsResponse);
     rpc GetAgentMods(GetAgentModsRequest) returns (GetAgentModsResponse);
 
-    rpc CreateAgentTask(CreateAgentTaskRequest) returns (SSMEmpty);
+    rpc CreateAgentTask(CreateAgentTaskRequest) returns (CreateAgentTaskResponse);
+    rpc GetAgentTasks(GetAgentTasksRequest) returns (GetAgentTasksResponse);
+    rpc CancelAgentTask(CancelAgentTaskRequest) returns (SSMEmpty);
+    rpc RetryAgentTask(RetryAgentTaskRequest) returns (SSMEmpty);
     rpc InstallAgentMod(InstallAgentModRequest) returns (SSMEmpty);
     rpc UninstallAgentMod(UninstallAgentModRequest) returns (SSMEmpty);
     rpc UpdateAgentSettings(UpdateAgentSettingsRequest) returns (SSMEmpty);
@@ -177,6 +180,46 @@ message CreateAgentTaskRequest{
     string eid = 1;
     string agent_id = 2;
     string action = 3;
+}
+
+message CreateAgentTaskResponse {
+    string task_id = 1;
+}
+
+message AgentTaskView {
+    string id = 1;
+    string action = 2;
+    string status = 3;
+    int32  progress = 4;
+    string message = 5;
+    string last_error = 6;
+    int32  attempts = 7;
+    int32  max_attempts = 8;
+    string triggered_by_type = 9;
+    string triggered_by_external_id = 10;
+    int64  created_at = 11;
+    int64  started_at = 12;
+    int64  finished_at = 13;
+}
+
+message GetAgentTasksRequest {
+    string eid = 1;
+    string agent_id = 2;
+    int64  limit = 3;
+}
+
+message GetAgentTasksResponse {
+    repeated AgentTaskView tasks = 1;
+}
+
+message CancelAgentTaskRequest {
+    string eid = 1;
+    string task_id = 2;
+}
+
+message RetryAgentTaskRequest {
+    string eid = 1;
+    string task_id = 2;
 }
 
 

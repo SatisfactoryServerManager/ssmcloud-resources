@@ -7,6 +7,7 @@ message Workflow {
     string type = 2;
     repeated WorkflowAction actions = 3;
     string status = 4;
+    string agent_id = 5;
 }
 
 message WorkflowAction {

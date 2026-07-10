@@ -27,6 +27,7 @@ type Workflow struct {
 	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	Actions       []*WorkflowAction      `protobuf:"bytes,3,rep,name=actions,proto3" json:"actions,omitempty"`
 	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	AgentId       string                 `protobuf:"bytes,5,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -85,6 +86,13 @@ func (x *Workflow) GetActions() []*WorkflowAction {
 func (x *Workflow) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+func (x *Workflow) GetAgentId() string {
+	if x != nil {
+		return x.AgentId
 	}
 	return ""
 }
@@ -161,12 +169,13 @@ var File_models_workflow_proto protoreflect.FileDescriptor
 
 const file_models_workflow_proto_rawDesc = "" +
 	"\n" +
-	"\x15models/workflow.proto\"q\n" +
+	"\x15models/workflow.proto\"\x8c\x01\n" +
 	"\bWorkflow\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12)\n" +
 	"\aactions\x18\x03 \x03(\v2\x0f.WorkflowActionR\aactions\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\"\x82\x01\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x19\n" +
+	"\bagent_id\x18\x05 \x01(\tR\aagentId\"\x82\x01\n" +
 	"\x0eWorkflowAction\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12#\n" +

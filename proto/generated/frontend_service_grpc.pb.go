@@ -45,6 +45,7 @@ const (
 	FrontendService_GetAccountIntegrationEvents_FullMethodName      = "/FrontendService/GetAccountIntegrationEvents"
 	FrontendService_UploadSaveFile_FullMethodName                   = "/FrontendService/UploadSaveFile"
 	FrontendService_GetAgentWorkflow_FullMethodName                 = "/FrontendService/GetAgentWorkflow"
+	FrontendService_GetAgentWorkflowByAgent_FullMethodName          = "/FrontendService/GetAgentWorkflowByAgent"
 	FrontendService_DownloadFile_FullMethodName                     = "/FrontendService/DownloadFile"
 	FrontendService_AddAccountIntegration_FullMethodName            = "/FrontendService/AddAccountIntegration"
 	FrontendService_UpdateAccountIntegration_FullMethodName         = "/FrontendService/UpdateAccountIntegration"
@@ -80,6 +81,7 @@ type FrontendServiceClient interface {
 	GetAccountIntegrationEvents(ctx context.Context, in *GetAccountIntegrationEventsRequest, opts ...grpc.CallOption) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error)
 	GetAgentWorkflow(ctx context.Context, in *GetAgentWorkflowRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
+	GetAgentWorkflowByAgent(ctx context.Context, in *GetAgentWorkflowByAgentRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
 	DownloadFile(ctx context.Context, in *FrontendDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadFileChunk], error)
 	AddAccountIntegration(ctx context.Context, in *AddAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAccountIntegration(ctx context.Context, in *UpdateAccountIntegrationRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
@@ -347,6 +349,16 @@ func (c *frontendServiceClient) GetAgentWorkflow(ctx context.Context, in *GetAge
 	return out, nil
 }
 
+func (c *frontendServiceClient) GetAgentWorkflowByAgent(ctx context.Context, in *GetAgentWorkflowByAgentRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAgentWorkflowResponse)
+	err := c.cc.Invoke(ctx, FrontendService_GetAgentWorkflowByAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *frontendServiceClient) DownloadFile(ctx context.Context, in *FrontendDownloadRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadFileChunk], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &FrontendService_ServiceDesc.Streams[1], FrontendService_DownloadFile_FullMethodName, cOpts...)
@@ -425,6 +437,7 @@ type FrontendServiceServer interface {
 	GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error)
 	UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error
 	GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error)
+	GetAgentWorkflowByAgent(context.Context, *GetAgentWorkflowByAgentRequest) (*GetAgentWorkflowResponse, error)
 	DownloadFile(*FrontendDownloadRequest, grpc.ServerStreamingServer[DownloadFileChunk]) error
 	AddAccountIntegration(context.Context, *AddAccountIntegrationRequest) (*models.SSMEmpty, error)
 	UpdateAccountIntegration(context.Context, *UpdateAccountIntegrationRequest) (*models.SSMEmpty, error)
@@ -513,6 +526,9 @@ func (UnimplementedFrontendServiceServer) UploadSaveFile(grpc.ClientStreamingSer
 }
 func (UnimplementedFrontendServiceServer) GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAgentWorkflow not implemented")
+}
+func (UnimplementedFrontendServiceServer) GetAgentWorkflowByAgent(context.Context, *GetAgentWorkflowByAgentRequest) (*GetAgentWorkflowResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAgentWorkflowByAgent not implemented")
 }
 func (UnimplementedFrontendServiceServer) DownloadFile(*FrontendDownloadRequest, grpc.ServerStreamingServer[DownloadFileChunk]) error {
 	return status.Error(codes.Unimplemented, "method DownloadFile not implemented")
@@ -986,6 +1002,24 @@ func _FrontendService_GetAgentWorkflow_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_GetAgentWorkflowByAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAgentWorkflowByAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).GetAgentWorkflowByAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_GetAgentWorkflowByAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).GetAgentWorkflowByAgent(ctx, req.(*GetAgentWorkflowByAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FrontendService_DownloadFile_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(FrontendDownloadRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1153,6 +1187,10 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAgentWorkflow",
 			Handler:    _FrontendService_GetAgentWorkflow_Handler,
+		},
+		{
+			MethodName: "GetAgentWorkflowByAgent",
+			Handler:    _FrontendService_GetAgentWorkflowByAgent_Handler,
 		},
 		{
 			MethodName: "AddAccountIntegration",

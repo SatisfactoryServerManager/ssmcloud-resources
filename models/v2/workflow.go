@@ -42,7 +42,9 @@ type ClaimServer_PostData struct {
 }
 
 type WorkflowSchema struct {
-	ID      bson.ObjectID    `json:"_id" bson:"_id"`
+	ID bson.ObjectID `json:"_id" bson:"_id"`
+	// AgentId is zero until the workflow's create-agent action has run.
+	AgentId bson.ObjectID    `json:"agentId" bson:"agentId"`
 	Type    string           `json:"type" bson:"type"`
 	Actions []WorkflowAction `json:"actions" bson:"actions"`
 	Status  string           `json:"status" bson:"status"`

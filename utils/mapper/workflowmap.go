@@ -13,8 +13,14 @@ func MapWorkflowToProto(workflow *v2.WorkflowSchema) *pbModels.Workflow {
 		pbWorkflowActions = append(pbWorkflowActions, MapWorkflowActionToProto(&workflow.Actions[i]))
 	}
 
+	agentId := ""
+	if !workflow.AgentId.IsZero() {
+		agentId = workflow.AgentId.Hex()
+	}
+
 	return &pbModels.Workflow{
 		Id:      workflow.ID.Hex(),
+		AgentId: agentId,
 		Type:    workflow.Type,
 		Status:  workflow.Status,
 		Actions: pbWorkflowActions,

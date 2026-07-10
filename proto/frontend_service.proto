@@ -45,6 +45,7 @@ service FrontendService {
     rpc UploadSaveFile(stream UploadSaveFileRequest) returns (UploadSaveFileResponse);
 
     rpc GetAgentWorkflow(GetAgentWorkflowRequest) returns(GetAgentWorkflowResponse);
+    rpc GetAgentWorkflowByAgent(GetAgentWorkflowByAgentRequest) returns(GetAgentWorkflowResponse);
 
     rpc DownloadFile(FrontendDownloadRequest) returns (stream DownloadFileChunk);
     rpc AddAccountIntegration(AddAccountIntegrationRequest) returns (SSMEmpty);
@@ -288,6 +289,10 @@ message JoinAccountRequest {
 
 message GetAgentWorkflowRequest {
     string workflow_id = 1;
+}
+
+message GetAgentWorkflowByAgentRequest {
+    string agent_id = 1;
 }
 
 message GetAgentWorkflowResponse {

@@ -4,27 +4,56 @@ option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/pro
 import "models/empty.proto";
 
 service AgentTaskService {
-    rpc GetAgentTasks(SSMEmpty) returns (AgentTaskList);
-    rpc MarkAgentTaskCompleted(AgentTaskCompletedRequest) returns (SSMEmpty);
-    rpc MarkAgentTaskFailed(AgentTaskFailedRequest) returns (SSMEmpty);
+    // The backend pushes each claimed task exactly once down this stream.
+    rpc SubscribeTasks(SubscribeTasksRequest) returns (stream TaskAssignment);
+
+    // Terminal and progress reports. Unary, so a dropped stream cannot lose them.
+    rpc ReportTaskStatus(TaskStatusReport) returns (SSMEmpty);
+
+    // Keeps the lease alive and carries cancellation back to the agent.
+    rpc RenewTaskLease(TaskLeaseRequest) returns (TaskLeaseResponse);
 }
 
-message AgentTask {
-  string id = 1;
-  string action = 2;
-  string data = 3;
-  bool completed = 4;
-  int32 retries = 5;
+message SubscribeTasksRequest {
+    string agent_version = 1;
+    string connection_id = 2;
+    string running_task_id = 3;
+    string running_lease_token = 4;
 }
 
-message AgentTaskList {
-  repeated AgentTask tasks = 1;
+message TaskAssignment {
+    string task_id = 1;
+    string action = 2;
+    string data = 3;
+    int32  attempt = 4;
+    int32  max_attempts = 5;
+    string lease_token = 6;
+    int32  lease_seconds = 7;
 }
 
-message AgentTaskCompletedRequest {
-    string id = 1;
+enum TaskStatus {
+    TASK_STATUS_UNSPECIFIED = 0;
+    RUNNING = 1;
+    COMPLETED = 2;
+    FAILED = 3;
+    RELEASED = 4;
 }
 
-message AgentTaskFailedRequest {
-    string id = 1;
+message TaskStatusReport {
+    string     task_id = 1;
+    string     lease_token = 2;
+    TaskStatus status = 3;
+    string     error = 4;
+    int32      progress_percent = 5;
+    string     message = 6;
+}
+
+message TaskLeaseRequest {
+    string task_id = 1;
+    string lease_token = 2;
+}
+
+message TaskLeaseResponse {
+    bool ok = 1;
+    bool cancel_requested = 2;
 }

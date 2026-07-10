@@ -20,18 +20,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentTaskService_GetAgentTasks_FullMethodName          = "/AgentTaskService/GetAgentTasks"
-	AgentTaskService_MarkAgentTaskCompleted_FullMethodName = "/AgentTaskService/MarkAgentTaskCompleted"
-	AgentTaskService_MarkAgentTaskFailed_FullMethodName    = "/AgentTaskService/MarkAgentTaskFailed"
+	AgentTaskService_SubscribeTasks_FullMethodName   = "/AgentTaskService/SubscribeTasks"
+	AgentTaskService_ReportTaskStatus_FullMethodName = "/AgentTaskService/ReportTaskStatus"
+	AgentTaskService_RenewTaskLease_FullMethodName   = "/AgentTaskService/RenewTaskLease"
 )
 
 // AgentTaskServiceClient is the client API for AgentTaskService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AgentTaskServiceClient interface {
-	GetAgentTasks(ctx context.Context, in *models.SSMEmpty, opts ...grpc.CallOption) (*AgentTaskList, error)
-	MarkAgentTaskCompleted(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
-	MarkAgentTaskFailed(ctx context.Context, in *AgentTaskFailedRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	// The backend pushes each claimed task exactly once down this stream.
+	SubscribeTasks(ctx context.Context, in *SubscribeTasksRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TaskAssignment], error)
+	// Terminal and progress reports. Unary, so a dropped stream cannot lose them.
+	ReportTaskStatus(ctx context.Context, in *TaskStatusReport, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	// Keeps the lease alive and carries cancellation back to the agent.
+	RenewTaskLease(ctx context.Context, in *TaskLeaseRequest, opts ...grpc.CallOption) (*TaskLeaseResponse, error)
 }
 
 type agentTaskServiceClient struct {
@@ -42,30 +45,39 @@ func NewAgentTaskServiceClient(cc grpc.ClientConnInterface) AgentTaskServiceClie
 	return &agentTaskServiceClient{cc}
 }
 
-func (c *agentTaskServiceClient) GetAgentTasks(ctx context.Context, in *models.SSMEmpty, opts ...grpc.CallOption) (*AgentTaskList, error) {
+func (c *agentTaskServiceClient) SubscribeTasks(ctx context.Context, in *SubscribeTasksRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[TaskAssignment], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AgentTaskList)
-	err := c.cc.Invoke(ctx, AgentTaskService_GetAgentTasks_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &AgentTaskService_ServiceDesc.Streams[0], AgentTaskService_SubscribeTasks_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SubscribeTasksRequest, TaskAssignment]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type AgentTaskService_SubscribeTasksClient = grpc.ServerStreamingClient[TaskAssignment]
+
+func (c *agentTaskServiceClient) ReportTaskStatus(ctx context.Context, in *TaskStatusReport, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, AgentTaskService_ReportTaskStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *agentTaskServiceClient) MarkAgentTaskCompleted(ctx context.Context, in *AgentTaskCompletedRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+func (c *agentTaskServiceClient) RenewTaskLease(ctx context.Context, in *TaskLeaseRequest, opts ...grpc.CallOption) (*TaskLeaseResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, AgentTaskService_MarkAgentTaskCompleted_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *agentTaskServiceClient) MarkAgentTaskFailed(ctx context.Context, in *AgentTaskFailedRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, AgentTaskService_MarkAgentTaskFailed_FullMethodName, in, out, cOpts...)
+	out := new(TaskLeaseResponse)
+	err := c.cc.Invoke(ctx, AgentTaskService_RenewTaskLease_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,9 +88,12 @@ func (c *agentTaskServiceClient) MarkAgentTaskFailed(ctx context.Context, in *Ag
 // All implementations must embed UnimplementedAgentTaskServiceServer
 // for forward compatibility.
 type AgentTaskServiceServer interface {
-	GetAgentTasks(context.Context, *models.SSMEmpty) (*AgentTaskList, error)
-	MarkAgentTaskCompleted(context.Context, *AgentTaskCompletedRequest) (*models.SSMEmpty, error)
-	MarkAgentTaskFailed(context.Context, *AgentTaskFailedRequest) (*models.SSMEmpty, error)
+	// The backend pushes each claimed task exactly once down this stream.
+	SubscribeTasks(*SubscribeTasksRequest, grpc.ServerStreamingServer[TaskAssignment]) error
+	// Terminal and progress reports. Unary, so a dropped stream cannot lose them.
+	ReportTaskStatus(context.Context, *TaskStatusReport) (*models.SSMEmpty, error)
+	// Keeps the lease alive and carries cancellation back to the agent.
+	RenewTaskLease(context.Context, *TaskLeaseRequest) (*TaskLeaseResponse, error)
 	mustEmbedUnimplementedAgentTaskServiceServer()
 }
 
@@ -89,14 +104,14 @@ type AgentTaskServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAgentTaskServiceServer struct{}
 
-func (UnimplementedAgentTaskServiceServer) GetAgentTasks(context.Context, *models.SSMEmpty) (*AgentTaskList, error) {
-	return nil, status.Error(codes.Unimplemented, "method GetAgentTasks not implemented")
+func (UnimplementedAgentTaskServiceServer) SubscribeTasks(*SubscribeTasksRequest, grpc.ServerStreamingServer[TaskAssignment]) error {
+	return status.Error(codes.Unimplemented, "method SubscribeTasks not implemented")
 }
-func (UnimplementedAgentTaskServiceServer) MarkAgentTaskCompleted(context.Context, *AgentTaskCompletedRequest) (*models.SSMEmpty, error) {
-	return nil, status.Error(codes.Unimplemented, "method MarkAgentTaskCompleted not implemented")
+func (UnimplementedAgentTaskServiceServer) ReportTaskStatus(context.Context, *TaskStatusReport) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportTaskStatus not implemented")
 }
-func (UnimplementedAgentTaskServiceServer) MarkAgentTaskFailed(context.Context, *AgentTaskFailedRequest) (*models.SSMEmpty, error) {
-	return nil, status.Error(codes.Unimplemented, "method MarkAgentTaskFailed not implemented")
+func (UnimplementedAgentTaskServiceServer) RenewTaskLease(context.Context, *TaskLeaseRequest) (*TaskLeaseResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RenewTaskLease not implemented")
 }
 func (UnimplementedAgentTaskServiceServer) mustEmbedUnimplementedAgentTaskServiceServer() {}
 func (UnimplementedAgentTaskServiceServer) testEmbeddedByValue()                          {}
@@ -119,56 +134,49 @@ func RegisterAgentTaskServiceServer(s grpc.ServiceRegistrar, srv AgentTaskServic
 	s.RegisterService(&AgentTaskService_ServiceDesc, srv)
 }
 
-func _AgentTaskService_GetAgentTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(models.SSMEmpty)
+func _AgentTaskService_SubscribeTasks_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SubscribeTasksRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AgentTaskServiceServer).SubscribeTasks(m, &grpc.GenericServerStream[SubscribeTasksRequest, TaskAssignment]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type AgentTaskService_SubscribeTasksServer = grpc.ServerStreamingServer[TaskAssignment]
+
+func _AgentTaskService_ReportTaskStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TaskStatusReport)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AgentTaskServiceServer).GetAgentTasks(ctx, in)
+		return srv.(AgentTaskServiceServer).ReportTaskStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AgentTaskService_GetAgentTasks_FullMethodName,
+		FullMethod: AgentTaskService_ReportTaskStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentTaskServiceServer).GetAgentTasks(ctx, req.(*models.SSMEmpty))
+		return srv.(AgentTaskServiceServer).ReportTaskStatus(ctx, req.(*TaskStatusReport))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AgentTaskService_MarkAgentTaskCompleted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AgentTaskCompletedRequest)
+func _AgentTaskService_RenewTaskLease_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TaskLeaseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AgentTaskServiceServer).MarkAgentTaskCompleted(ctx, in)
+		return srv.(AgentTaskServiceServer).RenewTaskLease(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AgentTaskService_MarkAgentTaskCompleted_FullMethodName,
+		FullMethod: AgentTaskService_RenewTaskLease_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentTaskServiceServer).MarkAgentTaskCompleted(ctx, req.(*AgentTaskCompletedRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AgentTaskService_MarkAgentTaskFailed_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AgentTaskFailedRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AgentTaskServiceServer).MarkAgentTaskFailed(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AgentTaskService_MarkAgentTaskFailed_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentTaskServiceServer).MarkAgentTaskFailed(ctx, req.(*AgentTaskFailedRequest))
+		return srv.(AgentTaskServiceServer).RenewTaskLease(ctx, req.(*TaskLeaseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -181,18 +189,20 @@ var AgentTaskService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AgentTaskServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAgentTasks",
-			Handler:    _AgentTaskService_GetAgentTasks_Handler,
+			MethodName: "ReportTaskStatus",
+			Handler:    _AgentTaskService_ReportTaskStatus_Handler,
 		},
 		{
-			MethodName: "MarkAgentTaskCompleted",
-			Handler:    _AgentTaskService_MarkAgentTaskCompleted_Handler,
-		},
-		{
-			MethodName: "MarkAgentTaskFailed",
-			Handler:    _AgentTaskService_MarkAgentTaskFailed_Handler,
+			MethodName: "RenewTaskLease",
+			Handler:    _AgentTaskService_RenewTaskLease_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "SubscribeTasks",
+			Handler:       _AgentTaskService_SubscribeTasks_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "agent_task_service.proto",
 }

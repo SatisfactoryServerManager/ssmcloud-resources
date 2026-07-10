@@ -22,31 +22,85 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type AgentTask struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
-	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	Completed     bool                   `protobuf:"varint,4,opt,name=completed,proto3" json:"completed,omitempty"`
-	Retries       int32                  `protobuf:"varint,5,opt,name=retries,proto3" json:"retries,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type TaskStatus int32
+
+const (
+	TaskStatus_TASK_STATUS_UNSPECIFIED TaskStatus = 0
+	TaskStatus_RUNNING                 TaskStatus = 1
+	TaskStatus_COMPLETED               TaskStatus = 2
+	TaskStatus_FAILED                  TaskStatus = 3
+	TaskStatus_RELEASED                TaskStatus = 4
+)
+
+// Enum value maps for TaskStatus.
+var (
+	TaskStatus_name = map[int32]string{
+		0: "TASK_STATUS_UNSPECIFIED",
+		1: "RUNNING",
+		2: "COMPLETED",
+		3: "FAILED",
+		4: "RELEASED",
+	}
+	TaskStatus_value = map[string]int32{
+		"TASK_STATUS_UNSPECIFIED": 0,
+		"RUNNING":                 1,
+		"COMPLETED":               2,
+		"FAILED":                  3,
+		"RELEASED":                4,
+	}
+)
+
+func (x TaskStatus) Enum() *TaskStatus {
+	p := new(TaskStatus)
+	*p = x
+	return p
 }
 
-func (x *AgentTask) Reset() {
-	*x = AgentTask{}
+func (x TaskStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TaskStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_agent_task_service_proto_enumTypes[0].Descriptor()
+}
+
+func (TaskStatus) Type() protoreflect.EnumType {
+	return &file_agent_task_service_proto_enumTypes[0]
+}
+
+func (x TaskStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TaskStatus.Descriptor instead.
+func (TaskStatus) EnumDescriptor() ([]byte, []int) {
+	return file_agent_task_service_proto_rawDescGZIP(), []int{0}
+}
+
+type SubscribeTasksRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	AgentVersion      string                 `protobuf:"bytes,1,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
+	ConnectionId      string                 `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
+	RunningTaskId     string                 `protobuf:"bytes,3,opt,name=running_task_id,json=runningTaskId,proto3" json:"running_task_id,omitempty"`
+	RunningLeaseToken string                 `protobuf:"bytes,4,opt,name=running_lease_token,json=runningLeaseToken,proto3" json:"running_lease_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SubscribeTasksRequest) Reset() {
+	*x = SubscribeTasksRequest{}
 	mi := &file_agent_task_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AgentTask) String() string {
+func (x *SubscribeTasksRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AgentTask) ProtoMessage() {}
+func (*SubscribeTasksRequest) ProtoMessage() {}
 
-func (x *AgentTask) ProtoReflect() protoreflect.Message {
+func (x *SubscribeTasksRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_task_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -58,111 +112,157 @@ func (x *AgentTask) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AgentTask.ProtoReflect.Descriptor instead.
-func (*AgentTask) Descriptor() ([]byte, []int) {
+// Deprecated: Use SubscribeTasksRequest.ProtoReflect.Descriptor instead.
+func (*SubscribeTasksRequest) Descriptor() ([]byte, []int) {
 	return file_agent_task_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AgentTask) GetId() string {
+func (x *SubscribeTasksRequest) GetAgentVersion() string {
 	if x != nil {
-		return x.Id
+		return x.AgentVersion
 	}
 	return ""
 }
 
-func (x *AgentTask) GetAction() string {
+func (x *SubscribeTasksRequest) GetConnectionId() string {
+	if x != nil {
+		return x.ConnectionId
+	}
+	return ""
+}
+
+func (x *SubscribeTasksRequest) GetRunningTaskId() string {
+	if x != nil {
+		return x.RunningTaskId
+	}
+	return ""
+}
+
+func (x *SubscribeTasksRequest) GetRunningLeaseToken() string {
+	if x != nil {
+		return x.RunningLeaseToken
+	}
+	return ""
+}
+
+type TaskAssignment struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Action        string                 `protobuf:"bytes,2,opt,name=action,proto3" json:"action,omitempty"`
+	Data          string                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	Attempt       int32                  `protobuf:"varint,4,opt,name=attempt,proto3" json:"attempt,omitempty"`
+	MaxAttempts   int32                  `protobuf:"varint,5,opt,name=max_attempts,json=maxAttempts,proto3" json:"max_attempts,omitempty"`
+	LeaseToken    string                 `protobuf:"bytes,6,opt,name=lease_token,json=leaseToken,proto3" json:"lease_token,omitempty"`
+	LeaseSeconds  int32                  `protobuf:"varint,7,opt,name=lease_seconds,json=leaseSeconds,proto3" json:"lease_seconds,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TaskAssignment) Reset() {
+	*x = TaskAssignment{}
+	mi := &file_agent_task_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskAssignment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskAssignment) ProtoMessage() {}
+
+func (x *TaskAssignment) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_task_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TaskAssignment.ProtoReflect.Descriptor instead.
+func (*TaskAssignment) Descriptor() ([]byte, []int) {
+	return file_agent_task_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *TaskAssignment) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+func (x *TaskAssignment) GetAction() string {
 	if x != nil {
 		return x.Action
 	}
 	return ""
 }
 
-func (x *AgentTask) GetData() string {
+func (x *TaskAssignment) GetData() string {
 	if x != nil {
 		return x.Data
 	}
 	return ""
 }
 
-func (x *AgentTask) GetCompleted() bool {
+func (x *TaskAssignment) GetAttempt() int32 {
 	if x != nil {
-		return x.Completed
-	}
-	return false
-}
-
-func (x *AgentTask) GetRetries() int32 {
-	if x != nil {
-		return x.Retries
+		return x.Attempt
 	}
 	return 0
 }
 
-type AgentTaskList struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tasks         []*AgentTask           `protobuf:"bytes,1,rep,name=tasks,proto3" json:"tasks,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *AgentTaskList) Reset() {
-	*x = AgentTaskList{}
-	mi := &file_agent_task_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AgentTaskList) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AgentTaskList) ProtoMessage() {}
-
-func (x *AgentTaskList) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_task_service_proto_msgTypes[1]
+func (x *TaskAssignment) GetMaxAttempts() int32 {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+		return x.MaxAttempts
 	}
-	return mi.MessageOf(x)
+	return 0
 }
 
-// Deprecated: Use AgentTaskList.ProtoReflect.Descriptor instead.
-func (*AgentTaskList) Descriptor() ([]byte, []int) {
-	return file_agent_task_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AgentTaskList) GetTasks() []*AgentTask {
+func (x *TaskAssignment) GetLeaseToken() string {
 	if x != nil {
-		return x.Tasks
+		return x.LeaseToken
 	}
-	return nil
+	return ""
 }
 
-type AgentTaskCompletedRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+func (x *TaskAssignment) GetLeaseSeconds() int32 {
+	if x != nil {
+		return x.LeaseSeconds
+	}
+	return 0
 }
 
-func (x *AgentTaskCompletedRequest) Reset() {
-	*x = AgentTaskCompletedRequest{}
+type TaskStatusReport struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TaskId          string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	LeaseToken      string                 `protobuf:"bytes,2,opt,name=lease_token,json=leaseToken,proto3" json:"lease_token,omitempty"`
+	Status          TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=TaskStatus" json:"status,omitempty"`
+	Error           string                 `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	ProgressPercent int32                  `protobuf:"varint,5,opt,name=progress_percent,json=progressPercent,proto3" json:"progress_percent,omitempty"`
+	Message         string                 `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TaskStatusReport) Reset() {
+	*x = TaskStatusReport{}
 	mi := &file_agent_task_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AgentTaskCompletedRequest) String() string {
+func (x *TaskStatusReport) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AgentTaskCompletedRequest) ProtoMessage() {}
+func (*TaskStatusReport) ProtoMessage() {}
 
-func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
+func (x *TaskStatusReport) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_task_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -174,39 +274,75 @@ func (x *AgentTaskCompletedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AgentTaskCompletedRequest.ProtoReflect.Descriptor instead.
-func (*AgentTaskCompletedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use TaskStatusReport.ProtoReflect.Descriptor instead.
+func (*TaskStatusReport) Descriptor() ([]byte, []int) {
 	return file_agent_task_service_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AgentTaskCompletedRequest) GetId() string {
+func (x *TaskStatusReport) GetTaskId() string {
 	if x != nil {
-		return x.Id
+		return x.TaskId
 	}
 	return ""
 }
 
-type AgentTaskFailedRequest struct {
+func (x *TaskStatusReport) GetLeaseToken() string {
+	if x != nil {
+		return x.LeaseToken
+	}
+	return ""
+}
+
+func (x *TaskStatusReport) GetStatus() TaskStatus {
+	if x != nil {
+		return x.Status
+	}
+	return TaskStatus_TASK_STATUS_UNSPECIFIED
+}
+
+func (x *TaskStatusReport) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+func (x *TaskStatusReport) GetProgressPercent() int32 {
+	if x != nil {
+		return x.ProgressPercent
+	}
+	return 0
+}
+
+func (x *TaskStatusReport) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type TaskLeaseRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	LeaseToken    string                 `protobuf:"bytes,2,opt,name=lease_token,json=leaseToken,proto3" json:"lease_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AgentTaskFailedRequest) Reset() {
-	*x = AgentTaskFailedRequest{}
+func (x *TaskLeaseRequest) Reset() {
+	*x = TaskLeaseRequest{}
 	mi := &file_agent_task_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AgentTaskFailedRequest) String() string {
+func (x *TaskLeaseRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AgentTaskFailedRequest) ProtoMessage() {}
+func (*TaskLeaseRequest) ProtoMessage() {}
 
-func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
+func (x *TaskLeaseRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_task_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -218,40 +354,123 @@ func (x *AgentTaskFailedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AgentTaskFailedRequest.ProtoReflect.Descriptor instead.
-func (*AgentTaskFailedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use TaskLeaseRequest.ProtoReflect.Descriptor instead.
+func (*TaskLeaseRequest) Descriptor() ([]byte, []int) {
 	return file_agent_task_service_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *AgentTaskFailedRequest) GetId() string {
+func (x *TaskLeaseRequest) GetTaskId() string {
 	if x != nil {
-		return x.Id
+		return x.TaskId
 	}
 	return ""
+}
+
+func (x *TaskLeaseRequest) GetLeaseToken() string {
+	if x != nil {
+		return x.LeaseToken
+	}
+	return ""
+}
+
+type TaskLeaseResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Ok              bool                   `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
+	CancelRequested bool                   `protobuf:"varint,2,opt,name=cancel_requested,json=cancelRequested,proto3" json:"cancel_requested,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *TaskLeaseResponse) Reset() {
+	*x = TaskLeaseResponse{}
+	mi := &file_agent_task_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TaskLeaseResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TaskLeaseResponse) ProtoMessage() {}
+
+func (x *TaskLeaseResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_task_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TaskLeaseResponse.ProtoReflect.Descriptor instead.
+func (*TaskLeaseResponse) Descriptor() ([]byte, []int) {
+	return file_agent_task_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TaskLeaseResponse) GetOk() bool {
+	if x != nil {
+		return x.Ok
+	}
+	return false
+}
+
+func (x *TaskLeaseResponse) GetCancelRequested() bool {
+	if x != nil {
+		return x.CancelRequested
+	}
+	return false
 }
 
 var File_agent_task_service_proto protoreflect.FileDescriptor
 
 const file_agent_task_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18agent_task_service.proto\x1a\x12models/empty.proto\"\x7f\n" +
-	"\tAgentTask\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
+	"\x18agent_task_service.proto\x1a\x12models/empty.proto\"\xb9\x01\n" +
+	"\x15SubscribeTasksRequest\x12#\n" +
+	"\ragent_version\x18\x01 \x01(\tR\fagentVersion\x12#\n" +
+	"\rconnection_id\x18\x02 \x01(\tR\fconnectionId\x12&\n" +
+	"\x0frunning_task_id\x18\x03 \x01(\tR\rrunningTaskId\x12.\n" +
+	"\x13running_lease_token\x18\x04 \x01(\tR\x11runningLeaseToken\"\xd8\x01\n" +
+	"\x0eTaskAssignment\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\tR\x04data\x12\x1c\n" +
-	"\tcompleted\x18\x04 \x01(\bR\tcompleted\x12\x18\n" +
-	"\aretries\x18\x05 \x01(\x05R\aretries\"1\n" +
-	"\rAgentTaskList\x12 \n" +
-	"\x05tasks\x18\x01 \x03(\v2\n" +
-	".AgentTaskR\x05tasks\"+\n" +
-	"\x19AgentTaskCompletedRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"(\n" +
-	"\x16AgentTaskFailedRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2\xba\x01\n" +
-	"\x10AgentTaskService\x12*\n" +
-	"\rGetAgentTasks\x12\t.SSMEmpty\x1a\x0e.AgentTaskList\x12?\n" +
-	"\x16MarkAgentTaskCompleted\x12\x1a.AgentTaskCompletedRequest\x1a\t.SSMEmpty\x129\n" +
-	"\x13MarkAgentTaskFailed\x12\x17.AgentTaskFailedRequest\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x04data\x18\x03 \x01(\tR\x04data\x12\x18\n" +
+	"\aattempt\x18\x04 \x01(\x05R\aattempt\x12!\n" +
+	"\fmax_attempts\x18\x05 \x01(\x05R\vmaxAttempts\x12\x1f\n" +
+	"\vlease_token\x18\x06 \x01(\tR\n" +
+	"leaseToken\x12#\n" +
+	"\rlease_seconds\x18\a \x01(\x05R\fleaseSeconds\"\xcc\x01\n" +
+	"\x10TaskStatusReport\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x1f\n" +
+	"\vlease_token\x18\x02 \x01(\tR\n" +
+	"leaseToken\x12#\n" +
+	"\x06status\x18\x03 \x01(\x0e2\v.TaskStatusR\x06status\x12\x14\n" +
+	"\x05error\x18\x04 \x01(\tR\x05error\x12)\n" +
+	"\x10progress_percent\x18\x05 \x01(\x05R\x0fprogressPercent\x12\x18\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage\"L\n" +
+	"\x10TaskLeaseRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x1f\n" +
+	"\vlease_token\x18\x02 \x01(\tR\n" +
+	"leaseToken\"N\n" +
+	"\x11TaskLeaseResponse\x12\x0e\n" +
+	"\x02ok\x18\x01 \x01(\bR\x02ok\x12)\n" +
+	"\x10cancel_requested\x18\x02 \x01(\bR\x0fcancelRequested*_\n" +
+	"\n" +
+	"TaskStatus\x12\x1b\n" +
+	"\x17TASK_STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
+	"\aRUNNING\x10\x01\x12\r\n" +
+	"\tCOMPLETED\x10\x02\x12\n" +
+	"\n" +
+	"\x06FAILED\x10\x03\x12\f\n" +
+	"\bRELEASED\x10\x042\xba\x01\n" +
+	"\x10AgentTaskService\x12;\n" +
+	"\x0eSubscribeTasks\x12\x16.SubscribeTasksRequest\x1a\x0f.TaskAssignment0\x01\x120\n" +
+	"\x10ReportTaskStatus\x12\x11.TaskStatusReport\x1a\t.SSMEmpty\x127\n" +
+	"\x0eRenewTaskLease\x12\x11.TaskLeaseRequest\x1a\x12.TaskLeaseResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_agent_task_service_proto_rawDescOnce sync.Once
@@ -265,22 +484,25 @@ func file_agent_task_service_proto_rawDescGZIP() []byte {
 	return file_agent_task_service_proto_rawDescData
 }
 
-var file_agent_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_agent_task_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_agent_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_agent_task_service_proto_goTypes = []any{
-	(*AgentTask)(nil),                 // 0: AgentTask
-	(*AgentTaskList)(nil),             // 1: AgentTaskList
-	(*AgentTaskCompletedRequest)(nil), // 2: AgentTaskCompletedRequest
-	(*AgentTaskFailedRequest)(nil),    // 3: AgentTaskFailedRequest
-	(*models.SSMEmpty)(nil),           // 4: SSMEmpty
+	(TaskStatus)(0),               // 0: TaskStatus
+	(*SubscribeTasksRequest)(nil), // 1: SubscribeTasksRequest
+	(*TaskAssignment)(nil),        // 2: TaskAssignment
+	(*TaskStatusReport)(nil),      // 3: TaskStatusReport
+	(*TaskLeaseRequest)(nil),      // 4: TaskLeaseRequest
+	(*TaskLeaseResponse)(nil),     // 5: TaskLeaseResponse
+	(*models.SSMEmpty)(nil),       // 6: SSMEmpty
 }
 var file_agent_task_service_proto_depIdxs = []int32{
-	0, // 0: AgentTaskList.tasks:type_name -> AgentTask
-	4, // 1: AgentTaskService.GetAgentTasks:input_type -> SSMEmpty
-	2, // 2: AgentTaskService.MarkAgentTaskCompleted:input_type -> AgentTaskCompletedRequest
-	3, // 3: AgentTaskService.MarkAgentTaskFailed:input_type -> AgentTaskFailedRequest
-	1, // 4: AgentTaskService.GetAgentTasks:output_type -> AgentTaskList
-	4, // 5: AgentTaskService.MarkAgentTaskCompleted:output_type -> SSMEmpty
-	4, // 6: AgentTaskService.MarkAgentTaskFailed:output_type -> SSMEmpty
+	0, // 0: TaskStatusReport.status:type_name -> TaskStatus
+	1, // 1: AgentTaskService.SubscribeTasks:input_type -> SubscribeTasksRequest
+	3, // 2: AgentTaskService.ReportTaskStatus:input_type -> TaskStatusReport
+	4, // 3: AgentTaskService.RenewTaskLease:input_type -> TaskLeaseRequest
+	2, // 4: AgentTaskService.SubscribeTasks:output_type -> TaskAssignment
+	6, // 5: AgentTaskService.ReportTaskStatus:output_type -> SSMEmpty
+	5, // 6: AgentTaskService.RenewTaskLease:output_type -> TaskLeaseResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -298,13 +520,14 @@ func file_agent_task_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_agent_task_service_proto_rawDesc), len(file_agent_task_service_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   4,
+			NumEnums:      1,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_agent_task_service_proto_goTypes,
 		DependencyIndexes: file_agent_task_service_proto_depIdxs,
+		EnumInfos:         file_agent_task_service_proto_enumTypes,
 		MessageInfos:      file_agent_task_service_proto_msgTypes,
 	}.Build()
 	File_agent_task_service_proto = out.File

@@ -23,8 +23,6 @@ type AgentSchema struct {
 	Saves   []AgentSave   `json:"saves" bson:"saves"`
 	Backups []AgentBackup `json:"backups" bson:"backups"`
 
-	Tasks []AgentTask `json:"tasks" bson:"tasks"`
-
 	// ConnectedTo names the backend replica currently holding this agent's task
 	// stream. ConnectionID is minted by that replica per stream, not supplied by
 	// the agent, so a slow teardown of an old stream cannot detach a fresh one.
@@ -141,16 +139,6 @@ type AgentModConfigSelectedModSchema struct {
 	Config           string           `json:"config" bson:"config"`
 }
 
-// Task Data
-
-type AgentTask struct {
-	ID        bson.ObjectID `json:"_id" bson:"_id"`
-	Action    string        `json:"action" bson:"action"`
-	Data      interface{}   `json:"data" bson:"data"`
-	Completed bool          `json:"completed" bson:"completed"`
-	Retries   int           `json:"retries" bson:"retries"`
-}
-
 type AgentLogSchema struct {
 	ID            bson.ObjectID `json:"_id" bson:"_id"`
 	FileName      string        `json:"fileName" bson:"fileName"`
@@ -181,7 +169,6 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 		ID:        bson.NewObjectID(),
 		AgentName: agentName,
 		APIKey:    apiKey,
-		Tasks:     make([]AgentTask, 0),
 		LogIds:    make(bson.A, 0),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -205,19 +192,10 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 
 	newAgent.Saves = make([]AgentSave, 0)
 	newAgent.Backups = make([]AgentBackup, 0)
-	newAgent.Tasks = make([]AgentTask, 0)
 
 	newAgent.ModConfig.SelectedMods = make([]AgentModConfigSelectedModSchema, 0)
 
 	return newAgent
-}
-
-func NewAgentTask(action string, data interface{}) AgentTask {
-	return AgentTask{
-		ID:     bson.NewObjectID(),
-		Action: action,
-		Data:   data,
-	}
 }
 
 func NewAgentStat(theAgent *AgentSchema, running bool, cpu float64, memory float32) *AgentStatSchema {

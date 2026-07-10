@@ -16,7 +16,13 @@ service AgentTaskService {
 
 message SubscribeTasksRequest {
     string agent_version = 1;
-    string connection_id = 2;
+
+    // Stable for the agent process's lifetime and unchanged across reconnects.
+    // Scopes once-per-boot work such as the start-up update task. The backend
+    // mints its own per-stream id for connection bookkeeping, so this must not
+    // be rotated on reconnect.
+    string session_id = 2;
+
     string running_task_id = 3;
     string running_lease_token = 4;
 }

@@ -78,11 +78,15 @@ func (TaskStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type SubscribeTasksRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	AgentVersion      string                 `protobuf:"bytes,1,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
-	ConnectionId      string                 `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	RunningTaskId     string                 `protobuf:"bytes,3,opt,name=running_task_id,json=runningTaskId,proto3" json:"running_task_id,omitempty"`
-	RunningLeaseToken string                 `protobuf:"bytes,4,opt,name=running_lease_token,json=runningLeaseToken,proto3" json:"running_lease_token,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	AgentVersion string                 `protobuf:"bytes,1,opt,name=agent_version,json=agentVersion,proto3" json:"agent_version,omitempty"`
+	// Stable for the agent process's lifetime and unchanged across reconnects.
+	// Scopes once-per-boot work such as the start-up update task. The backend
+	// mints its own per-stream id for connection bookkeeping, so this must not
+	// be rotated on reconnect.
+	SessionId         string `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	RunningTaskId     string `protobuf:"bytes,3,opt,name=running_task_id,json=runningTaskId,proto3" json:"running_task_id,omitempty"`
+	RunningLeaseToken string `protobuf:"bytes,4,opt,name=running_lease_token,json=runningLeaseToken,proto3" json:"running_lease_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -124,9 +128,9 @@ func (x *SubscribeTasksRequest) GetAgentVersion() string {
 	return ""
 }
 
-func (x *SubscribeTasksRequest) GetConnectionId() string {
+func (x *SubscribeTasksRequest) GetSessionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.SessionId
 	}
 	return ""
 }
@@ -429,10 +433,11 @@ var File_agent_task_service_proto protoreflect.FileDescriptor
 
 const file_agent_task_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18agent_task_service.proto\x1a\x12models/empty.proto\"\xb9\x01\n" +
+	"\x18agent_task_service.proto\x1a\x12models/empty.proto\"\xb3\x01\n" +
 	"\x15SubscribeTasksRequest\x12#\n" +
-	"\ragent_version\x18\x01 \x01(\tR\fagentVersion\x12#\n" +
-	"\rconnection_id\x18\x02 \x01(\tR\fconnectionId\x12&\n" +
+	"\ragent_version\x18\x01 \x01(\tR\fagentVersion\x12\x1d\n" +
+	"\n" +
+	"session_id\x18\x02 \x01(\tR\tsessionId\x12&\n" +
 	"\x0frunning_task_id\x18\x03 \x01(\tR\rrunningTaskId\x12.\n" +
 	"\x13running_lease_token\x18\x04 \x01(\tR\x11runningLeaseToken\"\xd8\x01\n" +
 	"\x0eTaskAssignment\x12\x17\n" +

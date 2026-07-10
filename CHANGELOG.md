@@ -1,3 +1,6 @@
+## 0.0.92 (July 10, 2026)
+  - feat: New workflow changes
+
 ## 0.0.91 (July 09, 2026)
   - feat: add mod catalogue filter fields to GetAgentModsRequest
   - Merge pull request #1 from SatisfactoryServerManager/feature/rest-to-grpc-migration

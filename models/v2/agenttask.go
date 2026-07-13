@@ -55,6 +55,16 @@ type AgentTaskSchema struct {
 	CancelRequested bool   `json:"cancelRequested" bson:"cancelRequested"`
 	DedupeKey       string `json:"-" bson:"dedupeKey,omitempty"`
 
+	// DependsOn gates the claim: this task is not claimable until its parent has
+	// completed. The parent's terminal transition clears the field (on success) or
+	// cancels the child (on death), so the claim itself needs no $lookup.
+	DependsOn *bson.ObjectID `json:"dependsOn,omitempty" bson:"dependsOn,omitempty"`
+
+	// RequiresServerStopped gates the claim on the agent reporting the SF server
+	// stopped. Without it a deferred syncmods would be claimed and run immediately,
+	// because the dispatcher knows nothing about the SF process.
+	RequiresServerStopped bool `json:"requiresServerStopped,omitempty" bson:"requiresServerStopped,omitempty"`
+
 	LastError string `json:"lastError,omitempty" bson:"lastError,omitempty"`
 	Progress  int32  `json:"progress" bson:"progress"`
 	Message   string `json:"message,omitempty" bson:"message,omitempty"`
@@ -67,25 +77,34 @@ type AgentTaskSchema struct {
 	FinishedAt *time.Time `json:"finishedAt,omitempty" bson:"finishedAt,omitempty"`
 }
 
-func NewAgentTaskDoc(agentID, accountID bson.ObjectID, action, data, dedupeKey string, trigger TaskTrigger) AgentTaskSchema {
+// AgentTaskOpts carries the optional gates. Zero value means "claimable as soon
+// as the agent is idle", which is what every existing caller wants.
+type AgentTaskOpts struct {
+	DependsOn             *bson.ObjectID
+	RequiresServerStopped bool
+}
+
+func NewAgentTaskDoc(agentID, accountID bson.ObjectID, action, data, dedupeKey string, trigger TaskTrigger, opts AgentTaskOpts) AgentTaskSchema {
 	now := time.Now()
 	active := true
 
 	return AgentTaskSchema{
-		ID:            bson.NewObjectID(),
-		AgentID:       agentID,
-		AccountID:     accountID,
-		Action:        action,
-		Data:          data,
-		Status:        TaskStatusPending,
-		Active:        &active,
-		Attempts:      0,
-		MaxAttempts:   TaskDefaultMaxAttempts,
-		NextAttemptAt: now,
-		DedupeKey:     dedupeKey,
-		TriggeredBy:   trigger,
-		CreatedAt:     now,
-		UpdatedAt:     now,
+		ID:                    bson.NewObjectID(),
+		AgentID:               agentID,
+		AccountID:             accountID,
+		Action:                action,
+		Data:                  data,
+		Status:                TaskStatusPending,
+		Active:                &active,
+		Attempts:              0,
+		MaxAttempts:           TaskDefaultMaxAttempts,
+		NextAttemptAt:         now,
+		DedupeKey:             dedupeKey,
+		DependsOn:             opts.DependsOn,
+		RequiresServerStopped: opts.RequiresServerStopped,
+		TriggeredBy:           trigger,
+		CreatedAt:             now,
+		UpdatedAt:             now,
 	}
 }
 

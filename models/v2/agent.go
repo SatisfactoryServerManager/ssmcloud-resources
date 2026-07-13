@@ -61,6 +61,11 @@ type AgentConfig struct {
 	IP               string  `json:"ip" bson:"ip"`
 	BackupKeepAmount int     `json:"backupKeepAmount" bson:"backupKeepAmount"`
 	BackupInterval   float32 `json:"backupInterval" bson:"backupInterval"`
+
+	// Platform is the agent's mod target name: "WindowsServer" or "LinuxServer".
+	// The backend needs it to pin the right build in a lockfile; the agent used to
+	// make this choice itself, and the backend has no other way to know.
+	Platform string `json:"platform" bson:"platform"`
 }
 
 type AgentServerConfig struct {

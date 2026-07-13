@@ -1,0 +1,6 @@
+=== RUN   TestNewAgentModDocDefaults
+--- PASS: TestNewAgentModDocDefaults (0.00s)
+=== RUN   TestLockfileJSONTags
+--- PASS: TestLockfileJSONTags (0.00s)
+PASS
+ok  	github.com/SatisfactoryServerManager/ssmcloud-resources/models/v2	(cached)

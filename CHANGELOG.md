@@ -1,3 +1,7 @@
+## 0.0.94 (July 13, 2026)
+  - feat: add dependsOn and requiresServerStopped task gates
+  - feat: add AgentModSchema and the syncmods lockfile payload
+
 ## 0.0.93 (July 10, 2026)
   - feat: added workflow task action
   - feat!: frontend task list, cancel and retry RPCs

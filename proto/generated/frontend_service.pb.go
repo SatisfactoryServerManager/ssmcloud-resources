@@ -408,6 +408,7 @@ type CheckUserExistsOrCreateRequest struct {
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Eid           string                 `protobuf:"bytes,2,opt,name=eid,proto3" json:"eid,omitempty"`
 	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	AvatarUrl     string                 `protobuf:"bytes,4,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -459,6 +460,13 @@ func (x *CheckUserExistsOrCreateRequest) GetEid() string {
 func (x *CheckUserExistsOrCreateRequest) GetUsername() string {
 	if x != nil {
 		return x.Username
+	}
+	return ""
+}
+
+func (x *CheckUserExistsOrCreateRequest) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
 	}
 	return ""
 }
@@ -3614,11 +3622,13 @@ const file_frontend_service_proto_rawDesc = "" +
 	"eventTypes\"Z\n" +
 	"\x1fDeleteAccountIntegrationRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12%\n" +
-	"\x0eintegration_id\x18\x02 \x01(\tR\rintegrationId\"d\n" +
+	"\x0eintegration_id\x18\x02 \x01(\tR\rintegrationId\"\x83\x01\n" +
 	"\x1eCheckUserExistsOrCreateRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x10\n" +
 	"\x03eid\x18\x02 \x01(\tR\x03eid\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\"\"\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\x04 \x01(\tR\tavatarUrl\"\"\n" +
 	"\x0eGetUserRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\",\n" +
 	"\x0fGetUserResponse\x12\x19\n" +

@@ -1,3 +1,6 @@
+## 0.0.97 (July 14, 2026)
+  - feat: User API Keys
+
 ## 0.0.96 (July 14, 2026)
   - fix: Fixed missing platform in config gRPC data
 

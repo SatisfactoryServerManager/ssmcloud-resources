@@ -22,7 +22,6 @@ func MapAgentToProto(agent *v2.AgentSchema) *pb.Agent {
 	agentProto.Status = MapAgentStatusToProto(&agent.Status)
 	agentProto.Config = MapAgentConfigToProto(&agent.Config)
 	agentProto.ServerConfig = MapAgentServerConfigToProto(&agent.ServerConfig)
-	agentProto.ModConfig = MapAgentModConfigToProto(&agent.ModConfig)
 	agentProto.Logs = MapAgentLogsToProto(agent.Logs)
 
 	agentProto.Saves = MapAgentSavesToProto(agent.Saves)
@@ -67,30 +66,6 @@ func MapAgentServerConfigToProto(agentServerConfig *v2.AgentServerConfig) *pb.Ag
 		AutoSaveOnDisconnect:  wrapperspb.Bool(agentServerConfig.AutoSaveOnDisconnect),
 		AutoSaveInterval:      int32(agentServerConfig.AutoSaveInterval),
 		DisableSeasonalEvents: wrapperspb.Bool(agentServerConfig.DisableSeasonalEvents),
-	}
-}
-
-func MapAgentModConfigToProto(agentModConfig *v2.AgentModConfig) *pb.ModConfig {
-
-	pdSelectedMods := make([]*pb.SelectedMod, 0, len(agentModConfig.SelectedMods))
-
-	for i := range agentModConfig.SelectedMods {
-		pdSelectedMods = append(pdSelectedMods, MapSelectedModToProto(&agentModConfig.SelectedMods[i]))
-	}
-
-	return &pb.ModConfig{
-		SelectedMods: pdSelectedMods,
-	}
-}
-
-func MapSelectedModToProto(selectedMod *v2.AgentModConfigSelectedModSchema) *pb.SelectedMod {
-	return &pb.SelectedMod{
-		Mod:              MapModToProto(&selectedMod.Mod),
-		DesiredVersion:   selectedMod.DesiredVersion,
-		InstalledVersion: selectedMod.InstalledVersion,
-		Installed:        selectedMod.Installed,
-		NeedsUpdate:      selectedMod.NeedsUpdate,
-		Config:           selectedMod.Config,
 	}
 }
 

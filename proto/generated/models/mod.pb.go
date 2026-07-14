@@ -22,77 +22,37 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ModConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SelectedMods  []*SelectedMod         `protobuf:"bytes,1,rep,name=selectedMods,proto3" json:"selectedMods,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ModConfig) Reset() {
-	*x = ModConfig{}
-	mi := &file_models_mod_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ModConfig) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ModConfig) ProtoMessage() {}
-
-func (x *ModConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ModConfig.ProtoReflect.Descriptor instead.
-func (*ModConfig) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *ModConfig) GetSelectedMods() []*SelectedMod {
-	if x != nil {
-		return x.SelectedMods
-	}
-	return nil
-}
-
-type SelectedMod struct {
+type AgentMod struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Mod              *Mod                   `protobuf:"bytes,1,opt,name=mod,proto3" json:"mod,omitempty"`
-	DesiredVersion   string                 `protobuf:"bytes,2,opt,name=desiredVersion,proto3" json:"desiredVersion,omitempty"`
-	InstalledVersion string                 `protobuf:"bytes,3,opt,name=installedVersion,proto3" json:"installedVersion,omitempty"`
-	Installed        bool                   `protobuf:"varint,4,opt,name=installed,proto3" json:"installed,omitempty"`
-	NeedsUpdate      bool                   `protobuf:"varint,5,opt,name=needsUpdate,proto3" json:"needsUpdate,omitempty"`
-	Config           string                 `protobuf:"bytes,6,opt,name=config,proto3" json:"config,omitempty"`
+	ModReference     string                 `protobuf:"bytes,1,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
+	ModName          string                 `protobuf:"bytes,2,opt,name=mod_name,json=modName,proto3" json:"mod_name,omitempty"`
+	LogoUrl          string                 `protobuf:"bytes,3,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
+	DesiredVersion   string                 `protobuf:"bytes,4,opt,name=desired_version,json=desiredVersion,proto3" json:"desired_version,omitempty"`
+	InstalledVersion string                 `protobuf:"bytes,5,opt,name=installed_version,json=installedVersion,proto3" json:"installed_version,omitempty"`
+	LatestVersion    string                 `protobuf:"bytes,6,opt,name=latest_version,json=latestVersion,proto3" json:"latest_version,omitempty"`
+	Installed        bool                   `protobuf:"varint,7,opt,name=installed,proto3" json:"installed,omitempty"`
+	NeedsUpdate      bool                   `protobuf:"varint,8,opt,name=needs_update,json=needsUpdate,proto3" json:"needs_update,omitempty"`
+	Direct           bool                   `protobuf:"varint,9,opt,name=direct,proto3" json:"direct,omitempty"`
+	Config           string                 `protobuf:"bytes,10,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *SelectedMod) Reset() {
-	*x = SelectedMod{}
-	mi := &file_models_mod_proto_msgTypes[1]
+func (x *AgentMod) Reset() {
+	*x = AgentMod{}
+	mi := &file_models_mod_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SelectedMod) String() string {
+func (x *AgentMod) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SelectedMod) ProtoMessage() {}
+func (*AgentMod) ProtoMessage() {}
 
-func (x *SelectedMod) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[1]
+func (x *AgentMod) ProtoReflect() protoreflect.Message {
+	mi := &file_models_mod_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -103,47 +63,75 @@ func (x *SelectedMod) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SelectedMod.ProtoReflect.Descriptor instead.
-func (*SelectedMod) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use AgentMod.ProtoReflect.Descriptor instead.
+func (*AgentMod) Descriptor() ([]byte, []int) {
+	return file_models_mod_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SelectedMod) GetMod() *Mod {
+func (x *AgentMod) GetModReference() string {
 	if x != nil {
-		return x.Mod
+		return x.ModReference
 	}
-	return nil
+	return ""
 }
 
-func (x *SelectedMod) GetDesiredVersion() string {
+func (x *AgentMod) GetModName() string {
+	if x != nil {
+		return x.ModName
+	}
+	return ""
+}
+
+func (x *AgentMod) GetLogoUrl() string {
+	if x != nil {
+		return x.LogoUrl
+	}
+	return ""
+}
+
+func (x *AgentMod) GetDesiredVersion() string {
 	if x != nil {
 		return x.DesiredVersion
 	}
 	return ""
 }
 
-func (x *SelectedMod) GetInstalledVersion() string {
+func (x *AgentMod) GetInstalledVersion() string {
 	if x != nil {
 		return x.InstalledVersion
 	}
 	return ""
 }
 
-func (x *SelectedMod) GetInstalled() bool {
+func (x *AgentMod) GetLatestVersion() string {
+	if x != nil {
+		return x.LatestVersion
+	}
+	return ""
+}
+
+func (x *AgentMod) GetInstalled() bool {
 	if x != nil {
 		return x.Installed
 	}
 	return false
 }
 
-func (x *SelectedMod) GetNeedsUpdate() bool {
+func (x *AgentMod) GetNeedsUpdate() bool {
 	if x != nil {
 		return x.NeedsUpdate
 	}
 	return false
 }
 
-func (x *SelectedMod) GetConfig() string {
+func (x *AgentMod) GetDirect() bool {
+	if x != nil {
+		return x.Direct
+	}
+	return false
+}
+
+func (x *AgentMod) GetConfig() string {
 	if x != nil {
 		return x.Config
 	}
@@ -166,7 +154,7 @@ type Mod struct {
 
 func (x *Mod) Reset() {
 	*x = Mod{}
-	mi := &file_models_mod_proto_msgTypes[2]
+	mi := &file_models_mod_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -178,7 +166,7 @@ func (x *Mod) String() string {
 func (*Mod) ProtoMessage() {}
 
 func (x *Mod) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[2]
+	mi := &file_models_mod_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -191,7 +179,7 @@ func (x *Mod) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Mod.ProtoReflect.Descriptor instead.
 func (*Mod) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{2}
+	return file_models_mod_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Mod) GetId() string {
@@ -263,7 +251,7 @@ type ModVersion struct {
 
 func (x *ModVersion) Reset() {
 	*x = ModVersion{}
-	mi := &file_models_mod_proto_msgTypes[3]
+	mi := &file_models_mod_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -275,7 +263,7 @@ func (x *ModVersion) String() string {
 func (*ModVersion) ProtoMessage() {}
 
 func (x *ModVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[3]
+	mi := &file_models_mod_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -288,7 +276,7 @@ func (x *ModVersion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModVersion.ProtoReflect.Descriptor instead.
 func (*ModVersion) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{3}
+	return file_models_mod_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ModVersion) GetVersion() string {
@@ -330,13 +318,15 @@ type ModVersionTarget struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TargetName    string                 `protobuf:"bytes,1,opt,name=targetName,proto3" json:"targetName,omitempty"`
 	Link          string                 `protobuf:"bytes,2,opt,name=link,proto3" json:"link,omitempty"`
+	Hash          string                 `protobuf:"bytes,3,opt,name=hash,proto3" json:"hash,omitempty"`
+	Size          int64                  `protobuf:"varint,4,opt,name=size,proto3" json:"size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ModVersionTarget) Reset() {
 	*x = ModVersionTarget{}
-	mi := &file_models_mod_proto_msgTypes[4]
+	mi := &file_models_mod_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -348,7 +338,7 @@ func (x *ModVersionTarget) String() string {
 func (*ModVersionTarget) ProtoMessage() {}
 
 func (x *ModVersionTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[4]
+	mi := &file_models_mod_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -361,7 +351,7 @@ func (x *ModVersionTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModVersionTarget.ProtoReflect.Descriptor instead.
 func (*ModVersionTarget) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{4}
+	return file_models_mod_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ModVersionTarget) GetTargetName() string {
@@ -378,6 +368,20 @@ func (x *ModVersionTarget) GetLink() string {
 	return ""
 }
 
+func (x *ModVersionTarget) GetHash() string {
+	if x != nil {
+		return x.Hash
+	}
+	return ""
+}
+
+func (x *ModVersionTarget) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
 type ModVersionDependency struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ModReference  string                 `protobuf:"bytes,1,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
@@ -389,7 +393,7 @@ type ModVersionDependency struct {
 
 func (x *ModVersionDependency) Reset() {
 	*x = ModVersionDependency{}
-	mi := &file_models_mod_proto_msgTypes[5]
+	mi := &file_models_mod_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -401,7 +405,7 @@ func (x *ModVersionDependency) String() string {
 func (*ModVersionDependency) ProtoMessage() {}
 
 func (x *ModVersionDependency) ProtoReflect() protoreflect.Message {
-	mi := &file_models_mod_proto_msgTypes[5]
+	mi := &file_models_mod_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -414,7 +418,7 @@ func (x *ModVersionDependency) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModVersionDependency.ProtoReflect.Descriptor instead.
 func (*ModVersionDependency) Descriptor() ([]byte, []int) {
-	return file_models_mod_proto_rawDescGZIP(), []int{5}
+	return file_models_mod_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ModVersionDependency) GetModReference() string {
@@ -442,16 +446,19 @@ var File_models_mod_proto protoreflect.FileDescriptor
 
 const file_models_mod_proto_rawDesc = "" +
 	"\n" +
-	"\x10models/mod.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"=\n" +
-	"\tModConfig\x120\n" +
-	"\fselectedMods\x18\x01 \x03(\v2\f.SelectedModR\fselectedMods\"\xd1\x01\n" +
-	"\vSelectedMod\x12\x16\n" +
-	"\x03mod\x18\x01 \x01(\v2\x04.ModR\x03mod\x12&\n" +
-	"\x0edesiredVersion\x18\x02 \x01(\tR\x0edesiredVersion\x12*\n" +
-	"\x10installedVersion\x18\x03 \x01(\tR\x10installedVersion\x12\x1c\n" +
-	"\tinstalled\x18\x04 \x01(\bR\tinstalled\x12 \n" +
-	"\vneedsUpdate\x18\x05 \x01(\bR\vneedsUpdate\x12\x16\n" +
-	"\x06config\x18\x06 \x01(\tR\x06config\"\xe6\x01\n" +
+	"\x10models/mod.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd3\x02\n" +
+	"\bAgentMod\x12#\n" +
+	"\rmod_reference\x18\x01 \x01(\tR\fmodReference\x12\x19\n" +
+	"\bmod_name\x18\x02 \x01(\tR\amodName\x12\x19\n" +
+	"\blogo_url\x18\x03 \x01(\tR\alogoUrl\x12'\n" +
+	"\x0fdesired_version\x18\x04 \x01(\tR\x0edesiredVersion\x12+\n" +
+	"\x11installed_version\x18\x05 \x01(\tR\x10installedVersion\x12%\n" +
+	"\x0elatest_version\x18\x06 \x01(\tR\rlatestVersion\x12\x1c\n" +
+	"\tinstalled\x18\a \x01(\bR\tinstalled\x12!\n" +
+	"\fneeds_update\x18\b \x01(\bR\vneedsUpdate\x12\x16\n" +
+	"\x06direct\x18\t \x01(\bR\x06direct\x12\x16\n" +
+	"\x06config\x18\n" +
+	" \x01(\tR\x06config\"\xe6\x01\n" +
 	"\x03Mod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x15\n" +
 	"\x06mod_id\x18\x02 \x01(\tR\x05modId\x12\x19\n" +
@@ -468,12 +475,14 @@ const file_models_mod_proto_rawDesc = "" +
 	"\atargets\x18\x03 \x03(\v2\x11.ModVersionTargetR\atargets\x129\n" +
 	"\fdependencies\x18\x04 \x03(\v2\x15.ModVersionDependencyR\fdependencies\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"F\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"n\n" +
 	"\x10ModVersionTarget\x12\x1e\n" +
 	"\n" +
 	"targetName\x18\x01 \x01(\tR\n" +
 	"targetName\x12\x12\n" +
-	"\x04link\x18\x02 \x01(\tR\x04link\"u\n" +
+	"\x04link\x18\x02 \x01(\tR\x04link\x12\x12\n" +
+	"\x04hash\x18\x03 \x01(\tR\x04hash\x12\x12\n" +
+	"\x04size\x18\x04 \x01(\x03R\x04size\"u\n" +
 	"\x14ModVersionDependency\x12#\n" +
 	"\rmod_reference\x18\x01 \x01(\tR\fmodReference\x12\x1c\n" +
 	"\tcondition\x18\x02 \x01(\tR\tcondition\x12\x1a\n" +
@@ -491,28 +500,25 @@ func file_models_mod_proto_rawDescGZIP() []byte {
 	return file_models_mod_proto_rawDescData
 }
 
-var file_models_mod_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_models_mod_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_models_mod_proto_goTypes = []any{
-	(*ModConfig)(nil),             // 0: ModConfig
-	(*SelectedMod)(nil),           // 1: SelectedMod
-	(*Mod)(nil),                   // 2: Mod
-	(*ModVersion)(nil),            // 3: ModVersion
-	(*ModVersionTarget)(nil),      // 4: ModVersionTarget
-	(*ModVersionDependency)(nil),  // 5: ModVersionDependency
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*AgentMod)(nil),              // 0: AgentMod
+	(*Mod)(nil),                   // 1: Mod
+	(*ModVersion)(nil),            // 2: ModVersion
+	(*ModVersionTarget)(nil),      // 3: ModVersionTarget
+	(*ModVersionDependency)(nil),  // 4: ModVersionDependency
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_models_mod_proto_depIdxs = []int32{
-	1, // 0: ModConfig.selectedMods:type_name -> SelectedMod
-	2, // 1: SelectedMod.mod:type_name -> Mod
-	3, // 2: Mod.versions:type_name -> ModVersion
-	4, // 3: ModVersion.targets:type_name -> ModVersionTarget
-	5, // 4: ModVersion.dependencies:type_name -> ModVersionDependency
-	6, // 5: ModVersion.created_at:type_name -> google.protobuf.Timestamp
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	2, // 0: Mod.versions:type_name -> ModVersion
+	3, // 1: ModVersion.targets:type_name -> ModVersionTarget
+	4, // 2: ModVersion.dependencies:type_name -> ModVersionDependency
+	5, // 3: ModVersion.created_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_models_mod_proto_init() }
@@ -526,7 +532,7 @@ func file_models_mod_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_models_mod_proto_rawDesc), len(file_models_mod_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

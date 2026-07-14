@@ -32,8 +32,6 @@ type AgentSchema struct {
 	LogIds bson.A           `json:"-" bson:"logs" mson:"collection=agentlogs"`
 	Logs   []AgentLogSchema `json:"logs" bson:"-"`
 
-	ModConfig AgentModConfig `json:"modConfig" bson:"modConfig"`
-
 	LatestAgentVersion string `json:"latestAgentVersion" bson:"latestAgentVersion"`
 
 	CreatedAt time.Time `json:"createdAt" bson:"createdAt"`
@@ -128,22 +126,6 @@ type AgentBackup struct {
 	UpdatedAt time.Time `json:"updatedAt" bson:"updatedAt"`
 }
 
-// Mod Data
-
-type AgentModConfig struct {
-	SelectedMods []AgentModConfigSelectedModSchema `json:"selectedMods" bson:"selectedMods"`
-}
-
-type AgentModConfigSelectedModSchema struct {
-	ModId            bson.ObjectID    `json:"-" bson:"mod" mson:"collection=mods"`
-	Mod              models.ModSchema `json:"mod" bson:"-"`
-	DesiredVersion   string           `json:"desiredVersion" bson:"desiredVersion"`
-	InstalledVersion string           `json:"installedVersion" bson:"installedVersion"`
-	Installed        bool             `json:"installed" bson:"installed"`
-	NeedsUpdate      bool             `json:"needsUpdate" bson:"needsUpdate"`
-	Config           string           `json:"config" bson:"config"`
-}
-
 type AgentLogSchema struct {
 	ID            bson.ObjectID `json:"_id" bson:"_id"`
 	FileName      string        `json:"fileName" bson:"fileName"`
@@ -197,8 +179,6 @@ func NewAgent(agentName string, port int, memory int64, apiKey string) AgentSche
 
 	newAgent.Saves = make([]AgentSave, 0)
 	newAgent.Backups = make([]AgentBackup, 0)
-
-	newAgent.ModConfig.SelectedMods = make([]AgentModConfigSelectedModSchema, 0)
 
 	return newAgent
 }

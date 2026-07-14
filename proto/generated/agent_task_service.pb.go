@@ -429,6 +429,110 @@ func (x *TaskLeaseResponse) GetCancelRequested() bool {
 	return false
 }
 
+type InstalledMod struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ModReference     string                 `protobuf:"bytes,1,opt,name=mod_reference,json=modReference,proto3" json:"mod_reference,omitempty"`
+	InstalledVersion string                 `protobuf:"bytes,2,opt,name=installed_version,json=installedVersion,proto3" json:"installed_version,omitempty"`
+	Installed        bool                   `protobuf:"varint,3,opt,name=installed,proto3" json:"installed,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *InstalledMod) Reset() {
+	*x = InstalledMod{}
+	mi := &file_agent_task_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InstalledMod) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InstalledMod) ProtoMessage() {}
+
+func (x *InstalledMod) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_task_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InstalledMod.ProtoReflect.Descriptor instead.
+func (*InstalledMod) Descriptor() ([]byte, []int) {
+	return file_agent_task_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *InstalledMod) GetModReference() string {
+	if x != nil {
+		return x.ModReference
+	}
+	return ""
+}
+
+func (x *InstalledMod) GetInstalledVersion() string {
+	if x != nil {
+		return x.InstalledVersion
+	}
+	return ""
+}
+
+func (x *InstalledMod) GetInstalled() bool {
+	if x != nil {
+		return x.Installed
+	}
+	return false
+}
+
+type InstalledModsReport struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mods          []*InstalledMod        `protobuf:"bytes,1,rep,name=mods,proto3" json:"mods,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *InstalledModsReport) Reset() {
+	*x = InstalledModsReport{}
+	mi := &file_agent_task_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InstalledModsReport) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InstalledModsReport) ProtoMessage() {}
+
+func (x *InstalledModsReport) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_task_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use InstalledModsReport.ProtoReflect.Descriptor instead.
+func (*InstalledModsReport) Descriptor() ([]byte, []int) {
+	return file_agent_task_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *InstalledModsReport) GetMods() []*InstalledMod {
+	if x != nil {
+		return x.Mods
+	}
+	return nil
+}
+
 var File_agent_task_service_proto protoreflect.FileDescriptor
 
 const file_agent_task_service_proto_rawDesc = "" +
@@ -463,7 +567,13 @@ const file_agent_task_service_proto_rawDesc = "" +
 	"leaseToken\"N\n" +
 	"\x11TaskLeaseResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12)\n" +
-	"\x10cancel_requested\x18\x02 \x01(\bR\x0fcancelRequested*_\n" +
+	"\x10cancel_requested\x18\x02 \x01(\bR\x0fcancelRequested\"~\n" +
+	"\fInstalledMod\x12#\n" +
+	"\rmod_reference\x18\x01 \x01(\tR\fmodReference\x12+\n" +
+	"\x11installed_version\x18\x02 \x01(\tR\x10installedVersion\x12\x1c\n" +
+	"\tinstalled\x18\x03 \x01(\bR\tinstalled\"8\n" +
+	"\x13InstalledModsReport\x12!\n" +
+	"\x04mods\x18\x01 \x03(\v2\r.InstalledModR\x04mods*_\n" +
 	"\n" +
 	"TaskStatus\x12\x1b\n" +
 	"\x17TASK_STATUS_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -471,11 +581,12 @@ const file_agent_task_service_proto_rawDesc = "" +
 	"\tCOMPLETED\x10\x02\x12\n" +
 	"\n" +
 	"\x06FAILED\x10\x03\x12\f\n" +
-	"\bRELEASED\x10\x042\xba\x01\n" +
+	"\bRELEASED\x10\x042\xf2\x01\n" +
 	"\x10AgentTaskService\x12;\n" +
 	"\x0eSubscribeTasks\x12\x16.SubscribeTasksRequest\x1a\x0f.TaskAssignment0\x01\x120\n" +
 	"\x10ReportTaskStatus\x12\x11.TaskStatusReport\x1a\t.SSMEmpty\x127\n" +
-	"\x0eRenewTaskLease\x12\x11.TaskLeaseRequest\x1a\x12.TaskLeaseResponseBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
+	"\x0eRenewTaskLease\x12\x11.TaskLeaseRequest\x1a\x12.TaskLeaseResponse\x126\n" +
+	"\x13ReportInstalledMods\x12\x14.InstalledModsReport\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"
 
 var (
 	file_agent_task_service_proto_rawDescOnce sync.Once
@@ -490,7 +601,7 @@ func file_agent_task_service_proto_rawDescGZIP() []byte {
 }
 
 var file_agent_task_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_agent_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_agent_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_agent_task_service_proto_goTypes = []any{
 	(TaskStatus)(0),               // 0: TaskStatus
 	(*SubscribeTasksRequest)(nil), // 1: SubscribeTasksRequest
@@ -498,21 +609,26 @@ var file_agent_task_service_proto_goTypes = []any{
 	(*TaskStatusReport)(nil),      // 3: TaskStatusReport
 	(*TaskLeaseRequest)(nil),      // 4: TaskLeaseRequest
 	(*TaskLeaseResponse)(nil),     // 5: TaskLeaseResponse
-	(*models.SSMEmpty)(nil),       // 6: SSMEmpty
+	(*InstalledMod)(nil),          // 6: InstalledMod
+	(*InstalledModsReport)(nil),   // 7: InstalledModsReport
+	(*models.SSMEmpty)(nil),       // 8: SSMEmpty
 }
 var file_agent_task_service_proto_depIdxs = []int32{
 	0, // 0: TaskStatusReport.status:type_name -> TaskStatus
-	1, // 1: AgentTaskService.SubscribeTasks:input_type -> SubscribeTasksRequest
-	3, // 2: AgentTaskService.ReportTaskStatus:input_type -> TaskStatusReport
-	4, // 3: AgentTaskService.RenewTaskLease:input_type -> TaskLeaseRequest
-	2, // 4: AgentTaskService.SubscribeTasks:output_type -> TaskAssignment
-	6, // 5: AgentTaskService.ReportTaskStatus:output_type -> SSMEmpty
-	5, // 6: AgentTaskService.RenewTaskLease:output_type -> TaskLeaseResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	6, // 1: InstalledModsReport.mods:type_name -> InstalledMod
+	1, // 2: AgentTaskService.SubscribeTasks:input_type -> SubscribeTasksRequest
+	3, // 3: AgentTaskService.ReportTaskStatus:input_type -> TaskStatusReport
+	4, // 4: AgentTaskService.RenewTaskLease:input_type -> TaskLeaseRequest
+	7, // 5: AgentTaskService.ReportInstalledMods:input_type -> InstalledModsReport
+	2, // 6: AgentTaskService.SubscribeTasks:output_type -> TaskAssignment
+	8, // 7: AgentTaskService.ReportTaskStatus:output_type -> SSMEmpty
+	5, // 8: AgentTaskService.RenewTaskLease:output_type -> TaskLeaseResponse
+	8, // 9: AgentTaskService.ReportInstalledMods:output_type -> SSMEmpty
+	6, // [6:10] is the sub-list for method output_type
+	2, // [2:6] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_agent_task_service_proto_init() }
@@ -526,7 +642,7 @@ func file_agent_task_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_agent_task_service_proto_rawDesc), len(file_agent_task_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

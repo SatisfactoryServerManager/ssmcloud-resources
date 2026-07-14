@@ -20,9 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentTaskService_SubscribeTasks_FullMethodName   = "/AgentTaskService/SubscribeTasks"
-	AgentTaskService_ReportTaskStatus_FullMethodName = "/AgentTaskService/ReportTaskStatus"
-	AgentTaskService_RenewTaskLease_FullMethodName   = "/AgentTaskService/RenewTaskLease"
+	AgentTaskService_SubscribeTasks_FullMethodName      = "/AgentTaskService/SubscribeTasks"
+	AgentTaskService_ReportTaskStatus_FullMethodName    = "/AgentTaskService/ReportTaskStatus"
+	AgentTaskService_RenewTaskLease_FullMethodName      = "/AgentTaskService/RenewTaskLease"
+	AgentTaskService_ReportInstalledMods_FullMethodName = "/AgentTaskService/ReportInstalledMods"
 )
 
 // AgentTaskServiceClient is the client API for AgentTaskService service.
@@ -35,6 +36,9 @@ type AgentTaskServiceClient interface {
 	ReportTaskStatus(ctx context.Context, in *TaskStatusReport, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	// Keeps the lease alive and carries cancellation back to the agent.
 	RenewTaskLease(ctx context.Context, in *TaskLeaseRequest, opts ...grpc.CallOption) (*TaskLeaseResponse, error)
+	// The agent's report of what is actually in its Mods directory. Sent at the
+	// end of a sync, and once on subscribe so a mod deleted by hand is noticed.
+	ReportInstalledMods(ctx context.Context, in *InstalledModsReport, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 }
 
 type agentTaskServiceClient struct {
@@ -84,6 +88,16 @@ func (c *agentTaskServiceClient) RenewTaskLease(ctx context.Context, in *TaskLea
 	return out, nil
 }
 
+func (c *agentTaskServiceClient) ReportInstalledMods(ctx context.Context, in *InstalledModsReport, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, AgentTaskService_ReportInstalledMods_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentTaskServiceServer is the server API for AgentTaskService service.
 // All implementations must embed UnimplementedAgentTaskServiceServer
 // for forward compatibility.
@@ -94,6 +108,9 @@ type AgentTaskServiceServer interface {
 	ReportTaskStatus(context.Context, *TaskStatusReport) (*models.SSMEmpty, error)
 	// Keeps the lease alive and carries cancellation back to the agent.
 	RenewTaskLease(context.Context, *TaskLeaseRequest) (*TaskLeaseResponse, error)
+	// The agent's report of what is actually in its Mods directory. Sent at the
+	// end of a sync, and once on subscribe so a mod deleted by hand is noticed.
+	ReportInstalledMods(context.Context, *InstalledModsReport) (*models.SSMEmpty, error)
 	mustEmbedUnimplementedAgentTaskServiceServer()
 }
 
@@ -112,6 +129,9 @@ func (UnimplementedAgentTaskServiceServer) ReportTaskStatus(context.Context, *Ta
 }
 func (UnimplementedAgentTaskServiceServer) RenewTaskLease(context.Context, *TaskLeaseRequest) (*TaskLeaseResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RenewTaskLease not implemented")
+}
+func (UnimplementedAgentTaskServiceServer) ReportInstalledMods(context.Context, *InstalledModsReport) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReportInstalledMods not implemented")
 }
 func (UnimplementedAgentTaskServiceServer) mustEmbedUnimplementedAgentTaskServiceServer() {}
 func (UnimplementedAgentTaskServiceServer) testEmbeddedByValue()                          {}
@@ -181,6 +201,24 @@ func _AgentTaskService_RenewTaskLease_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentTaskService_ReportInstalledMods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InstalledModsReport)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentTaskServiceServer).ReportInstalledMods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentTaskService_ReportInstalledMods_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentTaskServiceServer).ReportInstalledMods(ctx, req.(*InstalledModsReport))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentTaskService_ServiceDesc is the grpc.ServiceDesc for AgentTaskService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -195,6 +233,10 @@ var AgentTaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RenewTaskLease",
 			Handler:    _AgentTaskService_RenewTaskLease_Handler,
+		},
+		{
+			MethodName: "ReportInstalledMods",
+			Handler:    _AgentTaskService_ReportInstalledMods_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

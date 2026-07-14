@@ -12,6 +12,10 @@ service AgentTaskService {
 
     // Keeps the lease alive and carries cancellation back to the agent.
     rpc RenewTaskLease(TaskLeaseRequest) returns (TaskLeaseResponse);
+
+    // The agent's report of what is actually in its Mods directory. Sent at the
+    // end of a sync, and once on subscribe so a mod deleted by hand is noticed.
+    rpc ReportInstalledMods(InstalledModsReport) returns (SSMEmpty);
 }
 
 message SubscribeTasksRequest {
@@ -62,4 +66,14 @@ message TaskLeaseRequest {
 message TaskLeaseResponse {
     bool ok = 1;
     bool cancel_requested = 2;
+}
+
+message InstalledMod {
+    string mod_reference     = 1;
+    string installed_version = 2;
+    bool   installed         = 3;
+}
+
+message InstalledModsReport {
+    repeated InstalledMod mods = 1;
 }

@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "models/mod.proto";
 
 message Agent{
     string id = 1;
@@ -13,7 +12,7 @@ message Agent{
     AgentStatus status = 4;
     AgentConfig config = 5;
     AgentServerConfig server_config = 6;
-    ModConfig mod_config = 7;
+    reserved 7; // was ModConfig mod_config; the agent's mods now live in agentmods
 
     string latest_agent_version = 10;
 

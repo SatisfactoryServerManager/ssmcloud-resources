@@ -30,8 +30,9 @@ service FrontendService {
     rpc GetAgentTasks(GetAgentTasksRequest) returns (GetAgentTasksResponse);
     rpc CancelAgentTask(CancelAgentTaskRequest) returns (SSMEmpty);
     rpc RetryAgentTask(RetryAgentTaskRequest) returns (SSMEmpty);
-    rpc InstallAgentMod(InstallAgentModRequest) returns (SSMEmpty);
-    rpc UninstallAgentMod(UninstallAgentModRequest) returns (SSMEmpty);
+    rpc PreviewModChange(ModChangeRequest) returns (PreviewModChangeResponse);
+    rpc ApplyModChange(ApplyModChangeRequest) returns (ApplyModChangeResponse);
+    rpc UpdateAgentModConfigText(UpdateAgentModConfigTextRequest) returns (SSMEmpty);
     rpc UpdateAgentSettings(UpdateAgentSettingsRequest) returns (SSMEmpty);
     rpc CreateAgent(CreateAgentRequest) returns(CreateAgentResponse);
     rpc DeleteAgent(DeleteAgentRequest) returns(SSMEmpty);
@@ -237,22 +238,48 @@ message GetAgentModsRequest {
 }
 
 message GetAgentModsResponse {
-    repeated Mod mods = 1;
-    ModConfig agent_mod_config = 2;
-    int32 total_mods = 3;
-    int32 pages = 4;
+    repeated Mod      mods       = 1;  // the catalogue page
+    int64             totalCount = 2;
+    repeated AgentMod agentMods  = 3;  // this agent's selection, whole
+    int32             pages      = 4;
 }
 
-message InstallAgentModRequest {
-    string eid = 1;
-    string agent_id = 2;
-    string mod_reference = 3;
+message ModChangeRequest {
+    string agentId      = 1;
+    string op           = 2;  // add | remove | setVersion | updateAll
+    string modReference = 3;
+    string version      = 4;  // setVersion only
 }
 
-message UninstallAgentModRequest {
-    string eid = 1;
-    string agent_id = 2;
-    string mod_reference = 3;
+message ChangedMod {
+    string modReference = 1;
+    string from         = 2;
+    string to           = 3;
+    bool   dependency   = 4;
+}
+
+message PreviewModChangeResponse {
+    repeated ChangedMod added   = 1;
+    repeated ChangedMod removed = 2;
+    repeated ChangedMod changed = 3;
+    // True when the server is running, so the client knows to offer the
+    // apply-now / apply-on-restart choice rather than just applying.
+    bool serverRunning = 4;
+}
+
+message ApplyModChangeRequest {
+    ModChangeRequest change   = 1;
+    bool             applyNow = 2;
+}
+
+message ApplyModChangeResponse {
+    repeated string taskIds = 1;
+}
+
+message UpdateAgentModConfigTextRequest {
+    string agentId      = 1;
+    string modReference = 2;
+    string config       = 3;
 }
 
 message UpdateAgentSettingsRequest{

@@ -36,8 +36,9 @@ const (
 	FrontendService_GetAgentTasks_FullMethodName                    = "/FrontendService/GetAgentTasks"
 	FrontendService_CancelAgentTask_FullMethodName                  = "/FrontendService/CancelAgentTask"
 	FrontendService_RetryAgentTask_FullMethodName                   = "/FrontendService/RetryAgentTask"
-	FrontendService_InstallAgentMod_FullMethodName                  = "/FrontendService/InstallAgentMod"
-	FrontendService_UninstallAgentMod_FullMethodName                = "/FrontendService/UninstallAgentMod"
+	FrontendService_PreviewModChange_FullMethodName                 = "/FrontendService/PreviewModChange"
+	FrontendService_ApplyModChange_FullMethodName                   = "/FrontendService/ApplyModChange"
+	FrontendService_UpdateAgentModConfigText_FullMethodName         = "/FrontendService/UpdateAgentModConfigText"
 	FrontendService_UpdateAgentSettings_FullMethodName              = "/FrontendService/UpdateAgentSettings"
 	FrontendService_CreateAgent_FullMethodName                      = "/FrontendService/CreateAgent"
 	FrontendService_DeleteAgent_FullMethodName                      = "/FrontendService/DeleteAgent"
@@ -75,8 +76,9 @@ type FrontendServiceClient interface {
 	GetAgentTasks(ctx context.Context, in *GetAgentTasksRequest, opts ...grpc.CallOption) (*GetAgentTasksResponse, error)
 	CancelAgentTask(ctx context.Context, in *CancelAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	RetryAgentTask(ctx context.Context, in *RetryAgentTaskRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
-	InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
-	UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
+	PreviewModChange(ctx context.Context, in *ModChangeRequest, opts ...grpc.CallOption) (*PreviewModChangeResponse, error)
+	ApplyModChange(ctx context.Context, in *ApplyModChangeRequest, opts ...grpc.CallOption) (*ApplyModChangeResponse, error)
+	UpdateAgentModConfigText(ctx context.Context, in *UpdateAgentModConfigTextRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UpdateAgentSettings(ctx context.Context, in *UpdateAgentSettingsRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	CreateAgent(ctx context.Context, in *CreateAgentRequest, opts ...grpc.CallOption) (*CreateAgentResponse, error)
 	DeleteAgent(ctx context.Context, in *DeleteAgentRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
@@ -262,20 +264,30 @@ func (c *frontendServiceClient) RetryAgentTask(ctx context.Context, in *RetryAge
 	return out, nil
 }
 
-func (c *frontendServiceClient) InstallAgentMod(ctx context.Context, in *InstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+func (c *frontendServiceClient) PreviewModChange(ctx context.Context, in *ModChangeRequest, opts ...grpc.CallOption) (*PreviewModChangeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, FrontendService_InstallAgentMod_FullMethodName, in, out, cOpts...)
+	out := new(PreviewModChangeResponse)
+	err := c.cc.Invoke(ctx, FrontendService_PreviewModChange_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *frontendServiceClient) UninstallAgentMod(ctx context.Context, in *UninstallAgentModRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+func (c *frontendServiceClient) ApplyModChange(ctx context.Context, in *ApplyModChangeRequest, opts ...grpc.CallOption) (*ApplyModChangeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ApplyModChangeResponse)
+	err := c.cc.Invoke(ctx, FrontendService_ApplyModChange_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) UpdateAgentModConfigText(ctx context.Context, in *UpdateAgentModConfigTextRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(models.SSMEmpty)
-	err := c.cc.Invoke(ctx, FrontendService_UninstallAgentMod_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, FrontendService_UpdateAgentModConfigText_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -464,8 +476,9 @@ type FrontendServiceServer interface {
 	GetAgentTasks(context.Context, *GetAgentTasksRequest) (*GetAgentTasksResponse, error)
 	CancelAgentTask(context.Context, *CancelAgentTaskRequest) (*models.SSMEmpty, error)
 	RetryAgentTask(context.Context, *RetryAgentTaskRequest) (*models.SSMEmpty, error)
-	InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error)
-	UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error)
+	PreviewModChange(context.Context, *ModChangeRequest) (*PreviewModChangeResponse, error)
+	ApplyModChange(context.Context, *ApplyModChangeRequest) (*ApplyModChangeResponse, error)
+	UpdateAgentModConfigText(context.Context, *UpdateAgentModConfigTextRequest) (*models.SSMEmpty, error)
 	UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error)
 	CreateAgent(context.Context, *CreateAgentRequest) (*CreateAgentResponse, error)
 	DeleteAgent(context.Context, *DeleteAgentRequest) (*models.SSMEmpty, error)
@@ -539,11 +552,14 @@ func (UnimplementedFrontendServiceServer) CancelAgentTask(context.Context, *Canc
 func (UnimplementedFrontendServiceServer) RetryAgentTask(context.Context, *RetryAgentTaskRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RetryAgentTask not implemented")
 }
-func (UnimplementedFrontendServiceServer) InstallAgentMod(context.Context, *InstallAgentModRequest) (*models.SSMEmpty, error) {
-	return nil, status.Error(codes.Unimplemented, "method InstallAgentMod not implemented")
+func (UnimplementedFrontendServiceServer) PreviewModChange(context.Context, *ModChangeRequest) (*PreviewModChangeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PreviewModChange not implemented")
 }
-func (UnimplementedFrontendServiceServer) UninstallAgentMod(context.Context, *UninstallAgentModRequest) (*models.SSMEmpty, error) {
-	return nil, status.Error(codes.Unimplemented, "method UninstallAgentMod not implemented")
+func (UnimplementedFrontendServiceServer) ApplyModChange(context.Context, *ApplyModChangeRequest) (*ApplyModChangeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ApplyModChange not implemented")
+}
+func (UnimplementedFrontendServiceServer) UpdateAgentModConfigText(context.Context, *UpdateAgentModConfigTextRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateAgentModConfigText not implemented")
 }
 func (UnimplementedFrontendServiceServer) UpdateAgentSettings(context.Context, *UpdateAgentSettingsRequest) (*models.SSMEmpty, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateAgentSettings not implemented")
@@ -899,38 +915,56 @@ func _FrontendService_RetryAgentTask_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_InstallAgentMod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InstallAgentModRequest)
+func _FrontendService_PreviewModChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).InstallAgentMod(ctx, in)
+		return srv.(FrontendServiceServer).PreviewModChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_InstallAgentMod_FullMethodName,
+		FullMethod: FrontendService_PreviewModChange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).InstallAgentMod(ctx, req.(*InstallAgentModRequest))
+		return srv.(FrontendServiceServer).PreviewModChange(ctx, req.(*ModChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FrontendService_UninstallAgentMod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UninstallAgentModRequest)
+func _FrontendService_ApplyModChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyModChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FrontendServiceServer).UninstallAgentMod(ctx, in)
+		return srv.(FrontendServiceServer).ApplyModChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FrontendService_UninstallAgentMod_FullMethodName,
+		FullMethod: FrontendService_ApplyModChange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FrontendServiceServer).UninstallAgentMod(ctx, req.(*UninstallAgentModRequest))
+		return srv.(FrontendServiceServer).ApplyModChange(ctx, req.(*ApplyModChangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_UpdateAgentModConfigText_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAgentModConfigTextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).UpdateAgentModConfigText(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_UpdateAgentModConfigText_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).UpdateAgentModConfigText(ctx, req.(*UpdateAgentModConfigTextRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1259,12 +1293,16 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FrontendService_RetryAgentTask_Handler,
 		},
 		{
-			MethodName: "InstallAgentMod",
-			Handler:    _FrontendService_InstallAgentMod_Handler,
+			MethodName: "PreviewModChange",
+			Handler:    _FrontendService_PreviewModChange_Handler,
 		},
 		{
-			MethodName: "UninstallAgentMod",
-			Handler:    _FrontendService_UninstallAgentMod_Handler,
+			MethodName: "ApplyModChange",
+			Handler:    _FrontendService_ApplyModChange_Handler,
+		},
+		{
+			MethodName: "UpdateAgentModConfigText",
+			Handler:    _FrontendService_UpdateAgentModConfigText_Handler,
 		},
 		{
 			MethodName: "UpdateAgentSettings",

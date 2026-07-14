@@ -31,7 +31,6 @@ type Agent struct {
 	Status             *AgentStatus           `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
 	Config             *AgentConfig           `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	ServerConfig       *AgentServerConfig     `protobuf:"bytes,6,opt,name=server_config,json=serverConfig,proto3" json:"server_config,omitempty"`
-	ModConfig          *ModConfig             `protobuf:"bytes,7,opt,name=mod_config,json=modConfig,proto3" json:"mod_config,omitempty"`
 	LatestAgentVersion string                 `protobuf:"bytes,10,opt,name=latest_agent_version,json=latestAgentVersion,proto3" json:"latest_agent_version,omitempty"`
 	Logs               []*AgentLog            `protobuf:"bytes,11,rep,name=logs,proto3" json:"logs,omitempty"`
 	Saves              []*AgentSave           `protobuf:"bytes,12,rep,name=saves,proto3" json:"saves,omitempty"`
@@ -111,13 +110,6 @@ func (x *Agent) GetConfig() *AgentConfig {
 func (x *Agent) GetServerConfig() *AgentServerConfig {
 	if x != nil {
 		return x.ServerConfig
-	}
-	return nil
-}
-
-func (x *Agent) GetModConfig() *ModConfig {
-	if x != nil {
-		return x.ModConfig
 	}
 	return nil
 }
@@ -1127,7 +1119,7 @@ var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x10models/mod.proto\"\xba\x04\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x95\x04\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -1135,10 +1127,7 @@ const file_models_agent_proto_rawDesc = "" +
 	"\aapi_key\x18\x03 \x01(\tR\x06apiKey\x12$\n" +
 	"\x06status\x18\x04 \x01(\v2\f.AgentStatusR\x06status\x12$\n" +
 	"\x06config\x18\x05 \x01(\v2\f.AgentConfigR\x06config\x127\n" +
-	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x12)\n" +
-	"\n" +
-	"mod_config\x18\a \x01(\v2\n" +
-	".ModConfigR\tmodConfig\x120\n" +
+	"\rserver_config\x18\x06 \x01(\v2\x12.AgentServerConfigR\fserverConfig\x120\n" +
 	"\x14latest_agent_version\x18\n" +
 	" \x01(\tR\x12latestAgentVersion\x12\x1d\n" +
 	"\x04logs\x18\v \x03(\v2\t.AgentLogR\x04logs\x12 \n" +
@@ -1149,7 +1138,7 @@ const file_models_agent_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xa1\x02\n" +
+	"updated_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtJ\x04\b\a\x10\b\"\xa1\x02\n" +
 	"\vAgentStatus\x12\x16\n" +
 	"\x06online\x18\x01 \x01(\bR\x06online\x12\x1c\n" +
 	"\tinstalled\x18\x02 \x01(\bR\tinstalled\x12\x18\n" +
@@ -1265,48 +1254,46 @@ var file_models_agent_proto_goTypes = []any{
 	(*AgentMapDataPlayer)(nil),    // 10: AgentMapDataPlayer
 	(*AgentMapDataBuilding)(nil),  // 11: AgentMapDataBuilding
 	(*AgentMapData)(nil),          // 12: AgentMapData
-	(*ModConfig)(nil),             // 13: ModConfig
-	(*timestamppb.Timestamp)(nil), // 14: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),  // 15: google.protobuf.BoolValue
+	(*timestamppb.Timestamp)(nil), // 13: google.protobuf.Timestamp
+	(*wrapperspb.BoolValue)(nil),  // 14: google.protobuf.BoolValue
 }
 var file_models_agent_proto_depIdxs = []int32{
 	1,  // 0: Agent.status:type_name -> AgentStatus
 	2,  // 1: Agent.config:type_name -> AgentConfig
 	3,  // 2: Agent.server_config:type_name -> AgentServerConfig
-	13, // 3: Agent.mod_config:type_name -> ModConfig
-	4,  // 4: Agent.logs:type_name -> AgentLog
-	8,  // 5: Agent.saves:type_name -> AgentSave
-	9,  // 6: Agent.backups:type_name -> AgentBackup
-	12, // 7: Agent.map_data:type_name -> AgentMapData
-	14, // 8: Agent.created_at:type_name -> google.protobuf.Timestamp
-	14, // 9: Agent.updated_at:type_name -> google.protobuf.Timestamp
-	14, // 10: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
-	15, // 11: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
-	15, // 12: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
-	15, // 13: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
-	15, // 14: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
-	15, // 15: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
-	14, // 16: AgentLog.created_at:type_name -> google.protobuf.Timestamp
-	14, // 17: AgentLog.updated_at:type_name -> google.protobuf.Timestamp
-	15, // 18: AgentStat.running:type_name -> google.protobuf.BoolValue
-	14, // 19: AgentStat.created_at:type_name -> google.protobuf.Timestamp
-	6,  // 20: BoundingBox.min:type_name -> Vector3F
-	6,  // 21: BoundingBox.max:type_name -> Vector3F
-	14, // 22: AgentSave.mod_time:type_name -> google.protobuf.Timestamp
-	14, // 23: AgentSave.created_at:type_name -> google.protobuf.Timestamp
-	14, // 24: AgentSave.updated_at:type_name -> google.protobuf.Timestamp
-	14, // 25: AgentBackup.created_at:type_name -> google.protobuf.Timestamp
-	14, // 26: AgentBackup.updated_at:type_name -> google.protobuf.Timestamp
-	6,  // 27: AgentMapDataPlayer.location:type_name -> Vector3F
-	6,  // 28: AgentMapDataBuilding.location:type_name -> Vector3F
-	7,  // 29: AgentMapDataBuilding.bounding_box:type_name -> BoundingBox
-	10, // 30: AgentMapData.players:type_name -> AgentMapDataPlayer
-	11, // 31: AgentMapData.buildings:type_name -> AgentMapDataBuilding
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	4,  // 3: Agent.logs:type_name -> AgentLog
+	8,  // 4: Agent.saves:type_name -> AgentSave
+	9,  // 5: Agent.backups:type_name -> AgentBackup
+	12, // 6: Agent.map_data:type_name -> AgentMapData
+	13, // 7: Agent.created_at:type_name -> google.protobuf.Timestamp
+	13, // 8: Agent.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 9: AgentStatus.last_comm_date:type_name -> google.protobuf.Timestamp
+	14, // 10: AgentServerConfig.update_on_start:type_name -> google.protobuf.BoolValue
+	14, // 11: AgentServerConfig.auto_restart:type_name -> google.protobuf.BoolValue
+	14, // 12: AgentServerConfig.auto_pause:type_name -> google.protobuf.BoolValue
+	14, // 13: AgentServerConfig.auto_save_on_disconnect:type_name -> google.protobuf.BoolValue
+	14, // 14: AgentServerConfig.disable_seasonal_events:type_name -> google.protobuf.BoolValue
+	13, // 15: AgentLog.created_at:type_name -> google.protobuf.Timestamp
+	13, // 16: AgentLog.updated_at:type_name -> google.protobuf.Timestamp
+	14, // 17: AgentStat.running:type_name -> google.protobuf.BoolValue
+	13, // 18: AgentStat.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 19: BoundingBox.min:type_name -> Vector3F
+	6,  // 20: BoundingBox.max:type_name -> Vector3F
+	13, // 21: AgentSave.mod_time:type_name -> google.protobuf.Timestamp
+	13, // 22: AgentSave.created_at:type_name -> google.protobuf.Timestamp
+	13, // 23: AgentSave.updated_at:type_name -> google.protobuf.Timestamp
+	13, // 24: AgentBackup.created_at:type_name -> google.protobuf.Timestamp
+	13, // 25: AgentBackup.updated_at:type_name -> google.protobuf.Timestamp
+	6,  // 26: AgentMapDataPlayer.location:type_name -> Vector3F
+	6,  // 27: AgentMapDataBuilding.location:type_name -> Vector3F
+	7,  // 28: AgentMapDataBuilding.bounding_box:type_name -> BoundingBox
+	10, // 29: AgentMapData.players:type_name -> AgentMapDataPlayer
+	11, // 30: AgentMapData.buildings:type_name -> AgentMapDataBuilding
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_models_agent_proto_init() }
@@ -1314,7 +1301,6 @@ func file_models_agent_proto_init() {
 	if File_models_agent_proto != nil {
 		return
 	}
-	file_models_mod_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

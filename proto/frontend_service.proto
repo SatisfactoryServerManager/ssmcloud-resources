@@ -44,6 +44,9 @@ service FrontendService {
 
     rpc GetAccountIntegrationEvents(GetAccountIntegrationEventsRequest) returns (GetAccountIntegrationEventsResponse);
 
+    rpc CreateUserAPIKey(CreateUserAPIKeyRequest) returns (CreateUserAPIKeyResponse);
+    rpc DeleteUserAPIKey(DeleteUserAPIKeyRequest) returns (SSMEmpty);
+
 
 
     rpc UploadSaveFile(stream UploadSaveFileRequest) returns (UploadSaveFileResponse);
@@ -396,4 +399,17 @@ message GetAccountIntegrationEventsRequest {
 
 message GetAccountIntegrationEventsResponse {
     repeated IntegrationEvent events = 1;
+}
+message CreateUserAPIKeyRequest {
+    string eid = 1;
+}
+
+message CreateUserAPIKeyResponse {
+    string key = 1;
+    string short_key = 2;
+}
+
+message DeleteUserAPIKeyRequest {
+    string eid = 1;
+    string short_key = 2;
 }

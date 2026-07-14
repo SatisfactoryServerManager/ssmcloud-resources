@@ -9,6 +9,7 @@ package models
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -33,6 +34,7 @@ type IntegrationEvent struct {
 	Status        string                 `protobuf:"bytes,8,opt,name=status,proto3" json:"status,omitempty"`
 	Attempts      int32                  `protobuf:"varint,9,opt,name=attempts,proto3" json:"attempts,omitempty"`
 	LastError     string                 `protobuf:"bytes,10,opt,name=last_error,json=lastError,proto3" json:"last_error,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,11 +139,18 @@ func (x *IntegrationEvent) GetLastError() string {
 	return ""
 }
 
+func (x *IntegrationEvent) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 var File_models_integration_proto protoreflect.FileDescriptor
 
 const file_models_integration_proto_rawDesc = "" +
 	"\n" +
-	"\x18models/integration.proto\"\x95\x02\n" +
+	"\x18models/integration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd0\x02\n" +
 	"\x10IntegrationEvent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\x05R\x04type\x12\x1d\n" +
@@ -155,7 +164,9 @@ const file_models_integration_proto_rawDesc = "" +
 	"\battempts\x18\t \x01(\x05R\battempts\x12\x1d\n" +
 	"\n" +
 	"last_error\x18\n" +
-	" \x01(\tR\tlastErrorBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
+	" \x01(\tR\tlastError\x129\n" +
+	"\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtBPZNgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/modelsb\x06proto3"
 
 var (
 	file_models_integration_proto_rawDescOnce sync.Once
@@ -171,14 +182,16 @@ func file_models_integration_proto_rawDescGZIP() []byte {
 
 var file_models_integration_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_models_integration_proto_goTypes = []any{
-	(*IntegrationEvent)(nil), // 0: IntegrationEvent
+	(*IntegrationEvent)(nil),      // 0: IntegrationEvent
+	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
 }
 var file_models_integration_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: IntegrationEvent.created_at:type_name -> google.protobuf.Timestamp
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_models_integration_proto_init() }

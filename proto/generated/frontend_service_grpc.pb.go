@@ -47,6 +47,8 @@ const (
 	FrontendService_JoinAccount_FullMethodName                      = "/FrontendService/JoinAccount"
 	FrontendService_DeleteAccount_FullMethodName                    = "/FrontendService/DeleteAccount"
 	FrontendService_GetAccountIntegrationEvents_FullMethodName      = "/FrontendService/GetAccountIntegrationEvents"
+	FrontendService_CreateUserAPIKey_FullMethodName                 = "/FrontendService/CreateUserAPIKey"
+	FrontendService_DeleteUserAPIKey_FullMethodName                 = "/FrontendService/DeleteUserAPIKey"
 	FrontendService_UploadSaveFile_FullMethodName                   = "/FrontendService/UploadSaveFile"
 	FrontendService_GetAgentWorkflow_FullMethodName                 = "/FrontendService/GetAgentWorkflow"
 	FrontendService_GetAgentWorkflowByAgent_FullMethodName          = "/FrontendService/GetAgentWorkflowByAgent"
@@ -87,6 +89,8 @@ type FrontendServiceClient interface {
 	JoinAccount(ctx context.Context, in *JoinAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	GetAccountIntegrationEvents(ctx context.Context, in *GetAccountIntegrationEventsRequest, opts ...grpc.CallOption) (*GetAccountIntegrationEventsResponse, error)
+	CreateUserAPIKey(ctx context.Context, in *CreateUserAPIKeyRequest, opts ...grpc.CallOption) (*CreateUserAPIKeyResponse, error)
+	DeleteUserAPIKey(ctx context.Context, in *DeleteUserAPIKeyRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error)
 	UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error)
 	GetAgentWorkflow(ctx context.Context, in *GetAgentWorkflowRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
 	GetAgentWorkflowByAgent(ctx context.Context, in *GetAgentWorkflowByAgentRequest, opts ...grpc.CallOption) (*GetAgentWorkflowResponse, error)
@@ -374,6 +378,26 @@ func (c *frontendServiceClient) GetAccountIntegrationEvents(ctx context.Context,
 	return out, nil
 }
 
+func (c *frontendServiceClient) CreateUserAPIKey(ctx context.Context, in *CreateUserAPIKeyRequest, opts ...grpc.CallOption) (*CreateUserAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUserAPIKeyResponse)
+	err := c.cc.Invoke(ctx, FrontendService_CreateUserAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *frontendServiceClient) DeleteUserAPIKey(ctx context.Context, in *DeleteUserAPIKeyRequest, opts ...grpc.CallOption) (*models.SSMEmpty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(models.SSMEmpty)
+	err := c.cc.Invoke(ctx, FrontendService_DeleteUserAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *frontendServiceClient) UploadSaveFile(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[UploadSaveFileRequest, UploadSaveFileResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &FrontendService_ServiceDesc.Streams[0], FrontendService_UploadSaveFile_FullMethodName, cOpts...)
@@ -487,6 +511,8 @@ type FrontendServiceServer interface {
 	JoinAccount(context.Context, *JoinAccountRequest) (*models.SSMEmpty, error)
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*models.SSMEmpty, error)
 	GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error)
+	CreateUserAPIKey(context.Context, *CreateUserAPIKeyRequest) (*CreateUserAPIKeyResponse, error)
+	DeleteUserAPIKey(context.Context, *DeleteUserAPIKeyRequest) (*models.SSMEmpty, error)
 	UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error
 	GetAgentWorkflow(context.Context, *GetAgentWorkflowRequest) (*GetAgentWorkflowResponse, error)
 	GetAgentWorkflowByAgent(context.Context, *GetAgentWorkflowByAgentRequest) (*GetAgentWorkflowResponse, error)
@@ -584,6 +610,12 @@ func (UnimplementedFrontendServiceServer) DeleteAccount(context.Context, *Delete
 }
 func (UnimplementedFrontendServiceServer) GetAccountIntegrationEvents(context.Context, *GetAccountIntegrationEventsRequest) (*GetAccountIntegrationEventsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetAccountIntegrationEvents not implemented")
+}
+func (UnimplementedFrontendServiceServer) CreateUserAPIKey(context.Context, *CreateUserAPIKeyRequest) (*CreateUserAPIKeyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateUserAPIKey not implemented")
+}
+func (UnimplementedFrontendServiceServer) DeleteUserAPIKey(context.Context, *DeleteUserAPIKeyRequest) (*models.SSMEmpty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteUserAPIKey not implemented")
 }
 func (UnimplementedFrontendServiceServer) UploadSaveFile(grpc.ClientStreamingServer[UploadSaveFileRequest, UploadSaveFileResponse]) error {
 	return status.Error(codes.Unimplemented, "method UploadSaveFile not implemented")
@@ -1113,6 +1145,42 @@ func _FrontendService_GetAccountIntegrationEvents_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FrontendService_CreateUserAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).CreateUserAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_CreateUserAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).CreateUserAPIKey(ctx, req.(*CreateUserAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FrontendService_DeleteUserAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FrontendServiceServer).DeleteUserAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FrontendService_DeleteUserAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FrontendServiceServer).DeleteUserAPIKey(ctx, req.(*DeleteUserAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FrontendService_UploadSaveFile_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(FrontendServiceServer).UploadSaveFile(&grpc.GenericServerStream[UploadSaveFileRequest, UploadSaveFileResponse]{ServerStream: stream})
 }
@@ -1335,6 +1403,14 @@ var FrontendService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccountIntegrationEvents",
 			Handler:    _FrontendService_GetAccountIntegrationEvents_Handler,
+		},
+		{
+			MethodName: "CreateUserAPIKey",
+			Handler:    _FrontendService_CreateUserAPIKey_Handler,
+		},
+		{
+			MethodName: "DeleteUserAPIKey",
+			Handler:    _FrontendService_DeleteUserAPIKey_Handler,
 		},
 		{
 			MethodName: "GetAgentWorkflow",

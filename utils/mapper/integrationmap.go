@@ -4,6 +4,7 @@ import (
 	v2 "github.com/SatisfactoryServerManager/ssmcloud-resources/models/v2"
 	pbModels "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models"
 	"github.com/SatisfactoryServerManager/ssmcloud-resources/utils"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func MapIntegrationEventsToProto(events []v2.IntegrationEventSchema) []*pbModels.IntegrationEvent {
@@ -28,5 +29,6 @@ func MapIntegrationEventToProto(integrationEvent *v2.IntegrationEventSchema) *pb
 		ResponseCode: int32(integrationEvent.ResponseCode),
 		Attempts:     int32(integrationEvent.Attempts),
 		LastError:    integrationEvent.LastError,
+		CreatedAt:    timestamppb.New(integrationEvent.CreatedAt),
 	}
 }

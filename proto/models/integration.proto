@@ -1,4 +1,6 @@
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/SatisfactoryServerManager/ssmcloud-resources/proto/generated/models";
 
 
@@ -13,4 +15,5 @@ message IntegrationEvent {
     string status = 8;
     int32 attempts = 9;
     string last_error = 10;
+    google.protobuf.Timestamp created_at = 11;
 }

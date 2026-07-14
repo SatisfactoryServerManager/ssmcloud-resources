@@ -3436,6 +3436,154 @@ func (x *GetAccountIntegrationEventsResponse) GetEvents() []*models.IntegrationE
 	return nil
 }
 
+type CreateUserAPIKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserAPIKeyRequest) Reset() {
+	*x = CreateUserAPIKeyRequest{}
+	mi := &file_frontend_service_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserAPIKeyRequest) ProtoMessage() {}
+
+func (x *CreateUserAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*CreateUserAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *CreateUserAPIKeyRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+type CreateUserAPIKeyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	ShortKey      string                 `protobuf:"bytes,2,opt,name=short_key,json=shortKey,proto3" json:"short_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateUserAPIKeyResponse) Reset() {
+	*x = CreateUserAPIKeyResponse{}
+	mi := &file_frontend_service_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateUserAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserAPIKeyResponse) ProtoMessage() {}
+
+func (x *CreateUserAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*CreateUserAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *CreateUserAPIKeyResponse) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *CreateUserAPIKeyResponse) GetShortKey() string {
+	if x != nil {
+		return x.ShortKey
+	}
+	return ""
+}
+
+type DeleteUserAPIKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Eid           string                 `protobuf:"bytes,1,opt,name=eid,proto3" json:"eid,omitempty"`
+	ShortKey      string                 `protobuf:"bytes,2,opt,name=short_key,json=shortKey,proto3" json:"short_key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteUserAPIKeyRequest) Reset() {
+	*x = DeleteUserAPIKeyRequest{}
+	mi := &file_frontend_service_proto_msgTypes[60]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteUserAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserAPIKeyRequest) ProtoMessage() {}
+
+func (x *DeleteUserAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_frontend_service_proto_msgTypes[60]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*DeleteUserAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_frontend_service_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *DeleteUserAPIKeyRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
+	}
+	return ""
+}
+
+func (x *DeleteUserAPIKeyRequest) GetShortKey() string {
+	if x != nil {
+		return x.ShortKey
+	}
+	return ""
+}
+
 var File_frontend_service_proto protoreflect.FileDescriptor
 
 const file_frontend_service_proto_rawDesc = "" +
@@ -3681,11 +3829,19 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\"GetAccountIntegrationEventsRequest\x12%\n" +
 	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId\"P\n" +
 	"#GetAccountIntegrationEventsResponse\x12)\n" +
-	"\x06events\x18\x01 \x03(\v2\x11.IntegrationEventR\x06events*k\n" +
+	"\x06events\x18\x01 \x03(\v2\x11.IntegrationEventR\x06events\"+\n" +
+	"\x17CreateUserAPIKeyRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\"I\n" +
+	"\x18CreateUserAPIKeyResponse\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1b\n" +
+	"\tshort_key\x18\x02 \x01(\tR\bshortKey\"H\n" +
+	"\x17DeleteUserAPIKeyRequest\x12\x10\n" +
+	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x1b\n" +
+	"\tshort_key\x18\x02 \x01(\tR\bshortKey*k\n" +
 	"\x14FrontendDownloadKind\x12\x1a\n" +
 	"\x16FRONTEND_DOWNLOAD_SAVE\x10\x00\x12\x1c\n" +
 	"\x18FRONTEND_DOWNLOAD_BACKUP\x10\x01\x12\x19\n" +
-	"\x15FRONTEND_DOWNLOAD_LOG\x10\x022\xe6\x12\n" +
+	"\x15FRONTEND_DOWNLOAD_LOG\x10\x022\xe8\x13\n" +
 	"\x0fFrontendService\x12E\n" +
 	"\x17CheckUserExistsOrCreate\x12\x1f.CheckUserExistsOrCreateRequest\x1a\t.SSMEmpty\x12,\n" +
 	"\aGetUser\x12\x0f.GetUserRequest\x1a\x10.GetUserResponse\x12V\n" +
@@ -3713,7 +3869,9 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\rCreateAccount\x12\x15.CreateAccountRequest\x1a\t.SSMEmpty\x12-\n" +
 	"\vJoinAccount\x12\x13.JoinAccountRequest\x1a\t.SSMEmpty\x121\n" +
 	"\rDeleteAccount\x12\x15.DeleteAccountRequest\x1a\t.SSMEmpty\x12h\n" +
-	"\x1bGetAccountIntegrationEvents\x12#.GetAccountIntegrationEventsRequest\x1a$.GetAccountIntegrationEventsResponse\x12C\n" +
+	"\x1bGetAccountIntegrationEvents\x12#.GetAccountIntegrationEventsRequest\x1a$.GetAccountIntegrationEventsResponse\x12G\n" +
+	"\x10CreateUserAPIKey\x12\x18.CreateUserAPIKeyRequest\x1a\x19.CreateUserAPIKeyResponse\x127\n" +
+	"\x10DeleteUserAPIKey\x12\x18.DeleteUserAPIKeyRequest\x1a\t.SSMEmpty\x12C\n" +
 	"\x0eUploadSaveFile\x12\x16.UploadSaveFileRequest\x1a\x17.UploadSaveFileResponse(\x01\x12G\n" +
 	"\x10GetAgentWorkflow\x12\x18.GetAgentWorkflowRequest\x1a\x19.GetAgentWorkflowResponse\x12U\n" +
 	"\x17GetAgentWorkflowByAgent\x12\x1f.GetAgentWorkflowByAgentRequest\x1a\x19.GetAgentWorkflowResponse\x12>\n" +
@@ -3735,7 +3893,7 @@ func file_frontend_service_proto_rawDescGZIP() []byte {
 }
 
 var file_frontend_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
+var file_frontend_service_proto_msgTypes = make([]protoimpl.MessageInfo, 61)
 var file_frontend_service_proto_goTypes = []any{
 	(FrontendDownloadKind)(0),                        // 0: FrontendDownloadKind
 	(*FrontendDownloadRequest)(nil),                  // 1: FrontendDownloadRequest
@@ -3796,42 +3954,45 @@ var file_frontend_service_proto_goTypes = []any{
 	(*GetUserActiveAccountIntegrationsResponse)(nil), // 56: GetUserActiveAccountIntegrationsResponse
 	(*GetAccountIntegrationEventsRequest)(nil),       // 57: GetAccountIntegrationEventsRequest
 	(*GetAccountIntegrationEventsResponse)(nil),      // 58: GetAccountIntegrationEventsResponse
-	(*models.User)(nil),                              // 59: User
-	(*models.Account)(nil),                           // 60: Account
-	(*models.Agent)(nil),                             // 61: Agent
-	(*models.AccountAudit)(nil),                      // 62: AccountAudit
-	(*models.AgentLog)(nil),                          // 63: AgentLog
-	(*models.AgentStat)(nil),                         // 64: AgentStat
-	(*models.Mod)(nil),                               // 65: Mod
-	(*models.AgentMod)(nil),                          // 66: AgentMod
-	(*models.Workflow)(nil),                          // 67: Workflow
-	(*models.AccountIntegration)(nil),                // 68: AccountIntegration
-	(*models.IntegrationEvent)(nil),                  // 69: IntegrationEvent
-	(*models.SSMEmpty)(nil),                          // 70: SSMEmpty
+	(*CreateUserAPIKeyRequest)(nil),                  // 59: CreateUserAPIKeyRequest
+	(*CreateUserAPIKeyResponse)(nil),                 // 60: CreateUserAPIKeyResponse
+	(*DeleteUserAPIKeyRequest)(nil),                  // 61: DeleteUserAPIKeyRequest
+	(*models.User)(nil),                              // 62: User
+	(*models.Account)(nil),                           // 63: Account
+	(*models.Agent)(nil),                             // 64: Agent
+	(*models.AccountAudit)(nil),                      // 65: AccountAudit
+	(*models.AgentLog)(nil),                          // 66: AgentLog
+	(*models.AgentStat)(nil),                         // 67: AgentStat
+	(*models.Mod)(nil),                               // 68: Mod
+	(*models.AgentMod)(nil),                          // 69: AgentMod
+	(*models.Workflow)(nil),                          // 70: Workflow
+	(*models.AccountIntegration)(nil),                // 71: AccountIntegration
+	(*models.IntegrationEvent)(nil),                  // 72: IntegrationEvent
+	(*models.SSMEmpty)(nil),                          // 73: SSMEmpty
 }
 var file_frontend_service_proto_depIdxs = []int32{
 	0,  // 0: FrontendDownloadRequest.kind:type_name -> FrontendDownloadKind
-	59, // 1: GetUserResponse.user:type_name -> User
-	60, // 2: GetUserLinkedAccountsResponse.linked_accounts:type_name -> Account
-	60, // 3: GetUserActiveAccountResponse.active_account:type_name -> Account
-	61, // 4: GetUserActiveAccountAgentsResponse.agents:type_name -> Agent
-	59, // 5: GetUserActiveAccountUsersResponse.users:type_name -> User
-	62, // 6: GetUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
-	61, // 7: GetAgentResponse.agent:type_name -> Agent
-	63, // 8: GetAgentLogResponse.log:type_name -> AgentLog
-	64, // 9: GetAgentStatsResponse.stats:type_name -> AgentStat
+	62, // 1: GetUserResponse.user:type_name -> User
+	63, // 2: GetUserLinkedAccountsResponse.linked_accounts:type_name -> Account
+	63, // 3: GetUserActiveAccountResponse.active_account:type_name -> Account
+	64, // 4: GetUserActiveAccountAgentsResponse.agents:type_name -> Agent
+	62, // 5: GetUserActiveAccountUsersResponse.users:type_name -> User
+	65, // 6: GetUserActiveAccountAuditsResponse.audits:type_name -> AccountAudit
+	64, // 7: GetAgentResponse.agent:type_name -> Agent
+	66, // 8: GetAgentLogResponse.log:type_name -> AgentLog
+	67, // 9: GetAgentStatsResponse.stats:type_name -> AgentStat
 	27, // 10: GetAgentTasksResponse.tasks:type_name -> AgentTaskView
-	65, // 11: GetAgentModsResponse.mods:type_name -> Mod
-	66, // 12: GetAgentModsResponse.agentMods:type_name -> AgentMod
+	68, // 11: GetAgentModsResponse.mods:type_name -> Mod
+	69, // 12: GetAgentModsResponse.agentMods:type_name -> AgentMod
 	35, // 13: PreviewModChangeResponse.added:type_name -> ChangedMod
 	35, // 14: PreviewModChangeResponse.removed:type_name -> ChangedMod
 	35, // 15: PreviewModChangeResponse.changed:type_name -> ChangedMod
 	34, // 16: ApplyModChangeRequest.change:type_name -> ModChangeRequest
 	41, // 17: UpdateAgentSettingsRequest.settings:type_name -> ServerSettings
 	43, // 18: UploadSaveFileRequest.metadata:type_name -> FileMetadata
-	67, // 19: GetAgentWorkflowResponse.workflow:type_name -> Workflow
-	68, // 20: GetUserActiveAccountIntegrationsResponse.integrations:type_name -> AccountIntegration
-	69, // 21: GetAccountIntegrationEventsResponse.events:type_name -> IntegrationEvent
+	70, // 19: GetAgentWorkflowResponse.workflow:type_name -> Workflow
+	71, // 20: GetUserActiveAccountIntegrationsResponse.integrations:type_name -> AccountIntegration
+	72, // 21: GetAccountIntegrationEventsResponse.events:type_name -> IntegrationEvent
 	6,  // 22: FrontendService.CheckUserExistsOrCreate:input_type -> CheckUserExistsOrCreateRequest
 	7,  // 23: FrontendService.GetUser:input_type -> GetUserRequest
 	9,  // 24: FrontendService.GetUserLinkedAccounts:input_type -> GetUserLinkedAccountsRequest
@@ -3859,49 +4020,53 @@ var file_frontend_service_proto_depIdxs = []int32{
 	50, // 46: FrontendService.JoinAccount:input_type -> JoinAccountRequest
 	54, // 47: FrontendService.DeleteAccount:input_type -> DeleteAccountRequest
 	57, // 48: FrontendService.GetAccountIntegrationEvents:input_type -> GetAccountIntegrationEventsRequest
-	42, // 49: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
-	51, // 50: FrontendService.GetAgentWorkflow:input_type -> GetAgentWorkflowRequest
-	52, // 51: FrontendService.GetAgentWorkflowByAgent:input_type -> GetAgentWorkflowByAgentRequest
-	1,  // 52: FrontendService.DownloadFile:input_type -> FrontendDownloadRequest
-	3,  // 53: FrontendService.AddAccountIntegration:input_type -> AddAccountIntegrationRequest
-	4,  // 54: FrontendService.UpdateAccountIntegration:input_type -> UpdateAccountIntegrationRequest
-	5,  // 55: FrontendService.DeleteAccountIntegration:input_type -> DeleteAccountIntegrationRequest
-	70, // 56: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
-	8,  // 57: FrontendService.GetUser:output_type -> GetUserResponse
-	10, // 58: FrontendService.GetUserLinkedAccounts:output_type -> GetUserLinkedAccountsResponse
-	12, // 59: FrontendService.GetUserActiveAccount:output_type -> GetUserActiveAccountResponse
-	14, // 60: FrontendService.GetUserActiveAccountAgents:output_type -> GetUserActiveAccountAgentsResponse
-	16, // 61: FrontendService.GetUserActiveAccountUsers:output_type -> GetUserActiveAccountUsersResponse
-	18, // 62: FrontendService.GetUserActiveAccountAudits:output_type -> GetUserActiveAccountAuditsResponse
-	56, // 63: FrontendService.GetUserActiveAccountIntegrations:output_type -> GetUserActiveAccountIntegrationsResponse
-	20, // 64: FrontendService.GetAgent:output_type -> GetAgentResponse
-	22, // 65: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
-	24, // 66: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
-	33, // 67: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
-	26, // 68: FrontendService.CreateAgentTask:output_type -> CreateAgentTaskResponse
-	29, // 69: FrontendService.GetAgentTasks:output_type -> GetAgentTasksResponse
-	70, // 70: FrontendService.CancelAgentTask:output_type -> SSMEmpty
-	70, // 71: FrontendService.RetryAgentTask:output_type -> SSMEmpty
-	36, // 72: FrontendService.PreviewModChange:output_type -> PreviewModChangeResponse
-	38, // 73: FrontendService.ApplyModChange:output_type -> ApplyModChangeResponse
-	70, // 74: FrontendService.UpdateAgentModConfigText:output_type -> SSMEmpty
-	70, // 75: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
-	46, // 76: FrontendService.CreateAgent:output_type -> CreateAgentResponse
-	70, // 77: FrontendService.DeleteAgent:output_type -> SSMEmpty
-	70, // 78: FrontendService.SwitchActiveAccount:output_type -> SSMEmpty
-	70, // 79: FrontendService.CreateAccount:output_type -> SSMEmpty
-	70, // 80: FrontendService.JoinAccount:output_type -> SSMEmpty
-	70, // 81: FrontendService.DeleteAccount:output_type -> SSMEmpty
-	58, // 82: FrontendService.GetAccountIntegrationEvents:output_type -> GetAccountIntegrationEventsResponse
-	44, // 83: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
-	53, // 84: FrontendService.GetAgentWorkflow:output_type -> GetAgentWorkflowResponse
-	53, // 85: FrontendService.GetAgentWorkflowByAgent:output_type -> GetAgentWorkflowResponse
-	2,  // 86: FrontendService.DownloadFile:output_type -> DownloadFileChunk
-	70, // 87: FrontendService.AddAccountIntegration:output_type -> SSMEmpty
-	70, // 88: FrontendService.UpdateAccountIntegration:output_type -> SSMEmpty
-	70, // 89: FrontendService.DeleteAccountIntegration:output_type -> SSMEmpty
-	56, // [56:90] is the sub-list for method output_type
-	22, // [22:56] is the sub-list for method input_type
+	59, // 49: FrontendService.CreateUserAPIKey:input_type -> CreateUserAPIKeyRequest
+	61, // 50: FrontendService.DeleteUserAPIKey:input_type -> DeleteUserAPIKeyRequest
+	42, // 51: FrontendService.UploadSaveFile:input_type -> UploadSaveFileRequest
+	51, // 52: FrontendService.GetAgentWorkflow:input_type -> GetAgentWorkflowRequest
+	52, // 53: FrontendService.GetAgentWorkflowByAgent:input_type -> GetAgentWorkflowByAgentRequest
+	1,  // 54: FrontendService.DownloadFile:input_type -> FrontendDownloadRequest
+	3,  // 55: FrontendService.AddAccountIntegration:input_type -> AddAccountIntegrationRequest
+	4,  // 56: FrontendService.UpdateAccountIntegration:input_type -> UpdateAccountIntegrationRequest
+	5,  // 57: FrontendService.DeleteAccountIntegration:input_type -> DeleteAccountIntegrationRequest
+	73, // 58: FrontendService.CheckUserExistsOrCreate:output_type -> SSMEmpty
+	8,  // 59: FrontendService.GetUser:output_type -> GetUserResponse
+	10, // 60: FrontendService.GetUserLinkedAccounts:output_type -> GetUserLinkedAccountsResponse
+	12, // 61: FrontendService.GetUserActiveAccount:output_type -> GetUserActiveAccountResponse
+	14, // 62: FrontendService.GetUserActiveAccountAgents:output_type -> GetUserActiveAccountAgentsResponse
+	16, // 63: FrontendService.GetUserActiveAccountUsers:output_type -> GetUserActiveAccountUsersResponse
+	18, // 64: FrontendService.GetUserActiveAccountAudits:output_type -> GetUserActiveAccountAuditsResponse
+	56, // 65: FrontendService.GetUserActiveAccountIntegrations:output_type -> GetUserActiveAccountIntegrationsResponse
+	20, // 66: FrontendService.GetAgent:output_type -> GetAgentResponse
+	22, // 67: FrontendService.GetAgentLog:output_type -> GetAgentLogResponse
+	24, // 68: FrontendService.GetAgentStats:output_type -> GetAgentStatsResponse
+	33, // 69: FrontendService.GetAgentMods:output_type -> GetAgentModsResponse
+	26, // 70: FrontendService.CreateAgentTask:output_type -> CreateAgentTaskResponse
+	29, // 71: FrontendService.GetAgentTasks:output_type -> GetAgentTasksResponse
+	73, // 72: FrontendService.CancelAgentTask:output_type -> SSMEmpty
+	73, // 73: FrontendService.RetryAgentTask:output_type -> SSMEmpty
+	36, // 74: FrontendService.PreviewModChange:output_type -> PreviewModChangeResponse
+	38, // 75: FrontendService.ApplyModChange:output_type -> ApplyModChangeResponse
+	73, // 76: FrontendService.UpdateAgentModConfigText:output_type -> SSMEmpty
+	73, // 77: FrontendService.UpdateAgentSettings:output_type -> SSMEmpty
+	46, // 78: FrontendService.CreateAgent:output_type -> CreateAgentResponse
+	73, // 79: FrontendService.DeleteAgent:output_type -> SSMEmpty
+	73, // 80: FrontendService.SwitchActiveAccount:output_type -> SSMEmpty
+	73, // 81: FrontendService.CreateAccount:output_type -> SSMEmpty
+	73, // 82: FrontendService.JoinAccount:output_type -> SSMEmpty
+	73, // 83: FrontendService.DeleteAccount:output_type -> SSMEmpty
+	58, // 84: FrontendService.GetAccountIntegrationEvents:output_type -> GetAccountIntegrationEventsResponse
+	60, // 85: FrontendService.CreateUserAPIKey:output_type -> CreateUserAPIKeyResponse
+	73, // 86: FrontendService.DeleteUserAPIKey:output_type -> SSMEmpty
+	44, // 87: FrontendService.UploadSaveFile:output_type -> UploadSaveFileResponse
+	53, // 88: FrontendService.GetAgentWorkflow:output_type -> GetAgentWorkflowResponse
+	53, // 89: FrontendService.GetAgentWorkflowByAgent:output_type -> GetAgentWorkflowResponse
+	2,  // 90: FrontendService.DownloadFile:output_type -> DownloadFileChunk
+	73, // 91: FrontendService.AddAccountIntegration:output_type -> SSMEmpty
+	73, // 92: FrontendService.UpdateAccountIntegration:output_type -> SSMEmpty
+	73, // 93: FrontendService.DeleteAccountIntegration:output_type -> SSMEmpty
+	58, // [58:94] is the sub-list for method output_type
+	22, // [22:58] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
 	22, // [22:22] is the sub-list for extension extendee
 	0,  // [0:22] is the sub-list for field type_name
@@ -3922,7 +4087,7 @@ func file_frontend_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_frontend_service_proto_rawDesc), len(file_frontend_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   58,
+			NumMessages:   61,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

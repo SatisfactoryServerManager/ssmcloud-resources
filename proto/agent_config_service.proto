@@ -17,4 +17,5 @@ message AgentConfigResponse {
 message UpdateAgentConfigRequest {
     string version = 2;
     string ip = 3;
+    string platform = 4;
 }

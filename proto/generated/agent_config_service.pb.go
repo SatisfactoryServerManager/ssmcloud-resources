@@ -78,6 +78,7 @@ type UpdateAgentConfigRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Version       string                 `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
 	Ip            string                 `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
+	Platform      string                 `protobuf:"bytes,4,opt,name=platform,proto3" json:"platform,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -126,6 +127,13 @@ func (x *UpdateAgentConfigRequest) GetIp() string {
 	return ""
 }
 
+func (x *UpdateAgentConfigRequest) GetPlatform() string {
+	if x != nil {
+		return x.Platform
+	}
+	return ""
+}
+
 var File_agent_config_service_proto protoreflect.FileDescriptor
 
 const file_agent_config_service_proto_rawDesc = "" +
@@ -133,10 +141,11 @@ const file_agent_config_service_proto_rawDesc = "" +
 	"\x1aagent_config_service.proto\x1a\x12models/empty.proto\x1a\x12models/agent.proto\"t\n" +
 	"\x13AgentConfigResponse\x12$\n" +
 	"\x06config\x18\x01 \x01(\v2\f.AgentConfigR\x06config\x127\n" +
-	"\rserver_config\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\"D\n" +
+	"\rserver_config\x18\x02 \x01(\v2\x12.AgentServerConfigR\fserverConfig\"`\n" +
 	"\x18UpdateAgentConfigRequest\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12\x0e\n" +
-	"\x02ip\x18\x03 \x01(\tR\x02ip2\x8b\x01\n" +
+	"\x02ip\x18\x03 \x01(\tR\x02ip\x12\x1a\n" +
+	"\bplatform\x18\x04 \x01(\tR\bplatform2\x8b\x01\n" +
 	"\x12AgentConfigService\x121\n" +
 	"\x0eGetAgentConfig\x12\t.SSMEmpty\x1a\x14.AgentConfigResponse\x12B\n" +
 	"\x1aUpdateAgentConfigVersionIp\x12\x19.UpdateAgentConfigRequest\x1a\t.SSMEmptyBIZGgithub.com/SatisfactoryServerManager/ssmcloud-resources/proto/generatedb\x06proto3"

@@ -1,3 +1,6 @@
+## 0.0.96 (July 14, 2026)
+  - fix: Fixed missing platform in config gRPC data
+
 ## 0.0.95 (July 14, 2026)
   - feat: surface requiresServerStopped on AgentTaskView
   - feat: add mod_count to Agent proto

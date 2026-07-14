@@ -1422,6 +1422,12 @@ type AgentTaskView struct {
 	CreatedAt             int64                  `protobuf:"varint,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	StartedAt             int64                  `protobuf:"varint,12,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	FinishedAt            int64                  `protobuf:"varint,13,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
+	// A pending task carrying this gate is waiting for the game server to stop,
+	// i.e. it is DEFERRED. A pending task WITHOUT it is either claimable now or
+	// gated behind its own chain's stopsfserver, which is about to run — the UI
+	// cannot tell "waiting for the next restart" from "running right now"
+	// without this.
+	RequiresServerStopped bool `protobuf:"varint,14,opt,name=requires_server_stopped,json=requiresServerStopped,proto3" json:"requires_server_stopped,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1545,6 +1551,13 @@ func (x *AgentTaskView) GetFinishedAt() int64 {
 		return x.FinishedAt
 	}
 	return 0
+}
+
+func (x *AgentTaskView) GetRequiresServerStopped() bool {
+	if x != nil {
+		return x.RequiresServerStopped
+	}
+	return false
 }
 
 type GetAgentTasksRequest struct {
@@ -3507,7 +3520,7 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\"2\n" +
 	"\x17CreateAgentTaskResponse\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\"\xa7\x03\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\"\xdf\x03\n" +
 	"\rAgentTaskView\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x16\n" +
@@ -3526,7 +3539,8 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\n" +
 	"started_at\x18\f \x01(\x03R\tstartedAt\x12\x1f\n" +
 	"\vfinished_at\x18\r \x01(\x03R\n" +
-	"finishedAt\"Y\n" +
+	"finishedAt\x126\n" +
+	"\x17requires_server_stopped\x18\x0e \x01(\bR\x15requiresServerStopped\"Y\n" +
 	"\x14GetAgentTasksRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12\x14\n" +

@@ -201,6 +201,12 @@ message AgentTaskView {
     int64  created_at = 11;
     int64  started_at = 12;
     int64  finished_at = 13;
+    // A pending task carrying this gate is waiting for the game server to stop,
+    // i.e. it is DEFERRED. A pending task WITHOUT it is either claimable now or
+    // gated behind its own chain's stopsfserver, which is about to run — the UI
+    // cannot tell "waiting for the next restart" from "running right now"
+    // without this.
+    bool   requires_server_stopped = 14;
 }
 
 message GetAgentTasksRequest {

@@ -1945,6 +1945,7 @@ type ModChangeRequest struct {
 	Op            string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // add | remove | setVersion | updateAll
 	ModReference  string                 `protobuf:"bytes,3,opt,name=modReference,proto3" json:"modReference,omitempty"`
 	Version       string                 `protobuf:"bytes,4,opt,name=version,proto3" json:"version,omitempty"` // setVersion only
+	Eid           string                 `protobuf:"bytes,5,opt,name=eid,proto3" json:"eid,omitempty"`         // the calling user; scopes the agent to their active account
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2003,6 +2004,13 @@ func (x *ModChangeRequest) GetModReference() string {
 func (x *ModChangeRequest) GetVersion() string {
 	if x != nil {
 		return x.Version
+	}
+	return ""
+}
+
+func (x *ModChangeRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
 	}
 	return ""
 }
@@ -2246,6 +2254,7 @@ type UpdateAgentModConfigTextRequest struct {
 	AgentId       string                 `protobuf:"bytes,1,opt,name=agentId,proto3" json:"agentId,omitempty"`
 	ModReference  string                 `protobuf:"bytes,2,opt,name=modReference,proto3" json:"modReference,omitempty"`
 	Config        string                 `protobuf:"bytes,3,opt,name=config,proto3" json:"config,omitempty"`
+	Eid           string                 `protobuf:"bytes,4,opt,name=eid,proto3" json:"eid,omitempty"` // the calling user; scopes the agent to their active account
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2297,6 +2306,13 @@ func (x *UpdateAgentModConfigTextRequest) GetModReference() string {
 func (x *UpdateAgentModConfigTextRequest) GetConfig() string {
 	if x != nil {
 		return x.Config
+	}
+	return ""
+}
+
+func (x *UpdateAgentModConfigTextRequest) GetEid() string {
+	if x != nil {
+		return x.Eid
 	}
 	return ""
 }
@@ -3541,12 +3557,13 @@ const file_frontend_service_proto_rawDesc = "" +
 	"totalCount\x18\x02 \x01(\x03R\n" +
 	"totalCount\x12'\n" +
 	"\tagentMods\x18\x03 \x03(\v2\t.AgentModR\tagentMods\x12\x14\n" +
-	"\x05pages\x18\x04 \x01(\x05R\x05pages\"z\n" +
+	"\x05pages\x18\x04 \x01(\x05R\x05pages\"\x8c\x01\n" +
 	"\x10ModChangeRequest\x12\x18\n" +
 	"\aagentId\x18\x01 \x01(\tR\aagentId\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x12\"\n" +
 	"\fmodReference\x18\x03 \x01(\tR\fmodReference\x12\x18\n" +
-	"\aversion\x18\x04 \x01(\tR\aversion\"t\n" +
+	"\aversion\x18\x04 \x01(\tR\aversion\x12\x10\n" +
+	"\x03eid\x18\x05 \x01(\tR\x03eid\"t\n" +
 	"\n" +
 	"ChangedMod\x12\"\n" +
 	"\fmodReference\x18\x01 \x01(\tR\fmodReference\x12\x12\n" +
@@ -3564,11 +3581,12 @@ const file_frontend_service_proto_rawDesc = "" +
 	"\x06change\x18\x01 \x01(\v2\x11.ModChangeRequestR\x06change\x12\x1a\n" +
 	"\bapplyNow\x18\x02 \x01(\bR\bapplyNow\"2\n" +
 	"\x16ApplyModChangeResponse\x12\x18\n" +
-	"\ataskIds\x18\x01 \x03(\tR\ataskIds\"w\n" +
+	"\ataskIds\x18\x01 \x03(\tR\ataskIds\"\x89\x01\n" +
 	"\x1fUpdateAgentModConfigTextRequest\x12\x18\n" +
 	"\aagentId\x18\x01 \x01(\tR\aagentId\x12\"\n" +
 	"\fmodReference\x18\x02 \x01(\tR\fmodReference\x12\x16\n" +
-	"\x06config\x18\x03 \x01(\tR\x06config\"v\n" +
+	"\x06config\x18\x03 \x01(\tR\x06config\x12\x10\n" +
+	"\x03eid\x18\x04 \x01(\tR\x03eid\"v\n" +
 	"\x1aUpdateAgentSettingsRequest\x12\x10\n" +
 	"\x03eid\x18\x01 \x01(\tR\x03eid\x12\x19\n" +
 	"\bagent_id\x18\x02 \x01(\tR\aagentId\x12+\n" +

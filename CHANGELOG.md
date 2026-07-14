@@ -1,3 +1,10 @@
+## 0.0.95 (July 14, 2026)
+  - feat: surface requiresServerStopped on AgentTaskView
+  - feat: add mod_count to Agent proto
+  - feat: carry the calling user's eid on the mod change RPCs
+  - fix: carry the catalogue's target hash and size onto the wire
+  - feat!: replace the mod config poll RPCs
+
 ## 0.0.94 (July 13, 2026)
   - feat: add dependsOn and requiresServerStopped task gates
   - feat: add AgentModSchema and the syncmods lockfile payload

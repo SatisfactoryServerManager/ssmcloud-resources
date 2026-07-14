@@ -1,3 +1,6 @@
+## 0.0.98 (July 14, 2026)
+  - fix: Fixed the profile image
+
 ## 0.0.97 (July 14, 2026)
   - feat: User API Keys
 

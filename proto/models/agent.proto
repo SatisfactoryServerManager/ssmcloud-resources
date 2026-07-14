@@ -22,6 +22,10 @@ message Agent{
     repeated AgentBackup backups = 13;
     AgentMapData map_data = 14;
 
+    // Number of mods the user directly selected for this agent, counted from the
+    // agentmods collection. Not the resolved dependency closure.
+    int32 mod_count = 15;
+
     google.protobuf.Timestamp created_at = 8;
     google.protobuf.Timestamp updated_at = 9;
 }

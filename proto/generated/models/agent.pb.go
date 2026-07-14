@@ -36,10 +36,13 @@ type Agent struct {
 	Saves              []*AgentSave           `protobuf:"bytes,12,rep,name=saves,proto3" json:"saves,omitempty"`
 	Backups            []*AgentBackup         `protobuf:"bytes,13,rep,name=backups,proto3" json:"backups,omitempty"`
 	MapData            *AgentMapData          `protobuf:"bytes,14,opt,name=map_data,json=mapData,proto3" json:"map_data,omitempty"`
-	CreatedAt          *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt          *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// Number of mods the user directly selected for this agent, counted from the
+	// agentmods collection. Not the resolved dependency closure.
+	ModCount      int32                  `protobuf:"varint,15,opt,name=mod_count,json=modCount,proto3" json:"mod_count,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Agent) Reset() {
@@ -147,6 +150,13 @@ func (x *Agent) GetMapData() *AgentMapData {
 		return x.MapData
 	}
 	return nil
+}
+
+func (x *Agent) GetModCount() int32 {
+	if x != nil {
+		return x.ModCount
+	}
+	return 0
 }
 
 func (x *Agent) GetCreatedAt() *timestamppb.Timestamp {
@@ -1119,7 +1129,7 @@ var File_models_agent_proto protoreflect.FileDescriptor
 
 const file_models_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x95\x04\n" +
+	"\x12models/agent.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb2\x04\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -1134,7 +1144,8 @@ const file_models_agent_proto_rawDesc = "" +
 	"\x05saves\x18\f \x03(\v2\n" +
 	".AgentSaveR\x05saves\x12&\n" +
 	"\abackups\x18\r \x03(\v2\f.AgentBackupR\abackups\x12(\n" +
-	"\bmap_data\x18\x0e \x01(\v2\r.AgentMapDataR\amapData\x129\n" +
+	"\bmap_data\x18\x0e \x01(\v2\r.AgentMapDataR\amapData\x12\x1b\n" +
+	"\tmod_count\x18\x0f \x01(\x05R\bmodCount\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +

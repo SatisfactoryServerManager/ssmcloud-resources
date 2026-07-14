@@ -56,6 +56,8 @@ func MapModVersionTargetToProto(modVersionTarget *models.ModVersionTarget) *pb.M
 	return &pb.ModVersionTarget{
 		TargetName: modVersionTarget.TargetName,
 		Link:       modVersionTarget.Link,
+		Hash:       modVersionTarget.Hash,
+		Size:       modVersionTarget.Size,
 	}
 }
 
